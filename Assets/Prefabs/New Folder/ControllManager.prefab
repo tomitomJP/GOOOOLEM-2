@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &58787952465205828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5812151072116063044}
+  - component: {fileID: 2661150361332985860}
+  - component: {fileID: 7700138363291421967}
+  m_Layer: 0
+  m_Name: ControllManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5812151072116063044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58787952465205828}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7324543, y: -0.58277684, z: -32.62824}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2661150361332985860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58787952465205828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb7fc6a4412b43adaad776d6bc627c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 1
+  PlayerPointer: {x: 0, y: 0}
+  speed: 4
+  golemHead:
+  - {fileID: 128635315751629816, guid: 888448a2cfe1b404da967eba9da57aec, type: 3}
+  - {fileID: 4281057991105837741, guid: 175c4f1e3587f4447b024c9a806d3439, type: 3}
+  Monsters:
+  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
+  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
+  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
+  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
+  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
+  - {fileID: 3097341304849269163, guid: 55f5ac87efb9b41dc8fa7bf331ce7b5e, type: 3}
+  - {fileID: 5671763633009671992, guid: 634ad65e0193f4b4bbd9b596121149b1, type: 3}
+  - {fileID: 3981826152234572559, guid: 5107279f8a43e4ec28c40b07ad467c78, type: 3}
+  - {fileID: 7273578518413537831, guid: b39c75f9bdc854971b24490bbf2975b8, type: 3}
+  - {fileID: 5439060659553784544, guid: 80b0e76f6c16342c5a4a95df3968cf22, type: 3}
+  choiceDown: 1
+  choiceUp: 0
+  pointerSize: 0.2
+  chainDis: 0.6
+  CanCheckPeace: 1
+  SelectPeaceNumber: -1
+--- !u!114 &7700138363291421967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58787952465205828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 275cfd8de5dcd49009f015d9e87fc04f, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

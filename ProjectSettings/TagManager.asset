@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Peace
+  - Golem
+  - House
+  - BattleField
+  - Monster
+  - Canvas
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Peace
+  - Water
+  - UI
+  - Golem1
+  - Golem2
+  - House1
+  - House2
+  - Floor
+  - Monster0
+  - Monster1
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Field
+    uniqueID: 1749715385
+    locked: 0
+  - name: Golem
+    uniqueID: 1749034075
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Golem
+    uniqueID: 1419988997
+    locked: 0
+  - name: UI
+    uniqueID: 94350297
+    locked: 0
