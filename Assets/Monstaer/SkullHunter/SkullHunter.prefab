@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: df7d223c6813e41a793fd7eaf5967402, type: 3}
   - {fileID: 21300000, guid: 936527567da7c43c28707476afdb1560, type: 3}
   - {fileID: 21300000, guid: befc07a3237554587945b1d56c409326, type: 3}
+  - {fileID: 21300000, guid: 936527567da7c43c28707476afdb1560, type: 3}
   atkSprites:
   - {fileID: 21300000, guid: 012e99ff30056477892ad10f88f8708f, type: 3}
   - {fileID: 21300000, guid: b4de0fe4336644866a51660a7c9ca56b, type: 3}
@@ -62,8 +63,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 294144a05984b46b797d87806acb7cd0, type: 3}
   - {fileID: 21300000, guid: 984d9f296ccf44412a2ae7f832a74ec7, type: 3}
   - {fileID: 21300000, guid: 148f94e278e704225aa3c967c50dfa09, type: 3}
-  atk: 75
-  hp: 100
+  atk: 25
+  hp: 40
   spd: 1
   spdRate: 1
   atkSpdRate: 1

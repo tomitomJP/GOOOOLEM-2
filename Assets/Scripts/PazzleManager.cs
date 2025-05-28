@@ -13,11 +13,12 @@ public class PazzleManager : MonoBehaviour
 
     Dictionary<Vector2Int, GameObject> grid = new Dictionary<Vector2Int, GameObject>();
     List<GameObject> destroyPeace = new List<GameObject>();
-    [SerializeField] GameObject blackScreen;
+    public GameObject blackScreen;
 
     public Transform pointer;
     public GameObject[] Houses;
     public Transform BattleField;
+    public Transform MonstersPearent;
 
     void Start()
     {
@@ -37,38 +38,48 @@ public class PazzleManager : MonoBehaviour
 
     public IEnumerator PeaceSet()
     {
+        yield return new WaitForSeconds(0.3f);
+
         blackScreen.SetActive(true);
         int check = 1;
-        while (check > 0)
+        int MaxCount = 0;
+        while (peacePearent.transform.childCount != 121 && MaxCount < 100)
         {
-            check = 0;
-            for (int i = 0; i < 11; i++)
+            while (check > 0)
             {
-                Vector2 localPos = new Vector2((i * 0.5f) - 2.5f, 2.5f);
-                Vector2 worldPos = (Vector2)transform.TransformPoint(localPos) - new Vector2(0, 0.25f);
-                DrawCircle2D(worldPos, 0.25f);
-                if (Physics2D.OverlapPoint(worldPos, LayerMask.GetMask("Peace")) == null)
+                check = 0;
+                for (int i = 0; i < 11; i++)
                 {
-                    if (Random.Range(0, 20) == 0)
+                    Vector2 localPos = new Vector2((i * 0.5f) - 2.5f, 2.5f);
+                    Vector2 worldPos = (Vector2)transform.TransformPoint(localPos);
+                    //DrawCircle2D(worldPos, 0.25f);
+                    if (Physics2D.OverlapPoint(worldPos, LayerMask.GetMask("Peace")) == null)
                     {
-                        Instantiate(peaces[4], worldPos, Quaternion.identity, peacePearent.transform);
+                        if (Random.Range(0, 20) == 0)
+                        {
+                            Instantiate(peaces[4], worldPos, Quaternion.identity, peacePearent.transform);
 
-                    }
-                    else
-                    {
-                        Instantiate(peaces[Random.Range(0, peaces.Length - 1)], worldPos, Quaternion.identity, peacePearent.transform);
+                        }
+                        else
+                        {
+                            Instantiate(peaces[Random.Range(0, peaces.Length - 1)], worldPos, Quaternion.identity, peacePearent.transform);
 
+                        }
+                        check++;
                     }
-                    check++;
-                    yield return null;
                 }
+                yield return new WaitForSeconds(0.2f);
+
+                if (check > 0)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+
             }
-            if (check > 0)
-            {
-                yield return new WaitForSeconds(0.5f);
-            }
+            MaxCount++;
 
         }
+
         blackScreen.SetActive(false);
 
 
