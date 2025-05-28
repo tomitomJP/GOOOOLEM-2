@@ -72,7 +72,7 @@ MonoBehaviour:
   player: 0
   enemyDistance: 12
   allyDistance: 0.3
-  atkCT: 2
+  atkCT: 4
   aktCTimer: 0
   myLayer:
     serializedVersion: 2

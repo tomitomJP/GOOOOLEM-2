@@ -45,12 +45,12 @@ public class Angel : Monsters
 
             if (Random.Range(0, 100) <= AtkTriggerRate)
             {
-                AtkTriggerRate = 10;
+                AtkTriggerRate = 20;
                 StartCoroutine(AtkMotion());
             }
             else
             {
-                AtkTriggerRate *= 1.25f;
+                AtkTriggerRate *= 1.1f;
             }
             timer = 0;
         }

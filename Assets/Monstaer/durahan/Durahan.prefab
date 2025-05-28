@@ -80,6 +80,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  damageText: {fileID: 0}
   sm: []
 --- !u!212 &8078445330133208287
 SpriteRenderer:
@@ -165,18 +166,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09064174, y: 0.15869832}
+  m_Offset: {x: -0.09064174, y: 0.36041057}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.111111, y: 7.111111}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 8, y: 8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1055942, y: 3.3801293}
+  m_Size: {x: 2.1055942, y: 2.9767048}
   m_EdgeRadius: 0
 --- !u!50 &3290332485165636776
 Rigidbody2D:
