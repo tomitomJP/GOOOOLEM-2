@@ -52,10 +52,10 @@ MonoBehaviour:
   - {fileID: 128635315751629816, guid: 888448a2cfe1b404da967eba9da57aec, type: 3}
   - {fileID: 4281057991105837741, guid: 175c4f1e3587f4447b024c9a806d3439, type: 3}
   Monsters:
+  - {fileID: 5447051748445029993, guid: c18dcca14f41dba41beef89139c340ca, type: 3}
   - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
   - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
-  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
-  - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
+  - {fileID: 2027319491513497169, guid: 1d62662b6a05d47879064c034246e96f, type: 3}
   - {fileID: 1151914437371389530, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
   - {fileID: 3097341304849269163, guid: 55f5ac87efb9b41dc8fa7bf331ce7b5e, type: 3}
   - {fileID: 5671763633009671992, guid: 634ad65e0193f4b4bbd9b596121149b1, type: 3}
@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 5439060659553784544, guid: 80b0e76f6c16342c5a4a95df3968cf22, type: 3}
   choiceDown: 1
   choiceUp: 0
+  brokenText: {fileID: 5292398740679119046, guid: 1904d56a1b8b5422aaa48b2bb8116c36, type: 3}
   pointerSize: 0.2
   chainDis: 0.6
   CanCheckPeace: 1

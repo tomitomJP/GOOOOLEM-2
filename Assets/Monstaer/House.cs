@@ -9,15 +9,31 @@ public class House : Monsters
     [SerializeField] Slider hpBar;
 
     [SerializeField] Text hpBarText;
+    [SerializeField] float hpMax;
+    [SerializeField] Transform monstersPearent;
+    [SerializeField] BoxCollider2D boxCollider2D;
     void Start()
     {
+
         StartSetup();
+        hpMax = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hpBar.value = hp / 1000f;
-        hpBarText.text = Mathf.Floor(hp).ToString() + "/" + "1000";
+        hp = Mathf.Clamp(hp, 0, hpMax);
+        hpBar.value = hp / hpMax;
+        hpBarText.text = Mathf.Floor(hp).ToString() + "/" + hpMax;
+
+        if (monstersPearent.childCount > 0)
+        {
+            boxCollider2D.enabled = false;
+        }
+        else
+        {
+            boxCollider2D.enabled = true;
+
+        }
     }
 }

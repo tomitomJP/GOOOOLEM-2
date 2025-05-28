@@ -148,7 +148,7 @@ public class Golem : MonoBehaviour
             Golem golem = null;
             if (enemy.CompareTag("House"))
             {
-                gameManager.HouseAtk(player, atk);
+                //gameManager.HouseAtk(player, atk);
             }
             else if (enemy.GetComponent<Golem>() != null)
             {

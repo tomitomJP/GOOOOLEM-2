@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ControllManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ControllManager : MonoBehaviour
     PazzleManager pazzleManager;
     GameObject[] Houses;
     Transform BattleField;
+    Transform MonstersPearent;
 
     [SerializeField] GameObject[] golemHead;
     [SerializeField] GameObject[] Monsters;
@@ -27,6 +29,8 @@ public class ControllManager : MonoBehaviour
 
     [SerializeField] private bool choiceDown = false;
     [SerializeField] private bool choiceUp = false;
+    [SerializeField] GameObject brokenText;
+    Canvas canvas;
 
     void Awake()
     {
@@ -40,11 +44,13 @@ public class ControllManager : MonoBehaviour
 
     void Start()
     {
+        canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
         pazzleManager = GameObject.Find("Field_" + playerNumber.ToString()).GetComponent<PazzleManager>();
         transform.SetParent(pazzleManager.transform);
         pointer = pazzleManager.pointer;
         Houses = pazzleManager.Houses;
         BattleField = pazzleManager.BattleField;
+        MonstersPearent = pazzleManager.MonstersPearent;
     }
 
     void Update()
@@ -52,6 +58,12 @@ public class ControllManager : MonoBehaviour
         // MoveとChoiceのアクションを取得
         moveInput = moveAction.ReadValue<Vector2>();  // Move: WASD または Gamepad Left Stick
         choiceInput = choiceAction.triggered;  // Choice: Space または Gamepad A
+
+        if (!CanCheckPeace)
+        {
+            choiceDown = false;
+            choiceUp = false;
+        }
 
         SelectPeace();
         PointMove();
@@ -118,6 +130,10 @@ public class ControllManager : MonoBehaviour
                 checkingPeace.Add(selectingPeace);
             }
         }
+        else if (!CanCheckPeace)
+        {
+            choiceDown = false;
+        }
     }
 
     [SerializeField] float pointerSize = 1;
@@ -157,6 +173,10 @@ public class ControllManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            choiceDown = false;
+        }
     }
 
     void CheckPeaceUp()
@@ -167,11 +187,17 @@ public class ControllManager : MonoBehaviour
             CanCheckPeace = false;
             StartCoroutine(deletePeace(new List<GameObject>(checkingPeace)));
         }
+        else if (!CanCheckPeace)
+        {
+            choiceUp = false;
+        }
     }
 
     IEnumerator deletePeace(List<GameObject> DeletingPeace)
     {
         CanCheckPeace = false;
+        pazzleManager.blackScreen.SetActive(true);
+
         bool CanSpawnGolem = false;
         int goleBodyCount = 0;
         int peaceNumber = -1;
@@ -200,15 +226,21 @@ public class ControllManager : MonoBehaviour
                 }
                 goleBodyCount++;
             }
-
             yield return new WaitForSeconds(0.1f);
         }
+
+        BrokenText text = Instantiate(brokenText, DeletingPeace[DeletingPeace.Count - 1].transform.position, Quaternion.identity, canvas.transform).GetComponent<BrokenText>();
+        text.num = DeletingPeace.Count.ToString();
+        text.Spwan = CanSpawnGolem;
+
+        yield return new WaitForSeconds(0.2f);
+
 
         int count = 0;
         while (DeletingPeace.Count > 0)
         {
             count++;
-            Debug.Log(count);
+            //  Debug.Log(count);
             Vector2 pos = DeletingPeace[0].transform.position;
             if (count >= 6 && DeletingPeace.Count == 1)
             {
@@ -218,10 +250,28 @@ public class ControllManager : MonoBehaviour
             DeletingPeace.RemoveAt(0);
         }
 
-        if (CanSpawnGolem && goleBodyCount >= 3)
+        if (CanSpawnGolem /*&& goleBodyCount >= 3*/)
         {
-            int MonstaersNum = Mathf.Clamp(goleBodyCount - 3, 0, 9);
-            GameObject monstaer = Instantiate(Monsters[MonstaersNum], Houses[playerNumber].transform.position, Quaternion.identity, BattleField);
+            int MonstaersNum = Mathf.Clamp(goleBodyCount /*- 3*/, 0, 9);
+            GameObject monstaer = Instantiate(Monsters[MonstaersNum], Houses[playerNumber].transform.position, Quaternion.identity, MonstersPearent);
+
+            Monsters monsters = monstaer.GetComponent<Monsters>();
+            monsters.player = playerNumber;
+            switch (peaceNumber)
+            {
+                case 0:
+                    monsters.spdRate *= 1.2f;
+                    break;
+                case 1:
+                    monsters.atkRate *= 1.6f;
+                    break;
+                case 2:
+                    monsters.atkSpdRate *= 1.1f;
+                    break;
+                case 3:
+                    monsters.hp *= 1.3f;
+                    break;
+            }
             /*GameObject GOLEM = Instantiate(golemHead[playerNumber], Houses[playerNumber].transform.position, Quaternion.identity, BattleField);
             Golem Spr = GOLEM.GetComponent<Golem>();
             Spr.buffType = peaceNumber;

@@ -6,6 +6,10 @@ public class Blooder : Monsters
 {
     // Start is called before the first frame update
     [SerializeField] GameObject thunder;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip masicSE;
+     [SerializeField] AudioClip kaminariSE;
+
     void Start()
     {
         StartSetup();
@@ -75,6 +79,7 @@ public class Blooder : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
+        audioSource.PlayOneShot(masicSE);
         yield return Wait(0.1f, atkSpdRate);
 
         float t = 1;
@@ -104,6 +109,7 @@ public class Blooder : Monsters
                 {
                     GameObject monster = hit[j].collider.gameObject;
                     Instantiate(thunder, new Vector3(monster.transform.position.x, 9.5f, 0), Quaternion.identity);
+                    audioSource.PlayOneShot(kaminariSE,0.3f);
                     Attack(monster.GetComponent<Monsters>());
                     // スピード1.5倍、5秒間
                     ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.5f, -0.8f));

@@ -5,6 +5,9 @@ using UnityEngine;
 public class Angel : Monsters
 {
     [SerializeField] GameObject impact;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip trumpetSE;
+
     void Start()
     {
         StartSetup();
@@ -45,12 +48,13 @@ public class Angel : Monsters
 
             if (Random.Range(0, 100) <= AtkTriggerRate)
             {
-                AtkTriggerRate = 10;
+
+                AtkTriggerRate = 20;
                 StartCoroutine(AtkMotion());
             }
             else
             {
-                AtkTriggerRate *= 1.25f;
+                AtkTriggerRate *= 1.1f;
             }
             timer = 0;
         }
@@ -72,12 +76,13 @@ public class Angel : Monsters
 
         for (int i = 0; i < 10; i++)
         {
+
             int q = (i % 2);
             spriteRenderer.sprite = atkSprites[q];
             yield return Wait(0.2f, atkSpdRate);
 
         }
-
+        audioSource.PlayOneShot(trumpetSE, 0.3f);
         spriteRenderer.sprite = atkSprites[2];
         yield return Wait(0.1f, atkSpdRate);
 

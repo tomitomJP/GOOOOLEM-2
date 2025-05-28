@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5605667448411281913}
   - component: {fileID: 5069595553944010901}
   - component: {fileID: 7556889547539130782}
-  - component: {fileID: 8236647811376883270}
   m_Layer: 3
   m_Name: RedPeace
   m_TagString: Peace
@@ -54,6 +53,10 @@ MonoBehaviour:
   peaceNumber: 1
   checkingSprite: {fileID: 821517680440180185}
   selectingSprite: {fileID: 6156810045471676588}
+  fallingTime: 0.1
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 8200
 --- !u!212 &5069595553944010901
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -149,35 +152,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.95}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &8236647811376883270
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972885079989700107}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 5
 --- !u!1 &2141009255902139475
 GameObject:
   m_ObjectHideFlags: 0

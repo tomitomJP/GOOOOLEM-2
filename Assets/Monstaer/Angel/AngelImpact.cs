@@ -17,7 +17,7 @@ public class AngelImpact : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Time.deltaTime * transform.right * spd);
+        transform.Translate(Time.deltaTime * Vector2.right * spd);
 
         lifetime -= Time.deltaTime;
         if (lifetime < 0)
