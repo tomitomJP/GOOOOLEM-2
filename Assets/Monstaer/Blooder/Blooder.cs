@@ -21,11 +21,7 @@ public class Blooder : Monsters
         if (mode != Mode.atk)
         {
             Move();
-            RaycastHit2D[] hit;
-            if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
-            {
-                RandomAtk();
-            }
+
         }
         else
         {
@@ -36,7 +32,11 @@ public class Blooder : Monsters
         {
             Dead();
         }
-
+        RaycastHit2D[] hit;
+        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
+        {
+            RandomAtk();
+        }
         UpdateStatuses();
     }
 
