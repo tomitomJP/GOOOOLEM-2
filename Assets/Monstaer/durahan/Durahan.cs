@@ -27,20 +27,20 @@ public class Durahan : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.25f, atkSpdRate);
+        yield return Wait(0.25f);
 
         spriteRenderer.sprite = atkSprites[1];
-        yield return Wait(0.1f, 1);
+        yield return Wait(0.1f, 2);
 
         Attack(target);
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.05f, 1);
+        yield return Wait(0.05f, 2);
 
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.05f, 1);
+        yield return Wait(0.05f, 2);
 
         spriteRenderer.sprite = atkSprites[4];
-        yield return Wait(0.3f, 1);
+        yield return Wait(0.3f, 2);
 
         mode = Mode.move;
 

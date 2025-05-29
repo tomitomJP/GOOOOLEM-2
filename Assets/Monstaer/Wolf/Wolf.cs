@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wolf : Monsters
 {
-    
-    // Start is called before the first frame update
+
+    [SerializeField] GameObject bites;
     void Start()
     {
         StartSetup();
@@ -20,7 +20,7 @@ public class Wolf : Monsters
 
     public override IEnumerator AtkMotion(Monsters target)//攻撃アニメーションなど
     {
-        
+
         int num = 0;
         if (atkSprites.Length < 2)
         {
@@ -30,15 +30,30 @@ public class Wolf : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.15f, atkSpdRate);
+        yield return Wait(0.15f, 0);
 
+        Vector3 offset = new Vector2(3f, 0);
+
+        if (player == 1) offset.x *= -1;
+
+        Vector3 pos = transform.position + offset;
+        if (player == 0)
+        {
+            Instantiate(bites, pos, Quaternion.Euler(new Vector3(0, 0, -20)));
+
+        }
+        else
+        {
+            Instantiate(bites, pos, Quaternion.Euler(new Vector3(0, 0, 20)));
+
+        }
 
         spriteRenderer.sprite = atkSprites[1];
-        yield return Wait(0.15f, 1);
+        yield return Wait(0.15f, 0);
 
         Attack(target);
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.15f, 1);
+        yield return Wait(0.15f, 0);
 
 
 

@@ -40,7 +40,7 @@ public class Angel : Monsters
     float time = 2;
     float timer = 0;
     float AtkTriggerRate = 60;
-
+    bool attacking = false;
     void RandomAtk()
     {
         if (time <= timer)
@@ -49,6 +49,7 @@ public class Angel : Monsters
             if (Random.Range(0, 100) <= AtkTriggerRate)
             {
 
+                attacking = true;
                 AtkTriggerRate = 20;
                 StartCoroutine(AtkMotion());
             }
@@ -66,6 +67,8 @@ public class Angel : Monsters
 
     public IEnumerator AtkMotion()//攻撃アニメーションなど
     {
+        Debug.Log("ATK" + gameObject.name);
+
         int num = 0;
         if (atkSprites.Length < 2)
         {
@@ -79,34 +82,34 @@ public class Angel : Monsters
 
             int q = (i % 2);
             spriteRenderer.sprite = atkSprites[q];
-            yield return Wait(0.2f, atkSpdRate);
+            yield return Wait(0.2f);
 
         }
         audioSource.PlayOneShot(trumpetSE, 0.3f);
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f);
 
 
         InstantImpact();
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f, atkSpdRate);
+        yield return Wait(0.2f);
 
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f);
 
         InstantImpact();
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f, atkSpdRate);
+        yield return Wait(0.2f);
 
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f);
 
         InstantImpact();
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.5f, atkSpdRate);
+        yield return Wait(0.2f);
 
-        spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.3f, atkSpdRate);
+        spriteRenderer.sprite = atkSprites[2];
+        yield return Wait(0.1f);
 
 
         mode = Mode.move;

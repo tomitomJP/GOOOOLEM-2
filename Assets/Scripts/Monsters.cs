@@ -266,14 +266,30 @@ public class Monsters : MonoBehaviour
         mode = Mode.atk;
         mode = Mode.move;
     }
-
-    public IEnumerator Wait(float duration, float rate = 1)
+    /* protected WaitForSeconds Wait(float duration, float rate = 1)
+     {
+         return new WaitForSeconds(duration / Mathf.Clamp(rate, 0.001f, 100));
+     }*/
+    public IEnumerator Wait(float duration, int type = 0)
     {
         float time = duration;
         float timer = 0;
         while (time >= timer)
         {
-            timer += Time.deltaTime * Mathf.Clamp(rate, 0, 100);
+            float rate = 1;
+            switch (type)
+            {
+                case 0:
+                    rate = atkSpdRate;
+                    break;
+                case 1:
+                    rate = spdRate;
+                    break;
+                case >= 2:
+                    rate = 1;
+                    break;
+            }
+            timer += Time.deltaTime * Mathf.Clamp(rate, 0.001f, 100);
             yield return null;
         }
     }

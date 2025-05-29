@@ -60,9 +60,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 69ddac56b0176434b8a5d6888b065cb7, type: 3}
   - {fileID: 21300000, guid: 12db1966bfb474742af3bed681ebeb51, type: 3}
   - {fileID: 21300000, guid: ba757cfa717cb4072930a61c197db810, type: 3}
-  atk: 50
-  hp: 100
-  spd: 1
+  atk: 65
+  hp: 80
+  spd: 0.6
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
@@ -205,4 +205,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

@@ -64,8 +64,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 984d9f296ccf44412a2ae7f832a74ec7, type: 3}
   - {fileID: 21300000, guid: 148f94e278e704225aa3c967c50dfa09, type: 3}
   atk: 25
-  hp: 40
-  spd: 1
+  hp: 45
+  spd: 0.2
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
@@ -163,7 +163,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5999602104346826067
 BoxCollider2D:
   m_ObjectHideFlags: 0

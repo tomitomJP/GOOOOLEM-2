@@ -36,7 +36,7 @@ public class Doragon : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[num];
-        yield return Wait(1.3f, atkSpdRate);
+        yield return Wait(1.3f);
 
         num++;
         spriteRenderer.sprite = atkSprites[num];
@@ -47,15 +47,25 @@ public class Doragon : Monsters
         fire.transform.localEulerAngles = new Vector3(45, 90, 0);
 
         GetTargets();
-        yield return Wait(0.2f, 1);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.2f, 1);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.2f, 1);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.2f, 1);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.2f, 1);
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
         mode = Mode.move;
     }
 
@@ -68,7 +78,7 @@ public class Doragon : Monsters
         {
 
             // ここで hit.collider などを使って処理
-            Attack(hit.collider.gameObject.GetComponent<Monsters>(), atk / 5);
+            Attack(hit.collider.gameObject.GetComponent<Monsters>(), atk / 10);
         }
     }
 }

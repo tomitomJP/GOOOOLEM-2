@@ -28,11 +28,11 @@ public class Slime : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.5f, atkSpdRate);
+        yield return Wait(0.5f, 0);
 
         Attack(target);
         spriteRenderer.sprite = atkSprites[1];
-        yield return Wait(0.3f, 1);
+        yield return Wait(0.3f, 0);
 
 
 

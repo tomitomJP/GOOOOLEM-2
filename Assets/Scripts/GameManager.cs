@@ -106,14 +106,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator effectColor(int num)
     {
-        Debug.Log("Test");
         int player = num;
         Color[] colors = { Color.white, Color.black };
         int i = 0;
         while (playerJoinManager.currentPlayerCount == player)
         {
-            Debug.Log("Loop");
-
             ReadyOutLine[player].effectColor = colors[i];
             i = (i + 1) % 2;
             yield return new WaitForSeconds(0.6f);

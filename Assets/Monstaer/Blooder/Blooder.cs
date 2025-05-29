@@ -8,7 +8,7 @@ public class Blooder : Monsters
     [SerializeField] GameObject thunder;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip masicSE;
-     [SerializeField] AudioClip kaminariSE;
+    [SerializeField] AudioClip kaminariSE;
 
     void Start()
     {
@@ -21,6 +21,11 @@ public class Blooder : Monsters
         if (mode != Mode.atk)
         {
             Move();
+            RaycastHit2D[] hit;
+            if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
+            {
+                RandomAtk();
+            }
         }
         else
         {
@@ -31,11 +36,7 @@ public class Blooder : Monsters
         {
             Dead();
         }
-        RaycastHit2D[] hit;
-        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
-        {
-            RandomAtk();
-        }
+
         UpdateStatuses();
     }
 
@@ -80,7 +81,7 @@ public class Blooder : Monsters
 
         spriteRenderer.sprite = atkSprites[0];
         audioSource.PlayOneShot(masicSE);
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f);
 
         float t = 1;
         float t2 = 0;
@@ -97,10 +98,10 @@ public class Blooder : Monsters
         if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
         {
             spriteRenderer.sprite = atkSprites[3];
-            yield return Wait(0.2f, 1);
+            yield return Wait(0.2f);
 
             spriteRenderer.sprite = atkSprites[4];
-            yield return Wait(0.1f, 1);
+            yield return Wait(0.1f);
 
             if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
             {
@@ -109,19 +110,19 @@ public class Blooder : Monsters
                 {
                     GameObject monster = hit[j].collider.gameObject;
                     Instantiate(thunder, new Vector3(monster.transform.position.x, 9.5f, 0), Quaternion.identity);
-                    audioSource.PlayOneShot(kaminariSE,0.3f);
+                    audioSource.PlayOneShot(kaminariSE, 0.3f);
                     Attack(monster.GetComponent<Monsters>());
                     // スピード1.5倍、5秒間
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.5f, -0.8f));
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown", true, StatusManager.StatusType.atkSpdRate, 0.5f, -0.8f));
+                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.1f, -0.8f));
+                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown", true, StatusManager.StatusType.atkSpdRate, 0.1f, -0.8f));
 
                     ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown1", true, StatusManager.StatusType.spdRate, 3f, -0.3f));
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown1", true, StatusManager.StatusType.atkSpdRate, 53f, -0.4f));
+                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown1", true, StatusManager.StatusType.atkSpdRate, 3f, -0.4f));
 
                 }
             }
             spriteRenderer.sprite = atkSprites[4];
-            yield return Wait(0.5f, 1);
+            yield return Wait(0.5f);
         }
 
 

@@ -27,13 +27,13 @@ public class Reaper : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.5f, atkSpdRate);
+        yield return Wait(0.5f, 0);
 
         spriteRenderer.sprite = atkSprites[1];
-        yield return Wait(0.1f, 1);
+        yield return Wait(0.1f, 2);
 
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f, 1);
+        yield return Wait(0.1f, 2);
 
         if (Attack(target) > 0f)
         {

@@ -87,6 +87,8 @@ public class Peace : MonoBehaviour
                         yield return null;
                     }
 
+                    transform.position = B;
+
                 }
             }
             yield return null;

@@ -8,16 +8,63 @@ public class SkullHunter : Monsters
     void Start()
     {
         StartSetup();
+        enemyDistance *= Random.Range(0.9f, 1.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Updating();
+        if (mode != Mode.atk)
+        {
+            Move();
+            RaycastHit2D[] hit;
+            if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
+            {
+                RandomAtk();
+            }
+        }
+        else
+        {
+            MoveAniTimer = MoveAniTime;
+        }
+
+        if (0 >= hp)
+        {
+            Dead();
+        }
+
+        UpdateStatuses();
+    }
+
+    float time = 4f;
+    float timer = 0;
+    float AtkTriggerRate = 60;
+
+    void RandomAtk()
+    {
+        if (time <= timer)
+        {
+
+            if (Random.Range(0, 100) <= AtkTriggerRate)
+            {
+
+                AtkTriggerRate = 30;
+                StartCoroutine(AtkMotion());
+            }
+            else
+            {
+                AtkTriggerRate *= 1.5f;
+            }
+            timer = 0;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+        }
     }
 
 
-    public override IEnumerator AtkMotion(Monsters target)//攻撃アニメーションなど
+    public IEnumerator AtkMotion()//攻撃アニメーションなど
     {
         int num = 0;
         if (atkSprites.Length < 2)
@@ -25,36 +72,59 @@ public class SkullHunter : Monsters
             Debug.LogWarning("攻撃スプライトが足りません");
             yield break;
         }
+
+        Vector2 direction = transform.right;
+        Monsters target = null;
+        Debug.DrawRay(transform.position + rayOrigin, direction * enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, enemyDistance, enemyLayer);
+        if (hit.collider != null)
+        {
+            Monsters targetData = hit.collider.gameObject.GetComponent<Monsters>();
+            if (targetData != null && gameObject != hit.collider.gameObject)
+            {
+                if (targetData.player != player)
+                {
+                    target = targetData;
+                }
+            }
+        }
+
+        if (target == null)
+        {
+            yield break;
+        }
+
         mode = Mode.atk;
 
         for (int i = 0; i < 15; i++)
         {
             int q = (i % 3);
             spriteRenderer.sprite = atkSprites[q];
-            yield return Wait(0.2f, atkSpdRate);
+            yield return Wait(0.2f, 0);
 
         }
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f, 0);
 
         spriteRenderer.sprite = atkSprites[4];
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f, 0);
 
 
         spriteRenderer.sprite = atkSprites[5];
-        yield return Wait(0.1f, atkSpdRate);
+        yield return Wait(0.1f, 0);
 
         spriteRenderer.sprite = atkSprites[7];
-        yield return Wait(0.15f, atkSpdRate);
+        yield return Wait(0.15f, 0);
 
         Attack(target);
-        ApplyStatusTarget(target, new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.2f, -0.8f));
+        ApplyStatusTarget(target, new StatusManager("SKullHunterSpdRateDown", true, StatusManager.StatusType.spdRate, 0.2f, -0.8f));
 
         spriteRenderer.sprite = atkSprites[6];
-        yield return Wait(0.05f, atkSpdRate);
+        yield return Wait(0.05f, 0);
 
         spriteRenderer.sprite = atkSprites[7];
-        yield return Wait(0.7f, atkSpdRate);
+        yield return Wait(0.7f, 0);
         mode = Mode.move;
     }
 

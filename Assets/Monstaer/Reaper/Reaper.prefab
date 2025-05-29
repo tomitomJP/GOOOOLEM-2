@@ -61,9 +61,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3e673e649c1a34bbb81d38ab90991da3, type: 3}
   - {fileID: 21300000, guid: a3212dc2b87b145238336ac06bccd37c, type: 3}
   - {fileID: 21300000, guid: 4b11a157735104f85b88f809fa6dd191, type: 3}
-  atk: 25
-  hp: 50
-  spd: 0.7
+  atk: 55
+  hp: 45
+  spd: 0.5
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
@@ -81,6 +81,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  damageText: {fileID: 0}
   sm: []
 --- !u!212 &5602024344244058577
 SpriteRenderer:
@@ -217,7 +218,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &7657296145585624902
 GameObject:
   m_ObjectHideFlags: 0

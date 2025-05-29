@@ -260,13 +260,13 @@ public class ControllManager : MonoBehaviour
             switch (peaceNumber)
             {
                 case 0:
-                    monsters.spdRate *= 1.2f;
+                    monsters.spdRate *= 1.15f;
                     break;
                 case 1:
-                    monsters.atkRate *= 1.6f;
+                    monsters.atkRate *= 1.3f;
                     break;
                 case 2:
-                    monsters.atkSpdRate *= 1.1f;
+                    monsters.atkSpdRate *= 1.25f;
                     break;
                 case 3:
                     monsters.hp *= 1.3f;

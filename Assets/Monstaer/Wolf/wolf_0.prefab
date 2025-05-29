@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ccf804b15ad774cacda0e2596afb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayOrigin: {x: 0.8, y: 1, z: 0}
+  rayOrigin: {x: 0, y: 1, z: 0}
   spriteRenderer: {fileID: 0}
   moveSprites:
   - {fileID: 1248213313, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
@@ -112,14 +112,14 @@ MonoBehaviour:
   - {fileID: -1785456124, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
   - {fileID: -761541596, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
   - {fileID: 453724408, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
-  atk: 50
-  hp: 100
-  spd: 3
+  atk: 15
+  hp: 40
+  spd: 2
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
   player: 0
-  enemyDistance: 1
+  enemyDistance: 2.2
   allyDistance: 0.3
   atkCT: 1
   aktCTimer: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   MoveAniTimer: 0
   damageText: {fileID: 0}
   sm: []
+  bites: {fileID: 3410495544883879219, guid: 725ee4e8eec774af3bbafb569822330e, type: 3}
 --- !u!61 &1888955186276721055
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.33383977, y: 0.5016929}
+  m_Offset: {x: 0.12181866, y: 0.5016929}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -177,7 +178,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.6002934, y: 1.7929523}
+  m_Size: {x: 3.5116103, y: 1.7929523}
   m_EdgeRadius: 0
 --- !u!50 &3584874411356168012
 Rigidbody2D:
@@ -205,4 +206,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
