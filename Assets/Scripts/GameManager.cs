@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 using Unity.Mathematics;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -151,11 +147,15 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(GameOverWin(RedGameOverText));
             StartCoroutine(GameOverLose(BlueGameOverText));
+
+            pazzleManager[1].gameObject.AddComponent<Rigidbody2D>();
         }
         else
         {
             StartCoroutine(GameOverWin(BlueGameOverText));
             StartCoroutine(GameOverLose(RedGameOverText));
+            pazzleManager[0].gameObject.AddComponent<Rigidbody2D>();
+
         }
 
         yield return new WaitForSeconds(2f);
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverLose(Text winText)
     {
-        winText.text = "DEFEAT";
+        winText.text = "COLLAPSED";
 
         Transform TectPos = winText.transform;
 

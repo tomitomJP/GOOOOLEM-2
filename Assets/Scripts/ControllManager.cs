@@ -268,8 +268,11 @@ public class ControllManager : MonoBehaviour
 
         if (CanSpawnGolem /*&& goleBodyCount >= 3*/)
         {
-            int MonstaersNum = Mathf.Clamp(goleBodyCount /*- 3*/, 0, 9);
-            GameObject monstaer = Instantiate(Monsters[MonstaersNum], Houses[playerNumber].transform.position, Quaternion.identity, MonstersPearent);
+            pazzleManager.house.DoorAnimTrigger();
+            int MonstaersNum = Mathf.Clamp(goleBodyCount /*- 3*/, 0, 9);//-1.92
+            Vector3 pos = Houses[playerNumber].transform.position;
+            pos.y = -1.92f;
+            GameObject monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
 
             Monsters monsters = monstaer.GetComponent<Monsters>();
             monsters.player = playerNumber;

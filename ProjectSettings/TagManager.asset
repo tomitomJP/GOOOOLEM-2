@@ -44,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Castle
+    uniqueID: 3903160507
+    locked: 0
   - name: Field
     uniqueID: 1749715385
     locked: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class House : Monsters
     [SerializeField] float hpMax;
     [SerializeField] Transform monstersPearent;
     [SerializeField] BoxCollider2D boxCollider2D;
+
+    [SerializeField] Sprite[] houseSprites;
+
+    [SerializeField] SpriteRenderer DoorSpr;
+    [SerializeField] Sprite[] DoorSprite;
 
     Vector3 startPos;
     void Start()
@@ -45,6 +51,53 @@ public class House : Monsters
         {
             boxCollider2D.enabled = false;
         }
+
+        if (hp / 150 > 0.75f)
+        {
+            spriteRenderer.sprite = houseSprites[0];
+        }
+        else if (hp / 150 > 0.5f)
+        {
+            spriteRenderer.sprite = houseSprites[1];
+
+        }
+        else if (hp / 150 > 0.25f)
+        {
+            spriteRenderer.sprite = houseSprites[2];
+
+        }
+        else if (hp / 150 > 0)
+        {
+            spriteRenderer.sprite = houseSprites[3];
+
+        }
+        else
+        {
+            spriteRenderer.sprite = houseSprites[4];
+        }
+    }
+
+    public void DoorAnimTrigger()
+    {
+        StartCoroutine(DoorAnim());
+    }
+
+    IEnumerator DoorAnim()
+    {
+
+        for (int i = 0; i < DoorSprite.Length; i++)
+        {
+            DoorSpr.sprite = DoorSprite[i];
+            yield return Wait(0.1f, 2);
+        }
+        yield return Wait(0.3f, 2);
+
+        for (int i = 0; i < DoorSprite.Length; i++)
+        {
+            DoorSpr.sprite = DoorSprite[(DoorSprite.Length - 1) - i];
+            yield return Wait(0.1f, 2);
+        }
+
     }
 
     public override void Damaged(float damage)

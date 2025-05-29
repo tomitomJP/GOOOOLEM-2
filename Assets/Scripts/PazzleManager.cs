@@ -21,6 +21,7 @@ public class PazzleManager : MonoBehaviour
     public Transform BattleField;
     public Transform MonstersPearent;
     public ControllManager controllManager { get; set; }
+    public House house;
 
     void Start()
     {
