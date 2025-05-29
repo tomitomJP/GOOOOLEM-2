@@ -41,14 +41,14 @@ public class Goolem : Monsters
             yield return null;
         }
         spriteRenderer.sprite = atkSprites[1];
-        yield return Wait(0.1f, 2);
+        yield return Wait(0.1f, 0);
 
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.1f, 2);
+        yield return Wait(0.1f, 0);
 
         Attack(target);
         spriteRenderer.sprite = atkSprites[4];
-        yield return Wait(0.3f, 2);
+        yield return Wait(0.3f, 0);
 
         spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.3f, 2);

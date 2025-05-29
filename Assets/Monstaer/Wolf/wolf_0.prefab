@@ -130,9 +130,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   mode: 1
-  MoveAniTime: 0.09
+  MoveAniTime: 0.05
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
   bites: {fileID: 3410495544883879219, guid: 725ee4e8eec774af3bbafb569822330e, type: 3}
 --- !u!61 &1888955186276721055

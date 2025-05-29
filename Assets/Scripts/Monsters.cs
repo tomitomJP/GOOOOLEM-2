@@ -45,8 +45,8 @@ public class Monsters : MonoBehaviour
     public float MoveAniTimer = 0f;
     int MoveAniSpriteNum = 0;
 
-    [SerializeField] GameObject damageText;
-    Canvas canvas;
+    public GameObject damageText { get; set; }
+    public Canvas canvas { get; set; }
 
     void Update()
     {
@@ -144,7 +144,7 @@ public class Monsters : MonoBehaviour
 
     }
 
-    public void Damaged(float damage)
+    public virtual void Damaged(float damage)
     {
         hp -= damage;
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
@@ -289,7 +289,7 @@ public class Monsters : MonoBehaviour
                     rate = 1;
                     break;
             }
-            timer += Time.deltaTime * Mathf.Clamp(rate, 0.001f, 100);
+            timer += Time.deltaTime * Mathf.Clamp(rate, 0.001f, 5);
             yield return null;
         }
     }

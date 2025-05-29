@@ -42,7 +42,7 @@ public class Reaper : Monsters
         }
 
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.3f, 1);
+        yield return Wait(0.3f, 0);
 
         mode = Mode.move;
     }

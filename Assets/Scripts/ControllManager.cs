@@ -32,6 +32,7 @@ public class ControllManager : MonoBehaviour
     [SerializeField] GameObject brokenText;
     Canvas canvas;
 
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -42,7 +43,7 @@ public class ControllManager : MonoBehaviour
         choiceAction.canceled += ctx => choiceUp = true;     // 離した瞬間
     }
 
-    void Start()
+    IEnumerator Start()
     {
         canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
         pazzleManager = GameObject.Find("Field_" + playerNumber.ToString()).GetComponent<PazzleManager>();
@@ -51,6 +52,14 @@ public class ControllManager : MonoBehaviour
         Houses = pazzleManager.Houses;
         BattleField = pazzleManager.BattleField;
         MonstersPearent = pazzleManager.MonstersPearent;
+
+
+        while (pazzleManager.enabled == false)
+        {
+            yield return null;
+        }
+        yield return pazzleManager.PeaceSet();
+        CanCheckPeace = true;
     }
 
     void Update()
@@ -116,6 +125,7 @@ public class ControllManager : MonoBehaviour
     {
         if (choiceDown && CanCheckPeace)
         {
+            choiceUp = false;
             choiceDown = false;
             Collider2D col;
 
@@ -127,10 +137,12 @@ public class ControllManager : MonoBehaviour
                 {
                     SelectPeaceNumber = p.peaceNumber;
                 }
+                pazzleManager.BrickCount(checkingPeace.Count);
                 checkingPeace.Add(selectingPeace);
             }
         }
-        else if (!CanCheckPeace)
+
+        if (!CanCheckPeace)
         {
             choiceDown = false;
         }
@@ -168,6 +180,7 @@ public class ControllManager : MonoBehaviour
                         {
                             SelectPeaceNumber = p.peaceNumber;
                         }
+                        pazzleManager.BrickCount(checkingPeace.Count);
                         checkingPeace.Add(col.gameObject);
                     }
                 }
@@ -197,6 +210,7 @@ public class ControllManager : MonoBehaviour
     {
         CanCheckPeace = false;
         pazzleManager.blackScreen.SetActive(true);
+        pazzleManager.BrickCountOff();
 
         bool CanSpawnGolem = false;
         int goleBodyCount = 0;

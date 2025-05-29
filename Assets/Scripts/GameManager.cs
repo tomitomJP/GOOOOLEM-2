@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOverWin(Text winText)
     {
         winText.text = "VICTORY";
+        winText.color = Color.green;
         Transform TectPos = winText.transform;
 
         float time;
@@ -237,19 +238,21 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOverLose(Text winText)
     {
         winText.text = "DEFEAT";
+
         Transform TectPos = winText.transform;
 
         float time;
         float timer;
 
-        TectPos.eulerAngles = new Vector3(0, 0, -35);
+        TectPos.eulerAngles = new Vector3(0, 0, -25);
         TectPos.position = new Vector3(TectPos.position.x, 3);
 
         timer = 0;
-        time = 0.5f;
+        time = 0.3f;
         while (time >= timer)
         {
             float t = timer / time;
+            winText.fontSize = (int)math.lerp(100, 90, t);
             TectPos.position = Vector2.Lerp(new Vector3(TectPos.position.x, 3), new Vector3(TectPos.position.x, -0.5f), t);
             timer += Time.deltaTime;
             yield return null;
@@ -260,6 +263,7 @@ public class GameManager : MonoBehaviour
         while (time >= timer)
         {
             float t = timer / time;
+            winText.fontSize = (int)math.lerp(90, 100, t);
             TectPos.position = Vector2.Lerp(new Vector3(TectPos.position.x, -0.5f), new Vector3(TectPos.position.x, 0.5f), t);
             timer += Time.deltaTime;
             yield return null;

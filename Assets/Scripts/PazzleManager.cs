@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PazzleManager : MonoBehaviour
 {
@@ -19,10 +20,11 @@ public class PazzleManager : MonoBehaviour
     public GameObject[] Houses;
     public Transform BattleField;
     public Transform MonstersPearent;
+    public ControllManager controllManager { get; set; }
 
     void Start()
     {
-        StartCoroutine(PeaceSet());
+        //StartCoroutine(PeaceSet());
     }
 
     [SerializeField] bool movepeace = false;
@@ -79,13 +81,50 @@ public class PazzleManager : MonoBehaviour
             MaxCount++;
 
         }
-
         blackScreen.SetActive(false);
 
 
     }
 
+    [SerializeField] Text brickCountText;
+    public void BrickCount(int num)
+    {
+        StartCoroutine(BrickCountAnim(num));
+    }
+    public void BrickCountOff()
+    {
+        brickCountText.enabled = false;
+    }
 
+    IEnumerator BrickCountAnim(int num)
+    {
+        brickCountText.enabled = true;
+        float time;
+        float timer;
+
+        brickCountText.text = (num + 1).ToString();
+        timer = 0;
+        time = 0.15f;
+        while (time >= timer)
+        {
+            float t = timer / time;
+            brickCountText.fontSize = (int)Mathf.Lerp(40, 50, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+        time = 0.1f;
+        while (time >= timer)
+        {
+            float t = timer / time;
+            brickCountText.fontSize = (int)Mathf.Lerp(50, 40, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+
+    }
 
     void DrawCircle2D(Vector3 center, float radius, int segments = 30, Color color = default)
     {
