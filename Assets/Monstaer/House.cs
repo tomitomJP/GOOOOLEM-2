@@ -40,6 +40,11 @@ public class House : Monsters
             boxCollider2D.enabled = true;
 
         }
+
+        if (hp <= 0)
+        {
+            boxCollider2D.enabled = false;
+        }
     }
 
     public override void Damaged(float damage)

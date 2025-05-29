@@ -32,7 +32,7 @@ public class ControllManager : MonoBehaviour
     [SerializeField] GameObject brokenText;
     Canvas canvas;
 
-
+    GameManager gameManager;
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -47,6 +47,7 @@ public class ControllManager : MonoBehaviour
     {
         canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
         pazzleManager = GameObject.Find("Field_" + playerNumber.ToString()).GetComponent<PazzleManager>();
+        gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         transform.SetParent(pazzleManager.transform);
         pointer = pazzleManager.pointer;
         Houses = pazzleManager.Houses;
@@ -64,6 +65,7 @@ public class ControllManager : MonoBehaviour
 
     void Update()
     {
+        if (gameManager.gameOver) { return; }
         // MoveとChoiceのアクションを取得
         moveInput = moveAction.ReadValue<Vector2>();  // Move: WASD または Gamepad Left Stick
         choiceInput = choiceAction.triggered;  // Choice: Space または Gamepad A
