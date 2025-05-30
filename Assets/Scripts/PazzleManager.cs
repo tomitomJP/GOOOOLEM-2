@@ -10,7 +10,7 @@ public class PazzleManager : MonoBehaviour
     [SerializeField] int fieldHeight = 10;
     public GameObject[] peaces;
     [SerializeField] float spacing = 1.1f; // ピースの間隔
-    [SerializeField] GameObject peacePearent;
+    public GameObject peacePearent;
 
     Dictionary<Vector2Int, GameObject> grid = new Dictionary<Vector2Int, GameObject>();
     List<GameObject> destroyPeace = new List<GameObject>();
@@ -58,7 +58,7 @@ public class PazzleManager : MonoBehaviour
                     //DrawCircle2D(worldPos, 0.25f);
                     if (Physics2D.OverlapPoint(worldPos, LayerMask.GetMask("Peace")) == null)
                     {
-                        if (Random.Range(0, 20) == 0)
+                        if (Random.Range(0, 18) == 0)
                         {
                             Instantiate(peaces[4], worldPos, Quaternion.identity, peacePearent.transform);
 
@@ -82,6 +82,7 @@ public class PazzleManager : MonoBehaviour
             MaxCount++;
 
         }
+        ResetHilightPeace();
         blackScreen.SetActive(false);
 
 
@@ -142,6 +143,147 @@ public class PazzleManager : MonoBehaviour
 
             Debug.DrawLine(pointA, pointB, color, 0f, false);
         }
+    }
+
+    public void ResetHilightPeace()
+    {
+        for (int i = 0; i < peacePearent.transform.childCount; i++)
+        {
+            GameObject peaceG = peacePearent.transform.GetChild(i).gameObject;
+            Peace peaceS = peaceG.GetComponent<Peace>();
+
+            SpriteRenderer spr = peaceG.GetComponent<SpriteRenderer>();
+            spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1);
+            if (peaceS.peaceNumber == 4)
+            {
+                spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 0.3f);
+            }
+        }
+    }
+
+
+    public Vector2 HilightPeace(List<GameObject> peces, int number)
+    {
+        ResetHilightPeace();
+
+        Vector2 canDire = Vector2.zero;
+
+        List<GameObject> hilightPeaces = new List<GameObject>();
+        hilightPeaces.AddRange(peces);
+        int firstCount = hilightPeaces.Count - 1;
+        for (int n = firstCount; n < hilightPeaces.Count; n++)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2 direction = Vector2.right;
+                switch (i)
+                {
+                    case 0:
+                        direction = Vector2.right;
+                        break;
+                    case 1:
+                        direction = Vector2.up;
+                        break;
+                    case 2:
+                        direction = Vector2.left;
+                        break;
+                    case 3:
+                        direction = Vector2.down;
+                        break;
+                }
+                Debug.DrawRay(hilightPeaces[n].transform.position, direction * 0.6f, Color.red, 0.5f); // 可視化（長さに注意）
+                RaycastHit2D[] hit = Physics2D.RaycastAll(hilightPeaces[n].transform.position, direction, 0.6f, LayerMask.GetMask("Peace"));
+                if (hit != null && hit.Length > 0)
+                {
+                    Debug.Log(hit.Length);
+                    for (int j = 0; j < hit.Length; j++)
+                    {
+                        Peace peace = hit[j].collider.gameObject.GetComponent<Peace>();
+                        Peace Apeace = hilightPeaces[n].GetComponent<Peace>();
+
+                        if (peace != null)
+                        {
+                            if ((number == peace.peaceNumber || 4 == peace.peaceNumber) && peace.check == false)
+                            {
+                                if (!hilightPeaces.Contains(peace.gameObject))
+                                {
+                                    hilightPeaces.Add(peace.gameObject);
+                                    if (n == firstCount)
+                                    {
+
+                                        switch (i)
+                                        {
+                                            case 0: // 右
+                                                if (canDire.x == -1 || canDire.x == 2) canDire.x = 2;
+                                                else canDire.x = 1;
+                                                break;
+                                            case 2: // 左
+                                                if (canDire.x == 1 || canDire.x == 2) canDire.x = 2;
+                                                else canDire.x = -1;
+                                                break;
+                                            case 1: // 上
+                                                if (canDire.y == -1 || canDire.y == 2) canDire.y = 2;
+                                                else canDire.y = 1;
+                                                break;
+                                            case 3: // 下
+                                                if (canDire.y == 1 || canDire.y == 2) canDire.y = 2;
+                                                else canDire.y = -1;
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (hilightPeaces.Count >= 2 && firstCount >= 1)
+                            {
+                                if (n == firstCount && peace.gameObject == hilightPeaces[firstCount - 1])
+                                {
+
+                                    switch (i)
+                                    {
+                                        case 0: // 右
+                                            if (canDire.x == -1 || canDire.x == 2) canDire.x = 2;
+                                            else canDire.x = 1;
+                                            break;
+                                        case 2: // 左
+                                            if (canDire.x == 1 || canDire.x == 2) canDire.x = 2;
+                                            else canDire.x = -1;
+                                            break;
+                                        case 1: // 上
+                                            if (canDire.y == -1 || canDire.y == 2) canDire.y = 2;
+                                            else canDire.y = 1;
+                                            break;
+                                        case 3: // 下
+                                            if (canDire.y == 1 || canDire.y == 2) canDire.y = 2;
+                                            else canDire.y = -1;
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        for (int i = 0; i < peacePearent.transform.childCount; i++)
+        {
+            GameObject peaceG = peacePearent.transform.GetChild(i).gameObject;
+            Peace peaceS = peaceG.GetComponent<Peace>();
+            if (!hilightPeaces.Contains(peaceG) && peaceS.check == false)
+            {
+                SpriteRenderer spr = peaceG.gameObject.GetComponent<SpriteRenderer>();
+                spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 0.1f);
+            }
+            else
+            {
+                SpriteRenderer spr = peaceG.gameObject.GetComponent<SpriteRenderer>();
+                spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1f);
+            }
+
+        }
+        return canDire;
     }
 
 }

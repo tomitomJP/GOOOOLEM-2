@@ -67,7 +67,7 @@ MonoBehaviour:
   atkSpdRate: 1
   atkRate: 1
   player: 0
-  enemyDistance: 1
+  enemyDistance: 1.3
   allyDistance: 0.3
   atkCT: 1
   aktCTimer: 0
@@ -80,7 +80,6 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
 --- !u!212 &8078445330133208287
 SpriteRenderer:
@@ -166,7 +165,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09064174, y: 0.36041057}
+  m_Offset: {x: -0.09064174, y: 1.4039903}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -177,7 +176,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1055942, y: 2.9767048}
+  m_Size: {x: 2.1055942, y: 5.0638633}
   m_EdgeRadius: 0
 --- !u!50 &3290332485165636776
 Rigidbody2D:

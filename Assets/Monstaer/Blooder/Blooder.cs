@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Blooder : Monsters
@@ -33,10 +32,12 @@ public class Blooder : Monsters
             Dead();
         }
         RaycastHit2D[] hit;
-        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
+        if (Physics2D.Raycast(transform.position + rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
         {
             RandomAtk();
         }
+        Debug.DrawRay(transform.position + rayOrigin, transform.right, Color.red, Mathf.Infinity); // 可視化（長さに注意）
+
         UpdateStatuses();
     }
 
@@ -95,7 +96,7 @@ public class Blooder : Monsters
             yield return null;
         }
         RaycastHit2D[] hit;
-        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
+        if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
         {
             spriteRenderer.sprite = atkSprites[3];
             yield return Wait(0.2f);
@@ -103,9 +104,9 @@ public class Blooder : Monsters
             spriteRenderer.sprite = atkSprites[4];
             yield return Wait(0.1f);
 
-            if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
+            if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
             {
-                hit = Physics2D.RaycastAll(rayOrigin, transform.right, Mathf.Infinity, enemyLayer);
+                hit = Physics2D.RaycastAll(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer);
                 for (int j = 0; j < hit.Length; j++)
                 {
                     GameObject monster = hit[j].collider.gameObject;

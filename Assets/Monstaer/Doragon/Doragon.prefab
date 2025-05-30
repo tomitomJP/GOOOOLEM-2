@@ -90,8 +90,8 @@ MonoBehaviour:
   atkSprites:
   - {fileID: 21300000, guid: 417109b0e44b9492fae5ebf8d4bcf9bd, type: 3}
   - {fileID: 21300000, guid: a627a3dde44874188a4ac3aaa7101546, type: 3}
-  atk: 45
-  hp: 150
+  atk: 50
+  hp: 180
   spd: 0.6
   spdRate: 1
   atkSpdRate: 1
@@ -110,7 +110,6 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
   firePoint: {fileID: 7537967039426249455}
   fireParticle: {fileID: 6834844784792535100, guid: 22baee8f641d64814a3ac15bac27664f, type: 3}
@@ -198,7 +197,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.6666125, y: -0.06589329}
+  m_Offset: {x: -0.6666125, y: 1.1453025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -209,7 +208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.4752758, y: 3.8583663}
+  m_Size: {x: 3.4752758, y: 6.2807584}
   m_EdgeRadius: 0
 --- !u!210 &2130685121577261350
 SortingGroup:

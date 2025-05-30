@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text CountDownText;
     [SerializeField] PazzleManager[] pazzleManager;
     [SerializeField] GameObject ReadyCanvas;
+    [SerializeField] GameObject GameOverBlackScreen;
 
     IEnumerator Start()
     {
@@ -158,7 +159,8 @@ public class GameManager : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
+        GameOverBlackScreen.SetActive(true);
         GameOverMessage.text = "Aボタンを押して再マッチ";
 
         CanRemake = true;
@@ -183,7 +185,7 @@ public class GameManager : MonoBehaviour
     void OnAPressed(InputAction.CallbackContext context)
     {
         // ゲームオーバー状態でのみ再マッチ受け付ける
-        if (gameOver)
+        if (gameOver & CanRemake)
         {
             GameOverMessage.text = "再マッチを確認";
             Invoke("Remake", 1f);
@@ -209,7 +211,7 @@ public class GameManager : MonoBehaviour
         while (time >= timer)
         {
             float t = timer / time;
-            winText.fontSize = (int)math.lerp(0, 120, t);
+            winText.fontSize = (int)math.lerp(0, 100, t);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -219,7 +221,7 @@ public class GameManager : MonoBehaviour
         while (time >= timer)
         {
             float t = timer / time;
-            winText.fontSize = (int)math.lerp(120, 80, t);
+            winText.fontSize = (int)math.lerp(100, 60, t);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -229,7 +231,7 @@ public class GameManager : MonoBehaviour
         while (time >= timer)
         {
             float t = timer / time;
-            winText.fontSize = (int)math.lerp(80, 100, t);
+            winText.fontSize = (int)math.lerp(60, 80, t);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -252,7 +254,7 @@ public class GameManager : MonoBehaviour
         while (time >= timer)
         {
             float t = timer / time;
-            winText.fontSize = (int)math.lerp(100, 90, t);
+            winText.fontSize = (int)math.lerp(100, 70, t);
             TectPos.position = Vector2.Lerp(new Vector3(TectPos.position.x, 3), new Vector3(TectPos.position.x, -0.5f), t);
             timer += Time.deltaTime;
             yield return null;
@@ -263,7 +265,7 @@ public class GameManager : MonoBehaviour
         while (time >= timer)
         {
             float t = timer / time;
-            winText.fontSize = (int)math.lerp(90, 100, t);
+            winText.fontSize = (int)math.lerp(70, 80, t);
             TectPos.position = Vector2.Lerp(new Vector3(TectPos.position.x, -0.5f), new Vector3(TectPos.position.x, 0.5f), t);
             timer += Time.deltaTime;
             yield return null;

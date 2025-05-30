@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5999602104346826067}
   m_Layer: 0
   m_Name: SkullHunter
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,6 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
 --- !u!212 &7102765934196840624
 SpriteRenderer:
@@ -196,7 +195,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06310296, y: 0.10419941}
+  m_Offset: {x: -0.30974096, y: 2.6127188}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -207,5 +206,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9748001, y: 2.7006922}
+  m_Size: {x: 1.4680761, y: 7.717731}
   m_EdgeRadius: 0

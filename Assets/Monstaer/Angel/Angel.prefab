@@ -61,8 +61,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0a5d0fc037d414c7db86defb462053fd, type: 3}
   - {fileID: 21300000, guid: 664e3de9cb9484382aa6f397f95c25c0, type: 3}
   - {fileID: 21300000, guid: f45a8b225f7a8464bbc897b27de70130, type: 3}
-  atk: 35
-  hp: 30
+  atk: 12
+  hp: 35
   spd: 0.1
   spdRate: 1
   atkSpdRate: 1
@@ -81,7 +81,6 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.2
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
   impact: {fileID: 8694574148772513426, guid: c2cc9cc87199b4540bb7122d8cc28e02, type: 3}
   audioSource: {fileID: 2139489646133859638}
@@ -170,7 +169,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5138681, y: 0.81418705}
+  m_Offset: {x: -0.5138681, y: 2.0744421}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -181,7 +180,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5322638, y: 5.1019163}
+  m_Size: {x: 1.5322638, y: 7.6224265}
   m_EdgeRadius: 0
 --- !u!50 &7518727329288192447
 Rigidbody2D:

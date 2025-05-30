@@ -30,6 +30,7 @@ public class ControllManager : MonoBehaviour
     [SerializeField] private bool choiceDown = false;
     [SerializeField] private bool choiceUp = false;
     [SerializeField] GameObject brokenText;
+    [SerializeField] LineRenderer lineRenderer;
     Canvas canvas;
 
     GameManager gameManager;
@@ -53,7 +54,7 @@ public class ControllManager : MonoBehaviour
         Houses = pazzleManager.Houses;
         BattleField = pazzleManager.BattleField;
         MonstersPearent = pazzleManager.MonstersPearent;
-
+        pazzleManager.controllManager = this;
 
         while (pazzleManager.enabled == false)
         {
@@ -70,12 +71,15 @@ public class ControllManager : MonoBehaviour
         moveInput = moveAction.ReadValue<Vector2>();  // Move: WASD または Gamepad Left Stick
         choiceInput = choiceAction.triggered;  // Choice: Space または Gamepad A
 
+
+
         if (!CanCheckPeace)
         {
             choiceDown = false;
             choiceUp = false;
         }
 
+        LineView();
         SelectPeace();
         PointMove();
         CheckPeaceDown();
@@ -84,16 +88,94 @@ public class ControllManager : MonoBehaviour
         DrawCircle2D(pointer.position, pointerSize);
     }
 
-    void PointMove()
+    Vector2 GetFourDirection(Vector2 input)
     {
-        // 移動処理
-        pointer.position += new Vector3(moveInput.x, moveInput.y, 0) * speed * Time.deltaTime;
+        if (input == Vector2.zero) return Vector2.zero;
+
+        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+        {
+            return input.x > 0 ? Vector2.right : Vector2.left;
+        }
+        else
+        {
+            return input.y > 0 ? Vector2.up : Vector2.down;
+        }
+    }
+
+    void MovePointer(Vector2 dir)
+    {
+        Vector3 move = dir * 0.5f; // 1マス移動
+        pointer.localPosition += move;
 
         float X = Mathf.Clamp(pointer.localPosition.x, -2.5f, 2.5f);
         float Y = Mathf.Clamp(pointer.localPosition.y, -2.5f, 2.5f);
 
         pointer.localPosition = new Vector2(X, Y);
     }
+
+
+
+    // 変数定義（クラス内に入れてください）
+    private Vector2 moveDirection = Vector2.zero;
+    private float moveDelay = 0.5f;       // 最初の連続移動までの待ち時間
+    private float repeatRate = 0.1f;      // 押し続けた場合の連続間隔
+    private float moveTimer = 0f;
+    private bool isHolding = false;
+    Vector2 canDirection;
+
+    // Update() 内で moveInput 読み取り後に呼ばれる
+    void PointMove()
+    {
+        Vector2 input = GetFourDirection(moveInput);
+
+        if (input != moveDirection)
+        {
+            moveDirection = input;
+            moveTimer = moveDelay;
+            isHolding = true;
+
+            if (moveDirection != Vector2.zero && CanMoveDirection(moveDirection))
+            {
+                MovePointer(moveDirection);
+            }
+        }
+        else if (moveDirection != Vector2.zero && isHolding)
+        {
+            moveTimer -= Time.deltaTime;
+            if (moveTimer <= 0f && CanMoveDirection(moveDirection))
+            {
+                MovePointer(moveDirection);
+                moveTimer = repeatRate;
+            }
+        }
+
+        if (input == Vector2.zero)
+        {
+            moveDirection = Vector2.zero;
+            isHolding = false;
+        }
+    }
+
+    // 方向に基づいて pointer を動かす（1マス）
+    bool CanMoveDirection(Vector2 dir)
+    {
+        if (checkingPeace.Count == 0) return true;
+
+        // 横方向の制限
+        if (dir == Vector2.right)
+            return canDirection.x == 1 || canDirection.x == 2;
+        if (dir == Vector2.left)
+            return canDirection.x == -1 || canDirection.x == 2;
+
+        // 縦方向の制限
+        if (dir == Vector2.up)
+            return canDirection.y == 1 || canDirection.y == 2;
+        if (dir == Vector2.down)
+            return canDirection.y == -1 || canDirection.y == 2;
+
+        return false;
+    }
+
 
     GameObject selectingPeace;
     GameObject selectingPeacePrev;
@@ -134,13 +216,15 @@ public class ControllManager : MonoBehaviour
             if (selectingPeace != null)
             {
                 Peace p = selectingPeace.gameObject.GetComponent<Peace>();
-                p.check = true;
                 if (p.peaceNumber != 4)
                 {
+                    p.check = true;
                     SelectPeaceNumber = p.peaceNumber;
+                    pazzleManager.BrickCount(checkingPeace.Count);
+                    checkingPeace.Add(selectingPeace);
+                    canDirection = pazzleManager.HilightPeace(checkingPeace, SelectPeaceNumber);
                 }
-                pazzleManager.BrickCount(checkingPeace.Count);
-                checkingPeace.Add(selectingPeace);
+
             }
         }
 
@@ -151,7 +235,7 @@ public class ControllManager : MonoBehaviour
     }
 
     [SerializeField] float pointerSize = 1;
-    List<GameObject> checkingPeace = new List<GameObject>();
+    public List<GameObject> checkingPeace = new List<GameObject>();
 
     [SerializeField] float chainDis = 1.25f;
     [SerializeField] bool CanCheckPeace = true;
@@ -163,9 +247,9 @@ public class ControllManager : MonoBehaviour
         {
             Collider2D col = Physics2D.OverlapPoint(pointer.position);
 
-            if (col != null)
+            if (selectingPeace != null)
             {
-                Peace p = col.gameObject.GetComponent<Peace>();
+                Peace p = selectingPeace.gameObject.GetComponent<Peace>();
                 Peace pPrev = null;
                 if (checkingPeace[checkingPeace.Count - 1] != null)
                 {
@@ -175,17 +259,30 @@ public class ControllManager : MonoBehaviour
                 if (p != null && pPrev != null)
                 {
                     float dis = Vector2.Distance(p.transform.position, pPrev.transform.position);
-                    if (p.check == false && chainDis >= dis && (SelectPeaceNumber == p.peaceNumber || 4 == p.peaceNumber || -1 == SelectPeaceNumber))
+                    bool isPrevPeace = checkingPeace.Count > 1 && selectingPeace == checkingPeace[checkingPeace.Count - 2];
+
+                    if (
+                        (p.check == false && chainDis >= dis && (SelectPeaceNumber == p.peaceNumber || 4 == p.peaceNumber)) // 新規選択
+                        || isPrevPeace // 戻る操作を許可
+                    )
                     {
-                        p.check = true;
-                        if (SelectPeaceNumber == -1)
+                        if (isPrevPeace)
                         {
-                            SelectPeaceNumber = p.peaceNumber;
+                            // 戻る時はチェックを解除して一つ戻る
+                            pPrev.check = false;
+                            checkingPeace.RemoveAt(checkingPeace.Count - 1);
                         }
+                        else
+                        {
+                            p.check = true;
+                            checkingPeace.Add(selectingPeace);
+                        }
+
                         pazzleManager.BrickCount(checkingPeace.Count);
-                        checkingPeace.Add(col.gameObject);
+                        canDirection = pazzleManager.HilightPeace(checkingPeace, SelectPeaceNumber);
                     }
                 }
+
             }
         }
         else
@@ -210,6 +307,8 @@ public class ControllManager : MonoBehaviour
 
     IEnumerator deletePeace(List<GameObject> DeletingPeace)
     {
+        pazzleManager.ResetHilightPeace();
+
         CanCheckPeace = false;
         pazzleManager.blackScreen.SetActive(true);
         pazzleManager.BrickCountOff();
@@ -260,7 +359,7 @@ public class ControllManager : MonoBehaviour
             Vector2 pos = DeletingPeace[0].transform.position;
             if (count >= 6 && DeletingPeace.Count == 1)
             {
-                Instantiate(pazzleManager.peaces[4], pos, Quaternion.identity, pazzleManager.transform);
+                Instantiate(pazzleManager.peaces[4], pos, Quaternion.identity, pazzleManager.peacePearent.transform);
             }
             Destroy(DeletingPeace[0]);
             DeletingPeace.RemoveAt(0);
@@ -306,6 +405,25 @@ public class ControllManager : MonoBehaviour
         yield return pazzleManager.PeaceSet();
 
         CanCheckPeace = true;
+    }
+
+    void LineView()
+    {
+        if (checkingPeace.Count >= 2)
+        {
+            lineRenderer.positionCount = checkingPeace.Count;
+            Vector3[] points = new Vector3[checkingPeace.Count];
+            for (int i = 0; i < checkingPeace.Count; i++)
+            {
+                points[i] = checkingPeace[i].gameObject.transform.position;
+            }
+            lineRenderer.SetPositions(points);
+
+        }
+        else
+        {
+            lineRenderer.positionCount = 0;
+        }
     }
 
     void DrawCircle2D(Vector3 center, float radius, int segments = 30, Color color = default)

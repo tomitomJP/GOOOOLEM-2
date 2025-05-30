@@ -78,7 +78,7 @@ public class Monsters : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         // float X = (Random.Range(0, 11) - 5) * 0.1f;
         float Y = Random.Range(0, 4) * 0.1f;
-        rayOrigin.y = -1.0f;
+        rayOrigin.y = 0.0f;
         //enemyDistance *= Random.Range(0.8f, 1.1f);
         if (player == 1)
         {

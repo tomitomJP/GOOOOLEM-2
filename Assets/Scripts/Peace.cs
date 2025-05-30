@@ -51,7 +51,7 @@ public class Peace : MonoBehaviour
     {
         while (true)
         {
-            Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.green, 0.2f);
+            //Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.green, 0.2f);
 
             RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, Vector3.down, 0.5f, targetMask);
 

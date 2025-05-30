@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Durahan : Monsters
 {
@@ -8,6 +9,7 @@ public class Durahan : Monsters
     void Start()
     {
         StartSetup();
+        rayOrigin.y = 0;
     }
 
     // Update is called once per frame

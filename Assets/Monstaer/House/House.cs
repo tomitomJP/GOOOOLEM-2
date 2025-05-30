@@ -20,6 +20,7 @@ public class House : Monsters
 
     [SerializeField] SpriteRenderer DoorSpr;
     [SerializeField] Sprite[] DoorSprite;
+    public bool NonDamage = false;
 
     Vector3 startPos;
     void Start()
@@ -39,11 +40,11 @@ public class House : Monsters
 
         if (monstersPearent.childCount > 0)
         {
-            boxCollider2D.enabled = false;
+            NonDamage = true;
         }
         else
         {
-            boxCollider2D.enabled = true;
+            NonDamage = false;
 
         }
 
@@ -74,6 +75,8 @@ public class House : Monsters
         else
         {
             spriteRenderer.sprite = houseSprites[4];
+            spriteRenderer.color = Color.white;
+
         }
     }
 
@@ -102,12 +105,22 @@ public class House : Monsters
 
     public override void Damaged(float damage)
     {
-        StartCoroutine(DamageAnimHouse());
-        damages.Add(new Damage(hp, damage));
-        hp -= damage;
+        if (NonDamage)
+        {
+            // Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
+            // _damageText.text = "NULLILED";
+            // _damageText.color = Color.gray;
+        }
+        else
+        {
+            StartCoroutine(DamageAnimHouse());
+            damages.Add(new Damage(hp, damage));
+            hp -= damage;
 
-        Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
-        _damageText.text = damage.ToString("F0");
+            Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
+            _damageText.text = damage.ToString("F0");
+        }
+
     }
 
 
