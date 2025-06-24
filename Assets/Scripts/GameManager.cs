@@ -7,9 +7,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] int playerCount = 2;
     [SerializeField] Text[] Ready;
     [SerializeField] Outline[] ReadyOutLine;
     [SerializeField] Text[] Status;
+    [SerializeField] GameObject[] ContButton;
     [SerializeField] PlayerJoinManager playerJoinManager;
     [SerializeField] Text CountDownText;
     [SerializeField] PazzleManager[] pazzleManager;
@@ -18,26 +20,34 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        for (int i = 0; i < 2; i++)
+        {
+            Status[i].text = "";
+            Ready[i].enabled = false;
+
+        }
+
+        for (int i = 0; i < playerCount; i++)
+        {
+            Ready[i].enabled = true;
+
+        }
         ReadyCanvas.SetActive(true);
-        Status[1].text = "";
 
-        Status[0].text = "PRESS THE A BUTTON";
-
-        StartCoroutine(effectColor(0));
-        while (playerJoinManager.currentPlayerCount == 0)
+        for (int i = 0; i < playerCount; i++)
         {
-            yield return null;
+            Status[i].text = "PRESS THE    BUTTON";
+            ContButton[i].SetActive(true);
+            StartCoroutine(effectColor(i));
+            while (playerJoinManager.currentPlayerCount == i)
+            {
+                yield return null;
+            }
+            Status[i].text = "OK";
+            ContButton[i].SetActive(false);
         }
-        Status[0].text = "OK";
 
-        Status[1].text = "PRESS THE A BUTTON";
 
-        StartCoroutine(effectColor(1));
-        while (playerJoinManager.currentPlayerCount == 1)
-        {
-            yield return null;
-        }
-        Status[1].text = "OK";
 
         float time;
         float timer;
@@ -94,10 +104,13 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
 
+        for (int i = 0; i < playerCount; i++)
+        {
+            pazzleManager[i].enabled = true;
+
+        }
 
         ReadyCanvas.SetActive(false);
-        pazzleManager[0].enabled = true;
-        pazzleManager[1].enabled = true;
 
     }
 

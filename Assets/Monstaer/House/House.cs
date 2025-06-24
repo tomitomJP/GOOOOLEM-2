@@ -20,6 +20,7 @@ public class House : Monsters
 
     [SerializeField] SpriteRenderer DoorSpr;
     [SerializeField] Sprite[] DoorSprite;
+    [SerializeField] GameObject[] castleDamageParticles;
     public bool NonDamage = false;
 
     Vector3 startPos;
@@ -61,19 +62,30 @@ public class House : Monsters
         {
             spriteRenderer.sprite = houseSprites[1];
 
+
+
         }
         else if (hp / 150 > 0.25f)
         {
             spriteRenderer.sprite = houseSprites[2];
+            castleDamageParticles[0].SetActive(true);
+            castleDamageParticles[1].SetActive(true);
+
 
         }
         else if (hp / 150 > 0)
         {
             spriteRenderer.sprite = houseSprites[3];
+            castleDamageParticles[2].SetActive(true);
+
 
         }
         else
         {
+            for (int i = 0; i < castleDamageParticles[2].transform.childCount; i++)
+            {
+                castleDamageParticles[2].transform.GetChild(i).gameObject.SetActive(false);
+            }
             spriteRenderer.sprite = houseSprites[4];
             spriteRenderer.color = Color.white;
 
