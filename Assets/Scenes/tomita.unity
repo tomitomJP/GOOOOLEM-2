@@ -359,7 +359,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -437,7 +437,10 @@ MonoBehaviour:
   - {fileID: 726798817}
   - {fileID: 567068183}
   BattleField: {fileID: 608732664}
+  MonstersPearent: {fileID: 0}
+  house: {fileID: 0}
   movepeace: 0
+  brickCountText: {fileID: 0}
 --- !u!4 &121338532
 Transform:
   m_ObjectHideFlags: 0
@@ -523,7 +526,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -607,7 +610,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -692,7 +695,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -990,7 +993,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1103,10 +1106,18 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
   hpBar: {fileID: 1265465752}
+  hpBar_Red: {fileID: 0}
   hpBarText: {fileID: 1906601095}
+  hpMax: 0
+  monstersPearent: {fileID: 0}
+  boxCollider2D: {fileID: 0}
+  houseSprites: []
+  DoorSpr: {fileID: 0}
+  DoorSprite: []
+  castleDamageParticles: []
+  NonDamage: 0
 --- !u!1 &608732663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,7 +1206,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1308,10 +1319,18 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  damageText: {fileID: 0}
   sm: []
   hpBar: {fileID: 854564633}
+  hpBar_Red: {fileID: 0}
   hpBarText: {fileID: 1078448733}
+  hpMax: 0
+  monstersPearent: {fileID: 0}
+  boxCollider2D: {fileID: 0}
+  houseSprites: []
+  DoorSpr: {fileID: 0}
+  DoorSprite: []
+  castleDamageParticles: []
+  NonDamage: 0
 --- !u!1 &830473210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,7 +1504,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1739,7 +1758,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1865,7 +1884,10 @@ MonoBehaviour:
   pointer: {fileID: 0}
   Houses: []
   BattleField: {fileID: 0}
+  MonstersPearent: {fileID: 0}
+  house: {fileID: 0}
   movepeace: 0
+  brickCountText: {fileID: 0}
 --- !u!114 &1250047668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1885,7 +1907,10 @@ MonoBehaviour:
   Monsters: []
   choiceDown: 0
   choiceUp: 0
+  brokenText: {fileID: 0}
+  lineRenderer: {fileID: 0}
   pointerSize: 0.2
+  checkingPeace: []
   chainDis: 1
   CanCheckPeace: 1
   SelectPeaceNumber: -1
@@ -2181,7 +2206,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2278,6 +2303,7 @@ MonoBehaviour:
     m_Flags: 0
   playerPrefab: {fileID: 7700138363291421967, guid: e8ada6d31a06d482a92b9c8d3edda6d3, type: 3}
   maxPlayerCount: 2
+  currentPlayerCount: 0
 --- !u!4 &1360853264
 Transform:
   m_ObjectHideFlags: 0
@@ -2374,7 +2400,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2618,7 +2644,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2702,7 +2728,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2763,15 +2789,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e715abef04254719a2b755e5bb2f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HouseHealth:
-  - 300
-  - 300
-  HouseHealth_slider:
-  - {fileID: 854564633}
-  - {fileID: 1265465752}
-  HouseHealth_text:
-  - {fileID: 1078448733}
-  - {fileID: 1906601095}
+  playerCount: 2
+  Ready: []
+  ReadyOutLine: []
+  Status: []
+  ContButton: []
+  playerJoinManager: {fileID: 0}
+  CountDownText: {fileID: 0}
+  pazzleManager: []
+  ReadyCanvas: {fileID: 0}
+  GameOverBlackScreen: {fileID: 0}
+  RedGameOverText: {fileID: 0}
+  BlueGameOverText: {fileID: 0}
+  houseRed: {fileID: 0}
+  houseBlue: {fileID: 0}
+  blackScreen: {fileID: 0}
+  GameOverMessage: {fileID: 0}
+  gameOver: 0
+  CanRemake: 0
+  playerJoinInputAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: afa1fbee-d877-4ef2-9d34-09c0e25e9d53
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!4 &1835283638
 Transform:
   m_ObjectHideFlags: 0
@@ -2982,7 +3026,10 @@ MonoBehaviour:
   - {fileID: 726798817}
   - {fileID: 567068183}
   BattleField: {fileID: 608732664}
+  MonstersPearent: {fileID: 0}
+  house: {fileID: 0}
   movepeace: 0
+  brickCountText: {fileID: 0}
 --- !u!4 &1887197926942206197
 Transform:
   m_ObjectHideFlags: 0
@@ -3036,7 +3083,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3173,7 +3220,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3225,7 +3272,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3294,7 +3341,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3469,7 +3516,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
