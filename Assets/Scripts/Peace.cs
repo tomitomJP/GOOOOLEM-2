@@ -8,42 +8,35 @@ public class Peace : MonoBehaviour
     public bool check = false;
     public bool selecting = false;
     public int peaceNumber = 0;
-    [SerializeField] SpriteRenderer checkingSprite;
-    [SerializeField] SpriteRenderer selectingSprite;
+    [SerializeField] Material outlineCheck;
+    [SerializeField] Material outlineSelecting;
+
+    private Material defaultMaterial;
     [SerializeField] float fallingTime = 0.1f;
     [SerializeField] LayerMask targetMask;
     SpriteRenderer peaceSprite;
     void Start()
     {
         peaceSprite = GetComponent<SpriteRenderer>();
+        defaultMaterial = peaceSprite.material;
         StartCoroutine(Fall());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (check)
+        if (selecting)
         {
-            checkingSprite.enabled = true;
-            peaceSprite.sortingOrder = 4;
+            peaceSprite.material = outlineSelecting;
         }
-        else if (selecting)
+        else if (check)
         {
-            selectingSprite.enabled = true;
-            peaceSprite.sortingOrder = 4;
+            peaceSprite.material = outlineCheck;
+
         }
         else
         {
-            if (check == false)
-            {
-                checkingSprite.enabled = false;
-
-            }
-            if (selecting == false)
-            {
-                selectingSprite.enabled = false;
-            }
-            peaceSprite.sortingOrder = 0;
+            peaceSprite.material = defaultMaterial;
         }
     }
 
