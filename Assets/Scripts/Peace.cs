@@ -15,6 +15,10 @@ public class Peace : MonoBehaviour
     [SerializeField] float fallingTime = 0.1f;
     [SerializeField] LayerMask targetMask;
     SpriteRenderer peaceSprite;
+
+    [SerializeField] GameObject[] soulParticle;
+
+
     void Start()
     {
         peaceSprite = GetComponent<SpriteRenderer>();
@@ -105,5 +109,26 @@ public class Peace : MonoBehaviour
 
             Debug.DrawLine(pointA, pointB, color, 0.2f, false);
         }
+    }
+
+    public void StartParticle(int num)
+    {
+        if (peaceNumber != 4) { return; }
+        for (int i = 0; i < soulParticle.Length; i++)
+        {
+            if (i == num)
+            {
+                if (soulParticle[i].activeSelf == false) soulParticle[i].SetActive(true);
+
+            }
+            else
+            {
+                soulParticle[i].SetActive(false);
+            }
+        }
+
+
+
+
     }
 }
