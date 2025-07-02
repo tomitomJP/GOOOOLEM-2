@@ -10,6 +10,9 @@ TagManager:
   - BattleField
   - Monster
   - Canvas
+  - SE_Monster
+  - SE
+  - BGM
   layers:
   - Default
   - TransparentFX

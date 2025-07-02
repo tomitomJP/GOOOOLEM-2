@@ -44,6 +44,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenRule"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd687221-3892-4c52-9d76-8737d5e33520"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +165,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Choice"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f38d0c9-34f3-4f51-8caa-e3a145670811"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenRule"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e2b09a6-069f-4dce-9b3e-3daf6f0fa88b"",
+                    ""path"": ""<Joystick>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenRule"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7975ce8-7324-488e-9357-ba6b5d717c18"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenRule"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -200,6 +242,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Choice = m_Player.FindAction("Choice", throwIfNotFound: true);
+        m_Player_OpenRule = m_Player.FindAction("OpenRule", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,12 +306,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Choice;
+    private readonly InputAction m_Player_OpenRule;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
         public PlayerActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Choice => m_Wrapper.m_Player_Choice;
+        public InputAction @OpenRule => m_Wrapper.m_Player_OpenRule;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +329,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Choice.started += instance.OnChoice;
             @Choice.performed += instance.OnChoice;
             @Choice.canceled += instance.OnChoice;
+            @OpenRule.started += instance.OnOpenRule;
+            @OpenRule.performed += instance.OnOpenRule;
+            @OpenRule.canceled += instance.OnOpenRule;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -294,6 +342,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Choice.started -= instance.OnChoice;
             @Choice.performed -= instance.OnChoice;
             @Choice.canceled -= instance.OnChoice;
+            @OpenRule.started -= instance.OnOpenRule;
+            @OpenRule.performed -= instance.OnOpenRule;
+            @OpenRule.canceled -= instance.OnOpenRule;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -342,5 +393,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnChoice(InputAction.CallbackContext context);
+        void OnOpenRule(InputAction.CallbackContext context);
     }
 }

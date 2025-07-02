@@ -28,6 +28,7 @@ public class Monsters : MonoBehaviour
 
     public LayerMask myLayer;
     public LayerMask enemyLayer;
+    public AudioSource audioSource { get; set; }
 
     public enum Mode
     {
@@ -97,6 +98,9 @@ public class Monsters : MonoBehaviour
         }
 
         damageText = Resources.Load<GameObject>("DamageText"); // Resources/Enemy.prefab をロード
+
+
+        audioSource = GameObject.FindWithTag("SE_Monster").GetComponent<AudioSource>();
 
     }
 
@@ -174,7 +178,7 @@ public class Monsters : MonoBehaviour
         {
             flag = !flag;
             spriteRenderer.color = flag ? new Color(1, 1, 1, 0.5f) : Color.white;
-            yield return Wait(0.05f, 1);
+            yield return Wait(0.05f, 2);
         }
 
         spriteRenderer.color = Color.white;

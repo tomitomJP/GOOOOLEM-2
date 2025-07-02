@@ -5,7 +5,6 @@ public class Blooder : Monsters
 {
     // Start is called before the first frame update
     [SerializeField] GameObject thunder;
-    [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip masicSE;
     [SerializeField] AudioClip kaminariSE;
 

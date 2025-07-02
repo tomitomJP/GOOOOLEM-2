@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Doragon : Monsters
 {
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject fireParticle;
+    [SerializeField] Light2D fireLight;
 
 
 
@@ -45,6 +47,7 @@ public class Doragon : Monsters
 
         Transform fire = Instantiate(fireParticle, firePoint.transform.position, Quaternion.identity, transform).transform;
         fire.transform.localEulerAngles = new Vector3(45, 90, 0);
+        StartCoroutine(SwichFireLight(true, 0.2f));
 
         GetTargets();
         yield return Wait(0.2f);
@@ -66,6 +69,8 @@ public class Doragon : Monsters
         yield return Wait(0.2f);
         GetTargets();
         yield return Wait(0.2f);
+        StartCoroutine(SwichFireLight(false, 0.2f));
+
         mode = Mode.move;
     }
 
@@ -80,5 +85,39 @@ public class Doragon : Monsters
             // ここで hit.collider などを使って処理
             Attack(hit.collider.gameObject.GetComponent<Monsters>(), atk / 10);
         }
+    }
+
+
+    IEnumerator SwichFireLight(bool boo, float duration)
+    {
+        float timer = 0;
+        float minValue = 0;
+        float macValue = 30;
+        while (timer <= duration)
+        {
+            if (boo)
+            {
+                fireLight.intensity = Mathf.Lerp(minValue, macValue, timer / duration);
+
+            }
+            else
+            {
+                fireLight.intensity = Mathf.Lerp(minValue, macValue, 1 - timer / duration);
+
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        if (boo)
+        {
+            fireLight.intensity = macValue;
+
+        }
+        else
+        {
+            fireLight.intensity = minValue;
+
+        }
+
     }
 }

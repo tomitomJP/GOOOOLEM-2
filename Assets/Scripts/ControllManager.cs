@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using DG.Tweening;
+
 
 public class ControllManager : MonoBehaviour
 {
@@ -26,7 +28,7 @@ public class ControllManager : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction choiceAction;
-
+    private InputAction openRule;
     [SerializeField] private bool choiceDown = false;
     [SerializeField] private bool choiceUp = false;
     [SerializeField] GameObject brokenText;
@@ -39,6 +41,7 @@ public class ControllManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         choiceAction = playerInput.actions["Choice"];
+        openRule = playerInput.actions["OpenRule"];
 
         choiceAction.performed += ctx => choiceDown = true;   // 押した瞬間
         choiceAction.canceled += ctx => choiceUp = true;     // 離した瞬間
@@ -49,6 +52,7 @@ public class ControllManager : MonoBehaviour
         canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
         pazzleManager = GameObject.Find("Field_" + playerNumber.ToString()).GetComponent<PazzleManager>();
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+
         transform.SetParent(pazzleManager.transform);
         pointer = pazzleManager.pointer;
         Houses = pazzleManager.Houses;
@@ -86,6 +90,7 @@ public class ControllManager : MonoBehaviour
         CheckPeace();
         CheckPeaceUp();
         DrawCircle2D(pointer.position, pointerSize);
+        OpenMonstarsRule();
     }
 
     Vector2 GetFourDirection(Vector2 input)
@@ -111,6 +116,27 @@ public class ControllManager : MonoBehaviour
         float Y = Mathf.Clamp(pointer.localPosition.y, -2.5f, 2.5f);
 
         pointer.localPosition = new Vector2(X, Y);
+    }
+
+
+    void OpenMonstarsRule()
+    {
+
+        if (openRule == null) return;
+
+        // 押された瞬間かどうか
+        if (openRule.WasPressedThisFrame())
+        {
+            pazzleManager.MonstarsRule.transform.DOLocalMove(pazzleManager.MonstarsRulePos[0], 0.5f);
+            Debug.Log("Press");
+        }
+
+        // 離された瞬間かどうか
+        if (openRule.WasReleasedThisFrame())
+        {
+            pazzleManager.MonstarsRule.transform.DOLocalMove(pazzleManager.MonstarsRulePos[1], 0.5f);
+            Debug.Log("Release");
+        }
     }
 
 

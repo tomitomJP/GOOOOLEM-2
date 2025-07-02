@@ -5,7 +5,6 @@ using UnityEngine;
 public class Angel : Monsters
 {
     [SerializeField] GameObject impact;
-    [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip trumpetSE;
 
     void Start()

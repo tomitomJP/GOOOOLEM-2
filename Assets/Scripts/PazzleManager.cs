@@ -23,6 +23,8 @@ public class PazzleManager : MonoBehaviour
     public ControllManager controllManager { get; set; }
     public House house;
 
+    public Transform MonstarsRule;
+    public Vector3[] MonstarsRulePos = new Vector3[2];
     void Start()
     {
         //StartCoroutine(PeaceSet());
