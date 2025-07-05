@@ -18,8 +18,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ReadyCanvas;
     [SerializeField] GameObject GameOverBlackScreen;
 
+    [SerializeField] AudioSource BGM;
     IEnumerator Start()
     {
+
+        BGM = GameObject.FindWithTag("SE_Monster").GetComponent<AudioSource>();
+
         for (int i = 0; i < 2; i++)
         {
             Status[i].text = "";
@@ -109,6 +113,8 @@ public class GameManager : MonoBehaviour
             pazzleManager[i].enabled = true;
 
         }
+
+        BGM.gameObject.SetActive(true);
 
         ReadyCanvas.SetActive(false);
 

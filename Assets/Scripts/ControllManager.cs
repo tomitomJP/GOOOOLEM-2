@@ -33,6 +33,9 @@ public class ControllManager : MonoBehaviour
     [SerializeField] private bool choiceUp = false;
     [SerializeField] GameObject brokenText;
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] GameObject soulSpwanPar;
+    [SerializeField] GameObject brokenPeaceParticle;
+
     Canvas canvas;
 
     GameManager gameManager;
@@ -348,6 +351,14 @@ public class ControllManager : MonoBehaviour
             Peace PACE = DeletingPeace[i].GetComponent<Peace>();
             PACE.check = false;
 
+            DeletingPeace[i].GetComponent<SpriteRenderer>().sortingOrder = 16;
+
+
+            ParticleSystem particleSystem = Instantiate(brokenPeaceParticle, DeletingPeace[i].transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            var main = particleSystem.main;
+            main.startColor = Color.white;
+
+
             if (PACE.peaceNumber == 4)
             {
                 if (!CanSpawnGolem)
@@ -385,6 +396,8 @@ public class ControllManager : MonoBehaviour
             Vector2 pos = DeletingPeace[0].transform.position;
             if (count >= 6 && DeletingPeace.Count == 1)
             {
+                Instantiate(soulSpwanPar, pos, Quaternion.identity);
+
                 Instantiate(pazzleManager.peaces[4], pos, Quaternion.identity, pazzleManager.peacePearent.transform);
             }
             Destroy(DeletingPeace[0]);
@@ -396,7 +409,7 @@ public class ControllManager : MonoBehaviour
             pazzleManager.house.DoorAnimTrigger();
             int MonstaersNum = Mathf.Clamp(goleBodyCount /*- 3*/, 0, 9);//-1.92
             Vector3 pos = Houses[playerNumber].transform.position;
-            pos.y = -1.92f;
+            pos.y = -5f;
             GameObject monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
 
             Monsters monsters = monstaer.GetComponent<Monsters>();

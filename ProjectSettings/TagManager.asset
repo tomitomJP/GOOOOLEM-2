@@ -13,6 +13,8 @@ TagManager:
   - SE_Monster
   - SE
   - BGM
+  - ControllerManager
+  - Messager
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - Monster0
   - Monster1
   - PeaceFloor
-  - 
+  - Message
   - 
   - 
   - 
@@ -56,9 +58,6 @@ TagManager:
   - name: GlowPeace
     uniqueID: 3254306707
     locked: 0
-  - name: Field
-    uniqueID: 1749715385
-    locked: 0
   - name: Golem
     uniqueID: 1749034075
     locked: 0
@@ -67,6 +66,9 @@ TagManager:
     locked: 0
   - name: Golem
     uniqueID: 1419988997
+    locked: 0
+  - name: Field
+    uniqueID: 1749715385
     locked: 0
   - name: UI
     uniqueID: 94350297

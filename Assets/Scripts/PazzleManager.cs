@@ -159,7 +159,7 @@ public class PazzleManager : MonoBehaviour
             if (peaceS.peaceNumber == 4)
             {
                 spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1f);
-                peaceS.StartParticle(-1);
+                peaceS.StartParticle(4);
 
             }
         }
@@ -279,6 +279,8 @@ public class PazzleManager : MonoBehaviour
             {
                 SpriteRenderer spr = peaceG.gameObject.GetComponent<SpriteRenderer>();
                 spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 0.1f);
+                peaceS.StartParticle(-1);
+
             }
             else
             {

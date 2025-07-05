@@ -17,6 +17,7 @@ public class Peace : MonoBehaviour
     SpriteRenderer peaceSprite;
 
     [SerializeField] GameObject[] soulParticle;
+    [SerializeField] float rayDis;
 
 
     void Start()
@@ -50,7 +51,7 @@ public class Peace : MonoBehaviour
         {
             //Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.green, 0.2f);
 
-            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, Vector3.down, 0.5f, targetMask);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, Vector3.down, rayDis, targetMask);
 
             if (hit != null)
             {

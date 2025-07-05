@@ -17,6 +17,7 @@ public class PlayerJoinManager : MonoBehaviour
     private InputDevice[] joinedDevices = default;
     // 現在のプレイヤー数
     public int currentPlayerCount = 0;
+    ControllerManager controllerManager;
 
 
     private void Awake()
@@ -24,9 +25,21 @@ public class PlayerJoinManager : MonoBehaviour
         // 最大参加可能数で配列を初期化
         joinedDevices = new InputDevice[maxPlayerCount];
 
-        // InputActionを有効化し、コールバックを設定
-        playerJoinInputAction.Enable();
-        playerJoinInputAction.performed += OnJoin;
+
+
+        var obj = GameObject.FindWithTag("ControllerManager");
+
+        if (obj != null && obj.TryGetComponent<ControllerManager>(out controllerManager))
+        {
+            LoadingPairDevice();
+
+        }
+        else
+        {
+            playerJoinInputAction.Enable();
+            playerJoinInputAction.performed += OnJoin;
+        }
+
     }
 
     private void OnDestroy()
@@ -66,5 +79,25 @@ public class PlayerJoinManager : MonoBehaviour
         joinedDevices[currentPlayerCount] = context.control.device;
 
         currentPlayerCount++;
+    }
+
+    void LoadingPairDevice()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (controllerManager.PairWithDevice[i] != null)
+            {
+                GameObject C = PlayerInput.Instantiate(
+            prefab: playerPrefab.gameObject,
+            playerIndex: currentPlayerCount,
+            pairWithDevice: controllerManager.PairWithDevice[i]
+            ).gameObject;
+                C.GetComponent<ControllManager>().playerNumber = currentPlayerCount;
+                // Joinしたデバイス情報を保存
+                joinedDevices[currentPlayerCount] = controllerManager.PairWithDevice[i];
+
+                currentPlayerCount++;
+            }
+        }
     }
 }

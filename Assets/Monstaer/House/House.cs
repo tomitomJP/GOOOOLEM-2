@@ -37,7 +37,7 @@ public class House : Monsters
     {
         hp = Mathf.Clamp(hp, 0, hpMax);
         hpBar.value = hp / hpMax;
-        hpBarText.text = Mathf.Floor(hp).ToString() + "/" + hpMax;
+        hpBarText.text = Mathf.Floor(hp).ToString() + "HP";
 
         if (monstersPearent.childCount > 0)
         {
