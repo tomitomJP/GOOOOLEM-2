@@ -18,7 +18,7 @@ public class LobbyManager : MonoBehaviour
     ControllerManager controllerManager;
 
     [SerializeField] InputManagerLobby inputManagerLobby;
-    Messager messager;
+    [SerializeField] Transform titleLogo;
 
     public bool canOnButton = true;
     public float canOnButtonCT = 1;
@@ -26,7 +26,8 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         controllerManager = GameObject.FindWithTag("ControllerManager").GetComponent<ControllerManager>();
-        messager = GameObject.FindWithTag("Messager").GetComponent<Messager>();
+
+        StartCoroutine(TitleAnim());
 
     }
 
@@ -36,7 +37,7 @@ public class LobbyManager : MonoBehaviour
         SwitchMode();
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //Messager.ViewText("うんこおおおおお", 1);
         }
 
 
@@ -106,17 +107,18 @@ public class LobbyManager : MonoBehaviour
     {
         if (inputManagerLobby.currentPlayerCount == 2)
         {
-            messager.ViewText("ゲームを開始します", 1);
+            Messager.ViewText("ゲームを開始します", 1);
             yield return new WaitForSeconds(1f);
 
 
             yield return new WaitForSeconds(0.2f);
-            SceneManager.LoadScene("Game");
+            LoadSceneManager.FadeLoadScene("Game");
+
 
         }
         else
         {
-            messager.ViewText("コントローラーを二つ接続してください", 1);
+            Messager.ViewText("コントローラーを二つ接続してください", 1);
             yield return new WaitForSeconds(1f);
             canOnButton = true;
 
@@ -144,5 +146,20 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("閉じる");
         SwitchMode(false);
 
+    }
+
+    IEnumerator TitleAnim()
+    {
+        Vector2 ooo = Vector2.up;
+        while (true)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                titleLogo.Translate(0.01f * ooo);
+                yield return new WaitForSeconds(0.5f);
+            }
+            ooo *= -1;
+            yield return null;
+        }
     }
 }

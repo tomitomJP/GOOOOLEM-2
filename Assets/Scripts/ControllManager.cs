@@ -56,6 +56,9 @@ public class ControllManager : MonoBehaviour
         pazzleManager = GameObject.Find("Field_" + playerNumber.ToString()).GetComponent<PazzleManager>();
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
+        gameManager.playerInputs[playerNumber] = playerInput;
+
+
         transform.SetParent(pazzleManager.transform);
         pointer = pazzleManager.pointer;
         Houses = pazzleManager.Houses;

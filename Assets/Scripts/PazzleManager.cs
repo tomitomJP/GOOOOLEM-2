@@ -158,7 +158,7 @@ public class PazzleManager : MonoBehaviour
             spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1);
             if (peaceS.peaceNumber == 4)
             {
-                spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1f);
+                spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 0.4f);
                 peaceS.StartParticle(4);
 
             }

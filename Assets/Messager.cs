@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Messager : MonoBehaviour
 {
-    Messager instance = null;
+    public static Messager instance = null;
     Camera camera;
     [SerializeField] Canvas canvas;
     [SerializeField] GameObject MessageWindow;
@@ -30,7 +30,12 @@ public class Messager : MonoBehaviour
     {
     }
 
-    public void ViewText(string text, float duration)
+    public static void ViewText(string text, float duration)
+    {
+        instance.ViewTexts(text, duration);
+    }
+
+    public void ViewTexts(string text, float duration)
     {
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 

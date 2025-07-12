@@ -12,6 +12,7 @@ public class PlayerJoinManager : MonoBehaviour
     [SerializeField] private PlayerInput playerPrefab = default;
     // 最大参加人数
     [SerializeField] private int maxPlayerCount = default;
+    [SerializeField] GameManager gameManager;
 
     // Join済みのデバイス情報
     private InputDevice[] joinedDevices = default;
@@ -77,6 +78,8 @@ public class PlayerJoinManager : MonoBehaviour
         C.GetComponent<ControllManager>().playerNumber = currentPlayerCount;
         // Joinしたデバイス情報を保存
         joinedDevices[currentPlayerCount] = context.control.device;
+
+        gameManager.playerInputs[currentPlayerCount] = C.GetComponent<PlayerInput>();
 
         currentPlayerCount++;
     }

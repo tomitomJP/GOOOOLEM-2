@@ -9,49 +9,46 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] int playerCount = 2;
     [SerializeField] Text[] Ready;
-    [SerializeField] Outline[] ReadyOutLine;
-    [SerializeField] Text[] Status;
-    [SerializeField] GameObject[] ContButton;
     [SerializeField] PlayerJoinManager playerJoinManager;
     [SerializeField] Text CountDownText;
     [SerializeField] PazzleManager[] pazzleManager;
     [SerializeField] GameObject ReadyCanvas;
     [SerializeField] GameObject GameOverBlackScreen;
+    [SerializeField] GameObject RuleCanvas;
+    public PlayerInput[] playerInputs = new PlayerInput[2];
+    bool[] choiceDown = new bool[2];
+    bool[] choiceUp = new bool[2];
+    bool[] ReadyOk = new bool[2];
+
 
     [SerializeField] AudioSource BGM;
     IEnumerator Start()
     {
-
         BGM = GameObject.FindWithTag("SE_Monster").GetComponent<AudioSource>();
 
         for (int i = 0; i < 2; i++)
         {
-            Status[i].text = "";
-            Ready[i].enabled = false;
-
+            int index = i; // i をキャプチャして固定
+            playerInputs[index].actions["Choice"].performed += ctx => choiceDown[index] = true;
+            playerInputs[index].actions["Choice"].canceled += ctx => choiceUp[index] = true;
         }
 
-        for (int i = 0; i < playerCount; i++)
-        {
-            Ready[i].enabled = true;
 
-        }
-        ReadyCanvas.SetActive(true);
-
-        for (int i = 0; i < playerCount; i++)
+        while (!(ReadyOk[0] && ReadyOk[1]))
         {
-            Status[i].text = "PRESS THE    BUTTON";
-            ContButton[i].SetActive(true);
-            StartCoroutine(effectColor(i));
-            while (playerJoinManager.currentPlayerCount == i)
+            for (int i = 0; i < 2; i++)
             {
-                yield return null;
+                if (choiceDown[i])
+                {
+                    ReadyOk[i] = true;
+                    Ready[i].text = "OK";
+                }
             }
-            Status[i].text = "OK";
-            ContButton[i].SetActive(false);
+
+            yield return null;
         }
 
-
+        RuleCanvas.SetActive(false);
 
         float time;
         float timer;
@@ -118,19 +115,6 @@ public class GameManager : MonoBehaviour
 
         ReadyCanvas.SetActive(false);
 
-    }
-
-    IEnumerator effectColor(int num)
-    {
-        int player = num;
-        Color[] colors = { Color.white, Color.black };
-        int i = 0;
-        while (playerJoinManager.currentPlayerCount == player)
-        {
-            ReadyOutLine[player].effectColor = colors[i];
-            i = (i + 1) % 2;
-            yield return new WaitForSeconds(0.6f);
-        }
     }
 
     [SerializeField] Text RedGameOverText;
