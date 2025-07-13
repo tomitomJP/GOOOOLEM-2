@@ -110,7 +110,6 @@ public class LobbyManager : MonoBehaviour
             Messager.ViewText("ゲームを開始します", 1);
             yield return new WaitForSeconds(1f);
 
-
             yield return new WaitForSeconds(0.2f);
             LoadSceneManager.FadeLoadScene("Game");
 
@@ -118,8 +117,7 @@ public class LobbyManager : MonoBehaviour
         }
         else
         {
-            Messager.ViewText("コントローラーを二つ接続してください", 1);
-            yield return new WaitForSeconds(1f);
+            yield return Messager.ViewText("コントローラーを二つ接続してください");
             canOnButton = true;
 
         }

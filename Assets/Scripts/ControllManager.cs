@@ -384,6 +384,7 @@ public class ControllManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+        gameManager.resultDatas[playerNumber].deletePeaceCount += DeletingPeace.Count;
         BrokenText text = Instantiate(brokenText, DeletingPeace[DeletingPeace.Count - 1].transform.position, Quaternion.identity, canvas.transform).GetComponent<BrokenText>();
         text.num = DeletingPeace.Count.ToString();
         text.Spwan = CanSpawnGolem;
@@ -409,6 +410,7 @@ public class ControllManager : MonoBehaviour
 
         if (CanSpawnGolem /*&& goleBodyCount >= 3*/)
         {
+            gameManager.resultDatas[playerNumber].spawnCount++;
             pazzleManager.house.DoorAnimTrigger();
             int MonstaersNum = Mathf.Clamp(goleBodyCount /*- 3*/, 0, 9);//-1.92
             Vector3 pos = Houses[playerNumber].transform.position;

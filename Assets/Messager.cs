@@ -30,6 +30,42 @@ public class Messager : MonoBehaviour
     {
     }
 
+    public static Coroutine ViewText(string text)
+    {
+        return instance.ViewTexts(text);
+    }
+
+    public Coroutine ViewTexts(string text)
+    {
+        camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
+        Transform obj = Instantiate(MessageWindow, canvas.transform).transform;
+        obj.GetChild(0).GetComponent<Text>().text = text;
+        return StartCoroutine(ViewText(obj));
+
+
+    }
+
+    IEnumerator ViewText(Transform obj)
+    {
+        obj.DOScale(new Vector2(1, 1), 0.1f);
+        yield return new WaitForSeconds(0.3f);
+
+        obj.GetChild(1).gameObject.SetActive(true);
+
+        while (true)
+        {
+            if (Input.anyKeyDown) break;
+            yield return null;
+        }
+
+        obj.DOScale(new Vector2(1, 0), 0.1f);
+        yield return new WaitForSeconds(0.1f);
+
+        Destroy(obj.gameObject);
+
+    }
+
     public static void ViewText(string text, float duration)
     {
         instance.ViewTexts(text, duration);

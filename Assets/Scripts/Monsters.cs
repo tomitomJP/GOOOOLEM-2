@@ -48,6 +48,7 @@ public class Monsters : MonoBehaviour
 
     public GameObject damageText { get; set; }
     public Canvas canvas { get; set; }
+    public GameManager gameManager { get; set; }
 
     void Update()
     {
@@ -76,6 +77,8 @@ public class Monsters : MonoBehaviour
     public virtual void StartSetup()//継承先のStart関数に入れる
     {
         canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+        gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         // float X = (Random.Range(0, 11) - 5) * 0.1f;
         float Y = Random.Range(0, 4) * 0.1f;
@@ -126,6 +129,8 @@ public class Monsters : MonoBehaviour
 
     public void Dead()
     {
+        gameManager.resultDatas[(player + 1) % 2].killCount++;
+
         spriteRenderer.enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject);

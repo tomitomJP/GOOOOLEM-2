@@ -54,8 +54,12 @@ public class LoadSceneManager : MonoBehaviour
 
         GameObject par = null;
 
-        if (OnParticle) par = Instantiate(LoadingParticle, Vector3.zero, Quaternion.identity, transform);
-        yield return new WaitForSeconds(0.5f);
+        if (OnParticle)
+        {
+            Vector2 pos = GameObject.FindWithTag("MainCamera").transform.position;
+            par = Instantiate(LoadingParticle, new Vector3(pos.x, pos.y, 0), Quaternion.identity, transform);
+            yield return new WaitForSeconds(0.5f);
+        }
 
         // フェードアウト
         yield return Fade(1f);

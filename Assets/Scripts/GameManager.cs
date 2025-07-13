@@ -13,17 +13,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text CountDownText;
     [SerializeField] PazzleManager[] pazzleManager;
     [SerializeField] GameObject ReadyCanvas;
-    [SerializeField] GameObject GameOverBlackScreen;
+    [SerializeField] GameObject BlackScreenObj;
     [SerializeField] GameObject RuleCanvas;
     public PlayerInput[] playerInputs = new PlayerInput[2];
     bool[] choiceDown = new bool[2];
     bool[] choiceUp = new bool[2];
     bool[] ReadyOk = new bool[2];
 
+    [SerializeField] GameObject GameCanvas;
+    [SerializeField] ResultVeiwer resultVeiwer;
 
     [SerializeField] AudioSource BGM;
+
+    public ResultVeiwer.resultData[] resultDatas = new ResultVeiwer.resultData[2];
     IEnumerator Start()
     {
+        BlackScreenObj.SetActive(true);
         BGM = GameObject.FindWithTag("SE_Monster").GetComponent<AudioSource>();
 
         for (int i = 0; i < 2; i++)
@@ -114,6 +119,7 @@ public class GameManager : MonoBehaviour
         BGM.gameObject.SetActive(true);
 
         ReadyCanvas.SetActive(false);
+        BlackScreenObj.SetActive(false);
 
     }
 
@@ -145,28 +151,33 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver(bool RedWin)
     {
+        BlackScreenObj.SetActive(true);
+
         gameOver = true;
         blackScreen.SetActive(true);
+        GameCanvas.SetActive(false);
         if (RedWin)
         {
             StartCoroutine(GameOverWin(RedGameOverText));
             StartCoroutine(GameOverLose(BlueGameOverText));
-
             pazzleManager[1].gameObject.AddComponent<Rigidbody2D>();
+
+            resultDatas[0].won = true;
+
         }
         else
         {
             StartCoroutine(GameOverWin(BlueGameOverText));
             StartCoroutine(GameOverLose(RedGameOverText));
             pazzleManager[0].gameObject.AddComponent<Rigidbody2D>();
+            resultDatas[1].won = true;
 
         }
 
-        yield return new WaitForSeconds(5f);
-        GameOverBlackScreen.SetActive(true);
-        GameOverMessage.text = "Aボタンを押して再マッチ";
-
-        CanRemake = true;
+        yield return new WaitForSeconds(3f);
+        resultVeiwer.gameObject.SetActive(true);
+        resultVeiwer.resultDatas = resultDatas;
+        blackScreen.SetActive(false);
 
 
 
@@ -202,7 +213,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverWin(Text winText)
     {
-        winText.text = "VICTORY";
+        winText.text = "WIN";
         winText.color = Color.green;
         Transform TectPos = winText.transform;
 
@@ -242,7 +253,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverLose(Text winText)
     {
-        winText.text = "COLLAPSED";
+        winText.text = "LOSE";
 
         Transform TectPos = winText.transform;
 
