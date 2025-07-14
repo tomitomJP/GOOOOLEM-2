@@ -84,7 +84,7 @@ public class Angel : Monsters
             yield return Wait(0.2f);
 
         }
-        audioSource.PlayOneShot(trumpetSE, 0.3f);
+        AudioManager.PlaySE(trumpetSE, 0.3f);
         spriteRenderer.sprite = atkSprites[2];
         yield return Wait(0.1f);
 

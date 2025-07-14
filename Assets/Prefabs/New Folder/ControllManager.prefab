@@ -69,6 +69,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 200475485703230489}
   soulSpwanPar: {fileID: 474256496774518506, guid: 9e56ce9b16fec457a89c85c75121f017, type: 3}
   brokenPeaceParticle: {fileID: 5166551073715190305, guid: 0f7c51aa1a2d047fab0d91825255b47d, type: 3}
+  peaceDeleteSound: {fileID: 8300000, guid: d2ee8390ab857420e8d23997aeea1c8a, type: 3}
   pointerSize: 0.1
   checkingPeace: []
   chainDis: 0.7

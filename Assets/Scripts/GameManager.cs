@@ -23,13 +23,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameCanvas;
     [SerializeField] ResultVeiwer resultVeiwer;
 
-    [SerializeField] AudioSource BGM;
+    [SerializeField] AudioClip PlayBgm;
+    [SerializeField] AudioClip ReadyBgm;
 
     public ResultVeiwer.resultData[] resultDatas = new ResultVeiwer.resultData[2];
     IEnumerator Start()
     {
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.PlayBGM(ReadyBgm);
+
         BlackScreenObj.SetActive(true);
-        BGM = GameObject.FindWithTag("SE_Monster").GetComponent<AudioSource>();
 
         for (int i = 0; i < 2; i++)
         {
@@ -54,6 +57,9 @@ public class GameManager : MonoBehaviour
         }
 
         RuleCanvas.SetActive(false);
+        AudioManager.StopBGM();
+        yield return new WaitForSeconds(0.5f);
+
 
         float time;
         float timer;
@@ -108,6 +114,8 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        AudioManager.PlayBGM(PlayBgm);
+
         yield return new WaitForSeconds(0.5f);
 
         for (int i = 0; i < playerCount; i++)
@@ -115,8 +123,6 @@ public class GameManager : MonoBehaviour
             pazzleManager[i].enabled = true;
 
         }
-
-        BGM.gameObject.SetActive(true);
 
         ReadyCanvas.SetActive(false);
         BlackScreenObj.SetActive(false);
