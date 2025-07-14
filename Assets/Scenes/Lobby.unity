@@ -33073,6 +33073,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5557126790620579871, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: icatchSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 33394923938c0194098b0cec782014c2, type: 3}
     - target: {fileID: 8870997561179751017, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
       propertyPath: m_Name
       value: LoadScene

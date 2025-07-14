@@ -9,6 +9,8 @@ public class LoadSceneManager : MonoBehaviour
     [SerializeField] SpriteRenderer fadeCanvas;
     [SerializeField] float fadeDuration = 1f;
     [SerializeField] GameObject LoadingParticle;
+    [SerializeField] AudioClip icatchSE;
+
 
     void Awake()
     {
@@ -56,6 +58,7 @@ public class LoadSceneManager : MonoBehaviour
 
         if (OnParticle)
         {
+            AudioManager.PlaySE(icatchSE);
             Vector2 pos = GameObject.FindWithTag("MainCamera").transform.position;
             par = Instantiate(LoadingParticle, new Vector3(pos.x, pos.y, 0), Quaternion.identity, transform);
             yield return new WaitForSeconds(0.5f);
