@@ -39,6 +39,7 @@ public class ControllManager : MonoBehaviour
     Canvas canvas;
 
     GameManager gameManager;
+    [SerializeField] AudioClip peaceDeleteSound;
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -356,6 +357,9 @@ public class ControllManager : MonoBehaviour
 
             DeletingPeace[i].GetComponent<SpriteRenderer>().sortingOrder = 16;
 
+
+            float pitch = Mathf.Clamp((0.1f * i) + 0.7f, 0.7f, 1.6f);
+            AudioManager.PlaySEWithPitch(peaceDeleteSound, pitch);
 
             ParticleSystem particleSystem = Instantiate(brokenPeaceParticle, DeletingPeace[i].transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             var main = particleSystem.main;

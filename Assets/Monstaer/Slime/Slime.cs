@@ -5,7 +5,7 @@ using UnityEngine;
 public class Slime : Monsters
 {
     // Start is called before the first frame update
-     [SerializeField] AudioClip attackSE;
+    [SerializeField] AudioClip attackSE;
     void Start()
     {
         StartSetup();
@@ -32,7 +32,8 @@ public class Slime : Monsters
         yield return Wait(0.5f, 0);
 
         Attack(target);
-         audioSource.PlayOneShot(attackSE, 0.3f);
+        AudioManager.PlaySE(attackSE, 0.3f);
+
         spriteRenderer.sprite = atkSprites[1];
         yield return Wait(0.3f, 0);
 

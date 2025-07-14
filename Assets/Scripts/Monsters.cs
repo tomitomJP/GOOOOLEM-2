@@ -28,7 +28,6 @@ public class Monsters : MonoBehaviour
 
     public LayerMask myLayer;
     public LayerMask enemyLayer;
-    public AudioSource audioSource { get; set; }
 
     public enum Mode
     {
@@ -101,10 +100,6 @@ public class Monsters : MonoBehaviour
         }
 
         damageText = Resources.Load<GameObject>("DamageText"); // Resources/Enemy.prefab をロード
-
-
-        audioSource = GameObject.FindWithTag("SE_Monster").GetComponent<AudioSource>();
-
     }
 
     public virtual void Updating()//継承先のUpdate関数に入れる
