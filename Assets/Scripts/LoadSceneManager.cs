@@ -10,6 +10,8 @@ public class LoadSceneManager : MonoBehaviour
     [SerializeField] Canvas canvas;
     [SerializeField] float fadeDuration = 1f;
     [SerializeField] GameObject LoadingParticle;
+    [SerializeField] AudioClip icatchSE;
+
 
     void Awake()
     {
@@ -60,6 +62,7 @@ public class LoadSceneManager : MonoBehaviour
         {
             Vector2 pos = mainCamera.transform.position;
             par = Instantiate(LoadingParticle, canvas.transform.position, Quaternion.identity, canvas.transform);
+            AudioManager.PlaySE(icatchSE);
             yield return new WaitForSeconds(0.5f);
         }
 

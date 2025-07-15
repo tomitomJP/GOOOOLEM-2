@@ -10982,6 +10982,7 @@ GameObject:
   - component: {fileID: 682591647}
   - component: {fileID: 682591650}
   - component: {fileID: 682591649}
+  - component: {fileID: 682591651}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -11008,6 +11009,7 @@ MonoBehaviour:
   titleLogo: {fileID: 691954583}
   canOnButton: 1
   canOnButtonCT: 1
+  buttonSE: {fileID: 8300000, guid: 2c4d1e368e185314f870c0dc2c173440, type: 3}
 --- !u!4 &682591648
 Transform:
   m_ObjectHideFlags: 0
@@ -11167,6 +11169,102 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!82 &682591651
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682591646}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 3
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &691954582
 GameObject:
   m_ObjectHideFlags: 0
@@ -32975,30 +33073,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 935476902472051928, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_Camera
+    - target: {fileID: 5557126790620579871, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: icatchSE
       value: 
-      objectReference: {fileID: 1892236276}
-    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_Color.b
-      value: 0.3018868
-      objectReference: {fileID: 0}
-    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_Color.g
-      value: 0.14443722
-      objectReference: {fileID: 0}
-    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_Color.r
-      value: 0.1295835
-      objectReference: {fileID: 0}
-    - target: {fileID: 8606579547143467900, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 33394923938c0194098b0cec782014c2, type: 3}
     - target: {fileID: 8870997561179751017, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
       propertyPath: m_Name
       value: LoadScene
