@@ -33077,6 +33077,22 @@ PrefabInstance:
       propertyPath: icatchSE
       value: 
       objectReference: {fileID: 8300000, guid: 33394923938c0194098b0cec782014c2, type: 3}
+    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.24528301
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.12508611
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11454253
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573381375927010022, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8870997561179751017, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
       propertyPath: m_Name
       value: LoadScene
