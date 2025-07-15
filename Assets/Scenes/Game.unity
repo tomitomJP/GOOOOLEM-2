@@ -39516,10 +39516,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3292963444789704332, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 935476902472051928, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 8870997561179751017, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
       propertyPath: m_Name
       value: LoadScene
@@ -42410,6 +42410,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   soulSpwanPar: {fileID: 0}
   brokenPeaceParticle: {fileID: 0}
+  peaceDeleteSound: {fileID: 0}
   pointerSize: 0.2
   checkingPeace: []
   chainDis: 1

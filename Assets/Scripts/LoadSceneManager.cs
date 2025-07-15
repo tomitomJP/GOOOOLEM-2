@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class LoadSceneManager : MonoBehaviour
 {
-    static LoadSceneManager instance;
-    [SerializeField] SpriteRenderer fadeCanvas;
+    public static LoadSceneManager instance = null;
+    [SerializeField] Image fadeCanvas;
+    [SerializeField] Canvas canvas;
     [SerializeField] float fadeDuration = 1f;
     [SerializeField] GameObject LoadingParticle;
 
@@ -51,13 +52,14 @@ public class LoadSceneManager : MonoBehaviour
     IEnumerator FadeAndLoad(string sceneName, bool OnParticle = true)
     {
         fadeCanvas.gameObject.SetActive(true);
-
         GameObject par = null;
+        GameObject mainCamera = GameObject.FindWithTag("MainCamera");
+        canvas.worldCamera = mainCamera.GetComponent<Camera>();
 
         if (OnParticle)
         {
-            Vector2 pos = GameObject.FindWithTag("MainCamera").transform.position;
-            par = Instantiate(LoadingParticle, new Vector3(pos.x, pos.y, 0), Quaternion.identity, transform);
+            Vector2 pos = mainCamera.transform.position;
+            par = Instantiate(LoadingParticle, canvas.transform.position, Quaternion.identity, canvas.transform);
             yield return new WaitForSeconds(0.5f);
         }
 
