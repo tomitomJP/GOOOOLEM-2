@@ -77,7 +77,7 @@ public class ControllManager : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.gameOver) { return; }
+        if (gameManager.gameOver || gameManager.mode == GameManager.Mode.ready || gameManager.mode == GameManager.Mode.deathMatchReady) { return; }
         // MoveとChoiceのアクションを取得
         moveInput = moveAction.ReadValue<Vector2>();  // Move: WASD または Gamepad Left Stick
         choiceInput = choiceAction.triggered;  // Choice: Space または Gamepad A
@@ -412,17 +412,11 @@ public class ControllManager : MonoBehaviour
             DeletingPeace.RemoveAt(0);
         }
 
-        if (CanSpawnGolem /*&& goleBodyCount >= 3*/)
+        if (CanSpawnGolem && gameManager.mode == GameManager.Mode.play)
         {
-            gameManager.resultDatas[playerNumber].spawnCount++;
-            pazzleManager.house.DoorAnimTrigger();
-            int MonstaersNum = Mathf.Clamp(goleBodyCount /*- 3*/, 0, 9);//-1.92
-            Vector3 pos = Houses[playerNumber].transform.position;
-            pos.y = -5f;
-            GameObject monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
 
-            Monsters monsters = monstaer.GetComponent<Monsters>();
-            monsters.player = playerNumber;
+            Monsters monsters = MonstatSpawn(goleBodyCount);
+
             switch (peaceNumber)
             {
                 case 0:
@@ -438,11 +432,6 @@ public class ControllManager : MonoBehaviour
                     monsters.hp *= 1.3f;
                     break;
             }
-            /*GameObject GOLEM = Instantiate(golemHead[playerNumber], Houses[playerNumber].transform.position, Quaternion.identity, BattleField);
-            Golem Spr = GOLEM.GetComponent<Golem>();
-            Spr.buffType = peaceNumber;
-            Spr.player = playerNumber + 1;
-            Spr.GolemSize = goleBodyCount;*/
         }
 
         checkingPeace.Clear();
@@ -453,6 +442,22 @@ public class ControllManager : MonoBehaviour
         yield return pazzleManager.PeaceSet();
 
         CanCheckPeace = true;
+    }
+
+
+    public Monsters MonstatSpawn(int Count)
+    {
+        gameManager.resultDatas[playerNumber].spawnCount++;
+        pazzleManager.house.DoorAnimTrigger();
+        int MonstaersNum = Mathf.Clamp(Count /*- 3*/, 0, 9);//-1.92
+        Vector3 pos = Houses[playerNumber].transform.position;
+        pos.y = -5f;
+        GameObject monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
+
+        Monsters monsters = monstaer.GetComponent<Monsters>();
+        monsters.player = playerNumber;
+
+        return monsters;
     }
 
     void LineView()

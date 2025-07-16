@@ -15,6 +15,7 @@ TagManager:
   - BGM
   - ControllerManager
   - Messager
+  - DamageTextCanvas
   layers:
   - Default
   - TransparentFX

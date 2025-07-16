@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goolem : Monsters
+public class DMGoolem : Monsters
 {
-    // Start is called before the first frame update
+
     void Start()
     {
         StartSetup();
@@ -54,12 +54,5 @@ public class Goolem : Monsters
         yield return Wait(0.3f, 2);
 
         mode = Mode.move;
-    }
-
-    int n = 0;
-    public void GolemBeamCharge()
-    {
-        n = (n + 1) % 2;
-        spriteRenderer.sprite = atkSprites[n + 1];
     }
 }

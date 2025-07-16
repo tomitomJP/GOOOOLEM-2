@@ -22,17 +22,15 @@ public class LobbyManager : MonoBehaviour
 
     public bool canOnButton = true;
     public float canOnButtonCT = 1;
-     [SerializeField] AudioClip buttonSE;
-    private AudioSource audioSource;
+    [SerializeField] AudioClip buttonSE;
 
     void Start()
     {
         controllerManager = GameObject.FindWithTag("ControllerManager").GetComponent<ControllerManager>();
 
         StartCoroutine(TitleAnim());
-        audioSource = GetComponent<AudioSource>();
 
-        
+
 
     }
 
@@ -104,7 +102,7 @@ public class LobbyManager : MonoBehaviour
 
         if (!canOnButton) { return; }
         canOnButton = false;
-         audioSource.PlayOneShot(buttonSE);
+        AudioManager.PlaySE(buttonSE);
         Debug.Log("Monstar");
         StartCoroutine(StartGame());
 

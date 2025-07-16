@@ -75,7 +75,7 @@ public class Monsters : MonoBehaviour
 
     public virtual void StartSetup()//継承先のStart関数に入れる
     {
-        canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+        canvas = GameObject.FindWithTag("DamageTextCanvas").GetComponent<Canvas>();
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();

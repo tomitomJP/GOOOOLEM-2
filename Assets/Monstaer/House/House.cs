@@ -117,7 +117,7 @@ public class House : Monsters
 
     public override void Damaged(float damage)
     {
-        if (NonDamage)
+        if (NonDamage && damage < 10000)
         {
             // Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
             // _damageText.text = "NULLILED";
