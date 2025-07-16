@@ -10,6 +10,7 @@ public class Doragon : Monsters
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject fireParticle;
     [SerializeField] Light2D fireLight;
+    [SerializeField] AudioClip doragonBreth;
 
 
 
@@ -50,21 +51,26 @@ public class Doragon : Monsters
         StartCoroutine(SwichFireLight(true, 0.2f));
 
         GetTargets();
+        AudioManager.PlaySE(doragonBreth, 0.5f);
         yield return Wait(0.2f);
         GetTargets();
         yield return Wait(0.2f);
         GetTargets();
+        AudioManager.PlaySE(doragonBreth, 0.5f);
         yield return Wait(0.2f);
         GetTargets();
         yield return Wait(0.2f);
         GetTargets();
+        AudioManager.PlaySE(doragonBreth, 0.5f);
         yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
         GetTargets();
         yield return Wait(0.2f);
         GetTargets();
         yield return Wait(0.2f);
-        GetTargets();
-        yield return Wait(0.2f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
         GetTargets();
         yield return Wait(0.2f);
         GetTargets();

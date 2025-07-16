@@ -54,18 +54,18 @@ public class House : Monsters
             boxCollider2D.enabled = false;
         }
 
-        if (hp / hpMax > 0.75f)
+        if (hp / hpMax <= 0.75f)
         {
             spriteRenderer.sprite = houseSprites[0];
         }
-        if (hp / hpMax > 0.5f)
+        if (hp / hpMax < -0.5f)
         {
             spriteRenderer.sprite = houseSprites[1];
 
 
 
         }
-        if (hp / hpMax > 0.25f)
+        if (hp / hpMax <= 0.25f)
         {
             spriteRenderer.sprite = houseSprites[2];
             castleDamageParticles[0].SetActive(true);
@@ -73,15 +73,11 @@ public class House : Monsters
 
 
         }
-        if (hp / hpMax > 0)
+        if (hp / hpMax <= 0)
         {
             spriteRenderer.sprite = houseSprites[3];
             castleDamageParticles[2].SetActive(true);
 
-
-        }
-        else
-        {
             for (int i = 0; i < castleDamageParticles[2].transform.childCount; i++)
             {
                 castleDamageParticles[2].transform.GetChild(i).gameObject.SetActive(false);

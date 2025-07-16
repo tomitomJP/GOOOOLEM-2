@@ -159,7 +159,6 @@ RectTransform:
   - {fileID: 1008173698}
   - {fileID: 141275519}
   - {fileID: 460402416}
-  - {fileID: 1293515163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -43967,7 +43966,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293515162}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -43976,7 +43975,7 @@ RectTransform:
   - {fileID: 1076887281}
   - {fileID: 643655391}
   - {fileID: 337285058}
-  m_Father: {fileID: 2533377}
+  m_Father: {fileID: 1403032889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -49744,7 +49743,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 94350297
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &1403032889
 RectTransform:
@@ -49757,7 +49756,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1293515163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -52616,11 +52616,14 @@ MonoBehaviour:
   PlayBgm: {fileID: 8300000, guid: 90dbc85c930d745fd8fb9af336ef9231, type: 3}
   deathMatchStartSe: {fileID: 8300000, guid: d396c7c69c01b48ed8709436a2a283ba, type: 3}
   ReadyBgm: {fileID: 8300000, guid: 924d8c585bd6c4da8ae4c42181b0e13a, type: 3}
+  ResultBgm: {fileID: 8300000, guid: 16be80e09acb34705a64ee56321d846d, type: 3}
+  scoreSE: {fileID: 0}
+  FinishSE: {fileID: 8300000, guid: 8af0c7e313dbb4f10b6891efc2b139ba, type: 3}
   GameStartCount: {fileID: 8300000, guid: 30275f3e2b4c94a56b1d768add8e76f2, type: 3}
   GameStart: {fileID: 8300000, guid: cd81a3f90e5ce4570b5093669814cb45, type: 3}
   TimerRemind: {fileID: 8300000, guid: 904afedc4801c4d909a691586f1662e5, type: 3}
   timerText: {fileID: 1331859409}
-  timer: 15
+  timer: 100
   resultDatas:
   - won: 0
     spawnCount: 0

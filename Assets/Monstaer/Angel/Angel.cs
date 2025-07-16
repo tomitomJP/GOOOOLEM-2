@@ -84,12 +84,12 @@ public class Angel : Monsters
             yield return Wait(0.2f);
 
         }
-        AudioManager.PlaySE(trumpetSE, 0.3f);
         spriteRenderer.sprite = atkSprites[2];
         yield return Wait(0.1f);
 
 
         InstantImpact();
+        AudioManager.PlaySEWithPitch(trumpetSE, 1f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
         yield return Wait(0.2f);
 
@@ -97,6 +97,7 @@ public class Angel : Monsters
         yield return Wait(0.1f);
 
         InstantImpact();
+        AudioManager.PlaySEWithPitch(trumpetSE, 1.2f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
         yield return Wait(0.2f);
 
@@ -104,6 +105,7 @@ public class Angel : Monsters
         yield return Wait(0.1f);
 
         InstantImpact();
+        AudioManager.PlaySEWithPitch(trumpetSE, 1.4f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
         yield return Wait(0.2f);
 

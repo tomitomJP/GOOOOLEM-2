@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip PlayBgm;
     [SerializeField] AudioClip deathMatchStartSe;
     [SerializeField] AudioClip ReadyBgm;
+    [SerializeField] AudioClip ResultBgm;
+    [SerializeField] AudioClip scoreSE;
+    [SerializeField] AudioClip FinishSE;
     [SerializeField] AudioClip GameStartCount;
     [SerializeField] AudioClip GameStart;
     [SerializeField] AudioClip TimerRemind;
@@ -307,6 +310,7 @@ public class GameManager : MonoBehaviour
         mode = Mode.deathMatch;
         DMslider.gameObject.SetActive(true);
 
+
         GameObject[] beamPars = new GameObject[2];
 
         float DMtime = 15;
@@ -329,6 +333,8 @@ public class GameManager : MonoBehaviour
         }
 
         DMslider.gameObject.SetActive(false);
+        DeathMatchSubTitleText.enabled = false;
+
         mode = Mode.deathMatchReady;
 
         for (int i = 0; i < Lights.Length; i++)
@@ -464,7 +470,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOver(bool RedWin)
     {
-        BlackScreenObj.SetActive(true);
+        AudioManager.PlaySE(FinishSE, 0.8f);
+        AudioManager.StopBGM();
+        //BlackScreenObj.SetActive(true);
         mode = Mode.ready;
         timerText.enabled = false;
 
@@ -488,6 +496,7 @@ public class GameManager : MonoBehaviour
             resultDatas[1].won = true;
 
         }
+        AudioManager.FadeInBGM(ResultBgm, 5f);
 
         yield return new WaitForSeconds(3f);
         resultVeiwer.gameObject.SetActive(true);

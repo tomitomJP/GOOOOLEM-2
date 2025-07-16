@@ -23,12 +23,17 @@ public class LobbyManager : MonoBehaviour
     public bool canOnButton = true;
     public float canOnButtonCT = 1;
     [SerializeField] AudioClip buttonSE;
+    [SerializeField] AudioClip titleBgm;
 
-    void Start()
+    IEnumerator Start()
     {
         controllerManager = GameObject.FindWithTag("ControllerManager").GetComponent<ControllerManager>();
 
         StartCoroutine(TitleAnim());
+
+        AudioManager.FadeOutBGM(0.5f);
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.PlayBGM(titleBgm);
 
 
 
@@ -102,7 +107,7 @@ public class LobbyManager : MonoBehaviour
 
         if (!canOnButton) { return; }
         canOnButton = false;
-        AudioManager.PlaySE(buttonSE);
+        AudioManager.PlaySE(buttonSE, 0.6f);
         Debug.Log("Monstar");
         StartCoroutine(StartGame());
 
@@ -114,7 +119,7 @@ public class LobbyManager : MonoBehaviour
         {
             Messager.ViewText("ゲームを開始します", 1);
             yield return new WaitForSeconds(1f);
-
+            AudioManager.FadeOutBGM(0.5f);
             yield return new WaitForSeconds(0.2f);
             LoadSceneManager.FadeLoadScene("Game");
 
@@ -132,6 +137,7 @@ public class LobbyManager : MonoBehaviour
     public void StartVSHButton()
     {
         if (!canOnButton) { return; }
+        AudioManager.PlaySE(buttonSE, 0.6f);
         canOnButton = false;
         Debug.Log("ニンゲン");
     }
@@ -139,6 +145,7 @@ public class LobbyManager : MonoBehaviour
     public void ResetControllerButton()
     {
         if (!canOnButton) { return; }
+        AudioManager.PlaySE(buttonSE, 0.6f);
         Debug.Log("再接続");
         ReconnectController();
 
@@ -146,9 +153,17 @@ public class LobbyManager : MonoBehaviour
 
     public void CloseButton()
     {
-        Debug.Log("閉じる");
-        SwitchMode(false);
 
+        if (!canOnButton) { return; }
+        canOnButton = false;
+        AudioManager.PlaySE(buttonSE, 0.6f);
+        StartCoroutine(MenberView());
+    }
+
+    IEnumerator MenberView()
+    {
+        yield return Messager.ViewText("Accompany/アカンパニー \n冨田陽士 工藤優馬 木村涼介");
+        canOnButton = true;
     }
 
     IEnumerator TitleAnim()
