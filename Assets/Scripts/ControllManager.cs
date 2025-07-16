@@ -433,6 +433,10 @@ public class ControllManager : MonoBehaviour
                     break;
             }
         }
+        else if (gameManager.mode == GameManager.Mode.deathMatch)
+        {
+            gameManager.DMGolemPowers[playerNumber] = count + (count * count / 8f);
+        }
 
         checkingPeace.Clear();
         SelectPeaceNumber = -1;

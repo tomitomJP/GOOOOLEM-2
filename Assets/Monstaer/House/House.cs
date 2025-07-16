@@ -58,14 +58,14 @@ public class House : Monsters
         {
             spriteRenderer.sprite = houseSprites[0];
         }
-        else if (hp / hpMax > 0.5f)
+        if (hp / hpMax > 0.5f)
         {
             spriteRenderer.sprite = houseSprites[1];
 
 
 
         }
-        else if (hp / hpMax > 0.25f)
+        if (hp / hpMax > 0.25f)
         {
             spriteRenderer.sprite = houseSprites[2];
             castleDamageParticles[0].SetActive(true);
@@ -73,7 +73,7 @@ public class House : Monsters
 
 
         }
-        else if (hp / hpMax > 0)
+        if (hp / hpMax > 0)
         {
             spriteRenderer.sprite = houseSprites[3];
             castleDamageParticles[2].SetActive(true);
