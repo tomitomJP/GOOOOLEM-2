@@ -132,6 +132,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.05
   MoveAniTimer: 0
+  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
   sm: []
   bites: {fileID: 3410495544883879219, guid: 725ee4e8eec774af3bbafb569822330e, type: 3}
 --- !u!61 &1888955186276721055

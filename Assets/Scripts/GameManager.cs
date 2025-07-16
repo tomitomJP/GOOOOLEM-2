@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip ReadyBgm;
     [SerializeField] AudioClip GameStartCount;
     [SerializeField] AudioClip GameStart;
+    [SerializeField] AudioClip TimerRemind;
+
 
     [SerializeField] Text timerText;
     [SerializeField] float timer = 100;
@@ -165,6 +167,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver = false;
     public bool CanRemake = false;
     [SerializeField] private InputAction playerJoinInputAction = default;
+    bool timer10 = false;
 
     void Update()
     {
@@ -188,9 +191,11 @@ public class GameManager : MonoBehaviour
                     timerText.enabled = false;
                     mode = Mode.deathMatchReady;
                 }
-                if (timer < 10)
+                if (timer < 10 && timer10 == false)
                 {
+                    timer10 = true;
                     AudioManager.BgmOption(1.05f);
+                    StartCoroutine(Timer10());
                 }
                 if (timer > 0) timer -= Time.deltaTime;
             }
@@ -199,6 +204,37 @@ public class GameManager : MonoBehaviour
 
             timerText.text = Mathf.RoundToInt(timer / 60).ToString("D2") + ":" + Mathf.RoundToInt(timer % 60).ToString("D2");
         }
+    }
+
+    IEnumerator Timer10()
+    {
+        int originalSize = timerText.fontSize;
+        DOTween.To(() => timerText.fontSize,
+                   x => timerText.fontSize = x,
+                   Mathf.RoundToInt(originalSize * 1.5f),
+                   0.1f);
+        timerText.DOColor(Color.red, 0.1f);
+
+        AudioManager.PlaySEWithPitch(TimerRemind, 1);
+        yield return new WaitForSeconds(0.5f);
+
+        AudioManager.PlaySEWithPitch(TimerRemind, 1.05f);
+        yield return new WaitForSeconds(0.25f);
+        AudioManager.PlaySEWithPitch(TimerRemind, 1.1f);
+
+        DOTween.To(() => timerText.fontSize,
+                   x => timerText.fontSize = x,
+                   Mathf.RoundToInt(originalSize * 1.5f),
+                   0.5f)
+               .OnComplete(() =>
+               {
+                   DOTween.To(() => timerText.fontSize,
+                              x => timerText.fontSize = x,
+                              originalSize,
+                              0.1f);
+               });
+        yield return new WaitForSeconds(0.5f);
+
     }
 
     [SerializeField] Text DeathMatchTitleText;
@@ -429,6 +465,8 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOver(bool RedWin)
     {
         BlackScreenObj.SetActive(true);
+        mode = Mode.ready;
+        timerText.enabled = false;
 
         gameOver = true;
         blackScreen.SetActive(true);

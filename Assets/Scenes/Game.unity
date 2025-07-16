@@ -44208,7 +44208,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 48
+    m_MaxSize: 73
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -52498,6 +52498,7 @@ MonoBehaviour:
   ReadyBgm: {fileID: 8300000, guid: 924d8c585bd6c4da8ae4c42181b0e13a, type: 3}
   GameStartCount: {fileID: 8300000, guid: 30275f3e2b4c94a56b1d768add8e76f2, type: 3}
   GameStart: {fileID: 8300000, guid: cd81a3f90e5ce4570b5093669814cb45, type: 3}
+  TimerRemind: {fileID: 8300000, guid: 904afedc4801c4d909a691586f1662e5, type: 3}
   timerText: {fileID: 1331859409}
   timer: 15
   resultDatas:

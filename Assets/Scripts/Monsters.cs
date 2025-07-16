@@ -48,6 +48,7 @@ public class Monsters : MonoBehaviour
     public GameObject damageText { get; set; }
     public Canvas canvas { get; set; }
     public GameManager gameManager { get; set; }
+    [SerializeField] AudioClip defaultAtkSE;
 
     void Update()
     {
@@ -150,6 +151,8 @@ public class Monsters : MonoBehaviour
 
     public virtual void Damaged(float damage)
     {
+        AudioManager.PlaySE(defaultAtkSE, 0.6f);
+
         hp -= damage;
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
         _damageText.text = damage.ToString("F0");

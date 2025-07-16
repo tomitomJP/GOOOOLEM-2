@@ -193,6 +193,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
   sm: []
   firePoint: {fileID: 7537967039426249455}
   fireParticle: {fileID: 6834844784792535100, guid: 22baee8f641d64814a3ac15bac27664f, type: 3}

@@ -200,4 +200,6 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
   sm: []
+  attackSE: {fileID: 0}
