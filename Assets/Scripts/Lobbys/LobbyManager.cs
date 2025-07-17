@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,6 +25,19 @@ public class LobbyManager : MonoBehaviour
     public float canOnButtonCT = 1;
     [SerializeField] AudioClip buttonSE;
     [SerializeField] AudioClip titleBgm;
+    [SerializeField] private InputAction playerJoinInputAction = default;
+
+    void Awake()
+    {
+        playerJoinInputAction.started += ctx =>
+        {
+            if (mode == Mode.title) SwitchMode();
+        };
+
+
+        playerJoinInputAction.Enable();
+
+    }
 
     IEnumerator Start()
     {
@@ -39,10 +53,11 @@ public class LobbyManager : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        SwitchMode();
+        //SwitchMode();
         if (Input.GetKeyDown(KeyCode.R))
         {
             //Messager.ViewText("うんこおおおおお", 1);
@@ -51,33 +66,18 @@ public class LobbyManager : MonoBehaviour
 
     }
 
-    void SwitchMode()
-    {
-        if (mode == Mode.title)
-        {
-            if (Input.anyKeyDown)
-            {
-                Debug.Log("開く");
-
-                SwitchMode(true);
-            }
-            else
-            {
-                //SwitchMode(false);
-
-            }
-        }
-    }
-    void SwitchMode(bool boo)
+    void SwitchMode(bool boo = true)
     {
         if (boo == true)
         {
+            ButtonCT(0.3f);
             mode = Mode.menu;
             anyKeyPress.SetActive(false);
             MenuWindw.SetActive(true);
         }
         else
         {
+            ButtonCT(0.3f);
             mode = Mode.title;
             anyKeyPress.SetActive(true);
             MenuWindw.SetActive(false);
@@ -137,7 +137,7 @@ public class LobbyManager : MonoBehaviour
     public void StartVSHButton()
     {
         if (!canOnButton) { return; }
-        AudioManager.PlaySE(buttonSE, 0.6f);
+        AudioManager.PlaySE(buttonSE, 0.2f);
         canOnButton = false;
         Debug.Log("ニンゲン");
     }
@@ -145,7 +145,7 @@ public class LobbyManager : MonoBehaviour
     public void ResetControllerButton()
     {
         if (!canOnButton) { return; }
-        AudioManager.PlaySE(buttonSE, 0.6f);
+        AudioManager.PlaySE(buttonSE, 0.2f);
         Debug.Log("再接続");
         ReconnectController();
 
@@ -153,12 +153,20 @@ public class LobbyManager : MonoBehaviour
 
     public void CloseButton()
     {
+        if (!canOnButton) { return; }
+        SwitchMode(false);
+        AudioManager.PlaySE(buttonSE, 0.2f);
+    }
+
+    public void MenberButton()
+    {
 
         if (!canOnButton) { return; }
         canOnButton = false;
-        AudioManager.PlaySE(buttonSE, 0.6f);
+        AudioManager.PlaySE(buttonSE, 0.2f);
         StartCoroutine(MenberView());
     }
+
 
     IEnumerator MenberView()
     {
@@ -179,5 +187,24 @@ public class LobbyManager : MonoBehaviour
             ooo *= -1;
             yield return null;
         }
+    }
+
+
+    Coroutine ButtonCTCoru = null;
+    void ButtonCT(float duration)
+    {
+        if (ButtonCTCoru != null)
+        {
+            StopCoroutine(ButtonCTCoru);
+            canOnButton = true;
+        }
+        ButtonCTCoru = StartCoroutine(_ButtonCT(duration));
+    }
+
+    IEnumerator _ButtonCT(float duration)
+    {
+        canOnButton = false;
+        yield return new WaitForSeconds(duration);
+        canOnButton = true;
     }
 }

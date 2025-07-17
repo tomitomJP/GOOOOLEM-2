@@ -151,7 +151,7 @@ public class Monsters : MonoBehaviour
 
     public virtual void Damaged(float damage)
     {
-        AudioManager.PlaySE(defaultAtkSE, 0.6f);
+        AudioManager.PlaySE(defaultAtkSE, 0.3f);
 
         hp -= damage;
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();

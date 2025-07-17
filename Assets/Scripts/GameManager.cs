@@ -200,12 +200,16 @@ public class GameManager : MonoBehaviour
                     AudioManager.BgmOption(1.05f);
                     StartCoroutine(Timer10());
                 }
-                if (timer > 0) timer -= Time.deltaTime;
+                if (timer > 0)
+                {
+                    timer -= Time.deltaTime;
+
+                }
             }
 
 
 
-            timerText.text = Mathf.RoundToInt(timer / 60).ToString("D2") + ":" + Mathf.RoundToInt(timer % 60).ToString("D2");
+            timerText.text = Mathf.Max(Mathf.FloorToInt(timer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(timer % 60), 0).ToString("D2");
         }
     }
 
