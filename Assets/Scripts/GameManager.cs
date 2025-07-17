@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
@@ -174,6 +173,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            LoadSceneManager.FadeLoadScene("Lobby");
+        }
+
         if (!gameOver)
         {
             if (houseRed.hp <= 0)

@@ -29066,7 +29066,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  defaultAtkSE: {fileID: 0}
+  defaultAtkSE: {fileID: 8300000, guid: c0029f11ed6b54736aabf19036cf258b, type: 3}
   sm: []
   hpBar: {fileID: 1265465752}
   hpBar_Red: {fileID: 1979342698}
@@ -34892,7 +34892,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
-  defaultAtkSE: {fileID: 0}
+  defaultAtkSE: {fileID: 8300000, guid: c0029f11ed6b54736aabf19036cf258b, type: 3}
   sm: []
   hpBar: {fileID: 854564633}
   hpBar_Red: {fileID: 1367664750}

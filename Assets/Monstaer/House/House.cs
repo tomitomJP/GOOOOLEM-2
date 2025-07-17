@@ -121,6 +121,8 @@ public class House : Monsters
         }
         else
         {
+
+            AudioManager.PlaySE(defaultAtkSE, 0.4f);
             StartCoroutine(DamageAnimHouse());
             damages.Add(new Damage(hp, damage));
             hp -= damage;

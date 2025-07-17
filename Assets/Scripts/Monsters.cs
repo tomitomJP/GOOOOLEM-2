@@ -48,7 +48,7 @@ public class Monsters : MonoBehaviour
     public GameObject damageText { get; set; }
     public Canvas canvas { get; set; }
     public GameManager gameManager { get; set; }
-    [SerializeField] AudioClip defaultAtkSE;
+    public AudioClip defaultAtkSE;
 
     void Update()
     {
