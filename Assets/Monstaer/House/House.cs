@@ -21,6 +21,7 @@ public class House : Monsters
     [SerializeField] SpriteRenderer DoorSpr;
     [SerializeField] Sprite[] DoorSprite;
     [SerializeField] GameObject[] castleDamageParticles;
+    [SerializeField] GameObject knockBackMon;
     public bool NonDamage = false;
 
     Vector3 startPos;
@@ -90,6 +91,8 @@ public class House : Monsters
 
     public void DoorAnimTrigger()
     {
+        KnockBack();
+
         StartCoroutine(DoorAnim());
     }
 
@@ -213,4 +216,36 @@ public class House : Monsters
         }
     }
 
+
+    [SerializeField] float knockBackPower = 10;
+    void KnockBack()
+    {
+        Instantiate(knockBackMon, transform.position, Quaternion.identity);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + rayOrigin, transform.right, enemyDistance * 2f, enemyLayer);
+        Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance * 2f), Color.yellow, 0.3f);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+
+            Attack(hit.collider.gameObject.GetComponent<Monsters>(), 18);
+            Rigidbody2D rb = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+            GameObject mon = hit.collider.gameObject;
+
+            Vector2 monUp = mon.transform.up;
+            Vector2 myLeft = -transform.right;
+            Vector2 dire;
+            if (player == 0)
+            {
+                dire = new Vector2(1, 1).normalized;
+            }
+            else
+            {
+                dire = new Vector2(-1, 1).normalized;
+
+            }
+
+            rb.AddForce(dire * knockBackPower, ForceMode2D.Impulse);
+        }
+
+    }
 }

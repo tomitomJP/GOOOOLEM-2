@@ -253,9 +253,10 @@ public class ControllManager : MonoBehaviour
                 {
                     p.check = true;
                     SelectPeaceNumber = p.peaceNumber;
-                    pazzleManager.BrickCount(checkingPeace.Count);
                     checkingPeace.Add(selectingPeace);
                     canDirection = pazzleManager.HilightPeace(checkingPeace, SelectPeaceNumber);
+                    pazzleManager.BrickCount(checkingPeace.Count);
+
                 }
 
             }

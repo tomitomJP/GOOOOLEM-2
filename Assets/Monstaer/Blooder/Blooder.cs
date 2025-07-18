@@ -111,7 +111,7 @@ public class Blooder : Monsters
                 {
                     GameObject monster = hit[j].collider.gameObject;
                     Instantiate(thunder, new Vector3(monster.transform.position.x, 9.5f, 0), Quaternion.identity);
-                    AudioManager.PlaySE(kaminariSE, 0.3f);
+                    AudioManager.PlaySE(kaminariSE, 0.15f);
 
                     Attack(monster.GetComponent<Monsters>());
                     // スピード1.5倍、5秒間

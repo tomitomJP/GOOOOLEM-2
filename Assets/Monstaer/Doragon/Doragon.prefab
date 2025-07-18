@@ -180,7 +180,7 @@ MonoBehaviour:
   atkSpdRate: 1
   atkRate: 1
   player: 0
-  enemyDistance: 3
+  enemyDistance: 2
   allyDistance: 0.01
   atkCT: 1
   aktCTimer: 0
@@ -190,6 +190,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   firePoint: {fileID: 7537967039426249455}
   fireParticle: {fileID: 6834844784792535100, guid: 22baee8f641d64814a3ac15bac27664f, type: 3}
   fireLight: {fileID: 8869844880690727383}
+  doragonBreth: {fileID: 0}
 --- !u!212 &6031778550671700287
 SpriteRenderer:
   m_ObjectHideFlags: 0
