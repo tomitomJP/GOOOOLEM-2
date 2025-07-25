@@ -22,7 +22,7 @@ public class LobbyManager : MonoBehaviour
     public float canOnButtonCT = 1;
     [SerializeField] AudioClip buttonSE;
     [SerializeField] AudioClip titleBgm;
-    [SerializeField] private InputAction playerJoinInputAction = default;
+    public InputAction playerJoinInputAction = default;
 
     void Awake()
     {

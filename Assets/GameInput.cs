@@ -221,6 +221,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cfb10d86-2041-47e6-9baf-1e275f9e0630"",
+                    ""path"": ""<HID::usb gamepad           >/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Choice"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1f38d0c9-34f3-4f51-8caa-e3a145670811"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -267,6 +278,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""c7975ce8-7324-488e-9357-ba6b5d717c18"",
                     ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenRule"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2229300d-2f7f-4364-ab02-48ce3d87302d"",
+                    ""path"": ""<HID::usb gamepad           >/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

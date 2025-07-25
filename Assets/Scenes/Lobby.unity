@@ -11148,70 +11148,22 @@ MonoBehaviour:
   titleBgm: {fileID: 8300000, guid: e6a66c93dab8d425fae73750b28df206, type: 3}
   playerJoinInputAction:
     m_Name: Player Join Input
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 77afb7b3-f18a-42c4-8949-1aaf70c85737
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 11fae768-6751-42a3-9aff-07aabe142df6
     m_Processors: 
-    m_Interactions: Press
+    m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 2d13cca4-921d-4894-8ec6-e565c15a02a9
-      m_Path: <Keyboard>/anyKey
+      m_Id: 6bdba1a6-5b80-44be-97dd-22b6efedab82
+      m_Path: <Gamepad>/buttonWest
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Player Join Input
       m_Flags: 0
     - m_Name: 
-      m_Id: 7fef069a-7498-4583-a1f8-081ae6c0765b
-      m_Path: <Joystick>/trigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 9f85df54-6a23-4a67-9c0c-6cba0fa09dcd
-      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button2
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 1c69f3f1-7436-41ee-80e1-369488a99401
-      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button4
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 89c44102-e51c-4427-8afd-5c4d11e031cf
-      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button5
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 46130065-5407-4bae-b238-ab4cd52ef2c2
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 783d87ef-3cf7-4d4e-863e-4c91918605ce
-      m_Path: <Gamepad>/buttonEast
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 97d0ad56-b7c5-49ca-85db-e61d6b43f8cd
+      m_Id: a371fc49-b6a2-49bd-bbf4-390e67b82d76
       m_Path: <Gamepad>/buttonNorth
       m_Interactions: 
       m_Processors: 
@@ -11219,8 +11171,64 @@ MonoBehaviour:
       m_Action: Player Join Input
       m_Flags: 0
     - m_Name: 
-      m_Id: 6fa0e1eb-46aa-4963-948b-75bb3fafbf0a
-      m_Path: <Gamepad>/buttonWest
+      m_Id: ce5d6f89-47ef-4c56-a764-1d9a76d75980
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ae2a9109-20a3-41d5-81a6-956269909562
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: f82dea9a-d52a-42fe-928f-b2985aedc3df
+      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button5
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 36e7018b-6219-4a79-8807-fe33882ed18d
+      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button4
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: a824b333-4098-4a59-84be-809c04966254
+      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button2
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: db6b3385-960a-4a83-977d-ac0b96ceccd4
+      m_Path: <Joystick>/trigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 920b382f-2d6f-417f-aef0-8c9390478242
+      m_Path: <Keyboard>/anyKey
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Join Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 7328e9c8-b4b3-421c-abd9-07b9b08aabaf
+      m_Path: <HID::usb gamepad           >/button2
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -11256,79 +11264,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerJoinInputAction:
     m_Name: Player Join Input
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 77afb7b3-f18a-42c4-8949-1aaf70c85737
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4ec99827-6f22-4a2a-96e6-6073f14129fd
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 2d13cca4-921d-4894-8ec6-e565c15a02a9
-      m_Path: <Keyboard>/anyKey
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 7fef069a-7498-4583-a1f8-081ae6c0765b
-      m_Path: <Joystick>/trigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 9f85df54-6a23-4a67-9c0c-6cba0fa09dcd
-      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button2
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 1c69f3f1-7436-41ee-80e1-369488a99401
-      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button4
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 89c44102-e51c-4427-8afd-5c4d11e031cf
-      m_Path: <HID::8BitDo Ultimate C Wired Controller >/button5
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 46130065-5407-4bae-b238-ab4cd52ef2c2
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 783d87ef-3cf7-4d4e-863e-4c91918605ce
-      m_Path: <Gamepad>/buttonEast
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 97d0ad56-b7c5-49ca-85db-e61d6b43f8cd
-      m_Path: <Gamepad>/buttonNorth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Join Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 6fa0e1eb-46aa-4963-948b-75bb3fafbf0a
-      m_Path: <Gamepad>/buttonWest
+      m_Id: 7dcdbd81-e041-4902-961f-ffd00ac4e36a
+      m_Path: 
       m_Interactions: 
       m_Processors: 
       m_Groups: 

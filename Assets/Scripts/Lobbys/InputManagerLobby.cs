@@ -8,7 +8,6 @@ public class InputManagerLobby : MonoBehaviour
 {
     // プレイヤーがゲームにJoinするためのInputAction
     [SerializeField] private InputAction playerJoinInputAction = default;
-    // PlayerInputがアタッチされているプレイヤーオブジェクト
     [SerializeField] private PlayerInput playerPrefab = default;
     // 最大参加人数
     public int maxPlayerCount = default;
@@ -23,6 +22,7 @@ public class InputManagerLobby : MonoBehaviour
 
     private void Awake()
     {
+        playerJoinInputAction = lobbyManager.playerJoinInputAction;
         // 最大参加可能数で配列を初期化
         joinedDevices = new InputDevice[maxPlayerCount];
 
