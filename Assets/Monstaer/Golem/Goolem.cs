@@ -55,4 +55,11 @@ public class Goolem : Monsters
 
         mode = Mode.move;
     }
+
+    int n = 0;
+    public void GolemBeamCharge()
+    {
+        n = (n + 1) % 2;
+        spriteRenderer.sprite = atkSprites[n + 1];
+    }
 }

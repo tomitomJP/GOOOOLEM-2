@@ -130,6 +130,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
   sm: []
 --- !u!50 &256448292973386186
 Rigidbody2D:
@@ -157,7 +158,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8817024758929492289
 BoxCollider2D:
   m_ObjectHideFlags: 0

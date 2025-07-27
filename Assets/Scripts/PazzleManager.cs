@@ -106,7 +106,7 @@ public class PazzleManager : MonoBehaviour
         float time;
         float timer;
 
-        brickCountText.text = (num + 1).ToString();
+        brickCountText.text = num.ToString();
         timer = 0;
         time = 0.15f;
         while (time >= timer)

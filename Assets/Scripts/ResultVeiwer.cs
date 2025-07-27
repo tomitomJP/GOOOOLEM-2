@@ -34,6 +34,7 @@ public class ResultVeiwer : MonoBehaviour
 
     IEnumerator Start()
     {
+
         for (int i = 0; i < 2; i++)
         {
             if (resultDatas[i].won)

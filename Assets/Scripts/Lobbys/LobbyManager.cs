@@ -1,8 +1,6 @@
 using System.Collections;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -22,24 +20,41 @@ public class LobbyManager : MonoBehaviour
 
     public bool canOnButton = true;
     public float canOnButtonCT = 1;
-     [SerializeField] AudioClip buttonSE;
-    private AudioSource audioSource;
+    [SerializeField] AudioClip buttonSE;
+    [SerializeField] AudioClip titleBgm;
+    public InputAction playerJoinInputAction = default;
 
-    void Start()
+    void Awake()
+    {
+        playerJoinInputAction.started += ctx =>
+        {
+            if (mode == Mode.title) SwitchMode();
+        };
+
+
+        playerJoinInputAction.Enable();
+
+    }
+
+    IEnumerator Start()
     {
         controllerManager = GameObject.FindWithTag("ControllerManager").GetComponent<ControllerManager>();
 
         StartCoroutine(TitleAnim());
-        audioSource = GetComponent<AudioSource>();
 
-        
+        AudioManager.FadeOutBGM(0.5f);
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.PlayBGM(titleBgm);
+
+
 
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        SwitchMode();
+        //SwitchMode();
         if (Input.GetKeyDown(KeyCode.R))
         {
             //Messager.ViewText("うんこおおおおお", 1);
@@ -48,33 +63,18 @@ public class LobbyManager : MonoBehaviour
 
     }
 
-    void SwitchMode()
-    {
-        if (mode == Mode.title)
-        {
-            if (Input.anyKeyDown)
-            {
-                Debug.Log("開く");
-
-                SwitchMode(true);
-            }
-            else
-            {
-                //SwitchMode(false);
-
-            }
-        }
-    }
-    void SwitchMode(bool boo)
+    void SwitchMode(bool boo = true)
     {
         if (boo == true)
         {
+            ButtonCT(0.3f);
             mode = Mode.menu;
             anyKeyPress.SetActive(false);
             MenuWindw.SetActive(true);
         }
         else
         {
+            ButtonCT(0.3f);
             mode = Mode.title;
             anyKeyPress.SetActive(true);
             MenuWindw.SetActive(false);
@@ -104,7 +104,7 @@ public class LobbyManager : MonoBehaviour
 
         if (!canOnButton) { return; }
         canOnButton = false;
-         audioSource.PlayOneShot(buttonSE);
+        AudioManager.PlaySE(buttonSE, 0.6f);
         Debug.Log("Monstar");
         StartCoroutine(StartGame());
 
@@ -116,7 +116,7 @@ public class LobbyManager : MonoBehaviour
         {
             Messager.ViewText("ゲームを開始します", 1);
             yield return new WaitForSeconds(1f);
-
+            AudioManager.FadeOutBGM(0.5f);
             yield return new WaitForSeconds(0.2f);
             LoadSceneManager.FadeLoadScene("Game");
 
@@ -134,6 +134,7 @@ public class LobbyManager : MonoBehaviour
     public void StartVSHButton()
     {
         if (!canOnButton) { return; }
+        AudioManager.PlaySE(buttonSE, 0.2f);
         canOnButton = false;
         Debug.Log("ニンゲン");
     }
@@ -141,6 +142,7 @@ public class LobbyManager : MonoBehaviour
     public void ResetControllerButton()
     {
         if (!canOnButton) { return; }
+        AudioManager.PlaySE(buttonSE, 0.2f);
         Debug.Log("再接続");
         ReconnectController();
 
@@ -148,9 +150,25 @@ public class LobbyManager : MonoBehaviour
 
     public void CloseButton()
     {
-        Debug.Log("閉じる");
+        if (!canOnButton) { return; }
         SwitchMode(false);
+        AudioManager.PlaySE(buttonSE, 0.2f);
+    }
 
+    public void MenberButton()
+    {
+
+        if (!canOnButton) { return; }
+        canOnButton = false;
+        AudioManager.PlaySE(buttonSE, 0.2f);
+        StartCoroutine(MenberView());
+    }
+
+
+    IEnumerator MenberView()
+    {
+        yield return Messager.ViewText("Accompany/アカンパニー \n冨田陽士 工藤優馬 木村涼介");
+        canOnButton = true;
     }
 
     IEnumerator TitleAnim()
@@ -166,5 +184,24 @@ public class LobbyManager : MonoBehaviour
             ooo *= -1;
             yield return null;
         }
+    }
+
+
+    Coroutine ButtonCTCoru = null;
+    void ButtonCT(float duration)
+    {
+        if (ButtonCTCoru != null)
+        {
+            StopCoroutine(ButtonCTCoru);
+            canOnButton = true;
+        }
+        ButtonCTCoru = StartCoroutine(_ButtonCT(duration));
+    }
+
+    IEnumerator _ButtonCT(float duration)
+    {
+        canOnButton = false;
+        yield return new WaitForSeconds(duration);
+        canOnButton = true;
     }
 }

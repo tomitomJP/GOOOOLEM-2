@@ -21,6 +21,7 @@ public class House : Monsters
     [SerializeField] SpriteRenderer DoorSpr;
     [SerializeField] Sprite[] DoorSprite;
     [SerializeField] GameObject[] castleDamageParticles;
+    [SerializeField] GameObject knockBackMon;
     public bool NonDamage = false;
 
     Vector3 startPos;
@@ -54,18 +55,18 @@ public class House : Monsters
             boxCollider2D.enabled = false;
         }
 
-        if (hp / hpMax > 0.75f)
+        if (hp / hpMax <= 0.75f)
         {
             spriteRenderer.sprite = houseSprites[0];
         }
-        else if (hp / hpMax > 0.5f)
+        if (hp / hpMax < -0.5f)
         {
             spriteRenderer.sprite = houseSprites[1];
 
 
 
         }
-        else if (hp / hpMax > 0.25f)
+        if (hp / hpMax <= 0.25f)
         {
             spriteRenderer.sprite = houseSprites[2];
             castleDamageParticles[0].SetActive(true);
@@ -73,15 +74,11 @@ public class House : Monsters
 
 
         }
-        else if (hp / hpMax > 0)
+        if (hp / hpMax <= 0)
         {
             spriteRenderer.sprite = houseSprites[3];
             castleDamageParticles[2].SetActive(true);
 
-
-        }
-        else
-        {
             for (int i = 0; i < castleDamageParticles[2].transform.childCount; i++)
             {
                 castleDamageParticles[2].transform.GetChild(i).gameObject.SetActive(false);
@@ -94,6 +91,8 @@ public class House : Monsters
 
     public void DoorAnimTrigger()
     {
+        KnockBack();
+
         StartCoroutine(DoorAnim());
     }
 
@@ -117,7 +116,7 @@ public class House : Monsters
 
     public override void Damaged(float damage)
     {
-        if (NonDamage)
+        if (NonDamage && damage < 10000)
         {
             // Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
             // _damageText.text = "NULLILED";
@@ -125,6 +124,8 @@ public class House : Monsters
         }
         else
         {
+
+            AudioManager.PlaySE(defaultAtkSE, 0.4f);
             StartCoroutine(DamageAnimHouse());
             damages.Add(new Damage(hp, damage));
             hp -= damage;
@@ -215,4 +216,36 @@ public class House : Monsters
         }
     }
 
+
+    [SerializeField] float knockBackPower = 10;
+    void KnockBack()
+    {
+        Instantiate(knockBackMon, transform.position, Quaternion.identity);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + rayOrigin, transform.right, enemyDistance * 2f, enemyLayer);
+        Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance * 2f), Color.yellow, 0.3f);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+
+            Attack(hit.collider.gameObject.GetComponent<Monsters>(), 18);
+            Rigidbody2D rb = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+            GameObject mon = hit.collider.gameObject;
+
+            Vector2 monUp = mon.transform.up;
+            Vector2 myLeft = -transform.right;
+            Vector2 dire;
+            if (player == 0)
+            {
+                dire = new Vector2(1, 1).normalized;
+            }
+            else
+            {
+                dire = new Vector2(-1, 1).normalized;
+
+            }
+
+            rb.AddForce(dire * knockBackPower, ForceMode2D.Impulse);
+        }
+
+    }
 }

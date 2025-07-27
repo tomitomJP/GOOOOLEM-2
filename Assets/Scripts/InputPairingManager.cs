@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerJoinManager : MonoBehaviour
 {
     // プレイヤーがゲームにJoinするためのInputAction
-    [SerializeField] private InputAction playerJoinInputAction = default;
+    private InputAction playerJoinInputAction = default;
+    [SerializeField] private InputActionAsset inputActionAsset;
     // PlayerInputがアタッチされているプレイヤーオブジェクト
     [SerializeField] private PlayerInput playerPrefab = default;
     // 最大参加人数
@@ -23,6 +24,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     private void Awake()
     {
+
         // 最大参加可能数で配列を初期化
         joinedDevices = new InputDevice[maxPlayerCount];
 
@@ -37,8 +39,8 @@ public class PlayerJoinManager : MonoBehaviour
         }
         else
         {
-            playerJoinInputAction.Enable();
-            playerJoinInputAction.performed += OnJoin;
+            //playerJoinInputAction.Enable();
+            //playerJoinInputAction.performed += OnJoin;
         }
 
     }

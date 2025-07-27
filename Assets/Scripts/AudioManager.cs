@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public float bgmVolume = 1;
     public float seVolume = 1;
 
+    Coroutine fadeCoroutine = null;
+
     void Awake()
     {
         if (instance == null)
@@ -25,7 +27,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
+    // SE再生（ピッチ指定）
     public static void PlaySEWithPitch(AudioClip clip, float pitch, float volumeScale = 1)
     {
         instance._PlaySEWithPitch(clip, pitch, volumeScale);
@@ -33,25 +35,24 @@ public class AudioManager : MonoBehaviour
 
     public void _PlaySEWithPitch(AudioClip clip, float pitch, float volumeScale)
     {
-        // 一時的なAudioSource作成
         GameObject tempGO = new GameObject("TempAudio");
         AudioSource tempSource = tempGO.AddComponent<AudioSource>();
 
         tempSource.clip = clip;
         tempSource.pitch = pitch;
-        tempSource.volume = seVolume * volumeScale; // 🔊 音量設定（0.0〜1.0）
-
+        tempSource.volume = seVolume * volumeScale;
         tempSource.Play();
 
-        // 再生後に自動破棄（長さに応じて調整）
         Destroy(tempGO, clip.length / pitch);
     }
 
+    // SE再生（通常）
     public static void PlaySE(AudioClip clip, float volumeScale = 1)
     {
         instance.se.PlayOneShot(clip, instance.seVolume * volumeScale);
     }
 
+    // BGM再生
     public static void PlayBGM(AudioClip clip, bool loop = true)
     {
         instance._PlayBGM(clip, loop);
@@ -67,6 +68,7 @@ public class AudioManager : MonoBehaviour
         bgm.Play();
     }
 
+    // BGM停止（即時）
     public static void StopBGM()
     {
         instance._StopBGM();
@@ -74,10 +76,15 @@ public class AudioManager : MonoBehaviour
 
     public void _StopBGM()
     {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+            fadeCoroutine = null;
+        }
         bgm.Stop();
     }
 
-
+    // BGMのピッチ変更
     public static void BgmOption(float pitch)
     {
         instance._BgmOption(pitch);
@@ -90,4 +97,68 @@ public class AudioManager : MonoBehaviour
         bgm.pitch = pitch;
     }
 
+    // BGMをフェードアウトしながら停止
+    public static void FadeOutBGM(float duration)
+    {
+        instance._FadeOutBGM(duration);
+    }
+
+    public void _FadeOutBGM(float duration)
+    {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+        fadeCoroutine = StartCoroutine(FadeOutBGMCoroutine(duration));
+    }
+
+    private IEnumerator FadeOutBGMCoroutine(float duration)
+    {
+        float startVolume = bgm.volume;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            bgm.volume = Mathf.Lerp(startVolume, 0, time / duration);
+            yield return null;
+        }
+
+        bgm.Stop();
+        bgm.volume = bgmVolume; // 元の音量に戻す
+        fadeCoroutine = null;
+    }
+
+    public static void FadeInBGM(AudioClip clip, float duration, bool loop = true)
+    {
+        instance._FadeInBGM(clip, duration, loop);
+    }
+
+    public void _FadeInBGM(AudioClip clip, float duration, bool loop)
+    {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+        fadeCoroutine = StartCoroutine(FadeInBGMCoroutine(clip, duration, loop));
+    }
+
+    private IEnumerator FadeInBGMCoroutine(AudioClip clip, float duration, bool loop)
+    {
+        bgm.clip = clip;
+        bgm.loop = loop;
+        bgm.volume = 0;
+        bgm.Play();
+
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            bgm.volume = Mathf.Lerp(0, bgmVolume, time / duration);
+            yield return null;
+        }
+
+        bgm.volume = bgmVolume;
+        fadeCoroutine = null;
+    }
 }

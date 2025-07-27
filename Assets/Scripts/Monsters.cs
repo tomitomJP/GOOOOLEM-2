@@ -29,6 +29,8 @@ public class Monsters : MonoBehaviour
     public LayerMask myLayer;
     public LayerMask enemyLayer;
 
+    public float stanTIme = 0;
+
     public enum Mode
     {
         idle,
@@ -48,6 +50,7 @@ public class Monsters : MonoBehaviour
     public GameObject damageText { get; set; }
     public Canvas canvas { get; set; }
     public GameManager gameManager { get; set; }
+    public AudioClip defaultAtkSE;
 
     void Update()
     {
@@ -56,7 +59,15 @@ public class Monsters : MonoBehaviour
 
     public virtual void Move()//移動と異動アニメーションを管理
     {
-        if (mode == Mode.move) transform.Translate(Vector3.right * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100));
+        if (mode == Mode.move && stanTIme <= 0)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100));
+        }
+
+        if (stanTIme > 0)
+        {
+            stanTIme -= Time.deltaTime;
+        }
 
         if (MoveAniTimer >= MoveAniTime)
         {
@@ -75,7 +86,7 @@ public class Monsters : MonoBehaviour
 
     public virtual void StartSetup()//継承先のStart関数に入れる
     {
-        canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+        canvas = GameObject.FindWithTag("DamageTextCanvas").GetComponent<Canvas>();
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -150,6 +161,8 @@ public class Monsters : MonoBehaviour
 
     public virtual void Damaged(float damage)
     {
+        AudioManager.PlaySE(defaultAtkSE, 0.3f);
+
         hp -= damage;
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
         _damageText.text = damage.ToString("F0");
@@ -310,6 +323,7 @@ public class Monsters : MonoBehaviour
             atkRate,
             atkSpdRate,
             heal,
+            stan,
         }
 
         public StatusType type;
@@ -385,6 +399,9 @@ public class Monsters : MonoBehaviour
                 hp += status.value;
                 Healed(status.value);
                 break;
+            case StatusManager.StatusType.stan:
+                mode = Mode.stan;
+                break;
         }
     }
 
@@ -400,6 +417,9 @@ public class Monsters : MonoBehaviour
                 break;
             case StatusManager.StatusType.atkSpdRate:
                 atkSpdRate -= status.value;
+                break;
+            case StatusManager.StatusType.stan:
+                mode = Mode.move;
                 break;
         }
     }
