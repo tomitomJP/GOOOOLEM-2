@@ -33186,6 +33186,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8606579547143467900, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8870997561179751017, guid: 6deba733428004a19a940a68ea59bafa, type: 3}
       propertyPath: m_Name
       value: LoadScene

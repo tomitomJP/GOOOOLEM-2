@@ -73,12 +73,12 @@ public class PazzleManager : MonoBehaviour
                         check++;
                     }
                 }
-                yield return new WaitForSeconds(0.2f);
 
                 if (check > 0)
                 {
                     yield return new WaitForSeconds(0.1f);
                 }
+                yield return null;
 
             }
             MaxCount++;
@@ -158,7 +158,6 @@ public class PazzleManager : MonoBehaviour
             spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1);
             if (peaceS.peaceNumber == 4)
             {
-                spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 0.4f);
                 peaceS.StartParticle(4);
 
             }
@@ -207,7 +206,7 @@ public class PazzleManager : MonoBehaviour
 
                         if (peace != null)
                         {
-                            if ((number == peace.peaceNumber || 4 == peace.peaceNumber) && peace.check == false)
+                            if ((number == peace.peaceNumber || 4 == peace.peaceNumber || number == 4) && peace.check == false)
                             {
                                 if (!hilightPeaces.Contains(peace.gameObject))
                                 {

@@ -16,6 +16,7 @@ TagManager:
   - ControllerManager
   - Messager
   - DamageTextCanvas
+  - GoblinBuild
   layers:
   - Default
   - TransparentFX

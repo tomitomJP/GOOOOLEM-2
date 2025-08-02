@@ -28,7 +28,9 @@ public class ControllManager : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction choiceAction;
+    private InputAction peaceDeleteAction;
     private InputAction openRule;
+    [SerializeField] bool choiseMode = false;
     [SerializeField] private bool choiceDown = false;
     [SerializeField] private bool choiceUp = false;
     [SerializeField] GameObject brokenText;
@@ -45,10 +47,12 @@ public class ControllManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         choiceAction = playerInput.actions["Choice"];
+        peaceDeleteAction = playerInput.actions["PeaceDelete"];
+
         openRule = playerInput.actions["OpenRule"];
 
         choiceAction.performed += ctx => choiceDown = true;   // 押した瞬間
-        choiceAction.canceled += ctx => choiceUp = true;     // 離した瞬間
+        peaceDeleteAction.canceled += ctx => choiceUp = true;     // 離した瞬間
     }
 
     IEnumerator Start()
@@ -73,6 +77,7 @@ public class ControllManager : MonoBehaviour
         }
         yield return pazzleManager.PeaceSet();
         CanCheckPeace = true;
+        GetArrow();
     }
 
     void Update()
@@ -88,6 +93,7 @@ public class ControllManager : MonoBehaviour
         {
             choiceDown = false;
             choiceUp = false;
+            choiseMode = false;
         }
 
         LineView();
@@ -240,8 +246,9 @@ public class ControllManager : MonoBehaviour
 
     void CheckPeaceDown()
     {
-        if (choiceDown && CanCheckPeace)
+        if (choiceDown && CanCheckPeace && !choiseMode)
         {
+            choiseMode = true;
             choiceUp = false;
             choiceDown = false;
             Collider2D col;
@@ -249,22 +256,15 @@ public class ControllManager : MonoBehaviour
             if (selectingPeace != null)
             {
                 Peace p = selectingPeace.gameObject.GetComponent<Peace>();
-                if (p.peaceNumber != 4)
-                {
-                    p.check = true;
-                    SelectPeaceNumber = p.peaceNumber;
-                    checkingPeace.Add(selectingPeace);
-                    canDirection = pazzleManager.HilightPeace(checkingPeace, SelectPeaceNumber);
-                    pazzleManager.BrickCount(checkingPeace.Count);
 
-                }
+                p.check = true;
+                SelectPeaceNumber = p.peaceNumber;
+                checkingPeace.Add(selectingPeace);
+                canDirection = pazzleManager.HilightPeace(checkingPeace, SelectPeaceNumber);
+                ArrowView();
+                pazzleManager.BrickCount(checkingPeace.Count);
 
             }
-        }
-
-        if (!CanCheckPeace)
-        {
-            choiceDown = false;
         }
     }
 
@@ -277,7 +277,7 @@ public class ControllManager : MonoBehaviour
 
     void CheckPeace()
     {
-        if (choiceAction.IsPressed() && CanCheckPeace && checkingPeace.Count > 0)
+        if (choiseMode && CanCheckPeace && checkingPeace.Count > 0)
         {
             Collider2D col = Physics2D.OverlapPoint(pointer.position);
 
@@ -296,7 +296,7 @@ public class ControllManager : MonoBehaviour
                     bool isPrevPeace = checkingPeace.Count > 1 && selectingPeace == checkingPeace[checkingPeace.Count - 2];
 
                     if (
-                        (p.check == false && chainDis >= dis && (SelectPeaceNumber == p.peaceNumber || 4 == p.peaceNumber)) // 新規選択
+                        (p.check == false && chainDis >= dis && (SelectPeaceNumber == p.peaceNumber || 4 == p.peaceNumber || SelectPeaceNumber == 4)) // 新規選択
                         || isPrevPeace // 戻る操作を許可
                     )
                     {
@@ -305,43 +305,46 @@ public class ControllManager : MonoBehaviour
                             // 戻る時はチェックを解除して一つ戻る
                             pPrev.check = false;
                             checkingPeace.RemoveAt(checkingPeace.Count - 1);
+                            if (checkingPeace.Count == 1)
+                            {
+                                SelectPeaceNumber = p.peaceNumber;
+                            }
                         }
                         else
                         {
                             p.check = true;
                             checkingPeace.Add(selectingPeace);
+                            if (p.peaceNumber != 4)
+                            {
+                                SelectPeaceNumber = p.peaceNumber;
+                            }
                         }
 
                         pazzleManager.BrickCount(checkingPeace.Count);
                         canDirection = pazzleManager.HilightPeace(checkingPeace, SelectPeaceNumber);
+                        ArrowView();
                     }
                 }
 
             }
         }
-        else
-        {
-            choiceDown = false;
-        }
     }
 
     void CheckPeaceUp()
     {
-        if (choiceUp && CanCheckPeace && checkingPeace.Count > 0)
+        if (choiceUp && CanCheckPeace && checkingPeace.Count > 0 && choiseMode)
         {
+            choiseMode = false;
             choiceUp = false;
             CanCheckPeace = false;
             StartCoroutine(deletePeace(new List<GameObject>(checkingPeace)));
-        }
-        else if (!CanCheckPeace)
-        {
-            choiceUp = false;
         }
     }
 
     IEnumerator deletePeace(List<GameObject> DeletingPeace)
     {
         pazzleManager.ResetHilightPeace();
+        ResetArrow();
 
         CanCheckPeace = false;
         pazzleManager.blackScreen.SetActive(true);
@@ -390,13 +393,14 @@ public class ControllManager : MonoBehaviour
         }
 
         gameManager.resultDatas[playerNumber].deletePeaceCount += DeletingPeace.Count;
-        BrokenText text = Instantiate(brokenText, DeletingPeace[DeletingPeace.Count - 1].transform.position, Quaternion.identity, canvas.transform).GetComponent<BrokenText>();
+        Vector2 offset = new Vector2(0, 1f);
+        BrokenText text = Instantiate(brokenText, DeletingPeace[DeletingPeace.Count - 1].transform.position + (Vector3)offset, Quaternion.identity, canvas.transform).GetComponent<BrokenText>();
         text.num = DeletingPeace.Count.ToString();
         text.Spwan = CanSpawnGolem;
 
         yield return new WaitForSeconds(0.2f);
 
-
+        GameObject newSoul = null;
         int count = 0;
         while (DeletingPeace.Count > 0)
         {
@@ -405,9 +409,8 @@ public class ControllManager : MonoBehaviour
             Vector2 pos = DeletingPeace[0].transform.position;
             if (count >= 6 && DeletingPeace.Count == 1)
             {
-                Instantiate(soulSpwanPar, pos, Quaternion.identity);
 
-                Instantiate(pazzleManager.peaces[4], pos, Quaternion.identity, pazzleManager.peacePearent.transform);
+                newSoul = Instantiate(pazzleManager.peaces[4], pos, Quaternion.identity, pazzleManager.peacePearent.transform);
             }
             Destroy(DeletingPeace[0]);
             DeletingPeace.RemoveAt(0);
@@ -442,9 +445,11 @@ public class ControllManager : MonoBehaviour
         checkingPeace.Clear();
         SelectPeaceNumber = -1;
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
         yield return pazzleManager.PeaceSet();
+
+        if (newSoul != null) Instantiate(soulSpwanPar, newSoul.transform.position, Quaternion.identity);
 
         CanCheckPeace = true;
     }
@@ -481,6 +486,34 @@ public class ControllManager : MonoBehaviour
         else
         {
             lineRenderer.positionCount = 0;
+        }
+    }
+
+    GameObject[] arrows = new GameObject[4];
+    void ArrowView()
+    {
+        arrows[0].SetActive(CanMoveDirection(Vector2.right));
+        arrows[1].SetActive(CanMoveDirection(Vector2.down));
+        arrows[2].SetActive(CanMoveDirection(Vector2.left));
+        arrows[3].SetActive(CanMoveDirection(Vector2.up));
+
+    }
+
+    void GetArrow()
+    {
+        for (int i = 0; i < pointer.childCount; i++)
+        {
+            arrows[i] = pointer.GetChild(i).gameObject;
+            arrows[i].SetActive(false);
+
+        }
+    }
+
+    void ResetArrow()
+    {
+        for (int i = 0; i < pointer.childCount; i++)
+        {
+            arrows[i].SetActive(false);
         }
     }
 

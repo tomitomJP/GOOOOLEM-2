@@ -117,7 +117,7 @@ MonoBehaviour:
   atkSpdRate: 1
   atkRate: 1
   player: 0
-  enemyDistance: 1.15
+  enemyDistance: 0.8
   allyDistance: 0.3
   atkCT: 1
   aktCTimer: 0
@@ -127,11 +127,16 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
   defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
   sm: []
+  building: 0
+  buildPosX: 0
+  goblinBuild: {fileID: 0}
+  nowBuiding: 0
 --- !u!50 &256448292973386186
 Rigidbody2D:
   serializedVersion: 4

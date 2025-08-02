@@ -46,7 +46,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""OpenRule"",
+                    ""name"": ""PeaceDelete"",
                     ""type"": ""Button"",
                     ""id"": ""dd687221-3892-4c52-9d76-8737d5e33520"",
                     ""expectedControlType"": ""Button"",
@@ -58,6 +58,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""AnyKey"",
                     ""type"": ""Button"",
                     ""id"": ""c102812d-ab3d-49e2-877a-c47088468ab3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenRule"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b1569b9-9f73-4da8-a0e2-b3950ee8492d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -166,50 +175,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""471675f4-0607-4485-be55-6f7949636a24"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e58ed529-d062-4914-b9fd-336854d24acf"",
-                    ""path"": ""<HID::8BitDo Ultimate C Wired Controller >/button2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a40ed741-1b4a-48d6-91db-c763569583ff"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7ad7b918-ad34-46bb-9274-8e4466b441ab"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1c7d57a3-858b-4629-9c08-01d94e784470"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -232,56 +197,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1f38d0c9-34f3-4f51-8caa-e3a145670811"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenRule"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""48ea9747-a8bb-4b1f-a5ba-75f31611fc24"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenRule"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e2b09a6-069f-4dce-9b3e-3daf6f0fa88b"",
-                    ""path"": ""<HID::8BitDo Ultimate C Wired Controller >/button5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenRule"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7e7db8b0-eae9-4f4f-8fe0-85359f1e3c27"",
-                    ""path"": ""<HID::8BitDo Ultimate C Wired Controller >/button4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenRule"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c7975ce8-7324-488e-9357-ba6b5d717c18"",
                     ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OpenRule"",
+                    ""action"": ""PeaceDelete"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -292,7 +213,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OpenRule"",
+                    ""action"": ""PeaceDelete"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -392,6 +313,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7445f812-1ff6-4a4c-958f-e542506548d0"",
+                    ""path"": ""<HID::usb gamepad           >/button9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenRule"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -502,50 +434,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""c9cf8120-775e-4f0b-9b60-ae35ecefa4ba"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ea891f98-39a3-48c4-ac71-933f64969293"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""422d4348-0937-42e0-8a44-973e3bd5067f"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c8036fa7-6368-4520-9c5a-42c7ad2819aa"",
-                    ""path"": ""*/{Cancel}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""fe04e18b-9011-4ad8-b345-56697ee784f9"",
@@ -853,6 +741,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8036fa7-6368-4520-9c5a-42c7ad2819aa"",
+                    ""path"": ""<HID::usb gamepad           >/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea891f98-39a3-48c4-ac71-933f64969293"",
+                    ""path"": ""<HID::usb gamepad           >/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""422d4348-0937-42e0-8a44-973e3bd5067f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -897,8 +818,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Choice = m_Player.FindAction("Choice", throwIfNotFound: true);
-        m_Player_OpenRule = m_Player.FindAction("OpenRule", throwIfNotFound: true);
+        m_Player_PeaceDelete = m_Player.FindAction("PeaceDelete", throwIfNotFound: true);
         m_Player_AnyKey = m_Player.FindAction("AnyKey", throwIfNotFound: true);
+        m_Player_OpenRule = m_Player.FindAction("OpenRule", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -975,16 +897,18 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Choice;
-    private readonly InputAction m_Player_OpenRule;
+    private readonly InputAction m_Player_PeaceDelete;
     private readonly InputAction m_Player_AnyKey;
+    private readonly InputAction m_Player_OpenRule;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
         public PlayerActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Choice => m_Wrapper.m_Player_Choice;
-        public InputAction @OpenRule => m_Wrapper.m_Player_OpenRule;
+        public InputAction @PeaceDelete => m_Wrapper.m_Player_PeaceDelete;
         public InputAction @AnyKey => m_Wrapper.m_Player_AnyKey;
+        public InputAction @OpenRule => m_Wrapper.m_Player_OpenRule;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1000,12 +924,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Choice.started += instance.OnChoice;
             @Choice.performed += instance.OnChoice;
             @Choice.canceled += instance.OnChoice;
-            @OpenRule.started += instance.OnOpenRule;
-            @OpenRule.performed += instance.OnOpenRule;
-            @OpenRule.canceled += instance.OnOpenRule;
+            @PeaceDelete.started += instance.OnPeaceDelete;
+            @PeaceDelete.performed += instance.OnPeaceDelete;
+            @PeaceDelete.canceled += instance.OnPeaceDelete;
             @AnyKey.started += instance.OnAnyKey;
             @AnyKey.performed += instance.OnAnyKey;
             @AnyKey.canceled += instance.OnAnyKey;
+            @OpenRule.started += instance.OnOpenRule;
+            @OpenRule.performed += instance.OnOpenRule;
+            @OpenRule.canceled += instance.OnOpenRule;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1016,12 +943,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Choice.started -= instance.OnChoice;
             @Choice.performed -= instance.OnChoice;
             @Choice.canceled -= instance.OnChoice;
-            @OpenRule.started -= instance.OnOpenRule;
-            @OpenRule.performed -= instance.OnOpenRule;
-            @OpenRule.canceled -= instance.OnOpenRule;
+            @PeaceDelete.started -= instance.OnPeaceDelete;
+            @PeaceDelete.performed -= instance.OnPeaceDelete;
+            @PeaceDelete.canceled -= instance.OnPeaceDelete;
             @AnyKey.started -= instance.OnAnyKey;
             @AnyKey.performed -= instance.OnAnyKey;
             @AnyKey.canceled -= instance.OnAnyKey;
+            @OpenRule.started -= instance.OnOpenRule;
+            @OpenRule.performed -= instance.OnOpenRule;
+            @OpenRule.canceled -= instance.OnOpenRule;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1196,8 +1126,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnChoice(InputAction.CallbackContext context);
-        void OnOpenRule(InputAction.CallbackContext context);
+        void OnPeaceDelete(InputAction.CallbackContext context);
         void OnAnyKey(InputAction.CallbackContext context);
+        void OnOpenRule(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

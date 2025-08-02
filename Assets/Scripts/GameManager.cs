@@ -7,9 +7,11 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] bool debugMode = false;
     [SerializeField] int playerCount = 2;
     [SerializeField] Text[] Ready;
     [SerializeField] PlayerJoinManager playerJoinManager;
@@ -35,8 +37,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip GameStartCount;
     [SerializeField] AudioClip GameStart;
     [SerializeField] AudioClip TimerRemind;
-
-
     [SerializeField] Text timerText;
     [SerializeField] float timer = 100;
     public ResultVeiwer.resultData[] resultDatas = new ResultVeiwer.resultData[2];
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public Mode mode = Mode.ready;
     IEnumerator Start()
     {
+        if (debugMode) { yield break; }
         //StartCoroutine(DeathMatchStart());
         yield return new WaitForSeconds(0.5f);
         AudioManager.PlayBGM(ReadyBgm);
@@ -212,10 +213,23 @@ public class GameManager : MonoBehaviour
             }
 
 
-
+            //SoulGageUpdata();
             timerText.text = Mathf.Max(Mathf.FloorToInt(timer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(timer % 60), 0).ToString("D2");
         }
     }
+
+    public float[] soulPt = { 0, 0 };
+    [SerializeField] float soulPtMax = 8;
+    [SerializeField] Slider[] soulGage;
+    void SoulGageUpdata()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            soulGage[i].value = soulPt[i] / soulPtMax;
+        }
+    }
+
+
 
     IEnumerator Timer10()
     {
@@ -356,7 +370,7 @@ public class GameManager : MonoBehaviour
         GameObject _hibana = Instantiate(hibana, new Vector2(0, DMGolem[0].transform.position.y), Quaternion.identity);
         beamLight = _hibana.GetComponent<Light2D>();
 
-        float lightTggleTime = 0.02f;
+        float lightTggleTime = 0.08f;
         float lightTggleTimer = 0;
         bool lightFragg = true;
 
