@@ -340,6 +340,17 @@ public class ControllManager : MonoBehaviour
             StartCoroutine(deletePeace(new List<GameObject>(checkingPeace)));
         }
     }
+    public void _checkPeaceUp()
+    {
+        if (CanCheckPeace && checkingPeace.Count > 0 && choiseMode)
+        {
+            choiseMode = false;
+            choiceUp = false;
+            CanCheckPeace = false;
+            StartCoroutine(deletePeace(new List<GameObject>(checkingPeace)));
+        }
+
+    }
 
     IEnumerator deletePeace(List<GameObject> DeletingPeace)
     {
@@ -395,7 +406,9 @@ public class ControllManager : MonoBehaviour
         gameManager.resultDatas[playerNumber].deletePeaceCount += DeletingPeace.Count;
         Vector2 offset = new Vector2(0, 1f);
         BrokenText text = Instantiate(brokenText, DeletingPeace[DeletingPeace.Count - 1].transform.position + (Vector3)offset, Quaternion.identity, canvas.transform).GetComponent<BrokenText>();
-        text.num = DeletingPeace.Count.ToString();
+
+        text.mode = gameManager.mode;
+        text.num = DeletingPeace.Count;
         text.Spwan = CanSpawnGolem;
 
         yield return new WaitForSeconds(0.2f);
@@ -439,13 +452,13 @@ public class ControllManager : MonoBehaviour
         }
         else if (gameManager.mode == GameManager.Mode.deathMatch)
         {
-            gameManager.DMGolemPowers[playerNumber] = count + (count * count / 8f);
+            gameManager.DMGolemPowers[playerNumber] += count + Mathf.Floor(count * count / 15f);
         }
 
         checkingPeace.Clear();
         SelectPeaceNumber = -1;
 
-        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         yield return pazzleManager.PeaceSet();
 

@@ -281,6 +281,13 @@ public class GameManager : MonoBehaviour
     IEnumerator DeathMatchStart()
     {
 
+        for (int i = 0; i < 2; i++)
+        {
+            pazzleManager[i].controllManager._checkPeaceUp();
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
         GameObject[] monstras = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monstar in monstras)
@@ -348,14 +355,36 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 2; i++)
             {
                 DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
+
+                var main = beamPars[i].GetComponent<ParticleSystem>().main;
+                main.startSize = 1f + (DMGolemPowers[i] / 10);
+
             }
             DMslider.value = 1 - (DMtimer / DMtime);
             DMtimer += Time.deltaTime;
             yield return null;
         }
 
+        for (int i = 0; i < 2; i++)
+        {
+            pazzleManager[i].controllManager._checkPeaceUp();
+        }
+
+        float wait = 2;
+        while (wait > 0)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
+            }
+            wait -= Time.deltaTime;
+            yield return null;
+        }
+
+
         DMslider.gameObject.SetActive(false);
         DeathMatchSubTitleText.enabled = false;
+
 
         mode = Mode.deathMatchReady;
 
@@ -378,6 +407,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(beamPars[i]);
             beamPars[i] = Instantiate(DMbeamPar[i], DMGolem[i].transform.position, Quaternion.identity);
+
+            var main = beamPars[i].GetComponent<ParticleSystem>().main;
+            main.startSize = 1f + (DMGolemPowers[i] / 10);
 
         }
 

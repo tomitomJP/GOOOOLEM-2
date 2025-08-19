@@ -47,7 +47,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerJoinInputAction.Dispose();
+        //playerJoinInputAction.Dispose();
     }
 
     /// <summary>

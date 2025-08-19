@@ -126,7 +126,7 @@ public class House : Monsters
         {
 
             AudioManager.PlaySE(defaultAtkSE, 0.4f);
-            StartCoroutine(DamageAnimHouse());
+            StartCoroutine(DamageAnimHouse(player));
             damages.Add(new Damage(hp, damage));
             hp -= damage;
 
@@ -153,11 +153,17 @@ public class House : Monsters
 
 
 
-    IEnumerator DamageAnimHouse()
+    IEnumerator DamageAnimHouse(int playerNum = 0)
     {
         Vector3 A = startPos;
         Vector3 B = transform.position + new Vector3(0.5f, 0);
         Vector3 C = transform.position + new Vector3(-0.2f, 0);
+
+        if (playerNum == 1)
+        {
+            B = transform.position + new Vector3(-0.5f, 0);
+            C = transform.position + new Vector3(0.2f, 0);
+        }
 
         float timer = 0;
         float time = 0.1f;

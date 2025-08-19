@@ -49,18 +49,24 @@ public class GoblinBuild : Monsters
     public override void Damaged(float damage)
     {
         AudioManager.PlaySE(defaultAtkSE, 0.4f);
-        StartCoroutine(DamageAnimHouse());
+        StartCoroutine(DamageAnimHouse(player));
         hp -= damage;
 
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
         _damageText.text = damage.ToString("F0");
     }
 
-    IEnumerator DamageAnimHouse()
+    IEnumerator DamageAnimHouse(int playerNum = 0)
     {
         Vector3 A = startPos;
         Vector3 B = transform.position + new Vector3(0.5f, 0);
         Vector3 C = transform.position + new Vector3(-0.2f, 0);
+
+        if (playerNum == 1)
+        {
+            B = transform.position + new Vector3(-0.5f, 0);
+            C = transform.position + new Vector3(0.2f, 0);
+        }
 
         float timer = 0;
         float time = 0.1f;
