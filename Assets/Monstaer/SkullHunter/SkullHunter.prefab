@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c64504b9d1554a75966cde14c7a0e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayOrigin: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 0}
   moveSprites:
   - {fileID: 21300000, guid: df7d223c6813e41a793fd7eaf5967402, type: 3}
@@ -74,12 +73,14 @@ MonoBehaviour:
   allyDistance: 0.3
   atkCT: 4
   aktCTimer: 0
+  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
   myLayer:
     serializedVersion: 2
     m_Bits: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
@@ -196,7 +197,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.30974096, y: 2.6127188}
+  m_Offset: {x: 0, y: 1.6283205}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -207,5 +208,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4680761, y: 7.717731}
+  m_Size: {x: 1, y: 5.743359}
   m_EdgeRadius: 0

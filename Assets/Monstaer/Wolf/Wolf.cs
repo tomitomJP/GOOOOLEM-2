@@ -9,7 +9,6 @@ public class Wolf : Monsters
     void Start()
     {
         StartSetup();
-        rayOrigin.y = 0.0f;
     }
 
     // Update is called once per frame

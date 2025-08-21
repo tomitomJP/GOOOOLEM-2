@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2957136151220492112}
   - component: {fileID: 256448292973386186}
   - component: {fileID: 8817024758929492289}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Goblin
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.45, y: -1.62, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262b7ed6c9c9be849b8e5f5d1666cd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayOrigin: {x: 0, y: 1, z: 0}
   spriteRenderer: {fileID: 0}
   moveSprites:
   - {fileID: 21300000, guid: 149c9c45bcdd1994890a4694cf4ea708, type: 3}
@@ -117,10 +116,11 @@ MonoBehaviour:
   atkSpdRate: 1
   atkRate: 1
   player: 0
-  enemyDistance: 0.8
+  enemyDistance: 0.6
   allyDistance: 0.3
   atkCT: 1
   aktCTimer: 0
+  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
   myLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -137,6 +137,11 @@ MonoBehaviour:
   buildPosX: 0
   goblinBuild: {fileID: 0}
   nowBuiding: 0
+  buildMotion:
+  - {fileID: 21300000, guid: 0d95efa12efba4b35820beda0d6a2e47, type: 3}
+  - {fileID: 21300000, guid: 93fe283e1209e4d878e050951d9227e5, type: 3}
+  - {fileID: 21300000, guid: 1de59c2ab47bd4e18978003aee43028b, type: 3}
+  tonkachi: {fileID: 8300000, guid: 5ac18d5b3c6b34bc9badf3aae43bb560, type: 3}
 --- !u!50 &256448292973386186
 Rigidbody2D:
   serializedVersion: 4
@@ -196,16 +201,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5933569, y: 1.5070115}
+  m_Offset: {x: 0, y: 1.725588}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.501417, y: 6.9161663}
+  m_Size: {x: 1, y: 5.5488243}
   m_EdgeRadius: 0

@@ -26,7 +26,7 @@ public class GoblinBuild : Monsters
 
 
         boxCollider2D.enabled = hp > 0;
-        spriteRenderer.enabled = hp > 0;
+        //spriteRenderer.enabled = hp > 0;
 
         if (buildOK && hp <= 0)
         {
@@ -104,39 +104,40 @@ public class GoblinBuild : Monsters
 
         if (hpRate >= 1.0f)
         {
-            // HP 100% 以上
+            spriteRenderer.sprite = houseSprites[0];
         }
         else if (hpRate >= 0.75f)
         {
-            // HP 75%以上
+            spriteRenderer.sprite = houseSprites[1];
         }
         else if (hpRate >= 0.5f)
         {
-            // HP 50%以上
+            spriteRenderer.sprite = houseSprites[2];
         }
         else if (hpRate >= 0.25f)
         {
-            // HP 25%以上
+            spriteRenderer.sprite = houseSprites[3];
         }
         else if (hpRate >= 0f)
         {
-            // HP 0%以上
+            spriteRenderer.sprite = houseSprites[4];
+
         }
         else if (hpRate >= -5)
         {
-            // HP -25%以上
+            spriteRenderer.sprite = houseSprites[5];
         }
         else if (hpRate >= -10f)
         {
-            // HP -50%以上
+            spriteRenderer.sprite = houseSprites[6];
         }
         else if (hpRate >= -20f)
         {
-            // HP -50%以上
+            spriteRenderer.sprite = houseSprites[7];
         }
         else if (hpRate >= -30f)
         {
-            // HP -50%以上
+            spriteRenderer.sprite = houseSprites[8];
         }
     }
 

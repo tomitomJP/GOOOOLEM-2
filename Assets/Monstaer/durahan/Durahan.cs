@@ -9,7 +9,6 @@ public class Durahan : Monsters
     void Start()
     {
         StartSetup();
-        rayOrigin.y = 0;
     }
 
     // Update is called once per frame

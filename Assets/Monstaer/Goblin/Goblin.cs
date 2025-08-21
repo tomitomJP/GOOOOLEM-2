@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Goblin : Monsters
@@ -9,10 +8,13 @@ public class Goblin : Monsters
     public float buildPosX;
     public GoblinBuild goblinBuild;
     public bool nowBuiding;
+
+    [SerializeField] Sprite[] buildMotion;
+    [SerializeField] AudioClip tonkachi;
+
     void Start()
     {
         StartSetup();
-        rayOrigin.y = 0.5f;
 
         GameObject[] goblinBuilds = GameObject.FindGameObjectsWithTag("GoblinBuild");
 
@@ -83,14 +85,27 @@ public class Goblin : Monsters
         }
         mode = Mode.atk;
 
-        spriteRenderer.sprite = atkSprites[0];
+        spriteRenderer.sprite = buildMotion[0];
         yield return Wait(0.4f);
 
-        spriteRenderer.sprite = atkSprites[1];
+        spriteRenderer.sprite = buildMotion[1];
         yield return Wait(0.2f);
 
-        target.hp += 5f;
-        spriteRenderer.sprite = atkSprites[2];
+        target.hp += 2.5f;
+        AudioManager.PlaySEWithPitch(tonkachi, Random.Range(0.8f, 1.2f), 0.4f);
+
+        spriteRenderer.sprite = buildMotion[2];
+        yield return Wait(0.05f);
+
+        spriteRenderer.sprite = buildMotion[0];
+        yield return Wait(0.2f);
+
+        spriteRenderer.sprite = buildMotion[1];
+        yield return Wait(0.2f);
+
+        target.hp += 2.5f;
+        AudioManager.PlaySEWithPitch(tonkachi, Random.Range(0.8f, 1.2f), 0.4f);
+        spriteRenderer.sprite = buildMotion[2];
         yield return Wait(0.05f);
 
         yield return Wait(1.5f);

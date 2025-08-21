@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Monsters : MonoBehaviour
 {
 
-    public Vector3 rayOrigin;
+    public Vector3 rayOrigin { get; set; }
     public SpriteRenderer spriteRenderer;
     public Sprite[] moveSprites;//歩く用のスプライトを入れる
     public Sprite[] atkSprites;//攻撃用のスプライトを入れる
@@ -25,6 +25,7 @@ public class Monsters : MonoBehaviour
     public float allyDistance = 0.3f;//使用していない
     public float atkCT = 1;//攻撃のクールタイム
     public float aktCTimer = 0;
+    public GameObject monstarDeadPar;
 
     public LayerMask myLayer;
     public LayerMask enemyLayer;
@@ -90,10 +91,7 @@ public class Monsters : MonoBehaviour
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // float X = (Random.Range(0, 11) - 5) * 0.1f;
-        float Y = Random.Range(0, 4) * 0.1f;
-        rayOrigin.y = 0.0f;
-        //enemyDistance *= Random.Range(0.8f, 1.1f);
+        rayOrigin = Vector2.zero;
         if (player == 1)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
@@ -136,7 +134,7 @@ public class Monsters : MonoBehaviour
     public void Dead()
     {
         gameManager.resultDatas[(player + 1) % 2].killCount++;
-
+        Instantiate(monstarDeadPar, transform.position, Quaternion.identity);
         spriteRenderer.enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject);
