@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 2759018831891880264}
   - component: {fileID: 8103544414114708808}
   - component: {fileID: 3353198567842236404}
-  - component: {fileID: 7824496601810287851}
   - component: {fileID: -7869609232283002860}
-  - component: {fileID: -5541682891961599521}
   m_Layer: 11
   m_Name: bullet
   m_TagString: Monster
@@ -101,7 +99,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.13
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -145,26 +143,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &7824496601810287851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8642938531745277151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52c068ae52626742b984096fa19d2fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 10
-  explosionPrefab: {fileID: 1284203378627577565, guid: 1d7cfc88b9ca4844381f5aff764e62c5, type: 3}
 --- !u!114 &-7869609232283002860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +164,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   moveSprites: []
   atkSprites: []
-  atk: 5000
+  atk: 30
   hp: 100
   spd: 1
   spdRate: 1
@@ -204,42 +188,12 @@ MonoBehaviour:
   MoveAniTimer: 0
   defaultAtkSE: {fileID: 0}
   sm: []
---- !u!114 &-5541682891961599521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8642938531745277151}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce5bb67f1f894c788521d1499031ce7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  moveSprites: []
-  atkSprites: []
-  atk: 50
-  hp: 100
-  spd: 1
-  spdRate: 1
-  atkSpdRate: 1
-  atkRate: 1
-  player: 0
-  enemyDistance: 1
-  allyDistance: 0.3
-  atkCT: 1
-  aktCTimer: 0
-  monstarDeadPar: {fileID: 0}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
-  mode: 1
-  MoveAniTime: 0.3
-  MoveAniTimer: 0
-  defaultAtkSE: {fileID: 0}
-  sm: []
+  lifeTime: 10
+  explosionPrefab: {fileID: 9042700485184534923, guid: 3797c5fb2c1e34ae58448302503ef041, type: 3}
+  attackRadius: 2
+  targetLayer:
+  - serializedVersion: 2
+    m_Bits: 4096
+  - serializedVersion: 2
+    m_Bits: 2048
+  knockBackPower: 4

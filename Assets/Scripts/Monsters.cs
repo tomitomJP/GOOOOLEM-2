@@ -161,9 +161,13 @@ public class Monsters : MonoBehaviour
     {
         AudioManager.PlaySE(defaultAtkSE, 0.3f);
 
-        hp -= damage;
-        Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
-        _damageText.text = damage.ToString("F0");
+        if (hp > 0)
+        {
+            hp -= damage;
+            Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
+            _damageText.text = damage.ToString("F0");
+        }
+
     }
 
     public void Healed(float healValue)

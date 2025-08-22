@@ -42,6 +42,8 @@ public class ControllManager : MonoBehaviour
 
     GameManager gameManager;
     [SerializeField] AudioClip peaceDeleteSound;
+
+    CannonController cannon;
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -51,8 +53,8 @@ public class ControllManager : MonoBehaviour
 
         openRule = playerInput.actions["OpenRule"];
 
-        choiceAction.performed += ctx => choiceDown = true;   // 押した瞬間
-        peaceDeleteAction.canceled += ctx => choiceUp = true;     // 離した瞬間
+        choiceAction.started += ctx => choiceDown = true;   // 押した瞬間
+        peaceDeleteAction.started += ctx => choiceUp = true;     // 離した瞬間
     }
 
     IEnumerator Start()
@@ -62,7 +64,7 @@ public class ControllManager : MonoBehaviour
         gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
         gameManager.playerInputs[playerNumber] = playerInput;
-
+        cannon = gameManager.cannons[playerNumber];
 
         transform.SetParent(pazzleManager.transform);
         pointer = pazzleManager.pointer;
@@ -104,6 +106,7 @@ public class ControllManager : MonoBehaviour
         CheckPeaceUp();
         DrawCircle2D(pointer.position, pointerSize);
         OpenMonstarsRule();
+        CannonShoot();
     }
 
     Vector2 GetFourDirection(Vector2 input)
@@ -268,6 +271,17 @@ public class ControllManager : MonoBehaviour
         }
     }
 
+    void CannonShoot()
+    {
+        if (choiceUp && CanCheckPeace && !choiseMode && gameManager.mode == GameManager.Mode.play && gameManager.cannonsChages[playerNumber] >= 10)
+        {
+            gameManager.cannonsChages[playerNumber] -= 10;
+            cannon.Shoot();
+            choiceUp = false;
+        }
+
+    }
+
     [SerializeField] float pointerSize = 1;
     public List<GameObject> checkingPeace = new List<GameObject>();
 
@@ -364,22 +378,10 @@ public class ControllManager : MonoBehaviour
         bool CanSpawnGolem = false;
         int goleBodyCount = 0;
         int peaceNumber = -1;
+
         for (int i = 0; i < DeletingPeace.Count; i++)
         {
-            DeletingPeace[i].GetComponent<SpriteRenderer>().enabled = false;
             Peace PACE = DeletingPeace[i].GetComponent<Peace>();
-            PACE.check = false;
-
-            DeletingPeace[i].GetComponent<SpriteRenderer>().sortingOrder = 16;
-
-
-            float pitch = Mathf.Clamp((0.1f * i) + 0.7f, 0.7f, 1.6f);
-            AudioManager.PlaySEWithPitch(peaceDeleteSound, pitch);
-
-            ParticleSystem particleSystem = Instantiate(brokenPeaceParticle, DeletingPeace[i].transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
-            var main = particleSystem.main;
-            main.startColor = Color.white;
-
 
             if (PACE.peaceNumber == 4)
             {
@@ -398,8 +400,52 @@ public class ControllManager : MonoBehaviour
                 {
                     peaceNumber = PACE.peaceNumber;
                 }
+
                 goleBodyCount++;
             }
+        }
+
+        for (int i = 0; i < DeletingPeace.Count; i++)
+        {
+            DeletingPeace[i].GetComponent<SpriteRenderer>().enabled = false;
+            Peace PACE = DeletingPeace[i].GetComponent<Peace>();
+            PACE.check = false;
+
+            DeletingPeace[i].GetComponent<SpriteRenderer>().sortingOrder = 16;
+
+
+            float pitch = Mathf.Clamp((0.1f * i) + 0.7f, 0.7f, 1.6f);
+            AudioManager.PlaySEWithPitch(peaceDeleteSound, pitch);
+
+            ParticleSystem particleSystem = Instantiate(brokenPeaceParticle, DeletingPeace[i].transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            var main = particleSystem.main;
+            main.startColor = Color.white;
+
+
+            if (CanSpawnGolem)
+            {
+                gameManager.cannonsChages[playerNumber] += 0.8f;
+
+            }
+            else
+            {
+                gameManager.cannonsChages[playerNumber] += 2.5f;
+
+            }
+
+            int j = i + 1;
+            float value = j + (j * j / 15f);
+
+            if (gameManager.mode == GameManager.Mode.deathMatch && i == 0)
+            {
+                gameManager.DMGolemPowers[playerNumber] += value;
+            }
+            else if (gameManager.mode == GameManager.Mode.deathMatch)
+            {
+                float prev = i + (i * i / 15f);
+                gameManager.DMGolemPowers[playerNumber] += value - prev;
+            }
+
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -449,10 +495,6 @@ public class ControllManager : MonoBehaviour
                     monsters.hp *= 1.3f;
                     break;
             }
-        }
-        else if (gameManager.mode == GameManager.Mode.deathMatch)
-        {
-            gameManager.DMGolemPowers[playerNumber] += count + Mathf.Floor(count * count / 15f);
         }
 
         checkingPeace.Clear();

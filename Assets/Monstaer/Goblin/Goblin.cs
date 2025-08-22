@@ -16,16 +16,7 @@ public class Goblin : Monsters
     {
         StartSetup();
 
-        GameObject[] goblinBuilds = GameObject.FindGameObjectsWithTag("GoblinBuild");
-
-        for (int i = 0; i < goblinBuilds.Length; i++)
-        {
-            GoblinBuild _goblinBuild = goblinBuilds[i].GetComponent<GoblinBuild>();
-            if (_goblinBuild.player == player)
-            {
-                goblinBuild = _goblinBuild;
-            }
-        }
+        goblinBuild = gameManager.GoblinBuilds[player];
     }
 
     // Update is called once per frame

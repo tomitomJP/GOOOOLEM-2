@@ -41,6 +41,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] float timer = 100;
     public ResultVeiwer.resultData[] resultDatas = new ResultVeiwer.resultData[2];
 
+    [Header("大砲")]
+    public CannonController[] cannons = new CannonController[2];
+    public Slider[] cannonGaged;
+    public float[] cannonsChages = { 0, 0 };
+    public float maxCannonsChages = 80;
+
+    [Header("ゴブリンの壁")]
+    public GoblinBuild[] GoblinBuilds = new GoblinBuild[2];
+
     public enum Mode
     {
         ready,
@@ -212,7 +221,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-
+            CannonSliders();
             //SoulGageUpdata();
             timerText.text = Mathf.Max(Mathf.FloorToInt(timer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(timer % 60), 0).ToString("D2");
         }
@@ -663,6 +672,15 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+    }
+
+
+    void CannonSliders()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            cannonGaged[i].value = cannonsChages[i] / maxCannonsChages;
+        }
     }
 
 }
