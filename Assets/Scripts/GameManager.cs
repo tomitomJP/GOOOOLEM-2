@@ -680,6 +680,11 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             cannonGaged[i].value = cannonsChages[i] / maxCannonsChages;
+
+            if (cannonsChages[i] > maxCannonsChages)
+            {
+                cannonsChages[i] = maxCannonsChages;
+            }
         }
     }
 
