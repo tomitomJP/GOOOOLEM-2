@@ -16,16 +16,21 @@ public class CannonBallStatus : Monsters
         Destroy(gameObject, lifeTime);
     }
 
+    private bool hasExploded = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 爆発エフェクトを生成
+        if (hasExploded) return; // すでに処理したなら無視
+        hasExploded = true;
+
+        // 爆発エフェクト
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
 
+        // 範囲ダメージ
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackRadius, targetLayer[player]);
-
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Monster") || hit.CompareTag("House"))
@@ -33,7 +38,6 @@ public class CannonBallStatus : Monsters
                 Monsters monsters = hit.GetComponent<Monsters>();
                 if (monsters == null) continue;
 
-                // ダメージ処理
                 if (hit.CompareTag("House"))
                 {
                     Attack(monsters, atk * 0.5f);
@@ -43,11 +47,9 @@ public class CannonBallStatus : Monsters
                     Attack(monsters);
                     KnockBack(hit.gameObject);
                 }
-
-                Debug.Log(hit.gameObject.name);
-
             }
         }
+
         // 弾を削除
         Destroy(gameObject);
     }
