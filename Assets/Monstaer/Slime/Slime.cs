@@ -21,13 +21,17 @@ public class Slime : Monsters
 
         spawnTime = Time.time;
 
-        // 半径 mergeRadius の円形範囲にいるコライダーを取得
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, 20f, myLayer);
+        StartCoroutine(CheckMergeDelay());
+    }
 
+
+    IEnumerator CheckMergeDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, 20f, myLayer);
         foreach (var hit in hits)
         {
-            if (hit.collider.gameObject == gameObject) continue; // 自分自身は無視
-
+            if (hit.collider.gameObject == gameObject) continue;
             Slime other = hit.collider.GetComponent<Slime>();
             if (other != null && other.martgeCT <= 0)
             {
@@ -36,7 +40,6 @@ public class Slime : Monsters
                 break;
             }
         }
-
     }
 
     // Update is called once per frame
@@ -117,7 +120,7 @@ public class Slime : Monsters
 
         spriteRenderer.sprite = atkSprites[1];
 
-        float height = 4f; // 弧の高さ
+        float height = 3f; // 弧の高さ
         float duration = 1f;
 
         Vector3 startPos = transform.position;
@@ -130,7 +133,7 @@ public class Slime : Monsters
 
         // パス移動
         transform.DOPath(path, duration, PathType.CatmullRom)
-               .SetEase(Ease.InOutSine);
+               .SetEase(Ease.OutCubic);
 
         yield return Wait(2f, 0);
         mode = Mode.move;
