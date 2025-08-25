@@ -15,53 +15,12 @@ public class Angel : Monsters
     // Update is called once per frame
     void Update()
     {
-        if (mode != Mode.atk)
-        {
-            Move();
-        }
-        else
-        {
-            MoveAniTimer = MoveAniTime;
-        }
-
-        if (0 >= hp)
-        {
-            Dead();
-        }
-        RaycastHit2D[] hit;
-        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
-        {
-            RandomAtk();
-        }
-        UpdateStatuses();
+        RandomAtkCharaUpdate();
     }
 
-    float time = 2;
-    float timer = 0;
-    float AtkTriggerRate = 60;
-    bool attacking = false;
-    void RandomAtk()
+    public override void RandomAtkTrigger()
     {
-        if (time <= timer)
-        {
-
-            if (Random.Range(0, 100) <= AtkTriggerRate)
-            {
-
-                attacking = true;
-                AtkTriggerRate = 20;
-                StartCoroutine(AtkMotion());
-            }
-            else
-            {
-                AtkTriggerRate *= 1.1f;
-            }
-            timer = 0;
-        }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+        StartCoroutine(AtkMotion());
     }
 
     public IEnumerator AtkMotion()//攻撃アニメーションなど
@@ -81,36 +40,35 @@ public class Angel : Monsters
 
             int q = (i % 2);
             spriteRenderer.sprite = atkSprites[q];
-            yield return Wait(0.2f);
 
         }
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f);
+        yield return Wait(0.2f);
 
 
         InstantImpact();
         AudioManager.PlaySEWithPitch(trumpetSE, 1f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f);
+        yield return Wait(0.2f, 2);
 
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f);
+        yield return Wait(0.1f, 2);
 
         InstantImpact();
         AudioManager.PlaySEWithPitch(trumpetSE, 1.2f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f);
+        yield return Wait(0.2f, 2);
 
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f);
+        yield return Wait(0.1f, 2);
 
         InstantImpact();
         AudioManager.PlaySEWithPitch(trumpetSE, 1.4f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f);
+        yield return Wait(0.2f, 2);
 
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f);
+        yield return Wait(0.1f, 2);
 
 
         mode = Mode.move;

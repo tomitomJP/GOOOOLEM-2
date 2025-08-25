@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c64504b9d1554a75966cde14c7a0e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
   moveSprites:
   - {fileID: 21300000, guid: df7d223c6813e41a793fd7eaf5967402, type: 3}
   - {fileID: 21300000, guid: 936527567da7c43c28707476afdb1560, type: 3}
@@ -70,22 +69,12 @@ MonoBehaviour:
   atkRate: 1
   player: 0
   enemyDistance: 12
-  allyDistance: 0.3
-  atkCT: 4
-  aktCTimer: 0
-  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
+  atkCT: 1
   mode: 1
   MoveAniTime: 0.3
-  MoveAniTimer: 0
-  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
-  sm: []
+  time: 2
+  AtkTriggerRate: 10
+  AtkTriggerUpRate: 1.1
 --- !u!212 &7102765934196840624
 SpriteRenderer:
   m_ObjectHideFlags: 0

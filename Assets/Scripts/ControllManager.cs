@@ -271,10 +271,20 @@ public class ControllManager : MonoBehaviour
         }
     }
 
+    [SerializeField] float cannonCT = 1;
+    float cannonCTTimer = 0;
+
     void CannonShoot()
     {
+        if (cannonCTTimer > 0)
+        {
+            cannonCTTimer -= Time.deltaTime;
+            return;
+        }
+
         if (choiceUp && CanCheckPeace && !choiseMode && gameManager.mode == GameManager.Mode.play && gameManager.cannonsChages[playerNumber] >= 10)
         {
+            cannonCTTimer = cannonCT;
             gameManager.cannonsChages[playerNumber] -= 10;
             cannon.Shoot();
             choiceUp = false;

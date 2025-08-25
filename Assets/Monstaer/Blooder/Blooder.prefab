@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f09b73ac52d419687d72c193cec60e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 8170628760322363824}
   moveSprites:
   - {fileID: 21300000, guid: e1c2b244066b34a189f0c298196f4f9d, type: 3}
   - {fileID: 21300000, guid: fe50292abe5eb42eb905434c2ba97620, type: 3}
@@ -66,22 +65,12 @@ MonoBehaviour:
   atkRate: 1
   player: 0
   enemyDistance: 1
-  allyDistance: 0.3
   atkCT: 1
-  aktCTimer: 0
-  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
-  MoveAniTimer: 0
-  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
-  sm: []
+  time: 3
+  AtkTriggerRate: 40
+  AtkTriggerUpRate: 1.25
   thunder: {fileID: 440529245542458810, guid: 5fdfbf518a1ca4fbaabed6842ecbf87e, type: 3}
   masicSE: {fileID: 8300000, guid: 83acf6623c839f34a8051090c72dbe18, type: 3}
   kaminariSE: {fileID: 8300000, guid: f656927d6bbe22a4b8d0cc33c8316e95, type: 3}

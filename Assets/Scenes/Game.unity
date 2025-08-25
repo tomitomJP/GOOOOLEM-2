@@ -13502,6 +13502,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  MoveAniSpriteNum: 0
   defaultAtkSE: {fileID: 8300000, guid: 862aaa1b6d30a964d99d3afefb363fe4, type: 3}
   sm: []
   hpBar: {fileID: 0}
@@ -29587,6 +29588,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  MoveAniSpriteNum: 0
   defaultAtkSE: {fileID: 8300000, guid: c0029f11ed6b54736aabf19036cf258b, type: 3}
   sm: []
   hpBar: {fileID: 1265465752}
@@ -35419,6 +35421,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  MoveAniSpriteNum: 0
   defaultAtkSE: {fileID: 8300000, guid: c0029f11ed6b54736aabf19036cf258b, type: 3}
   sm: []
   hpBar: {fileID: 854564633}
@@ -53025,6 +53028,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  MoveAniSpriteNum: 0
   defaultAtkSE: {fileID: 8300000, guid: 862aaa1b6d30a964d99d3afefb363fe4, type: 3}
   sm: []
   hpBar: {fileID: 0}
@@ -76885,13 +76889,14 @@ SceneRoots:
   - {fileID: 1210309669}
   - {fileID: 1250047666}
   - {fileID: 608732664}
+  - {fileID: 2030978316}
+  - {fileID: 1835283638}
   - {fileID: 1360853264}
   - {fileID: 2762204340341394911}
   - {fileID: 121338532}
   - {fileID: 2533377}
   - {fileID: 810750886}
   - {fileID: 1317418739}
-  - {fileID: 1835283638}
   - {fileID: 813073322}
   - {fileID: 1199824762}
   - {fileID: 378606429}
@@ -76902,7 +76907,6 @@ SceneRoots:
   - {fileID: 432248175}
   - {fileID: 1627687915}
   - {fileID: 568610685}
-  - {fileID: 2030978316}
   - {fileID: 1403032889}
   - {fileID: 1620325645}
   - {fileID: 2115059608}

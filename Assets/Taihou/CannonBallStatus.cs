@@ -57,6 +57,7 @@ public class CannonBallStatus : Monsters
     [SerializeField] float knockBackPower = 10;
     void KnockBack(GameObject hit)
     {
+        if (hit == null && hit.activeSelf) return;
         Rigidbody2D rb = hit.GetComponent<Rigidbody2D>();
         GameObject mon = hit;
 

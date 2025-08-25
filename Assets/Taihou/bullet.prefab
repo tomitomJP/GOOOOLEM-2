@@ -186,6 +186,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   MoveAniTimer: 0
+  MoveAniSpriteNum: 0
   defaultAtkSE: {fileID: 0}
   sm: []
   lifeTime: 10
@@ -196,4 +197,4 @@ MonoBehaviour:
     m_Bits: 4096
   - serializedVersion: 2
     m_Bits: 2048
-  knockBackPower: 4
+  knockBackPower: 2

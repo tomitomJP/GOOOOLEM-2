@@ -14,55 +14,12 @@ public class SkullHunter : Monsters
     // Update is called once per frame
     void Update()
     {
-        if (mode != Mode.atk)
-        {
-            Move();
-            RaycastHit2D[] hit;
-            if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
-            {
-                RandomAtk();
-            }
-        }
-        else
-        {
-            MoveAniTimer = MoveAniTime;
-        }
-
-        if (0 >= hp)
-        {
-            Dead();
-        }
-
-        UpdateStatuses();
+        RandomAtkCharaUpdate();
     }
-
-    float time = 4f;
-    float timer = 0;
-    float AtkTriggerRate = 60;
-
-    void RandomAtk()
+    public override void RandomAtkTrigger()
     {
-        if (time <= timer)
-        {
-
-            if (Random.Range(0, 100) <= AtkTriggerRate)
-            {
-
-                AtkTriggerRate = 30;
-                StartCoroutine(AtkMotion());
-            }
-            else
-            {
-                AtkTriggerRate *= 1.5f;
-            }
-            timer = 0;
-        }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+        StartCoroutine(AtkMotion());
     }
-
 
     public IEnumerator AtkMotion()//攻撃アニメーションなど
     {

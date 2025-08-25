@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2131085006791548711
 Transform:
   m_ObjectHideFlags: 0
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cf9c3cb9b2e4b5886c9727b7ffaad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 285905586468107880}
   moveSprites:
   - {fileID: 21300000, guid: 89aec2318bf5247cd9e95932c546c3c4, type: 3}
   - {fileID: 21300000, guid: 334bf00950a4b4292842ed03f99cdc49, type: 3}
@@ -150,24 +149,15 @@ MonoBehaviour:
   atkRate: 1
   player: 0
   enemyDistance: 1
-  allyDistance: 0.3
   atkCT: 1
-  aktCTimer: 0
-  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.2
-  MoveAniTimer: 0
-  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
   sm: []
   impact: {fileID: 8694574148772513426, guid: c2cc9cc87199b4540bb7122d8cc28e02, type: 3}
   trumpetSE: {fileID: 8300000, guid: cdecc1c64c2b94930891be8ebaf6f4e0, type: 3}
+  time: 2
+  AtkTriggerRate: 60
+  AtkTriggerUpRate: 1.1
 --- !u!212 &285905586468107880
 SpriteRenderer:
   m_ObjectHideFlags: 0

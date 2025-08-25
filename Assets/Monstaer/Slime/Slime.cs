@@ -145,7 +145,7 @@ public class Slime : Monsters
         if (mutekiTime > 0) return;
         AudioManager.PlaySE(defaultAtkSE, 0.3f);
 
-        if (slimeSize > 1)
+        if (slimeSize > 1 && damage < 10000)
         {
             Split();
         }
@@ -168,7 +168,7 @@ public class Slime : Monsters
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
         _damageText.text = "ブンレツ";
 
-        Slime splitSlime = Instantiate(slimeSplit, transform.position, transform.rotation).GetComponent<Slime>();
+        Slime splitSlime = Instantiate(slimeSplit, transform.position, transform.rotation, transform.parent).GetComponent<Slime>();
         splitSlime.player = player;
         splitSlime.slimeSize = slimeSize;
         splitSlime.martgeCT = 7;
