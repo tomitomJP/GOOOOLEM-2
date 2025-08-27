@@ -23,6 +23,8 @@ public class Monsters : MonoBehaviour
 
     public int player = 0;//左は0,右は1
     public float enemyDistance = 1;//敵を見つける距離(攻撃の当たる距離。攻撃の当たる距離のみを変更したい場合はAttack関数とEnemyCheck関数をオーバーライドして書き換える)
+    public float enemyDistanceInCT = 1;
+    public bool MoveOk { get; set; }
     public float allyDistance { get; set; } = 0.3f;//使用していない
     public float atkCT = 1;//攻撃のクールタイム
     public float aktCTimer = 0;
@@ -123,9 +125,18 @@ public class Monsters : MonoBehaviour
 
     public virtual void Move()//移動と異動アニメーションを管理
     {
-        if (mode == Mode.move && stanTIme <= 0)
+        if (mode == Mode.move && stanTIme <= 0 && MoveOk)
         {
-            transform.Translate(Vector3.right * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100));
+            if (player == 0)
+            {
+                transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
+            }
+            else
+            {
+                transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
+            }
         }
 
         if (stanTIme > 0)
@@ -231,6 +242,23 @@ public class Monsters : MonoBehaviour
 
     }
 
+    public float Attacked(float damage)//投擲物などのモンスターのてから離れて死んでも残るようなオブジェクトが使用する
+    {
+        if (damage == -810) damage = atk;
+        if (this == null || !this.gameObject.activeSelf) { return 0; }
+
+        if (hp > 0)
+        {
+            this.Damaged(damage * atkRate);
+            if (this.hp >= 0)
+            {
+                this.DamagedAnimTrigger();
+            }
+            return damage * atkRate;
+        }
+        return 0;
+    }
+
     public bool CanHitTarget(Transform target)
     {
         if (target == null) return false;
@@ -309,12 +337,16 @@ public class Monsters : MonoBehaviour
         {
             //origin = (Vector2)transform.position + new Vector2(rayOrigin.x * -1, rayOrigin.y);
         }
+        bool _MoveOk = true;
 
         Vector2 direction = transform.right;
 
-        Debug.DrawRay(transform.position + rayOrigin, direction * enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
+        float _enemyDistance = enemyDistance;
+        if (aktCTimer > 0) _enemyDistance = enemyDistanceInCT;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, enemyDistance, enemyLayer);
+        Debug.DrawRay(transform.position + rayOrigin, direction * _enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, _enemyDistance, enemyLayer);
         if (hit.collider != null)
         {
             Monsters targetData = hit.collider.gameObject.GetComponent<Monsters>();
@@ -322,6 +354,7 @@ public class Monsters : MonoBehaviour
             {
                 if (targetData.player != player)
                 {
+                    _MoveOk = false;
                     if (mode != Mode.atk && aktCTimer <= 0)
                     {
                         StartCoroutine(AtkMotion(targetData));
@@ -330,18 +363,10 @@ public class Monsters : MonoBehaviour
                 }
             }
         }
-
+        MoveOk = _MoveOk;
         if (aktCTimer > 0 && mode != Mode.atk)
         {
             aktCTimer = Mathf.Clamp(aktCTimer - (Time.deltaTime * atkSpdRate), 0, Mathf.Infinity);
-            if (aktCTimer <= 0)
-            {
-                mode = Mode.move;
-            }
-            else
-            {
-                mode = Mode.atkCT;
-            }
         }
     }
 

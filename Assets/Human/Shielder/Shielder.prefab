@@ -64,22 +64,23 @@ MonoBehaviour:
   - {fileID: 60124541, guid: f12b815659cfb4929ac84a98f5d8d581, type: 3}
   - {fileID: 21300000, guid: 1cd3d1ede867c4cf2b81be870db674e8, type: 3}
   atk: 40
-  hp: 60
-  spd: 0.3
+  hp: 75
+  spd: 0.9
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
   defRate: 1
   player: 1
   enemyDistance: 6
+  enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
   mode: 1
   MoveAniTime: 0.3
   time: 2
   AtkTriggerUpRate: 1.1
-  level: 0
-  growthRate: 0.098
+  level: 1
+  growthRate: 0.25
   knockBackPower: 2
 --- !u!212 &2420912122019490345
 SpriteRenderer:
@@ -165,7 +166,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.725588}
+  m_Offset: {x: 0.03434801, y: 1.7950726}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -176,7 +177,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5488243}
+  m_Size: {x: 1.068696, y: 5.409855}
   m_EdgeRadius: 0
 --- !u!50 &7865952865797057562
 Rigidbody2D:

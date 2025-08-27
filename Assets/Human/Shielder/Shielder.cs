@@ -49,10 +49,10 @@ public class Shielder : Human
 
 
         float duration = 0.4f;
-        transform.DOMoveX(target.transform.position.x * 0.6f, duration);
+        transform.DOMoveX(target.transform.position.x * 1f, duration);
 
         int i = 0;
-        while (duration > 0)
+        while (duration * 0.7 > 0)
         {
             if (i % 2 == 0)
             {
@@ -87,8 +87,10 @@ public class Shielder : Human
             }
 
             int j = 7 + i;
-            Debug.Log(j);
             spriteRenderer.sprite = atkSprites[j];
+
+            ShieldingMove();
+
             yield return null;
             duration -= Time.deltaTime;
             animDuration -= Time.deltaTime;
@@ -97,6 +99,26 @@ public class Shielder : Human
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         defRate -= 1.5f;
         mode = Mode.move;
+
+    }
+
+    void ShieldingMove()
+    {
+        Vector2 direction;
+        if (player == 0)
+        {
+            direction = Vector2.right;
+        }
+        else
+        {
+            direction = -Vector2.right;
+
+        }
+
+        if (!Physics2D.Raycast(transform.position + rayOrigin, direction, 0.8f, enemyLayer))
+        {
+            transform.Translate(direction * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+        }
 
     }
 
