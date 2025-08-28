@@ -270,7 +270,6 @@ public class Monsters : MonoBehaviour
         }
 
     }
-
     public void Healed(float healValue)
     {
         hp -= healValue;
