@@ -68,7 +68,7 @@ public class Blooder : Monsters
                     Instantiate(thunder, new Vector3(monster.transform.position.x, 9.5f, 0), Quaternion.identity);
                     AudioManager.PlaySE(kaminariSE, 0.15f);
 
-                    Attack(monster.GetComponent<Monsters>());
+                    Attack(monster.GetComponent<Monsters>(), -810, false);
                     // スピード1.5倍、5秒間
                     ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.1f, -0.8f));
                     ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown", true, StatusManager.StatusType.atkSpdRate, 0.1f, -0.8f));

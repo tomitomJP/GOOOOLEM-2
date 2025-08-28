@@ -59,6 +59,10 @@ public class GameManager : MonoBehaviour
     }
 
     public Mode mode = Mode.ready;
+
+    [Header("ソロモード")]
+    [SerializeField] bool soloMode = false;
+    [SerializeField] SoloManager soloManager;
     IEnumerator Start()
     {
         if (debugMode) { yield break; }
@@ -68,22 +72,24 @@ public class GameManager : MonoBehaviour
 
         BlackScreenObj.SetActive(true);
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             int index = i; // i をキャプチャして固定
             playerInputs[index].actions["Choice"].performed += ctx => choiceDown[index] = true;
             playerInputs[index].actions["Choice"].canceled += ctx => choiceUp[index] = true;
         }
 
+        int okCount = 0;
 
-        while (!(ReadyOk[0] && ReadyOk[1]))
+        while (okCount < playerCount)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < playerCount; i++)
             {
-                if (choiceDown[i])
+                if (choiceDown[i] && !ReadyOk[i])
                 {
                     ReadyOk[i] = true;
                     Ready[i].text = "OK";
+                    okCount++;
                 }
             }
 
@@ -168,6 +174,11 @@ public class GameManager : MonoBehaviour
         ReadyCanvas.SetActive(false);
         BlackScreenObj.SetActive(false);
 
+        if (soloMode)
+        {
+            soloManager.gameObject.SetActive(true);
+        }
+
     }
 
     [SerializeField] Text RedGameOverText;
@@ -214,7 +225,7 @@ public class GameManager : MonoBehaviour
                     AudioManager.BgmOption(1.05f);
                     StartCoroutine(Timer10());
                 }
-                if (timer > 0)
+                if (timer > 0 && !soloMode)
                 {
                     timer -= Time.deltaTime;
 
@@ -232,7 +243,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider[] soulGage;
     void SoulGageUpdata()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             soulGage[i].value = soulPt[i] / soulPtMax;
         }
@@ -325,14 +336,14 @@ public class GameManager : MonoBehaviour
             monstar.GetComponent<Monsters>().Damaged(1000);
         }
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             DMGolem[i] = pazzleManager[i].controllManager.MonstatSpawn(10);
         }
 
         yield return new WaitForSeconds(3f);
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             DMGolem[i].spd = 0;
         }
@@ -354,14 +365,14 @@ public class GameManager : MonoBehaviour
         float DMtime = 15;
         float DMtimer = 0;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             beamPars[i] = Instantiate(DMchargePar[i], DMGolem[i].transform.position, Quaternion.identity);
         }
         AudioManager.PlaySE(beamCharge, 0.7f);
         while (DMtime >= DMtimer)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < playerCount; i++)
             {
                 DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
 
@@ -374,7 +385,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             pazzleManager[i].controllManager._checkPeaceUp();
         }
@@ -382,7 +393,7 @@ public class GameManager : MonoBehaviour
         float wait = 2;
         while (wait > 0)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < playerCount; i++)
             {
                 DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
             }
@@ -412,7 +423,7 @@ public class GameManager : MonoBehaviour
         float lightTggleTimer = 0;
         bool lightFragg = true;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             Destroy(beamPars[i]);
             beamPars[i] = Instantiate(DMbeamPar[i], DMGolem[i].transform.position, Quaternion.identity);
@@ -430,7 +441,7 @@ public class GameManager : MonoBehaviour
             AudioManager.PlaySE(beamShoot);
             while (DMtime >= DMtimer)
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < playerCount; i++)
                 {
                     DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
 
@@ -476,7 +487,7 @@ public class GameManager : MonoBehaviour
         AudioManager.PlaySE(beamShoot);
         while (DMtime >= DMtimer)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < playerCount; i++)
             {
                 DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
 
@@ -677,7 +688,7 @@ public class GameManager : MonoBehaviour
 
     void CannonSliders()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             cannonGaged[i].value = cannonsChages[i] / maxCannonsChages;
 

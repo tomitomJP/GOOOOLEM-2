@@ -8,6 +8,19 @@ public class Human : Monsters
     public int level = 1;
     [SerializeField] private float growthRate = 0.25f; // 二次関数の係数
 
+    public string name = "ああああ";
+    public string job;
+
+    public enum Sex
+    {
+        man,
+        woman,
+        unkown
+    }
+
+    public Sex sex = Sex.man;
+
+
 
 
     public void HumanSetUp()
@@ -36,6 +49,13 @@ public class Human : Monsters
 
         float atkValue = atk * (1.3f + ((level - 1f) / 20f));
         return Mathf.Floor(atkValue);
+    }
+
+    public override void Dead2()
+    {
+        if (SoloManager.instance == null) return;
+
+        SoloManager.SetHT($"{name}は死んでしまった。", SoloManager.ToHex(Color.red));
     }
 
 }

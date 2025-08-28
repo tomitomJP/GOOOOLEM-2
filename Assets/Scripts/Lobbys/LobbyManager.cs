@@ -136,7 +136,21 @@ public class LobbyManager : MonoBehaviour
         if (!canOnButton) { return; }
         AudioManager.PlaySE(buttonSE, 0.2f);
         canOnButton = false;
-        Debug.Log("ニンゲン");
+        StartCoroutine(StartGameSolo());
+    }
+
+    IEnumerator StartGameSolo()
+    {
+        if (inputManagerLobby.currentPlayerCount == 1)
+        {
+            Messager.ViewText("ゲームを開始します", 1);
+            yield return new WaitForSeconds(1f);
+            AudioManager.FadeOutBGM(0.5f);
+            yield return new WaitForSeconds(0.2f);
+            LoadSceneManager.FadeLoadScene("SoloGame");
+
+
+        }
     }
 
     public void ResetControllerButton()
