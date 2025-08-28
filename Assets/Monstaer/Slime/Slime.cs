@@ -139,7 +139,6 @@ public class Slime : Monsters
         mode = Mode.move;
     }
 
-
     public override void Damaged(float damage)
     {
         if (mutekiTime > 0) return;
