@@ -8,6 +8,7 @@ using DG.Tweening;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,6 +64,11 @@ public class GameManager : MonoBehaviour
     [Header("ソロモード")]
     [SerializeField] bool soloMode = false;
     [SerializeField] SoloManager soloManager;
+
+    void Awake()
+    {
+        instance = this;
+    }
     IEnumerator Start()
     {
         if (debugMode) { yield break; }
@@ -697,6 +703,91 @@ public class GameManager : MonoBehaviour
                 cannonsChages[i] = maxCannonsChages;
             }
         }
+    }
+
+    public List<Monsters> monsters0 = new List<Monsters>();
+    public List<Monsters> monsters1 = new List<Monsters>();
+    public List<Monsters> humans = new List<Monsters>();
+
+    public static GameManager instance;
+
+    public static void AddCharacter(Monsters target)
+    {
+        instance._AddCharacter(target);
+    }
+    void _AddCharacter(Monsters target)
+    {
+        Human human;
+        if (target.TryGetComponent<Human>(out human))
+        {
+            humans.Add(target);
+        }
+        else
+        {
+            if (target.player == 0)
+            {
+                monsters0.Add(target);
+            }
+            else
+            {
+                monsters1.Add(target);
+
+            }
+        }
+    }
+
+    public static void RemoveCharacter(Monsters target)
+    {
+        instance._RemoveCharacter(target);
+    }
+
+    void _RemoveCharacter(Monsters target)
+    {
+        if (monsters0.Contains(target)) monsters0.Remove(target);
+        if (monsters1.Contains(target)) monsters1.Remove(target);
+        if (humans.Contains(target)) humans.Remove(target);
+    }
+
+    public enum type
+    {
+        All,
+        mon,
+        mon0,
+        mon1,
+        human,
+
+    }
+
+    public static List<Monsters> GetMonsters(type _type)
+    {
+        return instance._GetMonsters(_type);
+    }
+
+    List<Monsters> _GetMonsters(type _type)
+    {
+        List<Monsters> targets = new List<Monsters>();
+        switch (_type)
+        {
+            case type.All:
+                targets.AddRange(monsters0);
+                targets.AddRange(monsters1);
+                targets.AddRange(humans);
+                break;
+            case type.mon:
+                targets.AddRange(monsters0);
+                targets.AddRange(monsters1);
+                break;
+            case type.mon0:
+                targets.AddRange(monsters0);
+                break;
+            case type.mon1:
+                targets.AddRange(monsters1);
+                break;
+            case type.human:
+                targets.AddRange(humans);
+                break;
+        }
+        return targets;
     }
 
 }

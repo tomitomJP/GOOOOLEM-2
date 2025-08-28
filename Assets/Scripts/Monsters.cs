@@ -190,7 +190,7 @@ public class Monsters : MonoBehaviour
         {
             gameManager = _gameManager.GetComponent<GameManager>();
         }
-
+        GameManager.AddCharacter(this);
     }
 
     public virtual void Updating()//継承先のUpdate関数に入れる
@@ -217,6 +217,7 @@ public class Monsters : MonoBehaviour
     {
         if (gameManager != null) gameManager.resultDatas[(player + 1) % 2].killCount++;
         Dead2();
+        GameManager.RemoveCharacter(this);
         Instantiate(monstarDeadPar, transform.position, Quaternion.identity);
         spriteRenderer.enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -304,6 +305,7 @@ public class Monsters : MonoBehaviour
         }
 
     }
+
     public void Healed(float healValue)
     {
         hp += healValue;

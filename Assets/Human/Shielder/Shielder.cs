@@ -69,8 +69,8 @@ public class Shielder : Human
             duration -= Time.deltaTime;
         }
 
+        KnockBack(target);
         Attack(target, atk);
-        KnockBack(target.gameObject);
 
         duration = 7f;
         i = 0;
@@ -123,12 +123,12 @@ public class Shielder : Human
     }
 
     [SerializeField] float knockBackPower = 2;
-    void KnockBack(GameObject hit)
+    void KnockBack(Monsters hit)
     {
 
-        if (hit == null && hit.activeSelf) return;
-        Rigidbody2D rb = hit.GetComponent<Rigidbody2D>();
-        GameObject mon = hit;
+        if (hit == null || !hit.gameObject.activeSelf) return;
+        GameObject mon = hit.gameObject;
+        Rigidbody2D rb = mon.GetComponent<Rigidbody2D>();
 
         Vector2 monUp = mon.transform.up;
         Vector2 myLeft = -transform.right;

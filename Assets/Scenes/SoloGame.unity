@@ -918,14 +918,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 763150572675496024, guid: b39c75f9bdc854971b24490bbf2975b8, type: 3}
-      propertyPath: hp
-      value: 18000
-      objectReference: {fileID: 0}
-    - target: {fileID: 763150572675496024, guid: b39c75f9bdc854971b24490bbf2975b8, type: 3}
-      propertyPath: atk
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7273578518413537831, guid: b39c75f9bdc854971b24490bbf2975b8, type: 3}
       propertyPath: m_Name
       value: Doragon
@@ -13948,7 +13940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3758228931430341879, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.9774704
+      value: -1.02
       objectReference: {fileID: 0}
     - target: {fileID: 3758228931430341879, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13985,10 +13977,6 @@ PrefabInstance:
     - target: {fileID: 3758228931430341879, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8534382045220607842, guid: d909e52f3a58b426c8e3ca15c8774a29, type: 3}
-      propertyPath: player
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54489,6 +54477,9 @@ MonoBehaviour:
   - 0
   beamCharge: {fileID: 8300000, guid: f90e2c58fdb92448cb5163966bbea70b, type: 3}
   beamShoot: {fileID: 8300000, guid: 044132e95911b46c38f87db87935b74b, type: 3}
+  monsters0: []
+  monsters1: []
+  humans: []
 --- !u!4 &1835283638
 Transform:
   m_ObjectHideFlags: 0
@@ -65500,7 +65491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2055442483
 MonoBehaviour:
   m_ObjectHideFlags: 0
