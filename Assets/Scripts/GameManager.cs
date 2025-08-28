@@ -7,9 +7,11 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] bool debugMode = false;
     [SerializeField] int playerCount = 2;
     [SerializeField] Text[] Ready;
     [SerializeField] PlayerJoinManager playerJoinManager;
@@ -35,11 +37,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip GameStartCount;
     [SerializeField] AudioClip GameStart;
     [SerializeField] AudioClip TimerRemind;
-
-
     [SerializeField] Text timerText;
     [SerializeField] float timer = 100;
     public ResultVeiwer.resultData[] resultDatas = new ResultVeiwer.resultData[2];
+
+    [Header("大砲")]
+    public CannonController[] cannons = new CannonController[2];
+    public Slider[] cannonGaged;
+    public float[] cannonsChages = { 0, 0 };
+    public float maxCannonsChages = 80;
+
+    [Header("ゴブリンの壁")]
+    public GoblinBuild[] GoblinBuilds = new GoblinBuild[2];
 
     public enum Mode
     {
@@ -52,6 +61,7 @@ public class GameManager : MonoBehaviour
     public Mode mode = Mode.ready;
     IEnumerator Start()
     {
+        if (debugMode) { yield break; }
         //StartCoroutine(DeathMatchStart());
         yield return new WaitForSeconds(0.5f);
         AudioManager.PlayBGM(ReadyBgm);
@@ -211,11 +221,24 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-
-
+            CannonSliders();
+            //SoulGageUpdata();
             timerText.text = Mathf.Max(Mathf.FloorToInt(timer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(timer % 60), 0).ToString("D2");
         }
     }
+
+    public float[] soulPt = { 0, 0 };
+    [SerializeField] float soulPtMax = 8;
+    [SerializeField] Slider[] soulGage;
+    void SoulGageUpdata()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            soulGage[i].value = soulPt[i] / soulPtMax;
+        }
+    }
+
+
 
     IEnumerator Timer10()
     {
@@ -266,6 +289,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DeathMatchStart()
     {
+
+        for (int i = 0; i < 2; i++)
+        {
+            pazzleManager[i].controllManager._checkPeaceUp();
+        }
+
+        yield return new WaitForSeconds(1.5f);
 
         GameObject[] monstras = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -334,14 +364,36 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 2; i++)
             {
                 DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
+
+                var main = beamPars[i].GetComponent<ParticleSystem>().main;
+                main.startSize = 1f + (DMGolemPowers[i] / 10);
+
             }
             DMslider.value = 1 - (DMtimer / DMtime);
             DMtimer += Time.deltaTime;
             yield return null;
         }
 
+        for (int i = 0; i < 2; i++)
+        {
+            pazzleManager[i].controllManager._checkPeaceUp();
+        }
+
+        float wait = 2;
+        while (wait > 0)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                DMGolem[i].GetComponent<Goolem>().GolemBeamCharge();
+            }
+            wait -= Time.deltaTime;
+            yield return null;
+        }
+
+
         DMslider.gameObject.SetActive(false);
         DeathMatchSubTitleText.enabled = false;
+
 
         mode = Mode.deathMatchReady;
 
@@ -356,7 +408,7 @@ public class GameManager : MonoBehaviour
         GameObject _hibana = Instantiate(hibana, new Vector2(0, DMGolem[0].transform.position.y), Quaternion.identity);
         beamLight = _hibana.GetComponent<Light2D>();
 
-        float lightTggleTime = 0.02f;
+        float lightTggleTime = 0.08f;
         float lightTggleTimer = 0;
         bool lightFragg = true;
 
@@ -364,6 +416,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(beamPars[i]);
             beamPars[i] = Instantiate(DMbeamPar[i], DMGolem[i].transform.position, Quaternion.identity);
+
+            var main = beamPars[i].GetComponent<ParticleSystem>().main;
+            main.startSize = 1f + (DMGolemPowers[i] / 10);
 
         }
 
@@ -617,6 +672,20 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+    }
+
+
+    void CannonSliders()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            cannonGaged[i].value = cannonsChages[i] / maxCannonsChages;
+
+            if (cannonsChages[i] > maxCannonsChages)
+            {
+                cannonsChages[i] = maxCannonsChages;
+            }
+        }
     }
 
 }

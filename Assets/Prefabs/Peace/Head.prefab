@@ -19376,7 +19376,7 @@ MonoBehaviour:
   peaceNumber: 4
   outlineCheck: {fileID: 2100000, guid: 9dc37855059a94c65ae61c9e20ce2d89, type: 2}
   outlineSelecting: {fileID: 2100000, guid: 9e77352aef39a447f881581ff8c9aac1, type: 2}
-  fallingTime: 0.1
+  fallingTime: 0.05
   targetMask:
     serializedVersion: 2
     m_Bits: 8200

@@ -36,6 +36,8 @@ public class House : Monsters
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance), Color.yellow, 0.3f);
+
         hp = Mathf.Clamp(hp, 0, hpMax);
         hpBar.value = hp / hpMax;
         hpBarText.text = Mathf.Floor(hp).ToString() + "HP";
@@ -126,7 +128,7 @@ public class House : Monsters
         {
 
             AudioManager.PlaySE(defaultAtkSE, 0.4f);
-            StartCoroutine(DamageAnimHouse());
+            StartCoroutine(DamageAnimHouse(player));
             damages.Add(new Damage(hp, damage));
             hp -= damage;
 
@@ -153,11 +155,17 @@ public class House : Monsters
 
 
 
-    IEnumerator DamageAnimHouse()
+    IEnumerator DamageAnimHouse(int playerNum = 0)
     {
         Vector3 A = startPos;
         Vector3 B = transform.position + new Vector3(0.5f, 0);
         Vector3 C = transform.position + new Vector3(-0.2f, 0);
+
+        if (playerNum == 1)
+        {
+            B = transform.position + new Vector3(-0.5f, 0);
+            C = transform.position + new Vector3(0.2f, 0);
+        }
 
         float timer = 0;
         float time = 0.1f;
@@ -221,8 +229,8 @@ public class House : Monsters
     void KnockBack()
     {
         Instantiate(knockBackMon, transform.position, Quaternion.identity);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + rayOrigin, transform.right, enemyDistance * 2f, enemyLayer);
-        Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance * 2f), Color.yellow, 0.3f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + rayOrigin, transform.right, enemyDistance, enemyLayer);
+        Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance), Color.yellow, 0.3f);
 
         foreach (RaycastHit2D hit in hits)
         {

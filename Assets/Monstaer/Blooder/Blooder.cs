@@ -16,58 +16,13 @@ public class Blooder : Monsters
     // Update is called once per frame
     void Update()
     {
-        if (mode != Mode.atk)
-        {
-            Move();
-
-        }
-        else
-        {
-            MoveAniTimer = MoveAniTime;
-        }
-
-        if (0 >= hp)
-        {
-            Dead();
-        }
-        RaycastHit2D[] hit;
-        if (Physics2D.Raycast(transform.position + rayOrigin, transform.right, Mathf.Infinity, enemyLayer))
-        {
-            RandomAtk();
-        }
-        Debug.DrawRay(transform.position + rayOrigin, transform.right, Color.red, Mathf.Infinity); // 可視化（長さに注意）
-
-        UpdateStatuses();
+        RandomAtkCharaUpdate();
     }
 
-    float time = 2;
-    float timer = 0;
-    float AtkTriggerRate = 60;
-
-    void RandomAtk()
+    public override void RandomAtkTrigger()
     {
-        if (time <= timer)
-        {
-
-            if (Random.Range(0, 100) <= AtkTriggerRate)
-            {
-                AtkTriggerRate = 10;
-                StartCoroutine(AtkMotion());
-            }
-            else
-            {
-                AtkTriggerRate *= 1.25f;
-            }
-            timer = 0;
-        }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+        StartCoroutine(AtkMotion());
     }
-
-
-
 
     public IEnumerator AtkMotion()//攻撃アニメーションなど
     {
@@ -92,17 +47,17 @@ public class Blooder : Monsters
             i++;
             int q = (i % 2) + 1;
             spriteRenderer.sprite = atkSprites[q];
-            t2 += Time.deltaTime;
+            t2 += Time.deltaTime * atkSpdRate;
             yield return null;
         }
         RaycastHit2D[] hit;
         if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
         {
             spriteRenderer.sprite = atkSprites[3];
-            yield return Wait(0.2f);
+            yield return Wait(0.1f, 2);
 
             spriteRenderer.sprite = atkSprites[4];
-            yield return Wait(0.1f);
+            yield return Wait(0.1f, 2);
 
             if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
             {
@@ -124,7 +79,7 @@ public class Blooder : Monsters
                 }
             }
             spriteRenderer.sprite = atkSprites[4];
-            yield return Wait(0.5f);
+            yield return Wait(0.1f, 2);
         }
 
 

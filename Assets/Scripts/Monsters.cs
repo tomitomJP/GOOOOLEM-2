@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class Monsters : MonoBehaviour
 {
 
-    public Vector3 rayOrigin;
-    public SpriteRenderer spriteRenderer;
+    public Vector3 rayOrigin { get; set; }
+    public SpriteRenderer spriteRenderer { get; set; }
     public Sprite[] moveSprites;//歩く用のスプライトを入れる
     public Sprite[] atkSprites;//攻撃用のスプライトを入れる
 
@@ -19,17 +19,19 @@ public class Monsters : MonoBehaviour
     public float spdRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(移動速度)
     public float atkSpdRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(攻撃速度)
     public float atkRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(攻撃力)
+    public float defRate = 1;
 
     public int player = 0;//左は0,右は1
     public float enemyDistance = 1;//敵を見つける距離(攻撃の当たる距離。攻撃の当たる距離のみを変更したい場合はAttack関数とEnemyCheck関数をオーバーライドして書き換える)
-    public float allyDistance = 0.3f;//使用していない
+    public float enemyDistanceInCT = 1;
+    public bool MoveOk { get; set; }
+    public float allyDistance { get; set; } = 0.3f;//使用していない
     public float atkCT = 1;//攻撃のクールタイム
     public float aktCTimer = 0;
+    public LayerMask myLayer { get; set; }
+    public LayerMask enemyLayer { get; set; }
 
-    public LayerMask myLayer;
-    public LayerMask enemyLayer;
-
-    public float stanTIme = 0;
+    public float stanTIme { get; set; } = 0;
 
     public enum Mode
     {
@@ -42,15 +44,79 @@ public class Monsters : MonoBehaviour
 
     public Mode mode = Mode.move;
 
-
     public float MoveAniTime = 0.3f;
-    public float MoveAniTimer = 0f;
-    int MoveAniSpriteNum = 0;
+    public float MoveAniTimer { get; set; } = 0f;
+    public int MoveAniSpriteNum { get; set; } = 0;
 
     public GameObject damageText { get; set; }
     public Canvas canvas { get; set; }
     public GameManager gameManager { get; set; }
-    public AudioClip defaultAtkSE;
+    public AudioClip defaultAtkSE { get; set; }
+    public GameObject monstarDeadPar { get; set; }
+
+
+    [Header("ランダムで攻撃するキャラの設定")]
+
+    public float time = 2;//抽選間隔
+    public float timer { get; set; } = 0;
+    public float AtkTriggerRate { get; set; } = 50;
+    public float AtkTriggerUpRate = 1.1f;
+
+    public void RandomAtk()
+    {
+        if (time <= timer)
+        {
+
+            if (Random.Range(0, 100) <= AtkTriggerRate)
+            {
+
+                AtkTriggerRate = 20;
+                RandomAtkTrigger();
+                aktCTimer = atkCT;
+            }
+            else
+            {
+                AtkTriggerRate *= AtkTriggerUpRate;
+            }
+            timer = 0;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+        }
+    }
+
+    public void RandomAtkCharaUpdate()
+    {
+        if (mode != Mode.atk)
+        {
+            Move();
+        }
+        else
+        {
+            MoveAniTimer = MoveAniTime;
+        }
+
+        if (0 >= hp)
+        {
+            Dead();
+        }
+        RaycastHit2D[] hit;
+        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer) && aktCTimer <= 0)
+        {
+            RandomAtk();
+        }
+        else if (aktCTimer > 0)
+        {
+            aktCTimer -= Time.deltaTime;
+        }
+        UpdateStatuses();
+    }
+
+    public virtual void RandomAtkTrigger()
+    {
+
+    }
 
     void Update()
     {
@@ -59,9 +125,18 @@ public class Monsters : MonoBehaviour
 
     public virtual void Move()//移動と異動アニメーションを管理
     {
-        if (mode == Mode.move && stanTIme <= 0)
+        if (mode == Mode.move && stanTIme <= 0 && MoveOk)
         {
-            transform.Translate(Vector3.right * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100));
+            if (player == 0)
+            {
+                transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
+            }
+            else
+            {
+                transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
+            }
         }
 
         if (stanTIme > 0)
@@ -87,13 +162,8 @@ public class Monsters : MonoBehaviour
     public virtual void StartSetup()//継承先のStart関数に入れる
     {
         canvas = GameObject.FindWithTag("DamageTextCanvas").GetComponent<Canvas>();
-        gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // float X = (Random.Range(0, 11) - 5) * 0.1f;
-        float Y = Random.Range(0, 4) * 0.1f;
-        rayOrigin.y = 0.0f;
-        //enemyDistance *= Random.Range(0.8f, 1.1f);
+        rayOrigin = Vector2.zero;
         if (player == 1)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
@@ -111,6 +181,16 @@ public class Monsters : MonoBehaviour
         }
 
         damageText = Resources.Load<GameObject>("DamageText"); // Resources/Enemy.prefab をロード
+        monstarDeadPar = Resources.Load<GameObject>("Paticle/MonstarDead"); // Resources/Enemy.prefab をロード
+        defaultAtkSE = Resources.Load<AudioClip>("SE/dedaultDamage"); // Resources/Enemy.prefab をロード
+
+
+        GameObject _gameManager = GameObject.FindWithTag("GameController");
+        if (_gameManager != null)
+        {
+            gameManager = _gameManager.GetComponent<GameManager>();
+        }
+
     }
 
     public virtual void Updating()//継承先のUpdate関数に入れる
@@ -135,8 +215,8 @@ public class Monsters : MonoBehaviour
 
     public void Dead()
     {
-        gameManager.resultDatas[(player + 1) % 2].killCount++;
-
+        if (gameManager != null) gameManager.resultDatas[(player + 1) % 2].killCount++;
+        Instantiate(monstarDeadPar, transform.position, Quaternion.identity);
         spriteRenderer.enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject);
@@ -146,6 +226,9 @@ public class Monsters : MonoBehaviour
     {
         if (damage == -810) damage = atk;
         if (target == null || !target.gameObject.activeSelf) { return 0; }
+
+        if (!CanHitTarget(target.transform)) return 0;
+
         if (hp > 0)
         {
             target.Damaged(damage * atkRate);
@@ -159,15 +242,62 @@ public class Monsters : MonoBehaviour
 
     }
 
+    public float Attacked(float damage)//投擲物などのモンスターのてから離れて死んでも残るようなオブジェクトが使用する
+    {
+        if (damage == -810) damage = atk;
+        if (this == null || !this.gameObject.activeSelf) { return 0; }
+
+        if (hp > 0)
+        {
+            this.Damaged(damage * atkRate);
+            if (this.hp >= 0)
+            {
+                this.DamagedAnimTrigger();
+            }
+            return damage * atkRate;
+        }
+        return 0;
+    }
+
+    public bool CanHitTarget(Transform target)
+    {
+        if (target == null) return false;
+
+        // 敵のコライダーの一番近い点を取る
+        Collider2D col = target.GetComponent<Collider2D>();
+        if (col == null) return false;
+
+        float dist = Vector2.Distance(
+            col.ClosestPoint(transform.position), // 自分から見て敵の最も近い点
+            transform.position
+        );
+
+        return dist <= enemyDistance * 1.1; // attackRange は「当たる距離」
+    }
+
+
     public virtual void Damaged(float damage)
     {
         AudioManager.PlaySE(defaultAtkSE, 0.3f);
 
-        hp -= damage;
-        Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
-        _damageText.text = damage.ToString("F0");
-    }
+        if (hp > 0)
+        {
+            float _damage = damage / defRate;
+            hp -= _damage;
+            Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
 
+            if (_damage >= 1)
+            {
+                _damageText.text = (damage / defRate).ToString("F0");
+
+            }
+            else
+            {
+                _damageText.text = (damage / defRate).ToString("F1");
+            }
+        }
+
+    }
     public void Healed(float healValue)
     {
         hp -= healValue;
@@ -206,12 +336,16 @@ public class Monsters : MonoBehaviour
         {
             //origin = (Vector2)transform.position + new Vector2(rayOrigin.x * -1, rayOrigin.y);
         }
+        bool _MoveOk = true;
 
         Vector2 direction = transform.right;
 
-        Debug.DrawRay(transform.position + rayOrigin, direction * enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
+        float _enemyDistance = enemyDistance;
+        if (aktCTimer > 0) _enemyDistance = enemyDistanceInCT;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, enemyDistance, enemyLayer);
+        Debug.DrawRay(transform.position + rayOrigin, direction * _enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, _enemyDistance, enemyLayer);
         if (hit.collider != null)
         {
             Monsters targetData = hit.collider.gameObject.GetComponent<Monsters>();
@@ -219,6 +353,7 @@ public class Monsters : MonoBehaviour
             {
                 if (targetData.player != player)
                 {
+                    _MoveOk = false;
                     if (mode != Mode.atk && aktCTimer <= 0)
                     {
                         StartCoroutine(AtkMotion(targetData));
@@ -227,18 +362,10 @@ public class Monsters : MonoBehaviour
                 }
             }
         }
-
+        MoveOk = _MoveOk;
         if (aktCTimer > 0 && mode != Mode.atk)
         {
             aktCTimer = Mathf.Clamp(aktCTimer - (Time.deltaTime * atkSpdRate), 0, Mathf.Infinity);
-            if (aktCTimer <= 0)
-            {
-                mode = Mode.move;
-            }
-            else
-            {
-                mode = Mode.atkCT;
-            }
         }
     }
 
@@ -346,10 +473,11 @@ public class Monsters : MonoBehaviour
         }
     }
 
-    public List<StatusManager> sm = new List<StatusManager>();
+    public List<StatusManager> sm { get; set; } = new List<StatusManager>();
 
     public void ApplyStatusTarget(Monsters monsters, StatusManager newStatus)
     {
+        if (monsters == null) return;
         monsters.ApplyStatus(newStatus);
     }
 

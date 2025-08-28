@@ -9,7 +9,6 @@ public class Wolf : Monsters
     void Start()
     {
         StartSetup();
-        rayOrigin.y = 0.0f;
     }
 
     // Update is called once per frame
@@ -18,6 +17,7 @@ public class Wolf : Monsters
         Updating();
     }
 
+    [SerializeField] Vector2 bithsRayOrigin;
     public override IEnumerator AtkMotion(Monsters target)//攻撃アニメーションなど
     {
 
@@ -37,14 +37,20 @@ public class Wolf : Monsters
         if (player == 1) offset.x *= -1;
 
         Vector3 pos = transform.position + offset;
+
+
+        Debug.DrawRay((Vector2)transform.position + bithsRayOrigin, transform.right * enemyDistance, Color.red, 0.5f); // 可視化（長さに注意）
+
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + bithsRayOrigin, transform.right, enemyDistance, enemyLayer);
+
         if (player == 0)
         {
-            Instantiate(bites, pos, Quaternion.Euler(new Vector3(0, 0, -20)));
+            Instantiate(bites, hit.point, Quaternion.Euler(new Vector3(0, 0, -20)));
 
         }
         else
         {
-            Instantiate(bites, pos, Quaternion.Euler(new Vector3(0, 0, 20)));
+            Instantiate(bites, hit.point, Quaternion.Euler(new Vector3(0, 0, 20)));
 
         }
 

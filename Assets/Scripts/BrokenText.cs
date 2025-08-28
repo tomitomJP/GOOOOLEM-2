@@ -10,16 +10,21 @@ public class BrokenText : MonoBehaviour
 
     Text text;
     Outline outline;
+    public GameManager.Mode mode = GameManager.Mode.play;
 
     public bool Spwan = false;
-    public string num;
+    public int num;
 
     IEnumerator Start()
     {
         text = GetComponent<Text>();
         outline = GetComponent<Outline>();
 
-        text.text = num;
+        if (mode == GameManager.Mode.play)
+        {
+            text.text = num.ToString();
+        }
+
         if (Spwan)
         {
             StartCoroutine(SpwanMonster());
@@ -40,10 +45,25 @@ public class BrokenText : MonoBehaviour
         {
             float t = timer / time;
             text.fontSize = (int)Mathf.Lerp(20f, 80f, t);
+
+            if (mode == GameManager.Mode.deathMatch)
+            {
+                int bonus = Mathf.FloorToInt(num * num / 15f);
+                text.text = $"{num}\n<size={text.fontSize - 5}>BONUS {bonus}</size>";
+
+            }
+            else if (mode != GameManager.Mode.play)
+            {
+                break;
+            }
+
             timer += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(0.2f);
+        if (mode == GameManager.Mode.deathMatch || mode == GameManager.Mode.play)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
         Destroy(gameObject);
     }
 

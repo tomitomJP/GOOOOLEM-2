@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6686045845207494809}
+  - component: {fileID: 8807073132339034886}
   - component: {fileID: 6266413839542525270}
   - component: {fileID: 4108875571864191569}
   - component: {fileID: 8618122943105103407}
-  - component: {fileID: 8807073132339034886}
   m_Layer: 0
   m_Name: slimebb_0
   m_TagString: Monster
@@ -29,12 +29,63 @@ Transform:
   m_GameObject: {fileID: 5447051748445029993}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.37, y: -2.94, z: 0}
+  m_LocalPosition: {x: -8.16, y: -2.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8807073132339034886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447051748445029993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0627fae7b55e24592437abed9dbc0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  moveSprites:
+  - {fileID: -1637674817, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
+  - {fileID: -2043569913, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
+  - {fileID: 406978592, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
+  atkSprites:
+  - {fileID: 521386411, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
+  - {fileID: 1743407707, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
+  atk: 15
+  hp: 1
+  spd: 0.4
+  spdRate: 1
+  atkSpdRate: 1
+  atkRate: 1
+  player: 0
+  enemyDistance: 1
+  allyDistance: 0.3
+  atkCT: 1
+  aktCTimer: 0
+  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
+  myLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  stanTIme: 0
+  mode: 1
+  MoveAniTime: 0.3
+  MoveAniTimer: 0
+  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
+  sm: []
+  attackSE: {fileID: 0}
+  slimeSize: 2
+  spawnTime: 0
+  mergeRadius: 1
+  boxCollider2D: {fileID: 4108875571864191569}
+  slimeSplit: {fileID: 5447051748445029993}
+  martgeCT: 0
 --- !u!212 &6266413839542525270
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -119,7 +170,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.1862426}
+  m_Offset: {x: 0, y: 1.9403595}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +181,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.125, y: 3.7949257}
+  m_Size: {x: 1, y: 5.119281}
   m_EdgeRadius: 0
 --- !u!50 &8618122943105103407
 Rigidbody2D:
@@ -159,47 +210,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8807073132339034886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5447051748445029993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe0627fae7b55e24592437abed9dbc0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayOrigin: {x: 0, y: 1, z: 0}
-  spriteRenderer: {fileID: 0}
-  moveSprites:
-  - {fileID: -1637674817, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
-  - {fileID: -2043569913, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
-  - {fileID: 406978592, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
-  atkSprites:
-  - {fileID: 521386411, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
-  - {fileID: 1743407707, guid: a5580ed60c9116348ab399e6e816fc16, type: 3}
-  atk: 15
-  hp: 30
-  spd: 0.4
-  spdRate: 1
-  atkSpdRate: 1
-  atkRate: 1
-  player: 0
-  enemyDistance: 1
-  allyDistance: 0.3
-  atkCT: 1
-  aktCTimer: 0
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  mode: 1
-  MoveAniTime: 0.3
-  MoveAniTimer: 0
-  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
-  sm: []
-  attackSE: {fileID: 0}
