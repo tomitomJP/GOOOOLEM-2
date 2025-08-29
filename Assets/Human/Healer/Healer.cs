@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Healer : Human
 {
-    private float healCooldown = 3f;  // 回復の間隔（秒）
+    [SerializeField] float healRate = 0.2f;
+    [SerializeField] float healCooldown = 3f;  // 回復の間隔（秒）
     private float healTimer = 0f;
 
     void Start()
@@ -26,6 +27,11 @@ public class Healer : Human
 
                 StartCoroutine(HealMotion(target));
                 healTimer = healCooldown;
+            }
+            else
+            {
+                healTimer = healCooldown * 0.5f;//対象者がいない場合通常の半分のクールタイム
+
             }
         }
     }
@@ -64,7 +70,7 @@ public class Healer : Human
 
         if (target != null)
         {
-            float healAmount = target.maxHp * 0.2f; // 回復量を自由に設定
+            float healAmount = target.maxHp * healRate; // 回復量を自由に設定
             target.Healed(healAmount); // 同じ player の味方を回復
         }
 

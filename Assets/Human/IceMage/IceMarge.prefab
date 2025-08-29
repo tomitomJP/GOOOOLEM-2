@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: 253942099, guid: e56de8ed11d434debab6588f761936ee, type: 3}
   atk: 25
   hp: 20
-  spd: 0.4
+  spd: 0.3
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1

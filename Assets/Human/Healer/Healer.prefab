@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 373851128, guid: 47a67ba8b374982429c61d4cc9521e62, type: 3}
   atk: 0
   hp: 100
-  spd: 1
+  spd: 0.2
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
@@ -171,6 +171,8 @@ MonoBehaviour:
   name: "\u3042\u3042\u3042\u3042"
   job: 
   sex: 1
+  healRate: 0.15
+  healCooldown: 4
 --- !u!50 &5191685424538540944
 Rigidbody2D:
   serializedVersion: 4

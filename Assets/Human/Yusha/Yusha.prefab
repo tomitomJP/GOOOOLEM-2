@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: -1477129937, guid: c5d4d0ecea4ec4e8494282476260602e, type: 3}
   atk: 28
   hp: 50
-  spd: 0.8
+  spd: 0.45
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
@@ -81,6 +81,7 @@ MonoBehaviour:
   growthRate: 0.25
   name: "\u3042\u3042\u3042\u3042"
   job: "\u52C7\u8005"
+  sex: 0
 --- !u!212 &3443497008218442009
 SpriteRenderer:
   m_ObjectHideFlags: 0

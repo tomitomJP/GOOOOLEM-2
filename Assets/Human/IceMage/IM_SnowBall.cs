@@ -26,6 +26,8 @@ public class IM_SnowBall : MonoBehaviour
 
         Vector3 startPos = transform.position;
         Vector3 midPos = (startPos + target.position) / 2 + Vector3.up * height; // 弧の頂点
+        Vector3 endPos = target.position;
+
 
         float time = 0f;
         while (time < duration)
@@ -34,7 +36,7 @@ public class IM_SnowBall : MonoBehaviour
 
             // 2次ベジェ曲線 (start → mid → end)
             Vector3 m1 = Vector3.Lerp(startPos, midPos, t);
-            Vector3 m2 = Vector3.Lerp(midPos, target.position, t);
+            Vector3 m2 = Vector3.Lerp(midPos, endPos, t);
             obj.transform.position = Vector3.Lerp(m1, m2, t);
 
             time += Time.deltaTime;

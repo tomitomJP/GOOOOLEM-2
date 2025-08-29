@@ -9,11 +9,23 @@ public class CannonBallStatus : Monsters
     [SerializeField] float attackRadius = 2f; // 攻撃半径
     [SerializeField] LayerMask[] targetLayer;
 
+    [SerializeField] LayerMask myLayer0;
+    [SerializeField] LayerMask myLayer1;
     void Start()
     {
         StartSetup();
         // 5秒後に自動で消える（撃ちっぱなし対策）
         Destroy(gameObject, lifeTime);
+
+        if (player == 0)
+        {
+            gameObject.layer = myLayer0;
+        }
+        else
+        {
+            gameObject.layer = myLayer1;
+
+        }
     }
 
     private bool hasExploded = false;

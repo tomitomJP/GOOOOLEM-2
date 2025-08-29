@@ -89,6 +89,8 @@ public class Monsters : MonoBehaviour
 
     public void RandomAtkCharaUpdate()
     {
+        if (isDead) return;
+        EnemyCheck();
         if (mode != Mode.atk)
         {
             Move();
@@ -197,6 +199,7 @@ public class Monsters : MonoBehaviour
 
     public virtual void Updating()//継承先のUpdate関数に入れる
     {
+        if (isDead) return;
         //Allycheck();
         EnemyCheck();
         if (mode != Mode.atk)
@@ -215,15 +218,23 @@ public class Monsters : MonoBehaviour
         UpdateStatuses();
     }
 
+    public bool isDead = false;
     public void Dead()
     {
+        if (isDead)
+        {
+            return;
+        }
+        isDead = true;
         if (gameManager != null) gameManager.resultDatas[(player + 1) % 2].killCount++;
         Dead2();
         GameManager.RemoveCharacter(this);
         Instantiate(monstarDeadPar, transform.position, Quaternion.identity);
         spriteRenderer.enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        Destroy(gameObject);
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        transform.SetParent(null);
+        Destroy(gameObject, 30f);
     }
 
     public virtual void Dead2()
