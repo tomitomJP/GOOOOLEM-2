@@ -34,7 +34,7 @@ public class Shielder : Human
         spriteRenderer.sprite = atkSprites[1];
         yield return Wait(0.1f, 2);
 
-        if (Vector2.Distance(target.transform.position, transform.position) < 1)
+        if ((target != null && target.gameObject.activeSelf) && Vector2.Distance(target.transform.position, transform.position) < 1)
         {
             Attack(target, atk * 0.45f);
         }
@@ -49,7 +49,8 @@ public class Shielder : Human
 
 
         float duration = 0.4f;
-        transform.DOMoveX(target.transform.position.x * 1f, duration);
+
+        if (target != null && target.gameObject.activeSelf) transform.DOMoveX(target.transform.position.x * 1f, duration);
 
         int i = 0;
         while (duration * 0.7 > 0)

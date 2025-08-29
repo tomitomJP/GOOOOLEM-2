@@ -16,6 +16,7 @@ public class SoloManager : MonoBehaviour
 
     private List<int> availableCharacters = new List<int>();
     private List<List<string>> availableNames = new List<List<string>>();
+    [SerializeField] int humanLevel = 0;
 
     void Awake()
     {
@@ -24,6 +25,32 @@ public class SoloManager : MonoBehaviour
 
     void Start()
     {
+
+
+
+        StartCoroutine(GameLoop());
+    }
+
+    IEnumerator GameLoop()
+    {
+        while (true)
+        {
+            if (GameManager.GetMonsters(GameManager.type.human).Count == 0)
+            {
+                humanLevel++;
+                _SetHT("勇者一行が魔王城前に登場！");
+                InstantiateMembers();
+            }
+
+            yield return null;
+        }
+    }
+
+    void InstantiateMembers()
+    {
+
+        availableCharacters = new List<int>();
+        availableNames = new List<List<string>>();
         // 名前ファイルを読み込む
         for (int i = 0; i < names.Length; i++)
         {
@@ -38,14 +65,6 @@ public class SoloManager : MonoBehaviour
             availableCharacters.Add(i);
         Shuffle(availableCharacters);
 
-        InstantiateMembers();
-
-        _SetHT("勇者一行が魔王城前に登場！");
-
-    }
-
-    void InstantiateMembers()
-    {
         // 1人目は humans[0] 固定
         InstantiateMember(0);
 
@@ -71,7 +90,7 @@ public class SoloManager : MonoBehaviour
             availableCharacters.RemoveAt(0);
         }
 
-        Human human = Instantiate(humans[charIndex]).GetComponent<Human>();
+        Human human = Instantiate(humans[charIndex], transform.position, Quaternion.identity).GetComponent<Human>();
 
         // 名前を取得（性別に応じたリストから被りなしで）
         int sexIndex = (int)human.sex;
@@ -79,6 +98,7 @@ public class SoloManager : MonoBehaviour
         availableNames[sexIndex].RemoveAt(0);
 
         human.name = name;
+        human.level = humanLevel;
     }
 
     // シャッフル用ユーティリティ

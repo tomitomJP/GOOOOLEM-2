@@ -27,6 +27,7 @@ public class Human : Monsters
     {
         hp = GetHP(level);
         atk = GetATK(level);
+        maxHp = hp;
 
         monstarDeadPar = Resources.Load<GameObject>("Paticle/HumanDeadParticle");
     }

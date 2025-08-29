@@ -15,7 +15,7 @@ public class Monsters : MonoBehaviour
 
     public float atk = 50;//攻撃力
     public float hp = 100;
-    public float maxHp = 100; //最大のHP
+    public float maxHp { get; set; } //最大のHP
     public float spd = 1;//移動速度
     public float spdRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(移動速度)
     public float atkSpdRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(攻撃速度)
@@ -162,6 +162,7 @@ public class Monsters : MonoBehaviour
 
     public virtual void StartSetup()//継承先のStart関数に入れる
     {
+        maxHp = hp;
         canvas = GameObject.FindWithTag("DamageTextCanvas").GetComponent<Canvas>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rayOrigin = Vector2.zero;

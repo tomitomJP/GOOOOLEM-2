@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Start()
     {
         if (debugMode) { yield break; }
-        //StartCoroutine(DeathMatchStart());
+
         yield return new WaitForSeconds(0.5f);
         AudioManager.PlayBGM(ReadyBgm);
 
@@ -705,9 +705,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public List<Monsters> monsters0 = new List<Monsters>();
-    public List<Monsters> monsters1 = new List<Monsters>();
-    public List<Monsters> humans = new List<Monsters>();
+    [SerializeField] List<Monsters> monsters0 = new List<Monsters>();
+    [SerializeField] List<Monsters> monsters1 = new List<Monsters>();
+    [SerializeField] List<Monsters> humans = new List<Monsters>();
 
     public static GameManager instance;
 

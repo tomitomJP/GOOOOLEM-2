@@ -9,23 +9,23 @@ public class Healer : Human
 
     void Start()
     {
-        StartSetup();   
-        HumanSetUp();   
+        StartSetup();
+        HumanSetUp();
     }
 
     void Update()
     {
-        Updating(); 
-        
+        Updating();
+
         healTimer -= Time.deltaTime;
         if (healTimer <= 0f)
         {
-            Monsters target = FindAllyToHeal(); 
+            Monsters target = FindAllyToHeal();
             if (target != null)
             {
-                
+
                 StartCoroutine(HealMotion(target));
-                healTimer = healCooldown; 
+                healTimer = healCooldown;
             }
         }
     }
@@ -36,11 +36,14 @@ public class Healer : Human
         Monsters lowestHpAlly = null;
         float lowestHpRate = 1f;
 
-        foreach (var h in GameManager.instance.humans)
+        List<Monsters> targets = new List<Monsters>();
+        targets = GameManager.GetMonsters(GameManager.type.human);
+
+        foreach (var h in targets)
         {
             if (h != null && h != this && h.player == player && h.hp > 0)
             {
-                float hpRate = h.hp / h.maxHp; 
+                float hpRate = h.hp / h.maxHp;
                 if (hpRate < lowestHpRate)
                 {
                     lowestHpRate = hpRate;
@@ -55,8 +58,8 @@ public class Healer : Human
     private IEnumerator HealMotion(Monsters target)
     {
         mode = Mode.atk;
-                        
-       spriteRenderer.sprite = atkSprites[0];
+
+        spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.4f, 2);
 
         if (target != null)

@@ -11,6 +11,11 @@ public class IM_SnowBall : MonoBehaviour
 
     public void Slowing(Monsters Monsters, float damage)
     {
+        if (Monsters == null || !Monsters.gameObject.activeSelf)
+        {
+            Destroy(gameObject);
+            return;
+        }
         StartCoroutine(ArcMove(gameObject, Monsters.transform, 4, 0.5f, Monsters, damage));
 
     }
