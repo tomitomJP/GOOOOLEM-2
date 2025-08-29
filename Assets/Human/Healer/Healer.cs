@@ -4,52 +4,67 @@ using UnityEngine;
 
 public class Healer : Human
 {
+    private float healCooldown = 3f;  // 回復の間隔（秒）
+    private float healTimer = 0f;
+
     void Start()
     {
-        StartSetup();
-        HumanSetUp();
+        StartSetup();   
+        HumanSetUp();   
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Updating();
+        Updating(); 
+        
+        healTimer -= Time.deltaTime;
+        if (healTimer <= 0f)
+        {
+            Monsters target = FindAllyToHeal(); 
+            if (target != null)
+            {
+                
+                StartCoroutine(HealMotion(target));
+                healTimer = healCooldown; 
+            }
+        }
     }
 
-    public override IEnumerator AtkMotion(Monsters targetAlly)
+    // 同じ player の味方で一番HPが低いキャラを探す
+    private Monsters FindAllyToHeal()
     {
-        if (atkSprites.Length < 1)
+        Monsters lowestHpAlly = null;
+        float lowestHpRate = 1f;
+
+        foreach (var h in GameManager.instance.humans)
         {
-            Debug.LogWarning("攻撃スプライトが足りません");
-            yield break;
+            if (h != null && h != this && h.player == player && h.hp > 0)
+            {
+                float hpRate = h.hp / h.maxHp; 
+                if (hpRate < lowestHpRate)
+                {
+                    lowestHpRate = hpRate;
+                    lowestHpAlly = h;
+                }
+            }
         }
-
-        mode = Mode.atk;
-
-        // 攻撃（回復）アニメ
-        spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.5f, 0);
-
-
-
-        // 回復処理
-        if (targetAlly != null)
-        {
-            StatusManager healStatus = new StatusManager(
-                "Heal",       // ID
-                false,        // stackしない
-                StatusManager.StatusType.heal, // タイプ
-                0f,           // 効果時間は即時
-                atk * atkRate * 0.5f           // 回復量
-            );
-
-            // ターゲットに回復を適用
-            ApplyStatusTarget(targetAlly, healStatus);
-        }
-
-
-
-        mode = Mode.move;
+        return lowestHpAlly;
     }
 
+    // 回復アニメーションと処理
+    private IEnumerator HealMotion(Monsters target)
+    {
+        mode = Mode.atk;
+                        
+       spriteRenderer.sprite = atkSprites[0];
+        yield return Wait(0.4f, 2);
+
+        if (target != null)
+        {
+            float healAmount = target.maxHp * 0.2f; // 回復量を自由に設定
+            target.Healed(healAmount); // 同じ player の味方を回復
+        }
+
+        mode = Mode.move; // 終わったら移動状態に戻す
+    }
 }

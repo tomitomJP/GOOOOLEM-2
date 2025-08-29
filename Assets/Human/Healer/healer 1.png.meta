@@ -126,12 +126,12 @@ TextureImporter:
       name: healer 1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 12
         y: 0
-        width: 76
-        height: 64
+        width: 34
+        height: 63
       alignment: 9
-      pivot: {x: 0.3370928, y: 0.5144367}
+      pivot: {x: 0.4816801, y: 0.52888703}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: healer 1_1
       rect:
         serializedVersion: 2
-        x: 76
+        x: 82
         y: 0
-        width: 76
-        height: 64
+        width: 34
+        height: 62
       alignment: 9
-      pivot: {x: 0.27144352, y: 0.5317608}
+      pivot: {x: 0.48564687, y: 0.5435074}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: healer 1_2
       rect:
         serializedVersion: 2
-        x: 153
+        x: 158
         y: 0
-        width: 76
+        width: 34
         height: 64
       alignment: 9
-      pivot: {x: 0.25442323, y: 0.5259861}
+      pivot: {x: 0.48469186, y: 0.53452075}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,12 +189,12 @@ TextureImporter:
       name: healer 1_3
       rect:
         serializedVersion: 2
-        x: 229
+        x: 230
         y: 0
-        width: 76
-        height: 64
+        width: 52
+        height: 63
       alignment: 9
-      pivot: {x: 0.24712934, y: 0.52021146}
+      pivot: {x: 0.383684, y: 0.53755176}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

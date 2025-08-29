@@ -15,6 +15,7 @@ public class Monsters : MonoBehaviour
 
     public float atk = 50;//攻撃力
     public float hp = 100;
+    public float maxHp = 100; //最大のHP
     public float spd = 1;//移動速度
     public float spdRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(移動速度)
     public float atkSpdRate = 1;//バフやデバフを受けた時ここの値が変更される。ステータスマネージャーを介して変更するため、直接変更してはならない(攻撃速度)
@@ -306,9 +307,11 @@ public class Monsters : MonoBehaviour
 
     }
 
+
     public void Healed(float healValue)
     {
         hp += healValue;
+        if (hp > maxHp) hp = maxHp;
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
         _damageText.color = Color.green;
         _damageText.text = "+" + healValue.ToString("F0");

@@ -117,6 +117,7 @@ MonoBehaviour:
   defRate: 1
   player: 1
   enemyDistance: 1
+  enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
   mode: 1
@@ -125,6 +126,9 @@ MonoBehaviour:
   AtkTriggerUpRate: 1.1
   level: 1
   growthRate: 0.098
+  name: "\u3042\u3042\u3042\u3042"
+  job: "\u5263\u58EB"
+  sex: 0
 --- !u!50 &7047437340379277169
 Rigidbody2D:
   serializedVersion: 4
