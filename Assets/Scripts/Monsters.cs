@@ -190,7 +190,7 @@ public class Monsters : MonoBehaviour
         {
             gameManager = _gameManager.GetComponent<GameManager>();
         }
-
+        GameManager.AddCharacter(this);
     }
 
     public virtual void Updating()//継承先のUpdate関数に入れる
@@ -216,18 +216,25 @@ public class Monsters : MonoBehaviour
     public void Dead()
     {
         if (gameManager != null) gameManager.resultDatas[(player + 1) % 2].killCount++;
+        Dead2();
+        GameManager.RemoveCharacter(this);
         Instantiate(monstarDeadPar, transform.position, Quaternion.identity);
         spriteRenderer.enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject);
     }
 
-    public float Attack(Monsters target, float damage = -810)//引数に攻撃対象のMonstrsコンポーネントを入れる
+    public virtual void Dead2()
+    {
+
+    }
+
+    public float Attack(Monsters target, float damage = -810, bool Melee = true)//引数に攻撃対象のMonstrsコンポーネントを入れる
     {
         if (damage == -810) damage = atk;
         if (target == null || !target.gameObject.activeSelf) { return 0; }
 
-        if (!CanHitTarget(target.transform)) return 0;
+        if (!CanHitTarget(target.transform) && Melee) return 0;
 
         if (hp > 0)
         {
@@ -298,9 +305,10 @@ public class Monsters : MonoBehaviour
         }
 
     }
+
     public void Healed(float healValue)
     {
-        hp -= healValue;
+        hp += healValue;
         Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
         _damageText.color = Color.green;
         _damageText.text = "+" + healValue.ToString("F0");
@@ -524,7 +532,6 @@ public class Monsters : MonoBehaviour
                 atkSpdRate += status.value;
                 break;
             case StatusManager.StatusType.heal:
-                hp += status.value;
                 Healed(status.value);
                 break;
             case StatusManager.StatusType.stan:

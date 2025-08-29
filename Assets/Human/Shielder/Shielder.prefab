@@ -81,6 +81,8 @@ MonoBehaviour:
   AtkTriggerUpRate: 1.1
   level: 1
   growthRate: 0.25
+  name: "\u3042\u3042\u3042\u3042"
+  job: "\u76FE\u4F7F\u3044"
   knockBackPower: 2
 --- !u!212 &2420912122019490345
 SpriteRenderer:

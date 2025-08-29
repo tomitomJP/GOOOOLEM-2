@@ -74,7 +74,7 @@ public class SkullHunter : Monsters
         spriteRenderer.sprite = atkSprites[7];
         yield return Wait(0.15f, 0);
 
-        Attack(target);
+        Attack(target, -810, false);
         ApplyStatusTarget(target, new StatusManager("SKullHunterSpdRateDown", true, StatusManager.StatusType.spdRate, 0.2f, -0.8f));
 
         spriteRenderer.sprite = atkSprites[6];

@@ -44,8 +44,8 @@ public class CannonBallStatus : Monsters
                 }
                 else
                 {
+                    KnockBack(monsters);
                     Attack(monsters);
-                    KnockBack(hit.gameObject);
                 }
             }
         }
@@ -54,23 +54,24 @@ public class CannonBallStatus : Monsters
         Destroy(gameObject);
     }
 
-    [SerializeField] float knockBackPower = 10;
-    void KnockBack(GameObject hit)
+    [SerializeField] float knockBackPower = 2;
+    void KnockBack(Monsters hit)
     {
-        if (hit == null && hit.activeSelf) return;
-        Rigidbody2D rb = hit.GetComponent<Rigidbody2D>();
-        GameObject mon = hit;
+
+        if (hit == null || !hit.gameObject.activeSelf) return;
+        GameObject mon = hit.gameObject;
+        Rigidbody2D rb = mon.GetComponent<Rigidbody2D>();
 
         Vector2 monUp = mon.transform.up;
         Vector2 myLeft = -transform.right;
         Vector2 dire;
         if (player == 0)
         {
-            dire = new Vector2(1, 1).normalized;
+            dire = new Vector2(1, 0.7f).normalized;
         }
         else
         {
-            dire = new Vector2(-1, 1).normalized;
+            dire = new Vector2(-1, 0.7f).normalized;
 
         }
 

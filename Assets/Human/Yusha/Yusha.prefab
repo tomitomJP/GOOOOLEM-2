@@ -79,6 +79,8 @@ MonoBehaviour:
   AtkTriggerUpRate: 1.1
   level: 1
   growthRate: 0.25
+  name: "\u3042\u3042\u3042\u3042"
+  job: "\u52C7\u8005"
 --- !u!212 &3443497008218442009
 SpriteRenderer:
   m_ObjectHideFlags: 0
