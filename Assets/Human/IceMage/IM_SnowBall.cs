@@ -9,18 +9,18 @@ public class IM_SnowBall : MonoBehaviour
 
     [SerializeField] GameObject snowballExpPar;
 
-    public void Slowing(Monsters Monsters, float damage)
+    public void Slowing(Monsters Monsters, float damage, IceMage iceMage)
     {
         if (Monsters == null || !Monsters.gameObject.activeSelf)
         {
             Destroy(gameObject);
             return;
         }
-        StartCoroutine(ArcMove(gameObject, Monsters.transform, 4, 0.5f, Monsters, damage));
+        StartCoroutine(ArcMove(gameObject, Monsters.transform, 4, 0.5f, Monsters, damage, iceMage));
 
     }
 
-    IEnumerator ArcMove(GameObject obj, Transform target, float height, float duration, Monsters monsters, float damage)
+    IEnumerator ArcMove(GameObject obj, Transform target, float height, float duration, Monsters monsters, float damage, IceMage iceMage)
     {
         obj.transform.SetParent(null);
 
@@ -45,7 +45,7 @@ public class IM_SnowBall : MonoBehaviour
 
         // 最後に位置をピタッと合わせる
         Instantiate(snowballExpPar, obj.transform.position, Quaternion.identity);
-        monsters.Attacked(damage);
+        iceMage.Attack(monsters, damage);
         Destroy(obj);
     }
 }

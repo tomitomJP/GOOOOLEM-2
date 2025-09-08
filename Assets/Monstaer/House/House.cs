@@ -116,8 +116,17 @@ public class House : Monsters
 
     }
 
-    public override void Damaged(float damage)
+    public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
+
     {
+        if (damage > 0)
+        {
+        }
+        else
+        {
+            return;
+        }
+
         if (NonDamage && damage < 10000)
         {
             // Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();

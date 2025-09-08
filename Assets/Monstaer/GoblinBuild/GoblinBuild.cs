@@ -46,9 +46,17 @@ public class GoblinBuild : Monsters
 
     }
 
-    public override void Damaged(float damage)
+    public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
-        AudioManager.PlaySE(defaultAtkSE, 0.4f);
+
+        if (damage > 0)
+        {
+            AudioManager.PlaySE(defaultAtkSE, 0.3f);
+        }
+        else
+        {
+            return;
+        }
         StartCoroutine(DamageAnimHouse(player));
         hp -= damage;
 

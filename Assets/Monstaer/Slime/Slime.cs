@@ -139,10 +139,17 @@ public class Slime : Monsters
         mode = Mode.move;
     }
 
-    public override void Damaged(float damage)
+    public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
-        if (mutekiTime > 0) return;
-        AudioManager.PlaySE(defaultAtkSE, 0.3f);
+        if (newStatus == null) ApplyStatusEffect(newStatus);
+        if (damage > 0)
+        {
+            AudioManager.PlaySE(defaultAtkSE, 0.3f);
+        }
+        else
+        {
+            return;
+        }
 
         if (slimeSize > 1 && damage < 10000)
         {

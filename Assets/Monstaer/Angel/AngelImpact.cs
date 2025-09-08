@@ -36,14 +36,12 @@ public class AngelImpact : MonoBehaviour
         {
             Monsters monsters = collision.gameObject.GetComponent<Monsters>();
 
-            monsters.ApplyStatus(new Monsters.StatusManager("BlooderSpdRateDown", false, Monsters.StatusManager.StatusType.spdRate, 0.5f, -0.8f));
-            monsters.ApplyStatus(new Monsters.StatusManager("BlooderAtkSpdRateDown", false, Monsters.StatusManager.StatusType.atkSpdRate, 0.5f, -0.8f));
-
             angel.Attack(monsters, angel.atk / 3, false);
-            Debug.Log("hit");
+
+            angel.Attack(monsters, 0, false, angel.GetEffect("AngleSpd", false, Monsters.StatusManager.StatusType.spdRate, 0.5f, -0.8f));
+            angel.Attack(monsters, 0, false, angel.GetEffect("AngleatkSpdRate", false, Monsters.StatusManager.StatusType.atkSpdRate, 0.5f, -0.8f));
+
         }
 
     }
-
-
 }

@@ -50,7 +50,7 @@ public class IceMage : Human
             animDuration -= Time.deltaTime;
         }
 
-        _snowBall.Slowing(target, atk);
+        _snowBall.Slowing(target, atk, this);
         spriteRenderer.sprite = atkSprites[2];
         yield return Wait(0.05f);
 

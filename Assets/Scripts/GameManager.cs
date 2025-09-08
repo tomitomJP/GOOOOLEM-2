@@ -339,7 +339,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject monstar in monstras)
         {
-            monstar.GetComponent<Monsters>().Damaged(1000);
+            monstar.GetComponent<Monsters>().Damaged(1000, null, false);
         }
 
         for (int i = 0; i < playerCount; i++)
@@ -524,13 +524,13 @@ public class GameManager : MonoBehaviour
 
         if (DMGolemPowers[0] > DMGolemPowers[1])
         {
-            DMGolem[1].Damaged(10000);
-            houseBlue.Damaged(10000);
+            DMGolem[1].Damaged(10000, null, false);
+            houseBlue.Damaged(10000, null, false);
         }
         else
         {
-            DMGolem[0].Damaged(10000);
-            houseRed.Damaged(10000);
+            DMGolem[0].Damaged(10000, null, false);
+            houseRed.Damaged(10000, null, false);
 
         }
 

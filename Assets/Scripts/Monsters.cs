@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.IO.Compression;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -242,7 +244,7 @@ public class Monsters : MonoBehaviour
 
     }
 
-    public float Attack(Monsters target, float damage = -810, bool Melee = true)//引数に攻撃対象のMonstrsコンポーネントを入れる
+    public float Attack(Monsters target, float damage = -810, bool Melee = true, StatusManager newStatus = null)//引数に攻撃対象のMonstrsコンポーネントを入れる
     {
         if (damage == -810) damage = atk;
         if (target == null || !target.gameObject.activeSelf) { return 0; }
@@ -251,7 +253,7 @@ public class Monsters : MonoBehaviour
 
         if (hp > 0)
         {
-            target.Damaged(damage * atkRate);
+            target.Damaged(damage * atkRate, this, Melee, newStatus);
             if (target.hp >= 0)
             {
                 target.DamagedAnimTrigger();
@@ -262,21 +264,10 @@ public class Monsters : MonoBehaviour
 
     }
 
-    public float Attacked(float damage)//投擲物などのモンスターのてから離れて死んでも残るようなオブジェクトが使用する
+    public StatusManager GetEffect(string id, bool stack, StatusManager.StatusType type, float time, float value)
     {
-        if (damage == -810) damage = atk;
-        if (this == null || !this.gameObject.activeSelf) { return 0; }
-
-        if (hp > 0)
-        {
-            this.Damaged(damage * atkRate);
-            if (this.hp >= 0)
-            {
-                this.DamagedAnimTrigger();
-            }
-            return damage * atkRate;
-        }
-        return 0;
+        StatusManager newStatus = new StatusManager(id, stack, type, time, value);
+        return newStatus;
     }
 
     public bool CanHitTarget(Transform target)
@@ -296,9 +287,17 @@ public class Monsters : MonoBehaviour
     }
 
 
-    public virtual void Damaged(float damage)
+    public virtual void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
-        AudioManager.PlaySE(defaultAtkSE, 0.3f);
+        if (newStatus != null) ApplyStatus(newStatus);
+        if (damage > 0)
+        {
+            AudioManager.PlaySE(defaultAtkSE, 0.3f);
+        }
+        else
+        {
+            return;
+        }
 
         if (hp > 0)
         {
@@ -474,6 +473,7 @@ public class Monsters : MonoBehaviour
             atkSpdRate,
             heal,
             stan,
+            def,
         }
 
         public StatusType type;
@@ -552,6 +552,9 @@ public class Monsters : MonoBehaviour
             case StatusManager.StatusType.stan:
                 mode = Mode.stan;
                 break;
+            case StatusManager.StatusType.def:
+                defRate += status.value;
+                break;
         }
     }
 
@@ -570,6 +573,9 @@ public class Monsters : MonoBehaviour
                 break;
             case StatusManager.StatusType.stan:
                 mode = Mode.move;
+                break;
+            case StatusManager.StatusType.def:
+                defRate -= status.value;
                 break;
         }
     }

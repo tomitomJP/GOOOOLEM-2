@@ -70,11 +70,11 @@ public class Blooder : Monsters
 
                     Attack(monster.GetComponent<Monsters>(), -810, false);
                     // スピード1.5倍、5秒間
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.1f, -0.8f));
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown", true, StatusManager.StatusType.atkSpdRate, 0.1f, -0.8f));
+                    Attack(monster.GetComponent<Monsters>(), 0, false, new StatusManager("BlooderSpdRateDown", true, StatusManager.StatusType.spdRate, 0.1f, -0.8f));
+                    Attack(monster.GetComponent<Monsters>(), 0, false, new StatusManager("BlooderAtkSpdRateDown", true, StatusManager.StatusType.atkSpdRate, 0.1f, -0.8f));
 
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderSpdRateDown1", true, StatusManager.StatusType.spdRate, 3f, -0.3f));
-                    ApplyStatusTarget(monster.GetComponent<Monsters>(), new StatusManager("BlooderAtkSpdRateDown1", true, StatusManager.StatusType.atkSpdRate, 3f, -0.4f));
+                    Attack(monster.GetComponent<Monsters>(), 0, false, new StatusManager("BlooderSpdRateDown1", true, StatusManager.StatusType.spdRate, 3f, -0.3f));
+                    Attack(monster.GetComponent<Monsters>(), 0, false, new StatusManager("BlooderAtkSpdRateDown1", true, StatusManager.StatusType.atkSpdRate, 3f, -0.4f));
 
                 }
             }

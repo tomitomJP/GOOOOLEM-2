@@ -13412,6 +13412,7 @@ MonoBehaviour:
   MoveAniTime: 0.3
   time: 2
   AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 0}
   hpMax: 150
   boxCollider2D: {fileID: 374988172}
@@ -29488,6 +29489,7 @@ MonoBehaviour:
   MoveAniTime: 0.3
   time: 2
   AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 1265465752}
   hpBar_Red: {fileID: 1979342698}
   hpBarText: {fileID: 1906601095}
@@ -35311,6 +35313,7 @@ MonoBehaviour:
   MoveAniTime: 0.3
   time: 2
   AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 854564633}
   hpBar_Red: {fileID: 1367664750}
   hpBarText: {fileID: 1078448733}
@@ -52730,6 +52733,7 @@ MonoBehaviour:
   MoveAniTime: 0.3
   time: 2
   AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 0}
   hpMax: 150
   boxCollider2D: {fileID: 1609641299}
@@ -65473,7 +65477,7 @@ Transform:
   m_GameObject: {fileID: 2055442482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.81, y: -0.46, z: 0}
+  m_LocalPosition: {x: 8.5, y: -2.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
