@@ -62,7 +62,7 @@ public class Monsters : MonoBehaviour
 
     public float time = 2;//抽選間隔
     public float timer { get; set; } = 0;
-    public float AtkTriggerRate { get; set; } = 50;
+    public float AtkTriggerRate = 50;
     public float AtkTriggerUpRate = 1.1f;
 
     public void RandomAtk()
@@ -107,7 +107,7 @@ public class Monsters : MonoBehaviour
             Dead();
         }
         RaycastHit2D[] hit;
-        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer) && aktCTimer <= 0)
+        if (Physics2D.Raycast(rayOrigin, transform.right, Mathf.Infinity, enemyLayer) && aktCTimer <= 0 && mode == Mode.move)
         {
             RandomAtk();
         }
@@ -166,6 +166,8 @@ public class Monsters : MonoBehaviour
 
     public virtual void StartSetup()//継承先のStart関数に入れる
     {
+
+        if (CompareTag("Untagged")) tag = "Monster";
         maxHp = hp;
         canvas = GameObject.FindWithTag("DamageTextCanvas").GetComponent<Canvas>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -290,17 +292,19 @@ public class Monsters : MonoBehaviour
     public virtual void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
         if (newStatus != null) ApplyStatus(newStatus);
-        if (damage > 0)
-        {
-            AudioManager.PlaySE(defaultAtkSE, 0.3f);
-        }
-        else
-        {
-            return;
-        }
+
+
 
         if (hp > 0)
         {
+            if (damage > 0)
+            {
+                AudioManager.PlaySE(defaultAtkSE, 0.3f);
+            }
+            else
+            {
+                return;
+            }
             float _damage = damage / defRate;
             hp -= _damage;
             Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();

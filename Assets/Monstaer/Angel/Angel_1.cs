@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Angel : Monsters
+public class Angel_1 : Monsters
 {
     [SerializeField] GameObject impact;
     [SerializeField] AudioClip trumpetSE;
@@ -44,27 +44,16 @@ public class Angel : Monsters
 
         }
         spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.2f);
+        yield return Wait(0.4f);
 
-
-        InstantImpact();
         AudioManager.PlaySEWithPitch(trumpetSE, 1f, 0.3f);
-        spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f, 2);
-
-        spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f, 2);
-
-        InstantImpact();
+        yield return Wait(0.05f);
         AudioManager.PlaySEWithPitch(trumpetSE, 1.2f, 0.3f);
-        spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.2f, 2);
+        yield return Wait(0.05f);
+        AudioManager.PlaySEWithPitch(trumpetSE, 1.4f, 0.3f);
 
-        spriteRenderer.sprite = atkSprites[2];
-        yield return Wait(0.1f, 2);
 
         InstantImpact();
-        AudioManager.PlaySEWithPitch(trumpetSE, 1.4f, 0.3f);
         spriteRenderer.sprite = atkSprites[3];
         yield return Wait(0.2f, 2);
 
@@ -81,7 +70,7 @@ public class Angel : Monsters
         GameObject I = Instantiate(impact, transform.position, Quaternion.Euler(transform.eulerAngles));
         I.layer = Mathf.RoundToInt(Mathf.Log(this.myLayer.value, 2));
 
-        AngelImpact angelImpact = I.GetComponent<AngelImpact>();
+        AngelImpact_1 angelImpact = I.GetComponent<AngelImpact_1>();
         angelImpact.angel = this;
     }
 }

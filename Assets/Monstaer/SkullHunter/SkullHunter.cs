@@ -8,7 +8,6 @@ public class SkullHunter : Monsters
     void Start()
     {
         StartSetup();
-        enemyDistance *= Random.Range(0.9f, 1.1f);
     }
 
     // Update is called once per frame
@@ -32,9 +31,9 @@ public class SkullHunter : Monsters
 
         Vector2 direction = transform.right;
         Monsters target = null;
-        Debug.DrawRay(transform.position + rayOrigin, direction * enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
+        Debug.DrawRay(transform.position + rayOrigin, direction * enemyDistance, Color.red, 0.5f); // 可視化（長さに注意）
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, enemyDistance, enemyLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + rayOrigin, direction, Mathf.Infinity, enemyLayer);
         if (hit.collider != null)
         {
             Monsters targetData = hit.collider.gameObject.GetComponent<Monsters>();

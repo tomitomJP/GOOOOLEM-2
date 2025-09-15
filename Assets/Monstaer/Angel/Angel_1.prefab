@@ -91,12 +91,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211754958315373815}
-  - component: {fileID: 1799696598951230390}
+  - component: {fileID: 3913730720297424039}
   - component: {fileID: 285905586468107880}
   - component: {fileID: 7989467224533542589}
   - component: {fileID: 7518727329288192447}
   m_Layer: 0
-  m_Name: Angel
+  m_Name: Angel_1
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ Transform:
   - {fileID: 2131085006791548711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1799696598951230390
+--- !u!114 &3913730720297424039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,38 +128,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 3981826152234572559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0cf9c3cb9b2e4b5886c9727b7ffaad5, type: 3}
+  m_Script: {fileID: 11500000, guid: 99e1fed8ba2a144099bf6d4279343df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSprites:
-  - {fileID: 21300000, guid: 89aec2318bf5247cd9e95932c546c3c4, type: 3}
-  - {fileID: 21300000, guid: 334bf00950a4b4292842ed03f99cdc49, type: 3}
-  - {fileID: 21300000, guid: ef9afab126fb347c28dbf712bec14891, type: 3}
-  - {fileID: 21300000, guid: 334bf00950a4b4292842ed03f99cdc49, type: 3}
+  - {fileID: 1298420730, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  - {fileID: 1024125024, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  - {fileID: 1324025153, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  - {fileID: 1227436807, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
   atkSprites:
-  - {fileID: 21300000, guid: b72e737fb8bca4ae5a59f9c35ad563cc, type: 3}
-  - {fileID: 21300000, guid: 0a5d0fc037d414c7db86defb462053fd, type: 3}
-  - {fileID: 21300000, guid: 664e3de9cb9484382aa6f397f95c25c0, type: 3}
-  - {fileID: 21300000, guid: f45a8b225f7a8464bbc897b27de70130, type: 3}
-  atk: 12
-  hp: 35
-  spd: 0.1
+  - {fileID: -1772787505, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  - {fileID: -740542655, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  - {fileID: 1152029810, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  - {fileID: -35542188, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
+  atk: 25
+  hp: 40
+  spd: 0.3
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
   defRate: 1
   player: 0
-  enemyDistance: 0
+  enemyDistance: 1
   enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
   mode: 1
-  MoveAniTime: 0.2
-  time: 2
-  AtkTriggerRate: 60
-  AtkTriggerUpRate: 1.1
+  MoveAniTime: 0.3
+  time: 0.5
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.5
   isDead: 0
-  impact: {fileID: 8694574148772513426, guid: c2cc9cc87199b4540bb7122d8cc28e02, type: 3}
+  impact: {fileID: 8694574148772513426, guid: 188601495382449908a09cf0af93e2a5, type: 3}
   trumpetSE: {fileID: 8300000, guid: cdecc1c64c2b94930891be8ebaf6f4e0, type: 3}
 --- !u!212 &285905586468107880
 SpriteRenderer:
@@ -181,7 +181,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 98b3cc2559f1145d68d12e3aee3caac6, type: 2}
+  - {fileID: 2100000, guid: dd43e63cc347c47e7bd6140e774e5d24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -202,7 +202,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 89aec2318bf5247cd9e95932c546c3c4, type: 3}
+  m_Sprite: {fileID: 1298420730, guid: 36d9d9c9a9c0f4146bbc210686b09994, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -508,7 +508,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5062,7 +5062,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

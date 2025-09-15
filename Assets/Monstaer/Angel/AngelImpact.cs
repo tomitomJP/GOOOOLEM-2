@@ -40,7 +40,7 @@ public class AngelImpact : MonoBehaviour
 
             angel.Attack(monsters, 0, false, angel.GetEffect("AngleSpd", false, Monsters.StatusManager.StatusType.spdRate, 0.5f, -0.8f));
             angel.Attack(monsters, 0, false, angel.GetEffect("AngleatkSpdRate", false, Monsters.StatusManager.StatusType.atkSpdRate, 0.5f, -0.8f));
-
+            Debug.Log("HIT");
         }
 
     }

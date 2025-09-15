@@ -167,13 +167,13 @@ public class House : Monsters
     IEnumerator DamageAnimHouse(int playerNum = 0)
     {
         Vector3 A = startPos;
-        Vector3 B = transform.position + new Vector3(0.5f, 0);
-        Vector3 C = transform.position + new Vector3(-0.2f, 0);
+        Vector3 B = startPos + new Vector3(0.5f, 0);
+        Vector3 C = startPos + new Vector3(-0.2f, 0);
 
         if (playerNum == 1)
         {
-            B = transform.position + new Vector3(-0.5f, 0);
-            C = transform.position + new Vector3(0.2f, 0);
+            B = startPos + new Vector3(-0.5f, 0);
+            C = startPos + new Vector3(0.2f, 0);
         }
 
         float timer = 0;
