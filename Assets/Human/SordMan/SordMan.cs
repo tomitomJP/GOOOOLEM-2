@@ -29,7 +29,7 @@ public class SordMan : Human
         spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.4f, 2);
 
-        Attack(target, atk / 2);
+        AreaAtk();
         spriteRenderer.sprite = atkSprites[1];
         yield return Wait(0.1f, 2);
 
@@ -44,5 +44,20 @@ public class SordMan : Human
 
         mode = Mode.move;
 
+    }
+
+      void AreaAtk()
+    {
+        if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
+        {
+            RaycastHit2D[] hit;
+            hit = Physics2D.RaycastAll(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer);
+            for (int j = 0; j < hit.Length; j++)
+            {
+                GameObject monster = hit[j].collider.gameObject;
+
+                Attack(monster.GetComponent<Monsters>(), atk / 2);
+            }
+        }
     }
 }

@@ -13477,7 +13477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb043ebff361c44f5aad45359a9d7a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 374988171}
   moveSprites: []
   atkSprites: []
   atk: 0
@@ -13486,25 +13485,18 @@ MonoBehaviour:
   spdRate: 0
   atkSpdRate: 0
   atkRate: 0
+  defRate: 1
   player: 1
   enemyDistance: 0
-  allyDistance: 0
+  enemyDistanceInCT: 1
   atkCT: 0
   aktCTimer: 0
-  monstarDeadPar: {fileID: 0}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
-  MoveAniTimer: 0
-  MoveAniSpriteNum: 0
-  defaultAtkSE: {fileID: 8300000, guid: 862aaa1b6d30a964d99d3afefb363fe4, type: 3}
-  sm: []
+  time: 2
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 0}
   hpMax: 150
   boxCollider2D: {fileID: 374988172}
@@ -29563,7 +29555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289e6eb8fc47c40be89a8fecbc6ef624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 567068185}
   moveSprites: []
   atkSprites: []
   atk: 0
@@ -29572,25 +29563,18 @@ MonoBehaviour:
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
+  defRate: 1
   player: 1
   enemyDistance: 2.5
-  allyDistance: 0.3
+  enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
-  monstarDeadPar: {fileID: 0}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
-  MoveAniTimer: 0
-  MoveAniSpriteNum: 0
-  defaultAtkSE: {fileID: 8300000, guid: c0029f11ed6b54736aabf19036cf258b, type: 3}
-  sm: []
+  time: 2
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 1265465752}
   hpBar_Red: {fileID: 1979342698}
   hpBarText: {fileID: 1906601095}
@@ -35396,7 +35380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289e6eb8fc47c40be89a8fecbc6ef624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 726798819}
   moveSprites: []
   atkSprites: []
   atk: 0
@@ -35405,25 +35388,18 @@ MonoBehaviour:
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
+  defRate: 1
   player: 0
   enemyDistance: 2.5
-  allyDistance: 0.3
+  enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
-  monstarDeadPar: {fileID: 0}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
-  MoveAniTimer: 0
-  MoveAniSpriteNum: 0
-  defaultAtkSE: {fileID: 8300000, guid: c0029f11ed6b54736aabf19036cf258b, type: 3}
-  sm: []
+  time: 2
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 854564633}
   hpBar_Red: {fileID: 1367664750}
   hpBarText: {fileID: 1078448733}
@@ -44406,6 +44382,7 @@ MonoBehaviour:
   soulSpwanPar: {fileID: 0}
   brokenPeaceParticle: {fileID: 0}
   peaceDeleteSound: {fileID: 0}
+  cannonCT: 1
   pointerSize: 0.2
   checkingPeace: []
   chainDis: 1
@@ -53003,7 +52980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb043ebff361c44f5aad45359a9d7a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 1609641298}
   moveSprites: []
   atkSprites: []
   atk: 0
@@ -53012,25 +52988,18 @@ MonoBehaviour:
   spdRate: 0
   atkSpdRate: 0
   atkRate: 0
+  defRate: 1
   player: 0
   enemyDistance: 0
-  allyDistance: 0
+  enemyDistanceInCT: 1
   atkCT: 0
   aktCTimer: 0
-  monstarDeadPar: {fileID: 0}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.3
-  MoveAniTimer: 0
-  MoveAniSpriteNum: 0
-  defaultAtkSE: {fileID: 8300000, guid: 862aaa1b6d30a964d99d3afefb363fe4, type: 3}
-  sm: []
+  time: 2
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.1
+  isDead: 0
   hpBar: {fileID: 0}
   hpMax: 150
   boxCollider2D: {fileID: 1609641299}
@@ -54734,6 +54703,8 @@ MonoBehaviour:
   - {fileID: 1609641297}
   - {fileID: 374988170}
   mode: 0
+  soloMode: 0
+  soloManager: {fileID: 0}
   RedGameOverText: {fileID: 1589096139}
   BlueGameOverText: {fileID: 129218495}
   houseRed: {fileID: 726798822}
@@ -54803,6 +54774,9 @@ MonoBehaviour:
   - 0
   beamCharge: {fileID: 8300000, guid: f90e2c58fdb92448cb5163966bbea70b, type: 3}
   beamShoot: {fileID: 8300000, guid: 044132e95911b46c38f87db87935b74b, type: 3}
+  monsters0: []
+  monsters1: []
+  humans: []
 --- !u!4 &1835283638
 Transform:
   m_ObjectHideFlags: 0
