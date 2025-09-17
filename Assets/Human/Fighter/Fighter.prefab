@@ -59,8 +59,8 @@ MonoBehaviour:
   - {fileID: 1323920335, guid: 9101f3f55805d441bb249370b70860bc, type: 3}
   - {fileID: 1153629550, guid: 9101f3f55805d441bb249370b70860bc, type: 3}
   - {fileID: 1339736993, guid: 9101f3f55805d441bb249370b70860bc, type: 3}
-  atk: 30
-  hp: 70
+  atk: 18
+  hp: 40
   spd: 0.4
   spdRate: 1
   atkSpdRate: 1
@@ -74,6 +74,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
   level: 1
@@ -90,6 +91,7 @@ MonoBehaviour:
   - {fileID: -1988050506, guid: 9101f3f55805d441bb249370b70860bc, type: 3}
   upperSE: {fileID: 8300000, guid: d0a8bfed38df64042aec851c64a9a6a9, type: 3}
   kawasuSE: {fileID: 8300000, guid: f8a8f5e7d90804eb29dc73e761e07ef9, type: 3}
+  dashPar: {fileID: 4329098438704504396, guid: b20b7b62dd0044012b03b787cef96860, type: 3}
 --- !u!212 &1820095184755410698
 SpriteRenderer:
   m_ObjectHideFlags: 0

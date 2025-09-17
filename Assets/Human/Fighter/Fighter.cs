@@ -9,6 +9,7 @@ public class Fighter : Human
     public Sprite[] dashSprite;//歩く用のスプライトを入れる
     [SerializeField] AudioClip upperSE;
     [SerializeField] AudioClip kawasuSE;
+    [SerializeField] GameObject dashPar;
 
     void Start()
     {
@@ -55,14 +56,16 @@ public class Fighter : Human
         spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.4f);
 
-        if (hp > 0 && target.hp > 0)
+        float upperDamageRte =  0.6f;
+
+        if (hp > 0 && target.hp  > 0)
         {
             AudioManager.PlaySE(upperSE, 1f);
             spriteRenderer.sprite = atkSprites[4];
             Punch(target, 0.6f);//アッパー
-            float upperPower = 7;
+            float upperPower = 9;
 
-            if (target.hp > 0)
+            if (target.hp - (atk * upperDamageRte * atkRate) > 0)
             {
                 target.GetComponent<Rigidbody2D>().AddForce(new Vector2(-0.1f, 1) * upperPower, ForceMode2D.Impulse);
             }
@@ -82,25 +85,15 @@ public class Fighter : Human
             int i = 0;
             float timer = 0f;
             float frameTime = 0.1f;
+            int hit = 6;
 
-            while (duration > 0)
+            for(int j = 0; j < hit; j++)
             {
-                timer += Time.deltaTime;
-                duration -= Time.deltaTime;
-
-                if (timer >= frameTime)
-                {
-                    timer = 0f;
-                    spriteRenderer.sprite = atkSprites[4 + i];
-                    i = (i + 1) % 2;
-                    Punch(target, 0.12f);//アッパー
-
-                    Debug.Log(i);
-                }
-
-                yield return null;
+                spriteRenderer.sprite = atkSprites[4 + i];
+                i = (i + 1) % 2;
+                Punch(target, upperDamageRte/hit);//アッパー
+                yield return new WaitForSeconds(frameTime);
             }
-
             spriteRenderer.sprite = atkSprites[0];
             yield return Wait(1.3f);
         }
@@ -121,20 +114,26 @@ public class Fighter : Human
         if (mode == Mode.atk) yield break;
         mode = Mode.atk;
 
-        float upSpd = 10;
+        float upSpd = 15;
         spdRate += upSpd;
 
         spriteRenderer.sprite = dashSprite[0];
-        yield return Wait(0.05f);
+        GameObject _dashpar =  Instantiate(dashPar,transform.position, Quaternion.Euler(0,180,0),transform);
 
+
+        float duration = 0.2f;
+        while (duration > 0 && DashMoving())
+        {
+            duration -= Time.deltaTime;
+            yield return null;
+        }
         spriteRenderer.sprite = dashSprite[1];
-        yield return Wait(0.05f);
         spdRate -= upSpd;
 
-        upSpd = 3;
+        upSpd = 6;
         spdRate += upSpd;
 
-        float duration = 2f;
+        duration = 1f;
         float frameTime = 0.15f;
         float timer = 0f;
         int i = 0;
@@ -155,7 +154,8 @@ public class Fighter : Human
 
             yield return null;
         }
-
+        _dashpar.GetComponent<ParticleSystem>().Stop();
+        Destroy(_dashpar,1);
         spdRate -= upSpd;
         mode = Mode.move;
         yield break;

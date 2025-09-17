@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 558451770, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
+  m_Sprite: {fileID: -907332146, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ccf804b15ad774cacda0e2596afb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
   moveSprites:
   - {fileID: 1248213313, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
   - {fileID: -2119661435, guid: e284bb7356368ce448520a6c36b0dc3b, type: 3}
@@ -117,25 +116,20 @@ MonoBehaviour:
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
+  defRate: 1
   player: 0
-  enemyDistance: 2.2
-  allyDistance: 0.3
+  enemyDistance: 1.5
+  enemyDistanceInCT: 2
   atkCT: 1
   aktCTimer: 0
-  monstarDeadPar: {fileID: 8167447678406892185, guid: 2fe3f2dfee7fe414d99b35126d0d5151, type: 3}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.05
-  MoveAniTimer: 0
-  defaultAtkSE: {fileID: 8300000, guid: 2cef62864446540759dd201d6c519d34, type: 3}
-  sm: []
+  time: 2
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.1
+  isDead: 0
   bites: {fileID: 3410495544883879219, guid: 725ee4e8eec774af3bbafb569822330e, type: 3}
+  bithsRayOrigin: {x: 0, y: 0}
 --- !u!61 &1888955186276721055
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +165,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.0219872}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.62, y: 0.5}
     oldSize: {x: 3.96875, y: 2}
     newSize: {x: 3.96875, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -179,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.9560256}
+  m_Size: {x: 1.94, y: 4.9560256}
   m_EdgeRadius: 0
 --- !u!50 &3584874411356168012
 Rigidbody2D:

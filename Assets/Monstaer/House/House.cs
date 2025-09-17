@@ -135,7 +135,7 @@ public class House : Monsters
         }
         else
         {
-
+            InsHitPar(attacker);
             AudioManager.PlaySE(defaultAtkSE, 0.4f);
             StartCoroutine(DamageAnimHouse(player));
             damages.Add(new Damage(hp, damage));

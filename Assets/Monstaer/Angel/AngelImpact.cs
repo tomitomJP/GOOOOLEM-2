@@ -35,12 +35,15 @@ public class AngelImpact : MonoBehaviour
         if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("House"))
         {
             Monsters monsters = collision.gameObject.GetComponent<Monsters>();
-
+            if(angel.player != monsters.player)
+            {
             angel.Attack(monsters, angel.atk / 3, false);
 
             angel.Attack(monsters, 0, false, angel.GetEffect("AngleSpd", false, Monsters.StatusManager.StatusType.spdRate, 0.5f, -0.8f));
             angel.Attack(monsters, 0, false, angel.GetEffect("AngleatkSpdRate", false, Monsters.StatusManager.StatusType.atkSpdRate, 0.5f, -0.8f));
             Debug.Log("HIT");
+
+            }
         }
 
     }

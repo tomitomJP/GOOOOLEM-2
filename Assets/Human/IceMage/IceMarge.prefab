@@ -61,7 +61,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0bbc10e55f70c4225a4a239c198b9657, type: 3}
   - {fileID: -1449511958, guid: e56de8ed11d434debab6588f761936ee, type: 3}
   - {fileID: 253942099, guid: e56de8ed11d434debab6588f761936ee, type: 3}
-  atk: 25
+  atk: 18
   hp: 20
   spd: 0.3
   spdRate: 1
@@ -76,7 +76,9 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.15
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
+  isDead: 0
   level: 1
   growthRate: 0.25
   name: "\u3042\u3042\u3042\u3042"

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7108004279789632350}
   - component: {fileID: 2125381504072813581}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: AngelImpact 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 900577444568168868}
   - component: {fileID: 8814707160496292034}
   - component: {fileID: 4288265811700403716}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 8830134067207920610}
   - component: {fileID: 1013332786218792358}
   - component: {fileID: 8391654687023513565}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9757,7 +9757,7 @@ GameObject:
   - component: {fileID: 7299496630172127563}
   - component: {fileID: -8844799401888415314}
   - component: {fileID: 6198928192853615787}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: AngelImpact 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

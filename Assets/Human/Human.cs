@@ -34,21 +34,21 @@ public class Human : Monsters
 
     public float GetHP(int level)
     {
-        if (level < 1) level = 1;
+        if (level <= 1) level = 1;
 
-        float _hp = hp + (growthRate * Mathf.Pow(level - 1, 2));
+        float _hp = hp + (growthRate * Mathf.Pow(level - 2, 2));
         return Mathf.Floor(_hp);
     }
 
     public float GetATK(int level)
     {
-        if (level < 1)
+        if (level <= 1)
         {
             level = 1;
             return atk;
         }
 
-        float atkValue = atk * (1.3f + ((level - 1f) / 20f));
+        float atkValue = atk * (1.3f + ((level - 2f) / 30f));
         return Mathf.Floor(atkValue);
     }
 

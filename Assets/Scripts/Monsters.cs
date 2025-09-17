@@ -56,6 +56,7 @@ public class Monsters : MonoBehaviour
     public GameManager gameManager { get; set; }
     public AudioClip defaultAtkSE { get; set; }
     public GameObject monstarDeadPar { get; set; }
+    public GameObject hitPar { get; set; }
 
 
     [Header("ランダムで攻撃するキャラの設定")]
@@ -113,7 +114,7 @@ public class Monsters : MonoBehaviour
         }
         else if (aktCTimer > 0)
         {
-            aktCTimer -= Time.deltaTime;
+            aktCTimer -= Time.deltaTime * atkSpdRate;
         }
         UpdateStatuses();
     }
@@ -191,6 +192,8 @@ public class Monsters : MonoBehaviour
         damageText = Resources.Load<GameObject>("DamageText"); // Resources/Enemy.prefab をロード
         monstarDeadPar = Resources.Load<GameObject>("Paticle/MonstarDead"); // Resources/Enemy.prefab をロード
         defaultAtkSE = Resources.Load<AudioClip>("SE/dedaultDamage"); // Resources/Enemy.prefab をロード
+        hitPar = Resources.Load<GameObject>("Paticle/HitEffect"); // Resources/Enemy.prefab をロード
+
 
 
         GameObject _gameManager = GameObject.FindWithTag("GameController");
@@ -206,6 +209,10 @@ public class Monsters : MonoBehaviour
         if (isDead) return;
         //Allycheck();
         EnemyCheck();
+        if (aktCTimer > 0)
+        {
+            aktCTimer -= Time.deltaTime * atkSpdRate;
+        }
         if (mode != Mode.atk)
         {
             Move();
@@ -228,6 +235,10 @@ public class Monsters : MonoBehaviour
         if (isDead)
         {
             return;
+        }
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
         }
         isDead = true;
         if (gameManager != null) gameManager.resultDatas[(player + 1) % 2].killCount++;
@@ -266,6 +277,12 @@ public class Monsters : MonoBehaviour
 
     }
 
+    public void InsHitPar(Monsters attacker)
+    {
+        if (hp <= 0) return;
+        Instantiate(hitPar, new Vector3(transform.position.x, attacker.transform.position.y, transform.position.z), Quaternion.identity);
+    }
+
     public StatusManager GetEffect(string id, bool stack, StatusManager.StatusType type, float time, float value)
     {
         StatusManager newStatus = new StatusManager(id, stack, type, time, value);
@@ -292,7 +309,7 @@ public class Monsters : MonoBehaviour
     public virtual void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
         if (newStatus != null) ApplyStatus(newStatus);
-
+        InsHitPar(attacker);
 
 
         if (hp > 0)
@@ -389,10 +406,6 @@ public class Monsters : MonoBehaviour
             }
         }
         MoveOk = _MoveOk;
-        if (aktCTimer > 0 && mode != Mode.atk)
-        {
-            aktCTimer = Mathf.Clamp(aktCTimer - (Time.deltaTime * atkSpdRate), 0, Mathf.Infinity);
-        }
     }
 
     public void Allycheck()

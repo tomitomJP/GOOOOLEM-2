@@ -52,6 +52,7 @@ public class GoblinBuild : Monsters
         if (damage > 0)
         {
             AudioManager.PlaySE(defaultAtkSE, 0.3f);
+            InsHitPar(attacker);
         }
         else
         {

@@ -151,7 +151,7 @@ MonoBehaviour:
   atkSprites:
   - {fileID: 373851128, guid: 47a67ba8b374982429c61d4cc9521e62, type: 3}
   atk: 0
-  hp: 100
+  hp: 60
   spd: 0.2
   spdRate: 1
   atkSpdRate: 1
@@ -165,7 +165,9 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
+  isDead: 0
   level: 1
   growthRate: 0.098
   name: "\u3042\u3042\u3042\u3042"

@@ -79,7 +79,7 @@ public class Angel : Monsters
     {
 
         GameObject I = Instantiate(impact, transform.position, Quaternion.Euler(transform.eulerAngles));
-        I.layer = Mathf.RoundToInt(Mathf.Log(this.myLayer.value, 2));
+        //I.layer = Mathf.RoundToInt(Mathf.Log(this.myLayer.value, 2));
 
         AngelImpact angelImpact = I.GetComponent<AngelImpact>();
         angelImpact.angel = this;

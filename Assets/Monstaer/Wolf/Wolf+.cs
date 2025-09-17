@@ -57,9 +57,18 @@ public class WolfPlus : Monsters
 
     public override void Move()//移動と異動アニメーションを管理
     {
-        if (mode == Mode.move && stanTIme <= 0)
+        if (mode == Mode.move && stanTIme <= 0 && MoveOk)
         {
-            transform.Translate(Vector3.right * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100));
+            if (player == 0)
+            {
+                transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
+            }
+            else
+            {
+                transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
+            }
         }
         else
         {

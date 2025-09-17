@@ -187,7 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792dfaafc5d0a4e02af018c7d822403a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
   moveSprites:
   - {fileID: 1248213313, guid: d7a5db7ca84f342ef9b577e6c1a8ac06, type: 3}
   - {fileID: -2119661435, guid: d7a5db7ca84f342ef9b577e6c1a8ac06, type: 3}
@@ -205,25 +204,18 @@ MonoBehaviour:
   spdRate: 1
   atkSpdRate: 1.5
   atkRate: 1
+  defRate: 1
   player: 0
-  enemyDistance: 2.2
-  allyDistance: 0.3
+  enemyDistance: 1.5
+  enemyDistanceInCT: 2
   atkCT: 1
   aktCTimer: 0
-  monstarDeadPar: {fileID: 0}
-  myLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  stanTIme: 0
   mode: 1
   MoveAniTime: 0.035
-  MoveAniTimer: 0
-  MoveAniSpriteNum: 0
-  defaultAtkSE: {fileID: 0}
-  sm: []
+  time: 2
+  AtkTriggerRate: 50
+  AtkTriggerUpRate: 1.1
+  isDead: 0
   bites: {fileID: 3410495544883879219, guid: 725ee4e8eec774af3bbafb569822330e, type: 3}
   zanzou:
   - {fileID: 1693930409111567689}
@@ -274,7 +266,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.9560256}
+  m_Size: {x: 1.94, y: 4.9560256}
   m_EdgeRadius: 0
 --- !u!50 &3584874411356168012
 Rigidbody2D:

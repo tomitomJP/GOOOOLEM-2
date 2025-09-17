@@ -34,9 +34,12 @@ public class AngelImpact_1 : MonoBehaviour
         if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("House"))
         {
             Monsters monsters = collision.gameObject.GetComponent<Monsters>();
-            Instantiate(exp, monsters.transform.position, Quaternion.identity);
-            angel.Attack(monsters, angel.atk, false);
-            Destroy(gameObject);
+            if(angel.player != monsters.player){
+                Instantiate(exp, monsters.transform.position, Quaternion.identity);
+                angel.Attack(monsters, angel.atk, false);
+                Destroy(gameObject);
+            }
+            
         }
 
     }

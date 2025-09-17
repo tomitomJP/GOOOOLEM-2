@@ -23,7 +23,7 @@ public class Joker : Human
         mode = Mode.atk;
 
 
-        if (Vector2.Distance(target.transform.position, transform.position) < 2)
+        if (Vector2.Distance(target.transform.position, transform.position) < 3)
         {
             yield return NomalAtk(target);
 
@@ -31,6 +31,7 @@ public class Joker : Human
         else
         {
             yield return MagicAtk(target);
+            aktCTimer = atkCT * 2;
 
         }
 

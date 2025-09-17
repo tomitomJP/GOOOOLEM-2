@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8830134067207920610}
   - component: {fileID: 1013332786218792358}
   - component: {fileID: 8391654687023513565}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4862,7 +4862,7 @@ GameObject:
   - component: {fileID: 7299496630172127563}
   - component: {fileID: -8844799401888415314}
   - component: {fileID: 6198928192853615787}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: AngelImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
