@@ -120,7 +120,7 @@ MonoBehaviour:
   player: 0
   enemyDistance: 1.5
   enemyDistanceInCT: 2
-  atkCT: 1
+  atkCT: 2
   aktCTimer: 0
   mode: 1
   MoveAniTime: 0.05

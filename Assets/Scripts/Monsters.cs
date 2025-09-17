@@ -209,7 +209,7 @@ public class Monsters : MonoBehaviour
         if (isDead) return;
         //Allycheck();
         EnemyCheck();
-        if (aktCTimer > 0)
+        if (aktCTimer > 0 && mode != Mode.atkCT)
         {
             aktCTimer -= Time.deltaTime * atkSpdRate;
         }
@@ -249,7 +249,7 @@ public class Monsters : MonoBehaviour
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         transform.SetParent(null);
-        Destroy(gameObject, 30f);
+        Destroy(gameObject, 15);
     }
 
     public virtual void Dead2()

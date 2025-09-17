@@ -63,6 +63,18 @@ MonoBehaviour:
   - {fileID: 3981826152234572559, guid: 5107279f8a43e4ec28c40b07ad467c78, type: 3}
   - {fileID: 7273578518413537831, guid: b39c75f9bdc854971b24490bbf2975b8, type: 3}
   - {fileID: 5439060659553784544, guid: 80b0e76f6c16342c5a4a95df3968cf22, type: 3}
+  MonstersPlus:
+  - {fileID: 5447051748445029993, guid: c18dcca14f41dba41beef89139c340ca, type: 3}
+  - {fileID: 6431710785250808798, guid: 25cba4e5ffc73416e8f20e589e9c1b63, type: 3}
+  - {fileID: 932860455082757102, guid: 9b16fd4708d714d07b82c4d389d15484, type: 3}
+  - {fileID: 2027319491513497169, guid: 1d62662b6a05d47879064c034246e96f, type: 3}
+  - {fileID: 1831818590274134714, guid: 3c6677b7bd6294b939bc9cb71d9c86e6, type: 3}
+  - {fileID: 3097341304849269163, guid: 55f5ac87efb9b41dc8fa7bf331ce7b5e, type: 3}
+  - {fileID: 5671763633009671992, guid: 524471d7f82e24d05aae6062b54602cd, type: 3}
+  - {fileID: 3981826152234572559, guid: 41b821289de42498096e263a8a7bf2cc, type: 3}
+  - {fileID: 3808656257000856580, guid: e7d1898ac47844971ba2d3b6e56198cb, type: 3}
+  - {fileID: 5439060659553784544, guid: a19e48756033d43c390f8df946c0de24, type: 3}
+  choiseMode: 0
   choiceDown: 0
   choiceUp: 0
   brokenText: {fileID: 5292398740679119046, guid: 1904d56a1b8b5422aaa48b2bb8116c36, type: 3}
@@ -70,6 +82,7 @@ MonoBehaviour:
   soulSpwanPar: {fileID: 474256496774518506, guid: 9e56ce9b16fec457a89c85c75121f017, type: 3}
   brokenPeaceParticle: {fileID: 5166551073715190305, guid: 0f7c51aa1a2d047fab0d91825255b47d, type: 3}
   peaceDeleteSound: {fileID: 8300000, guid: d2ee8390ab857420e8d23997aeea1c8a, type: 3}
+  cannonCT: 1
   pointerSize: 0.1
   checkingPeace: []
   chainDis: 0.7

@@ -19,11 +19,11 @@ public class CannonBallStatus : Monsters
 
         if (player == 0)
         {
-            gameObject.layer = myLayer0;
+            gameObject.layer = 15;
         }
         else
         {
-            gameObject.layer = myLayer1;
+            gameObject.layer = 16;
 
         }
     }

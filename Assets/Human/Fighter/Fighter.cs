@@ -56,9 +56,9 @@ public class Fighter : Human
         spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.4f);
 
-        float upperDamageRte =  0.6f;
+        float upperDamageRte = 0.6f;
 
-        if (hp > 0 && target.hp  > 0)
+        if (hp > 0 && target.hp > 0)
         {
             AudioManager.PlaySE(upperSE, 1f);
             spriteRenderer.sprite = atkSprites[4];
@@ -71,13 +71,16 @@ public class Fighter : Human
             }
             else
             {
+                Punch(target, upperDamageRte);//アッパー
                 GameObject obj = new GameObject("MyObject");
                 obj.transform.position = target.transform.position;
                 SpriteRenderer objSpr = obj.AddComponent<SpriteRenderer>();
                 objSpr.sprite = target.GetComponent<SpriteRenderer>().sprite;
                 target.GetComponent<SpriteRenderer>().enabled = false;
 
-                obj.AddComponent<Rigidbody2D>().AddForce(new Vector2(-0.1f, 1) * upperPower * 5, ForceMode2D.Impulse);
+                obj.AddComponent<Rigidbody2D>().AddForce(new Vector2(-0.1f, 1) * upperPower * 3, ForceMode2D.Impulse);
+                obj.GetComponent<Rigidbody2D>().angularVelocity = upperPower * 100;
+
                 Destroy(obj, 2f);
             }
             rb.AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
@@ -87,11 +90,11 @@ public class Fighter : Human
             float frameTime = 0.1f;
             int hit = 6;
 
-            for(int j = 0; j < hit; j++)
+            for (int j = 0; j < hit; j++)
             {
                 spriteRenderer.sprite = atkSprites[4 + i];
                 i = (i + 1) % 2;
-                Punch(target, upperDamageRte/hit);//アッパー
+                Punch(target, upperDamageRte / hit);//アッパー
                 yield return new WaitForSeconds(frameTime);
             }
             spriteRenderer.sprite = atkSprites[0];
@@ -118,7 +121,7 @@ public class Fighter : Human
         spdRate += upSpd;
 
         spriteRenderer.sprite = dashSprite[0];
-        GameObject _dashpar =  Instantiate(dashPar,transform.position, Quaternion.Euler(0,180,0),transform);
+        GameObject _dashpar = Instantiate(dashPar, transform.position, Quaternion.Euler(0, 180, 0), transform);
 
 
         float duration = 0.2f;
@@ -155,7 +158,7 @@ public class Fighter : Human
             yield return null;
         }
         _dashpar.GetComponent<ParticleSystem>().Stop();
-        Destroy(_dashpar,1);
+        Destroy(_dashpar, 1);
         spdRate -= upSpd;
         mode = Mode.move;
         yield break;

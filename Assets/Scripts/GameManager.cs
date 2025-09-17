@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
                     timerText.enabled = false;
                     mode = Mode.deathMatchReady;
                 }
-                if (timer < 10 && timer10 == false)
+                if (timer < 60 && timer10 == false)
                 {
                     timer10 = true;
                     AudioManager.BgmOption(1.05f);
@@ -240,7 +240,10 @@ public class GameManager : MonoBehaviour
 
             CannonSliders();
             //SoulGageUpdata();
-            timerText.text = Mathf.Max(Mathf.FloorToInt(timer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(timer % 60), 0).ToString("D2");
+            if (timer > 60)
+            {
+                timerText.text = Mathf.Max(Mathf.FloorToInt(timer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(timer % 60), 0).ToString("D2");
+            }
         }
     }
 
@@ -285,6 +288,7 @@ public class GameManager : MonoBehaviour
                               0.1f);
                });
         yield return new WaitForSeconds(0.5f);
+        timerText.text = "??:??";
 
     }
 

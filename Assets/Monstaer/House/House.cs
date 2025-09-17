@@ -80,7 +80,7 @@ public class House : Monsters
         {
             spriteRenderer.sprite = houseSprites[3];
             castleDamageParticles[2].SetActive(true);
-
+            DoorSpr.enabled = false;
             for (int i = 0; i < castleDamageParticles[2].transform.childCount; i++)
             {
                 castleDamageParticles[2].transform.GetChild(i).gameObject.SetActive(false);

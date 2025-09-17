@@ -13411,6 +13411,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
   hpBar: {fileID: 0}
@@ -29488,6 +29489,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
   hpBar: {fileID: 1265465752}
@@ -35312,6 +35314,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
   hpBar: {fileID: 854564633}
@@ -52675,6 +52678,7 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
   hpBar: {fileID: 0}
@@ -65297,7 +65301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2030978315
 SpriteRenderer:
   m_ObjectHideFlags: 0
