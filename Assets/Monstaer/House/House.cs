@@ -22,6 +22,8 @@ public class House : Monsters
     [SerializeField] Sprite[] DoorSprite;
     [SerializeField] GameObject[] castleDamageParticles;
     [SerializeField] GameObject knockBackMon;
+    [SerializeField] SpriteRenderer viewSpr;
+    [SerializeField] Transform vireTra;
     public bool NonDamage = false;
 
     Vector3 startPos;
@@ -89,6 +91,7 @@ public class House : Monsters
             spriteRenderer.color = Color.white;
 
         }
+        viewSpr.sprite = spriteRenderer.sprite;
     }
 
     public void DoorAnimTrigger()
@@ -180,7 +183,7 @@ public class House : Monsters
         float time = 0.1f;
         while (time > timer)
         {
-            transform.position = Vector3.Lerp(A, B, timer / time);
+            vireTra.position = Vector3.Lerp(A, B, timer / time);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -189,7 +192,7 @@ public class House : Monsters
         time = 0.05f;
         while (time > timer)
         {
-            transform.position = Vector3.Lerp(B, C, timer / time);
+            vireTra.position = Vector3.Lerp(B, C, timer / time);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -198,12 +201,12 @@ public class House : Monsters
         time = 0.2f;
         while (time > timer)
         {
-            transform.position = Vector3.Lerp(C, A, timer / time);
+            vireTra.position = Vector3.Lerp(C, A, timer / time);
             timer += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = A;
+        vireTra.position = A;
     }
 
     IEnumerator DamageSliderMove()

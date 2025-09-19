@@ -69,8 +69,8 @@ MonoBehaviour:
   atkRate: 1
   defRate: 1
   player: 0
-  enemyDistance: 12
-  enemyDistanceInCT: 1
+  enemyDistance: 0
+  enemyDistanceInCT: 2
   atkCT: 1
   aktCTimer: 0
   mode: 1
@@ -79,6 +79,7 @@ MonoBehaviour:
   AtkTriggerRate: 10
   AtkTriggerUpRate: 1.7
   isDead: 0
+  shootSE: {fileID: 8300000, guid: 1cc7a088ae98f4976a77e2fa1f786c21, type: 3}
 --- !u!212 &7102765934196840624
 SpriteRenderer:
   m_ObjectHideFlags: 0

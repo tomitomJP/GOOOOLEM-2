@@ -11,7 +11,7 @@ public class IM_SnowBall : MonoBehaviour
 
     public void Slowing(Monsters Monsters, float damage, IceMage iceMage)
     {
-        if (Monsters == null || !Monsters.gameObject.activeSelf)
+        if (Monsters == null || !Monsters.gameObject.activeSelf || !gameObject.activeSelf)
         {
             Destroy(gameObject);
             return;

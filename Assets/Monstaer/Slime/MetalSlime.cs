@@ -40,12 +40,22 @@ public class MetalSlime : Monsters
 
         mode = Mode.move;
     }
-    
-     public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
+
+    public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
+
+        if (damage > 0)
+        {
+            AudioManager.PlaySE(defaultAtkSE, 0.3f);
+        }
+        else
+        {
+            return;
+        }
+
         if (hp > 0)
         {
-            
+
             hp -= 1;
 
             // ヒット演出

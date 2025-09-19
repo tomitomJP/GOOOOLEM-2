@@ -178,9 +178,9 @@ MonoBehaviour:
   atkSprites:
   - {fileID: -1011605177, guid: 5fa2fcdd650af644583a307f87bb3533, type: 3}
   - {fileID: 958809406, guid: 5fa2fcdd650af644583a307f87bb3533, type: 3}
-  atk: 25
-  hp: 100
-  spd: 1
+  atk: 15
+  hp: 10
+  spd: 0.4
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1

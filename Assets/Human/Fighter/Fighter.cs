@@ -75,11 +75,17 @@ public class Fighter : Human
                 GameObject obj = new GameObject("MyObject");
                 obj.transform.position = target.transform.position;
                 SpriteRenderer objSpr = obj.AddComponent<SpriteRenderer>();
-                objSpr.sprite = target.GetComponent<SpriteRenderer>().sprite;
+                SpriteRenderer targetSpr = target.GetComponent<SpriteRenderer>();
+                objSpr.sprite = targetSpr.sprite;
+                objSpr.material = targetSpr.material;
+                objSpr.sortingOrder = targetSpr.sortingOrder;
+                objSpr.sortingLayerID = targetSpr.sortingLayerID;
+
                 target.GetComponent<SpriteRenderer>().enabled = false;
 
-                obj.AddComponent<Rigidbody2D>().AddForce(new Vector2(-0.1f, 1) * upperPower * 3, ForceMode2D.Impulse);
+                obj.AddComponent<Rigidbody2D>().AddForce(new Vector2(-0.1f, 1) * upperPower, ForceMode2D.Impulse);
                 obj.GetComponent<Rigidbody2D>().angularVelocity = upperPower * 100;
+                obj.GetComponent<Rigidbody2D>().gravityScale = 0;
 
                 Destroy(obj, 2f);
             }
@@ -98,7 +104,7 @@ public class Fighter : Human
                 yield return new WaitForSeconds(frameTime);
             }
             spriteRenderer.sprite = atkSprites[0];
-            yield return Wait(1.3f);
+            yield return Wait(1.3f, 2);
         }
 
         mode = Mode.move;

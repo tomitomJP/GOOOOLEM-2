@@ -209,7 +209,7 @@ public class Monsters : MonoBehaviour
         if (isDead) return;
         //Allycheck();
         EnemyCheck();
-        if (aktCTimer > 0 && mode != Mode.atkCT)
+        if (aktCTimer > 0 && mode != Mode.atk)
         {
             aktCTimer -= Time.deltaTime * atkSpdRate;
         }
@@ -384,7 +384,7 @@ public class Monsters : MonoBehaviour
         Vector2 direction = transform.right;
 
         float _enemyDistance = enemyDistance;
-        if (aktCTimer > 0) _enemyDistance = enemyDistanceInCT;
+        if (aktCTimer > 0 || enemyDistance == 0) _enemyDistance = enemyDistanceInCT;
 
         Debug.DrawRay(transform.position + rayOrigin, direction * _enemyDistance, Color.red, 0.1f); // 可視化（長さに注意）
 
@@ -397,10 +397,10 @@ public class Monsters : MonoBehaviour
                 if (targetData.player != player)
                 {
                     _MoveOk = false;
-                    if (mode != Mode.atk && aktCTimer <= 0)
+                    if (mode != Mode.atk && aktCTimer <= 0 && enemyDistance > 0)
                     {
-                        StartCoroutine(AtkMotion(targetData));
                         aktCTimer = atkCT;
+                        Coroutine atkMotion = StartCoroutine(AtkMotion(targetData));
                     }
                 }
             }
