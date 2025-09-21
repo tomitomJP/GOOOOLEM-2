@@ -149,8 +149,8 @@ MonoBehaviour:
   atkRate: 1
   defRate: 1
   player: 0
-  enemyDistance: 1
-  enemyDistanceInCT: 1
+  enemyDistance: 0
+  enemyDistanceInCT: 2
   atkCT: 1
   aktCTimer: 0
   mode: 1

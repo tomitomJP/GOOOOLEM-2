@@ -20,6 +20,7 @@ public class ControllManager : MonoBehaviour
 
     [SerializeField] GameObject[] golemHead;
     [SerializeField] GameObject[] Monsters;
+    [SerializeField] GameObject[] MonstersPlus;
 
     private GameInput controls;  // InputSystem用のコントロール
     private Vector2 moveInput;
@@ -385,23 +386,30 @@ public class ControllManager : MonoBehaviour
         pazzleManager.blackScreen.SetActive(true);
         pazzleManager.BrickCountOff();
 
-        bool CanSpawnGolem = false;
         int goleBodyCount = 0;
         int peaceNumber = -1;
-
+        int soulCount = 0;
+        float statusUprate = 1;
         for (int i = 0; i < DeletingPeace.Count; i++)
         {
             Peace PACE = DeletingPeace[i].GetComponent<Peace>();
 
             if (PACE.peaceNumber == 4)
             {
-                if (!CanSpawnGolem)
+                if (soulCount == 0)
                 {
-                    CanSpawnGolem = true;
+                    soulCount++;
+                }
+                else if (soulCount == 1)
+                {
+                    soulCount++;
+                    goleBodyCount++;
+
                 }
                 else
                 {
                     goleBodyCount++;
+                    statusUprate += 0.05f;
                 }
             }
             else
@@ -410,7 +418,7 @@ public class ControllManager : MonoBehaviour
                 {
                     peaceNumber = PACE.peaceNumber;
                 }
-
+                statusUprate += 0.025f;
                 goleBodyCount++;
             }
         }
@@ -432,7 +440,7 @@ public class ControllManager : MonoBehaviour
             main.startColor = Color.white;
 
 
-            if (CanSpawnGolem)
+            if (soulCount > 0)
             {
                 gameManager.cannonsChages[playerNumber] += 0.8f;
 
@@ -465,7 +473,7 @@ public class ControllManager : MonoBehaviour
 
         text.mode = gameManager.mode;
         text.num = DeletingPeace.Count;
-        text.Spwan = CanSpawnGolem;
+        text.Spwan = soulCount > 0;
 
         yield return new WaitForSeconds(0.2f);
 
@@ -476,7 +484,7 @@ public class ControllManager : MonoBehaviour
             count++;
             //  Debug.Log(count);
             Vector2 pos = DeletingPeace[0].transform.position;
-            if (count >= 6 && DeletingPeace.Count == 1)
+            if ((count >= 6 || soulCount > 1) && DeletingPeace.Count == 1)
             {
 
                 newSoul = Instantiate(pazzleManager.peaces[4], pos, Quaternion.identity, pazzleManager.peacePearent.transform);
@@ -485,24 +493,24 @@ public class ControllManager : MonoBehaviour
             DeletingPeace.RemoveAt(0);
         }
 
-        if (CanSpawnGolem && gameManager.mode == GameManager.Mode.play)
+        if (soulCount > 0 && gameManager.mode == GameManager.Mode.play)
         {
 
-            Monsters monsters = MonstatSpawn(goleBodyCount);
+            Monsters monsters = MonstatSpawn(goleBodyCount, soulCount);
 
             switch (peaceNumber)
             {
                 case 0:
-                    monsters.spdRate *= 1.15f;
+                    monsters.spdRate *= 1.15f + statusUprate;
                     break;
                 case 1:
-                    monsters.atkRate *= 1.3f;
+                    monsters.atkRate *= 1.3f + statusUprate;
                     break;
                 case 2:
-                    monsters.atkSpdRate *= 1.25f;
+                    monsters.atkSpdRate *= 1.25f + statusUprate;
                     break;
                 case 3:
-                    monsters.hp *= 1.3f;
+                    monsters.hp *= 1.3f + statusUprate;
                     break;
             }
         }
@@ -520,14 +528,38 @@ public class ControllManager : MonoBehaviour
     }
 
 
-    public Monsters MonstatSpawn(int Count)
+    public Monsters MonstatSpawn(int Count, int soulCount = 1)
     {
         gameManager.resultDatas[playerNumber].spawnCount++;
         pazzleManager.house.DoorAnimTrigger();
         int MonstaersNum = Mathf.Clamp(Count /*- 3*/, 0, 9);//-1.92
         Vector3 pos = Houses[playerNumber].transform.position;
         pos.y = -5f;
-        GameObject monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
+        GameObject monstaer;
+
+        if (Count == 1)
+        {
+            if (Random.Range(0, 5) == 0)
+            {
+                monstaer = Instantiate(MonstersPlus[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
+
+            }
+            else
+            {
+                monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
+
+            }
+        }
+        else if (soulCount == 1)
+        {
+            monstaer = Instantiate(Monsters[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
+
+        }
+        else
+        {
+            monstaer = Instantiate(MonstersPlus[MonstaersNum], pos, Quaternion.identity, MonstersPearent);
+
+        }
 
         Monsters monsters = monstaer.GetComponent<Monsters>();
         monsters.player = playerNumber;
