@@ -31,7 +31,7 @@ public class PurificationParticle : MonoBehaviour
 
         while (elapsed < duration)
         {
-            holyLight.intensity = Mathf.Lerp(10f, 20f, Mathf.PingPong(elapsed * 20f, 1f));
+            holyLight.intensity = Mathf.Lerp(10f, 15f, Mathf.PingPong(elapsed * 20f, 1f));
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -45,7 +45,7 @@ public class PurificationParticle : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator PlaySE(int steps = 16, float duration = 3f, float startPitch = 0.7f, float endPitch = 2.5f)
+    IEnumerator PlaySE(int steps = 12, float duration = 3f, float startPitch = 0.7f, float endPitch = 2.5f)
     {
         float stepDuration = duration / steps;  // 各ステップの間隔
         for (int i = 0; i < steps; i++)
@@ -54,7 +54,7 @@ public class PurificationParticle : MonoBehaviour
             float pitch = Mathf.Lerp(startPitch, endPitch, (float)i / (steps - 1));
 
             // 1回だけ再生
-            AudioManager.PlaySEWithPitch(se, pitch);
+            AudioManager.PlaySEWithPitch(se, pitch, 0.3f);
             // 後半ほど早くなるようにステップ時間を短くする
             float dynamicStep = stepDuration * Mathf.Pow(0.5f, (float)i / steps); // 徐々に早く
             yield return new WaitForSeconds(dynamicStep);
@@ -66,7 +66,7 @@ public class PurificationParticle : MonoBehaviour
 
     IEnumerator PlaySE2()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.4f);
         AudioManager.PlaySE(se2);
 
     }

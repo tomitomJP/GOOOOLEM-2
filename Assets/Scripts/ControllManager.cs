@@ -418,8 +418,8 @@ public class ControllManager : MonoBehaviour
                 {
                     peaceNumber = PACE.peaceNumber;
                 }
-                statusUprate += 0.025f;
                 goleBodyCount++;
+                if (goleBodyCount >= 11) statusUprate += 0.025f;
             }
         }
 

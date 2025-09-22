@@ -45,6 +45,7 @@ public class SoloManager : MonoBehaviour
                 if (!first) yield return YushaGekiha();
                 first = false;
                 _SetHT("勇者一行が魔王城前に登場！");
+                KnockBack();
                 InstantiateMembers();
             }
 
@@ -123,7 +124,7 @@ public class SoloManager : MonoBehaviour
 
         int savesMon = GameManager.GetMonsters(GameManager.type.mon0).Count;
         int up = Mathf.FloorToInt(savesMon / 7);
-        clearStatus.text += $"モンスター生存({savesMon.ToString("N0")}体)" + $" + Lv{up.ToString("N0")}\n";
+        clearStatus.text += $"モンスター生存({savesMon.ToString("N1")}体)" + $" + Lv{up.ToString("N1")}\n";
         humanLevel += up;
         yield return new WaitForSecondsRealtime(0.25f);
 
@@ -147,6 +148,7 @@ public class SoloManager : MonoBehaviour
             txt.gameObject.SetActive(false);
             clearStatus.text = "";
         }
+        waveTimer = 0;
         Time.timeScale = 1;
         GameManager.toggleBrackScreen(false);
 
@@ -299,5 +301,44 @@ public class SoloManager : MonoBehaviour
         int b = Mathf.RoundToInt(color.b * 255f);
         int a = Mathf.RoundToInt(color.a * 255f);
         return $"#{r:X2}{g:X2}{b:X2}{a:X2}";
+    }
+
+    [SerializeField] float knockBackPower = 10;
+    void KnockBack()
+    {
+        StartCoroutine(KnockBackCol());
+
+    }
+
+    IEnumerator KnockBackCol()
+    {
+        var targets = GameManager.GetMonsters(GameManager.type.mon0);
+        foreach (var target in targets)
+        {
+
+            Rigidbody2D rb = target.gameObject.GetComponent<Rigidbody2D>();
+            GameObject mon = target.gameObject;
+
+            mon.GetComponent<SpriteRenderer>().flipX = true;
+
+            Vector2 monUp = mon.transform.up;
+            Vector2 myLeft = -transform.right;
+            Vector2 dire;
+            dire = new Vector2(-1.5f, 0.3f).normalized;
+
+
+            rb.AddForce(dire * knockBackPower, ForceMode2D.Impulse);
+        }
+
+        yield return new WaitForSeconds(1);
+        foreach (var target in targets)
+        {
+            GameObject mon = target.gameObject;
+
+            mon.GetComponent<SpriteRenderer>().flipX = false;
+
+        }
+
+        yield break;
     }
 }
