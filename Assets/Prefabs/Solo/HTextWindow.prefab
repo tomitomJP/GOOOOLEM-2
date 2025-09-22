@@ -143,7 +143,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: eb5b9a7663f004a9fa3cbe1884658498, type: 3}
-    m_FontSize: 12
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -154,4 +154,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Lv1 \u52C7\u8005 \u3042\u3042\u3042\u3042\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n\n"
+  m_Text: "Lv1 \u52C7\u8005 \u3042\u3042\u3042\u3042\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n\u4FFA\u305F\u3061\u304C\u4E16\u754C\u3092\u6570\u3046\uFF01\n"

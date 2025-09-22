@@ -11,29 +11,38 @@ public class Goblin : Monsters
 
     [SerializeField] Sprite[] buildMotion;
     [SerializeField] AudioClip tonkachi;
+    [SerializeField] bool canBuild = true;
 
     void Start()
     {
         StartSetup();
 
-        goblinBuild = gameManager.GoblinBuilds[player];
+        if (canBuild) goblinBuild = gameManager.GoblinBuilds[player];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (BuildingDist() < 0.3f && goblinBuild.hp < goblinBuild.hpMax && hp > 0)
+        if (canBuild)
         {
-            if (!nowBuiding)
+            if (BuildingDist() < 0.3f && goblinBuild.hp < goblinBuild.hpMax && hp > 0)
             {
-                nowBuiding = true;
-                StartCoroutine(BuildMotion(goblinBuild));
+                if (!nowBuiding)
+                {
+                    nowBuiding = true;
+                    StartCoroutine(BuildMotion(goblinBuild));
+                }
+            }
+            else
+            {
+                Updating();
             }
         }
         else
         {
             Updating();
         }
+
     }
 
     public override IEnumerator AtkMotion(Monsters target)//攻撃アニメーションなど

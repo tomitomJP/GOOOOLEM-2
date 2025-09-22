@@ -58,11 +58,11 @@ public class SkullHunter_1 : Monsters
         for (int i = 0; i < shootCount; i++)
         {
             spriteRenderer.sprite = atkSprites[6];
-            yield return Wait(0.06f, 0);
+            yield return Wait(0.05f, 0);
             Shoot();
             AudioManager.PlaySEWithPitch(shootSE, Random.Range(0.8f, 1.2f));
             spriteRenderer.sprite = atkSprites[7];
-            yield return Wait(0.07f, 0);
+            yield return Wait(0.15f, 0);
         }
 
 
