@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Healer : Human
+public class Greener : Monsters
 {
     [SerializeField] float healRate = 0.2f;
     [SerializeField] float healCooldown = 3f;  // 回復の間隔（秒）
@@ -12,7 +12,7 @@ public class Healer : Human
     void Start()
     {
         StartSetup();
-        HumanSetUp();
+
     }
 
     void Update()
@@ -37,24 +37,33 @@ public class Healer : Human
         }
     }
 
-    // 同じ player の味方で一番HPが低いキャラを探す
+    
     private Monsters FindAllyToHeal()
     {
         Monsters lowestHpAlly = null;
         float lowestHpRate = 1f;
 
         List<Monsters> targets = new List<Monsters>();
-        targets = GameManager.GetMonsters(GameManager.type.human);
 
-        foreach (var h in targets)
+        // 自分の player に応じて対象を切り替え
+        if (player == 0)
         {
-            if (h != null && h != this && h.player == player && h.hp > 0)
+            targets = GameManager.GetMonsters(GameManager.type.mon0);
+        }
+        else if (player == 1)
+        {
+            targets = GameManager.GetMonsters(GameManager.type.mon1);
+        }
+
+        foreach (var ally in targets)
+        {
+            if (ally != null && ally != this && ally.player == player && ally.hp > 0)
             {
-                float hpRate = h.hp / h.maxHp;
+                float hpRate = ally.hp / ally.maxHp;
                 if (hpRate < lowestHpRate)
                 {
                     lowestHpRate = hpRate;
-                    lowestHpAlly = h;
+                    lowestHpAlly = ally;
                 }
             }
         }
@@ -67,6 +76,14 @@ public class Healer : Human
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
+        yield return Wait(0.2f, 2);
+        spriteRenderer.sprite = atkSprites[1];
+        yield return Wait(0.2f, 2);
+        spriteRenderer.sprite = atkSprites[2];
+        yield return Wait(0.2f, 2);
+        spriteRenderer.sprite = atkSprites[3];
+        yield return Wait(0.2f, 2);
+        spriteRenderer.sprite = atkSprites[4];
         yield return Wait(0.4f, 2);
 
         if (target != null)

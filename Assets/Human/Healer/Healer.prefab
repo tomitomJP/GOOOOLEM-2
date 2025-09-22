@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2445733953165381340}
   - component: {fileID: 7596938344000057802}
   - component: {fileID: 5191685424538540944}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Healer
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,12 +169,12 @@ MonoBehaviour:
   AtkTriggerUpRate: 1.1
   isDead: 0
   level: 1
-  growthRate: 0.098
   name: "\u3042\u3042\u3042\u3042"
   job: 
   sex: 1
   healRate: 0.15
   healCooldown: 4
+  healSE: {fileID: 8300000, guid: 1e6fbff42e1d75644b8568cdb9ab95ce, type: 3}
 --- !u!50 &5191685424538540944
 Rigidbody2D:
   serializedVersion: 4
