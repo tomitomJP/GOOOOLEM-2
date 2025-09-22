@@ -108,15 +108,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 759348fb048028f4e937d0e1a38e048d, type: 3}
   - {fileID: 21300000, guid: eb305078862a1424ca4a74017ab513c1, type: 3}
   - {fileID: 21300000, guid: eb305078862a1424ca4a74017ab513c1, type: 3}
-  atk: 18
-  hp: 35
-  spd: 1
+  atk: 35
+  hp: 45
+  spd: 0.8
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
   defRate: 1
   player: 0
-  enemyDistance: 0.6
+  enemyDistance: 1.5
   enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 93fe283e1209e4d878e050951d9227e5, type: 3}
   - {fileID: 21300000, guid: 1de59c2ab47bd4e18978003aee43028b, type: 3}
   tonkachi: {fileID: 8300000, guid: 5ac18d5b3c6b34bc9badf3aae43bb560, type: 3}
+  canBuild: 0
 --- !u!50 &256448292973386186
 Rigidbody2D:
   serializedVersion: 4

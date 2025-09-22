@@ -750,6 +750,11 @@ public class GameManager : MonoBehaviour
         if (monsters0.Contains(target)) monsters0.Remove(target);
         if (monsters1.Contains(target)) monsters1.Remove(target);
         if (humans.Contains(target)) humans.Remove(target);
+
+        monsters0.RemoveAll(m => m == null);
+        monsters1.RemoveAll(m => m == null);
+        humans.RemoveAll(m => m == null);
+
     }
 
     public enum type
@@ -794,6 +799,11 @@ public class GameManager : MonoBehaviour
         return targets;
     }
 
+
+    public static void toggleBrackScreen(bool boo)
+    {
+        instance.BlackScreenObj.SetActive(boo);
+    }
 }
 
 

@@ -16,7 +16,12 @@ public class SoloManager : MonoBehaviour
 
     private List<int> availableCharacters = new List<int>();
     private List<List<string>> availableNames = new List<List<string>>();
-    [SerializeField] int humanLevel = 0;
+    [SerializeField] int humanLevel = 1;
+    [SerializeField] Text LevelViewText;
+    [SerializeField] Text waveTimeText;
+
+    bool first = true;
+    float waveTimer = 0;
 
     void Awake()
     {
@@ -37,13 +42,116 @@ public class SoloManager : MonoBehaviour
         {
             if (GameManager.GetMonsters(GameManager.type.human).Count == 0)
             {
-                humanLevel++;
+                if (!first) yield return YushaGekiha();
+                first = false;
                 _SetHT("勇者一行が魔王城前に登場！");
                 InstantiateMembers();
             }
 
+            if (Time.timeScale > 0)
+            {
+                waveTimeText.text = Mathf.Max(Mathf.FloorToInt(waveTimer / 60), 0).ToString("D2") + ":" + Mathf.Max(Mathf.FloorToInt(waveTimer % 60), 0).ToString("D2");
+
+            }
+            waveTimer += Time.deltaTime;
             yield return null;
         }
+    }
+
+    [SerializeField] Text[] gekiha;
+    [SerializeField] RectTransform gekihaText;
+    [SerializeField] AudioClip gekihaTextSE;
+    [SerializeField] Text clearStatus;
+
+    bool wininnView = false;
+    IEnumerator YushaGekiha()
+    {
+        if (wininnView) yield break;
+        wininnView = true;
+
+        float clearTime = waveTimer;
+        yield return new WaitForSecondsRealtime(0.6f);
+        GameManager.toggleBrackScreen(true);
+        Time.timeScale = 0;
+
+        for (int i = 0; i < gekiha.Length; i++)
+        {
+            Text txt = gekiha[i];
+            int startSize = 10;
+            txt.fontSize = startSize;
+            txt.gameObject.SetActive(true);
+            txt.DOFade(1, 0f).SetUpdate(UpdateType.Normal, true);
+            clearStatus.DOFade(1, 0f).SetUpdate(UpdateType.Normal, true);
+            // フォントサイズを60に0.5秒で変更
+            DOTween.To(() => txt.fontSize, x => txt.fontSize = x, 100, 0.5f).SetUpdate(UpdateType.Normal, true).SetEase(Ease.OutBack);
+            AudioManager.PlaySE(gekihaTextSE);
+            yield return new WaitForSecondsRealtime(0.3f);
+        }
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        yield return gekihaText.DOAnchorPosY(100, 0.2f).SetUpdate(UpdateType.Normal, true).SetEase(Ease.InQuad).WaitForCompletion();
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        int beforeLv = humanLevel;
+
+        clearStatus.text = "勇者どもを返り討ちにする" + "+ Lv01\n";
+        humanLevel++;
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        if (clearTime <= 10)
+        {
+            clearStatus.text += "10秒以内に勝利" + "  + Lv06\n";
+            humanLevel += 6;
+
+        }
+        else if (clearTime <= 20)
+        {
+            clearStatus.text += "20秒以内に勝利" + "  + Lv04\n";
+            humanLevel += 4;
+        }
+        else if (clearTime <= 30)
+        {
+            clearStatus.text += "30秒以内に勝利" + "  + Lv03\n";
+            humanLevel += 3;
+        }
+        else if (clearTime <= 60)
+        {
+            clearStatus.text += "60秒以内に勝利" + " + Lv01\n";
+            humanLevel++;
+        }
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        int savesMon = GameManager.GetMonsters(GameManager.type.mon0).Count;
+        int up = Mathf.FloorToInt(savesMon / 7);
+        clearStatus.text += $"モンスター生存({savesMon.ToString("N0")}体)" + $" + Lv{up.ToString("N0")}\n";
+        humanLevel += up;
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        clearStatus.text += $"{beforeLv} ====> {humanLevel}";
+        LevelViewText.text = $"Lv {humanLevel}";
+        yield return new WaitForSecondsRealtime(2f);
+
+        for (int i = 0; i < gekiha.Length; i++)
+        {
+            Text txt = gekiha[i];
+            int startSize = txt.fontSize;
+            txt.DOFade(0, 0.3f).SetUpdate(UpdateType.Normal, true);
+            clearStatus.DOFade(0, 0.3f).SetUpdate(UpdateType.Normal, true);
+
+        }
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        for (int i = 0; i < gekiha.Length; i++)
+        {
+            Text txt = gekiha[i];
+            txt.gameObject.SetActive(false);
+            clearStatus.text = "";
+        }
+        Time.timeScale = 1;
+        GameManager.toggleBrackScreen(false);
+
+        wininnView = false;
+        yield break;
     }
 
     void InstantiateMembers()

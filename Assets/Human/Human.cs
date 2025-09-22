@@ -6,7 +6,7 @@ public class Human : Monsters
 {
     [Header("人間の設定")]
     public int level = 1;
-    [SerializeField] private float growthRate = 0.25f; // 二次関数の係数
+    private float growthRate = 0.5f; // 二次関数の係数
 
     public string name = "ああああ";
     public string job;
