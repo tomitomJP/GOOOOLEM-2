@@ -16,7 +16,7 @@ public class SacredGirl : Human
         HumanSetUp();
 
 
-        if (Random.Range(0, 10) == 0 || level >= 6) StartCoroutine(Purification(true));
+        if (Random.Range(0, 10) == 0 || level >= 18) StartCoroutine(Purification(true));
     }
 
     // Update is called once per frame

@@ -25,7 +25,7 @@ public class House : Monsters
     [SerializeField] SpriteRenderer viewSpr;
     [SerializeField] Transform vireTra;
     public bool NonDamage = false;
-
+    int monstaerablock = 1;
     Vector3 startPos;
     void Start()
     {
@@ -47,10 +47,12 @@ public class House : Monsters
         if (monstersPearent.childCount > 0)
         {
             NonDamage = true;
+            gameObject.layer = 18;
         }
         else
         {
             NonDamage = false;
+            gameObject.layer = (int)Mathf.Log(myLayer.value, 2);
 
         }
 

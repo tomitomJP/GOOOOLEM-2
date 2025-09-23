@@ -47,9 +47,12 @@ public class Shielder : Human
         spriteRenderer.sprite = atkSprites[4];
         yield return Wait(0.3f, 2);
 
-
         float duration = 0.4f;
-
+        bool near = false;
+        if ((target != null && target.gameObject.activeSelf) && Vector2.Distance(target.transform.position, transform.position) < 2)
+        {
+            near = true;
+        }
         if (target != null && target.gameObject.activeSelf) transform.DOMoveX(target.transform.position.x * 1f, duration);
 
         int i = 0;
@@ -70,8 +73,9 @@ public class Shielder : Human
             duration -= Time.deltaTime;
         }
 
-        KnockBack(target);
+        if (near) KnockBack(target);
         Attack(target, atk);
+
 
         duration = 7f;
         i = 0;

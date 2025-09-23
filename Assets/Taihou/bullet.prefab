@@ -47,29 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890330fe7b1f10b4fa6c243693e76f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSprites: []
-  atkSprites: []
-  atk: 30
-  hp: 100
-  spd: 1
-  spdRate: 1
-  atkSpdRate: 1
-  atkRate: 1
-  defRate: 1
-  player: 0
-  enemyDistance: 1
-  enemyDistanceInCT: 1
-  atkCT: 1
-  aktCTimer: 0
-  mode: 1
-  MoveAniTime: 0.3
-  time: 2
-  AtkTriggerRate: 50
-  AtkTriggerUpRate: 1.1
-  isDead: 0
   lifeTime: 10
   explosionPrefab: {fileID: 9042700485184534923, guid: 3797c5fb2c1e34ae58448302503ef041, type: 3}
-  attackRadius: 2
+  attackRadius: 3
+  damage: 18
   targetLayer:
   - serializedVersion: 2
     m_Bits: 4096
@@ -81,7 +62,8 @@ MonoBehaviour:
   myLayer1:
     serializedVersion: 2
     m_Bits: 65536
-  knockBackPower: 2
+  player: 0
+  knockBackPower: 3
 --- !u!212 &2759018831891880264
 SpriteRenderer:
   m_ObjectHideFlags: 0

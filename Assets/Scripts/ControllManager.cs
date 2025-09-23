@@ -389,7 +389,7 @@ public class ControllManager : MonoBehaviour
         int goleBodyCount = 0;
         int peaceNumber = -1;
         int soulCount = 0;
-        float statusUprate = 1;
+        float statusUprate = 0;
         for (int i = 0; i < DeletingPeace.Count; i++)
         {
             Peace PACE = DeletingPeace[i].GetComponent<Peace>();

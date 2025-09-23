@@ -1023,6 +1023,7 @@ MonoBehaviour:
   MonstarsRulePos:
   - {x: 0, y: 0, z: 0}
   - {x: 378, y: 0, z: 0}
+  soulSpawnRate: 10
   movepeace: 0
   brickCountText: {fileID: 1008173700}
 --- !u!4 &121338532
@@ -66325,6 +66326,7 @@ MonoBehaviour:
   startPos: {fileID: 1489359933}
   endPos: {fileID: 1930255389779385193}
   HTWindows: []
+  knockBackPower: 10
 --- !u!4 &2055442484
 Transform:
   m_ObjectHideFlags: 0
@@ -76490,6 +76492,7 @@ MonoBehaviour:
   MonstarsRulePos:
   - {x: 0, y: 0, z: 0}
   - {x: -378, y: 0, z: 0}
+  soulSpawnRate: 16
   movepeace: 0
   brickCountText: {fileID: 127017965}
 --- !u!1 &1720095057141214748
