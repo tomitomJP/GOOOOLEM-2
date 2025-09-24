@@ -1023,6 +1023,7 @@ MonoBehaviour:
   MonstarsRulePos:
   - {x: 0, y: 0, z: 0}
   - {x: 378, y: 0, z: 0}
+  soulSpawnRate: 10
   movepeace: 0
   brickCountText: {fileID: 1008173700}
 --- !u!4 &121338532
@@ -42515,63 +42516,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008173697}
   m_CullTransparentMesh: 1
---- !u!1001 &1063637551
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.63
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606404719722063020, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8073515747575328280, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
-      propertyPath: m_Name
-      value: Yusha
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b83288276e71041c8bebbcd06c08d412, type: 3}
 --- !u!1 &1076887277
 GameObject:
   m_ObjectHideFlags: 0
@@ -65605,6 +65549,8 @@ MonoBehaviour:
   - {fileID: 5507875532734075277, guid: 62a4aa735d6edda469322bf69135a5a3, type: 3}
   - {fileID: 3754749737571096728, guid: 3837bff1cfd69474aa6f27e9ac174512, type: 3}
   humanLevel: 0
+  LevelViewText: {fileID: 0}
+  waveTimeText: {fileID: 0}
   gekiha: []
   gekihaText: {fileID: 0}
   gekihaTextSE: {fileID: 0}
@@ -75779,6 +75725,7 @@ MonoBehaviour:
   MonstarsRulePos:
   - {x: 0, y: 0, z: 0}
   - {x: -378, y: 0, z: 0}
+  soulSpawnRate: 10
   movepeace: 0
   brickCountText: {fileID: 127017965}
 --- !u!1 &1720095057141214748
@@ -76845,6 +76792,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &8678282474072023845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650087823152615392, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809612509992870365, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+      propertyPath: m_Name
+      value: RainMarge
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -76875,4 +76879,4 @@ SceneRoots:
   - {fileID: 2115059608}
   - {fileID: 2364958757580654183}
   - {fileID: 1589277987}
-  - {fileID: 1063637551}
+  - {fileID: 8678282474072023845}

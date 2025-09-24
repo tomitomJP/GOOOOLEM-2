@@ -303,7 +303,7 @@ public class SoloManager : MonoBehaviour
         return $"#{r:X2}{g:X2}{b:X2}{a:X2}";
     }
 
-    [SerializeField] float knockBackPower = 10;
+     float knockBackPower = 5;
     void KnockBack()
     {
         StartCoroutine(KnockBackCol());
