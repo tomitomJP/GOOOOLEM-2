@@ -1023,6 +1023,7 @@ MonoBehaviour:
   MonstarsRulePos:
   - {x: 0, y: 0, z: 0}
   - {x: 378, y: 0, z: 0}
+  soulSpawnRate: 10
   movepeace: 0
   brickCountText: {fileID: 1008173700}
 --- !u!4 &121338532
@@ -66309,6 +66310,7 @@ MonoBehaviour:
   - {fileID: 3754749737571096728, guid: 3837bff1cfd69474aa6f27e9ac174512, type: 3}
   - {fileID: 3829371852777196674, guid: 2b69405597ca24580a0c09c3cec35575, type: 3}
   - {fileID: 5604669495224457799, guid: 2a2b4b2fe67e84ffa928dbef9c5e04b4, type: 3}
+  - {fileID: 8809612509992870365, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
   humanLevel: 1
   LevelViewText: {fileID: 1954892784}
   waveTimeText: {fileID: 1497534980}
@@ -76490,6 +76492,7 @@ MonoBehaviour:
   MonstarsRulePos:
   - {x: 0, y: 0, z: 0}
   - {x: -378, y: 0, z: 0}
+  soulSpawnRate: 16
   movepeace: 0
   brickCountText: {fileID: 127017965}
 --- !u!1 &1720095057141214748

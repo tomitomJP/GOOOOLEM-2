@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonBallStatus : Monsters
+public class CannonBallStatus : MonoBehaviour
 {
     public float lifeTime = 10f;          // 弾の寿命
     public GameObject explosionPrefab;   // 爆発エフェクトのPrefab
     [SerializeField] float attackRadius = 2f; // 攻撃半径
+    [SerializeField] float damage = 30f; // 攻撃半径
     [SerializeField] LayerMask[] targetLayer;
 
     [SerializeField] LayerMask myLayer0;
     [SerializeField] LayerMask myLayer1;
+    public int player = 0;
     void Start()
     {
-        StartSetup();
         // 5秒後に自動で消える（撃ちっぱなし対策）
         Destroy(gameObject, lifeTime);
 
@@ -52,12 +53,12 @@ public class CannonBallStatus : Monsters
 
                 if (hit.CompareTag("House"))
                 {
-                    Attack(monsters, atk * 0.5f);
+                    monsters.Damaged(damage * 0.45f, null);
                 }
                 else
                 {
                     KnockBack(monsters);
-                    Attack(monsters);
+                    monsters.Damaged(damage, null);
                 }
             }
         }

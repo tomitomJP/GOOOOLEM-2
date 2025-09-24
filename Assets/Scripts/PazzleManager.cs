@@ -25,6 +25,7 @@ public class PazzleManager : MonoBehaviour
 
     public Transform MonstarsRule;
     public Vector3[] MonstarsRulePos = new Vector3[2];
+    public int soulSpawnRate = 10;
     void Start()
     {
         //StartCoroutine(PeaceSet());
@@ -60,7 +61,7 @@ public class PazzleManager : MonoBehaviour
                     //DrawCircle2D(worldPos, 0.25f);
                     if (Physics2D.OverlapPoint(worldPos, LayerMask.GetMask("Peace")) == null)
                     {
-                        if (Random.Range(0, 18) == 0)
+                        if (Random.Range(0, 108) <= soulSpawnRate)
                         {
                             Instantiate(peaces[4], worldPos, Quaternion.identity, peacePearent.transform);
 

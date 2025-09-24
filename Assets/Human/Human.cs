@@ -48,7 +48,7 @@ public class Human : Monsters
             return atk;
         }
 
-        float atkValue = atk * (1.3f + ((level - 2f) / 30f));
+        float atkValue = atk * (1.8f + ((level - 2f) / 27f));
         return Mathf.Floor(atkValue);
     }
 

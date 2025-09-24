@@ -279,7 +279,13 @@ public class Monsters : MonoBehaviour
 
     public void InsHitPar(Monsters attacker)
     {
-        if (hp <= 0 || attacker == null) return;
+        if (hp <= 0) return;
+        if (attacker == null)
+        {
+            Instantiate(hitPar, transform.position, Quaternion.identity);
+            return;
+        }
+
         Instantiate(hitPar, new Vector3(transform.position.x, attacker.transform.position.y, transform.position.z), Quaternion.identity);
     }
 

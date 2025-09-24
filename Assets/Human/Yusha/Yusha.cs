@@ -10,7 +10,7 @@ public class Yusha : Human
         StartSetup();
         HumanSetUp();
 
-        ApplyStatusEffect(new StatusManager("YushaUp", true, StatusManager.StatusType.atkRate, Mathf.Infinity, (level - 1) * 0.01f));
+        ApplyStatusEffect(new StatusManager("YushaUp", true, StatusManager.StatusType.atkRate, Mathf.Infinity, (level - 1) * 0.03f));
     }
 
     // Update is called once per frame
@@ -66,12 +66,12 @@ public class Yusha : Human
         if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
         {
             RaycastHit2D[] hit;
-            hit = Physics2D.RaycastAll(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer);
+            hit = Physics2D.RaycastAll(rayOrigin + transform.position, transform.right, enemyDistance * 2, enemyLayer);
             for (int j = 0; j < hit.Length; j++)
             {
                 GameObject monster = hit[j].collider.gameObject;
 
-                Attack(monster.GetComponent<Monsters>(), atk / 2);
+                Attack(monster.GetComponent<Monsters>(), atk / 1.3f);
             }
         }
     }

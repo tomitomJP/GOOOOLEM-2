@@ -20,7 +20,7 @@ public class Greener : Monsters
         Updating();
 
         healTimer -= Time.deltaTime;
-        if (healTimer <= 0f)
+        if (healTimer <= 0f && !isDead)
         {
             Monsters target = FindAllyToHeal();
             if (target != null)
@@ -37,7 +37,7 @@ public class Greener : Monsters
         }
     }
 
-    
+
     private Monsters FindAllyToHeal()
     {
         Monsters lowestHpAlly = null;

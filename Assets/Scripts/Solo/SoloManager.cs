@@ -303,7 +303,7 @@ public class SoloManager : MonoBehaviour
         return $"#{r:X2}{g:X2}{b:X2}{a:X2}";
     }
 
-    [SerializeField] float knockBackPower = 10;
+     float knockBackPower = 5;
     void KnockBack()
     {
         StartCoroutine(KnockBackCol());
@@ -333,6 +333,7 @@ public class SoloManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         foreach (var target in targets)
         {
+            if (target == null || !target.gameObject.activeSelf) continue;
             GameObject mon = target.gameObject;
 
             mon.GetComponent<SpriteRenderer>().flipX = false;
