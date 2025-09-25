@@ -141,7 +141,7 @@ public class LobbyManager : MonoBehaviour
 
     IEnumerator StartGameSolo()
     {
-        if (inputManagerLobby.currentPlayerCount == 1)
+        if (inputManagerLobby.currentPlayerCount >= 1)
         {
             Messager.ViewText("ゲームを開始します", 1);
             yield return new WaitForSeconds(1f);
