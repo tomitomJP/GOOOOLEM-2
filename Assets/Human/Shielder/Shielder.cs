@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Shielder : Human
 {
+    [SerializeField] LayerMask hitLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class Shielder : Human
             yield break;
         }
         mode = Mode.atk;
-
+        Vector2 endPos = target.transform.position;
         spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.05f);
 
@@ -48,37 +49,11 @@ public class Shielder : Human
         yield return Wait(0.3f, 2);
 
         float duration = 0.4f;
-        bool near = false;
-        if ((target != null && target.gameObject.activeSelf) && Vector2.Distance(target.transform.position, transform.position) < 2)
-        {
-            near = true;
-        }
-        if (target != null && target.gameObject.activeSelf) transform.DOMoveX(target.transform.position.x * 1f, duration);
-
-        int i = 0;
-        while (duration * 0.7 > 0)
-        {
-            if (i % 2 == 0)
-            {
-                spriteRenderer.sprite = atkSprites[5];
-
-            }
-            else
-            {
-                spriteRenderer.sprite = atkSprites[6];
-
-            }
-            i++;
-            yield return null;
-            duration -= Time.deltaTime;
-        }
-
-        if (near) KnockBack(target);
-        Attack(target, atk);
+        yield return StartCoroutine(Charge(duration, endPos));
 
 
         duration = 7f;
-        i = 0;
+        int i = 0;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         defRate += 1.5f;
         float animDuration = 0;
@@ -90,7 +65,6 @@ public class Shielder : Human
                 animDuration = 0.6f;
                 i = (i + 1) % 2;
             }
-
             int j = 7 + i;
             spriteRenderer.sprite = atkSprites[j];
 
@@ -105,6 +79,59 @@ public class Shielder : Human
         defRate -= 1.5f;
         mode = Mode.move;
 
+    }
+
+    IEnumerator Charge(float duration, Vector2 endPos)
+    {
+        float time = duration;
+        int i = 0;
+
+        Vector2 startPos = transform.position;
+        endPos.y = startPos.y;
+        while (duration > 0)
+        {
+            float t = duration / time;
+            transform.position = Vector2.Lerp(startPos, endPos, 1 - t);
+            if (i % 2 == 0)
+            {
+                spriteRenderer.sprite = atkSprites[5];
+
+            }
+            else
+            {
+                spriteRenderer.sprite = atkSprites[6];
+
+            }
+            i++;
+            yield return null;
+
+            Collider2D targetCol = ChargeRayHit();
+            if (targetCol != null)
+            {
+                if (targetCol.gameObject.TryGetComponent<Monsters>(out Monsters target))
+                {
+                    KnockBack(target);
+                    Attack(target, atk);
+                }
+                break;
+            }
+            duration -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    Collider2D ChargeRayHit()
+    {
+        int mask = enemyLayer.value | hitLayer.value;
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position,
+            transform.right,
+            0.8f,
+            mask
+        );
+
+        return hit.collider; // ヒットしなければ null
     }
 
     void ShieldingMove()
@@ -123,6 +150,7 @@ public class Shielder : Human
         if (!Physics2D.Raycast(transform.position + rayOrigin, direction, 0.8f, enemyLayer))
         {
             transform.Translate(direction * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
+
         }
 
     }

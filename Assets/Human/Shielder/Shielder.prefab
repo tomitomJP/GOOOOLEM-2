@@ -85,6 +85,9 @@ MonoBehaviour:
   name: "\u3042\u3042\u3042\u3042"
   job: "\u76FE\u4F7F\u3044"
   sex: 0
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 262144
   knockBackPower: 2
 --- !u!212 &2420912122019490345
 SpriteRenderer:

@@ -143,6 +143,7 @@ public class Monsters : MonoBehaviour
                 transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime * spd * Mathf.Clamp(spdRate, 0, 100), Space.World);
 
             }
+
         }
 
         if (stanTIme > 0)
@@ -162,6 +163,7 @@ public class Monsters : MonoBehaviour
         {
             MoveAniTimer += Time.deltaTime * Mathf.Clamp(spdRate, 0, 2);
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
     }
 

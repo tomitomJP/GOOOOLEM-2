@@ -48,6 +48,8 @@ public class Slime : Monsters
         Updating();
         ScaleChange();
 
+        if (isDead) return;
+
         if (martgeCT <= 0)
         {
             CheckMerge();
@@ -140,35 +142,35 @@ public class Slime : Monsters
     }
 
     public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
-{
-    // newStatus が null じゃないときだけ適用する
-    if (newStatus != null) 
-        ApplyStatusEffect(newStatus);
+    {
+        // newStatus が null じゃないときだけ適用する
+        if (newStatus != null)
+            ApplyStatusEffect(newStatus);
 
-    if (damage > 0)
-    {
-        AudioManager.PlaySE(defaultAtkSE, 0.3f);
-        InsHitPar(attacker);
-    }
-    else
-    {
-        return;
-    }
-
-    if (slimeSize > 1 && damage < 10000)
-    {
-        Split();
-    }
-    else
-    {
-        if (hp > 0)
+        if (damage > 0)
         {
-            hp -= damage;
-            Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
-            _damageText.text = damage.ToString("F0");
+            AudioManager.PlaySE(defaultAtkSE, 0.3f);
+            InsHitPar(attacker);
+        }
+        else
+        {
+            return;
+        }
+
+        if (slimeSize > 1 && damage < 10000)
+        {
+            Split();
+        }
+        else
+        {
+            if (hp > 0)
+            {
+                hp -= damage;
+                Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
+                _damageText.text = damage.ToString("F0");
+            }
         }
     }
-}
 
 
     void Split()

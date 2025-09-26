@@ -43,32 +43,30 @@ public class MetalSlime : Monsters
 
     public override void Damaged(float damage, Monsters attacker, bool Melee = true, StatusManager newStatus = null)
     {
+        // newStatus が null じゃないときだけ適用する
+        if (newStatus != null)
+            ApplyStatusEffect(newStatus);
 
         if (damage > 0)
         {
             AudioManager.PlaySE(defaultAtkSE, 0.3f);
+            InsHitPar(attacker);
         }
         else
         {
             return;
         }
 
-        if (hp > 0)
+        if (damage < 10000)
         {
-
-            hp -= 1;
-
-            // ヒット演出
-            InsHitPar(attacker);
-
-            // ダメージテキスト表示
-            Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
-            _damageText.text = "1";
+            damage = 1;
         }
 
-        if (hp <= 0)
+        if (hp > 0)
         {
-            Dead();
+            hp -= damage;
+            Text _damageText = Instantiate(damageText, transform.position, Quaternion.identity, canvas.transform).GetComponent<Text>();
+            _damageText.text = damage.ToString("F0");
         }
     }
 }
