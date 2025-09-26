@@ -47,6 +47,7 @@ public class SoloManager : MonoBehaviour
                 _SetHT("勇者一行が魔王城前に登場！");
                 KnockBack();
                 InstantiateMembers();
+                //KnockBackColHuman();
             }
 
             if (Time.timeScale > 0)
@@ -200,7 +201,10 @@ public class SoloManager : MonoBehaviour
             availableCharacters.RemoveAt(0);
         }
 
-        Human human = Instantiate(humans[charIndex], transform.position, Quaternion.identity).GetComponent<Human>();
+        Vector3 offset = Vector3.zero;
+        offset.x = Random.Range(0, 1f);
+
+        Human human = Instantiate(humans[charIndex], transform.position + offset, Quaternion.identity).GetComponent<Human>();
 
         // 名前を取得（性別に応じたリストから被りなしで）
         int sexIndex = (int)human.sex;
@@ -209,6 +213,7 @@ public class SoloManager : MonoBehaviour
 
         human.name = name;
         human.level = humanLevel;
+        StartCoroutine(human.First());
     }
 
     // シャッフル用ユーティリティ
@@ -303,7 +308,7 @@ public class SoloManager : MonoBehaviour
         return $"#{r:X2}{g:X2}{b:X2}{a:X2}";
     }
 
-     float knockBackPower = 5;
+    float knockBackPower = 5;
     void KnockBack()
     {
         StartCoroutine(KnockBackCol());
@@ -341,5 +346,25 @@ public class SoloManager : MonoBehaviour
         }
 
         yield break;
+    }
+
+    void KnockBackColHuman()
+    {
+        var targets = GameManager.GetMonsters(GameManager.type.human);
+        foreach (var target in targets)
+        {
+
+            Rigidbody2D rb = target.gameObject.GetComponent<Rigidbody2D>();
+            GameObject mon = target.gameObject;
+
+
+            Vector2 monUp = mon.transform.up;
+            Vector2 myLeft = -transform.right;
+            Vector2 dire;
+            dire = new Vector2(-1.5f, 0.3f).normalized;
+
+
+            rb.AddForce(dire * knockBackPower * Random.Range(0.8f, 1.3f), ForceMode2D.Impulse);
+        }
     }
 }

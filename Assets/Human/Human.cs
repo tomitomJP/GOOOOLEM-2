@@ -30,6 +30,7 @@ public class Human : Monsters
         maxHp = hp;
 
         monstarDeadPar = Resources.Load<GameObject>("Paticle/HumanDeadParticle");
+
     }
 
     public float GetHP(int level)
@@ -59,4 +60,14 @@ public class Human : Monsters
         SoloManager.SetHT($"{name}は死んでしまった。", SoloManager.ToHex(Color.red));
     }
 
+
+    public IEnumerator First()
+    {
+        yield return new WaitForSeconds(0.5f);
+        float spdDefault = spd;
+        spd = Random.Range(1.3f, 1.8f);
+
+        yield return new WaitForSeconds(1);
+        spd = spdDefault;
+    }
 }

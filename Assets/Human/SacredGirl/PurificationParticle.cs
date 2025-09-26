@@ -54,7 +54,7 @@ public class PurificationParticle : MonoBehaviour
             float pitch = Mathf.Lerp(startPitch, endPitch, (float)i / (steps - 1));
 
             // 1回だけ再生
-            AudioManager.PlaySEWithPitch(se, pitch, 0.3f);
+            AudioManager.PlaySEWithPitch(se, pitch, 0.1f);
             // 後半ほど早くなるようにステップ時間を短くする
             float dynamicStep = stepDuration * Mathf.Pow(0.5f, (float)i / steps); // 徐々に早く
             yield return new WaitForSeconds(dynamicStep);
@@ -67,7 +67,7 @@ public class PurificationParticle : MonoBehaviour
     IEnumerator PlaySE2()
     {
         yield return new WaitForSeconds(1.4f);
-        AudioManager.PlaySE(se2);
+        AudioManager.PlaySE(se2, 0.5f);
 
     }
 
