@@ -57,7 +57,7 @@ public class Greener : Monsters
 
         foreach (var ally in targets)
         {
-            if (ally != null && ally != this && ally.player == player && ally.hp > 0)
+            if (ally != null && ally != this && ally.player == player && ally.hp > 0 && !ally.gameObject.TryGetComponent<House>(out House house))
             {
                 float hpRate = ally.hp / ally.maxHp;
                 if (hpRate < lowestHpRate)

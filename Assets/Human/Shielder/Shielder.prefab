@@ -71,7 +71,7 @@ MonoBehaviour:
   atkRate: 1
   defRate: 1
   player: 1
-  enemyDistance: 6
+  enemyDistance: 4
   enemyDistanceInCT: 1
   atkCT: 1
   aktCTimer: 0
@@ -82,7 +82,6 @@ MonoBehaviour:
   AtkTriggerUpRate: 1.1
   isDead: 0
   level: 1
-  growthRate: 0.25
   name: "\u3042\u3042\u3042\u3042"
   job: "\u76FE\u4F7F\u3044"
   sex: 0

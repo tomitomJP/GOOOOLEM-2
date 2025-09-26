@@ -112,7 +112,7 @@ public class Monsters : MonoBehaviour
         {
             RandomAtk();
         }
-        else if (aktCTimer > 0)
+        else if (aktCTimer > 0 && mode == Mode.move)
         {
             aktCTimer -= Time.deltaTime * atkSpdRate;
         }
@@ -452,8 +452,7 @@ public class Monsters : MonoBehaviour
             Debug.LogWarning("攻撃スプライトが足りません");
             yield break;
         }
-        mode = Mode.atk;
-        mode = Mode.move;
+
     }
     /* protected WaitForSeconds Wait(float duration, float rate = 1)
      {

@@ -10,7 +10,7 @@ public class Yusha : Human
         StartSetup();
         HumanSetUp();
 
-        ApplyStatusEffect(new StatusManager("YushaUp", true, StatusManager.StatusType.atkRate, Mathf.Infinity, (level - 1) * 0.03f));
+        ApplyStatusEffect(new StatusManager("YushaUp", true, StatusManager.StatusType.atkRate, Mathf.Infinity, (level - 1) * 0.025f));
     }
 
     // Update is called once per frame

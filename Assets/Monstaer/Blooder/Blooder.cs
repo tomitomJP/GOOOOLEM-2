@@ -45,7 +45,7 @@ public class Blooder : Monsters
         while (t >= t2)
         {
             i++;
-            int q = (i % 2) + 1;
+            int q = (i % 2) ;
             spriteRenderer.sprite = atkSprites[q];
             t2 += Time.deltaTime * atkSpdRate;
             yield return null;

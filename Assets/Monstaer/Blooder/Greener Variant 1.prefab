@@ -58,15 +58,15 @@ MonoBehaviour:
   - {fileID: -305140091, guid: c452a4633e3ee489aac48a1ee6e040a0, type: 3}
   - {fileID: 12396280, guid: c452a4633e3ee489aac48a1ee6e040a0, type: 3}
   atk: 0
-  hp: 100
-  spd: 1
+  hp: 50
+  spd: 0.22
   spdRate: 1
   atkSpdRate: 1
   atkRate: 1
   defRate: 1
   player: 0
-  enemyDistance: 1
-  enemyDistanceInCT: 1
+  enemyDistance: 0
+  enemyDistanceInCT: 2
   atkCT: 100000
   aktCTimer: 100000
   mode: 1
@@ -75,8 +75,8 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
-  healRate: 0.2
-  healCooldown: 3
+  healRate: 0.15
+  healCooldown: 6
   healSE: {fileID: 8300000, guid: 1e6fbff42e1d75644b8568cdb9ab95ce, type: 3}
 --- !u!212 &3397359355091404064
 SpriteRenderer:

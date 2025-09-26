@@ -537,7 +537,7 @@ public class ControllManager : MonoBehaviour
         pos.y = -5f;
         GameObject monstaer;
 
-        if (Count == 1)
+        if (Count == 0)
         {
             if (Random.Range(0, 5) == 0)
             {

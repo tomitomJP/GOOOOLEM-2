@@ -56,7 +56,7 @@ public class Goblin : Monsters
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
-        yield return Wait(0.25f);
+        yield return Wait(0.45f);
 
         spriteRenderer.sprite = atkSprites[1];
         yield return Wait(0.1f);
