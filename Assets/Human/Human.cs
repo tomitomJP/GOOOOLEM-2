@@ -69,5 +69,11 @@ public class Human : Monsters
 
         yield return new WaitForSeconds(1);
         spd = spdDefault;
+        FirstSkill();
+    }
+
+    public virtual void FirstSkill()
+    {
+
     }
 }

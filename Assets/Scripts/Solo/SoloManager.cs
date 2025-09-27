@@ -308,7 +308,7 @@ public class SoloManager : MonoBehaviour
         return $"#{r:X2}{g:X2}{b:X2}{a:X2}";
     }
 
-    float knockBackPower = 5;
+    float knockBackPower = 5.5f;
     void KnockBack()
     {
         StartCoroutine(KnockBackCol());

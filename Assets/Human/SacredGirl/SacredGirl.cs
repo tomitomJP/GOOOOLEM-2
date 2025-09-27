@@ -16,9 +16,13 @@ public class SacredGirl : Human
         HumanSetUp();
 
 
-        if (Random.Range(0, 10) == 0 || level >= 18) StartCoroutine(Purification(true));
     }
 
+    public override void FirstSkill()
+    {
+        if (Random.Range(0, 10) == 0 || level >= 18) StartCoroutine(Purification(true));
+
+    }
     // Update is called once per frame
     void Update()
     {

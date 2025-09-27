@@ -15,7 +15,12 @@ public class RainMarge : Human
         HumanSetUp();
 
 
+    }
+
+    public override void FirstSkill()
+    {
         if (Random.Range(0, 12) == 0 || level >= 15) AtkTriggerRate = 90;
+
     }
 
     // Update is called once per frame
@@ -110,7 +115,7 @@ public class RainMarge : Human
             }
         }
 
-        if(target == null)
+        if (target == null)
         {
             AtkTriggerRate = 50;
             return;
