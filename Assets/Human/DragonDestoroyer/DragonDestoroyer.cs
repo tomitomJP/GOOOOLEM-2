@@ -19,17 +19,13 @@ public class DragonDestoroyer : Human
     public override IEnumerator AtkMotion(Monsters target)//攻撃アニメーションなど
     {
         int num = 0;
-        if (atkSprites.Length < 2)
-        {
-            Debug.LogWarning("攻撃スプライトが足りません");
-            yield break;
-        }
+
         mode = Mode.atk;
 
         spriteRenderer.sprite = atkSprites[0];
         yield return Wait(0.4f, 2);
 
-        AreaAtk();
+        DoragonCheck(target);
         spriteRenderer.sprite = atkSprites[1];
         yield return Wait(0.1f, 2);
 
@@ -39,6 +35,8 @@ public class DragonDestoroyer : Human
         spriteRenderer.sprite = atkSprites[3];
         yield return Wait(0.1f, 2);
 
+       
+
 
 
 
@@ -46,32 +44,23 @@ public class DragonDestoroyer : Human
 
     }
 
-     void AreaAtk()
-{
-    if (Physics2D.Raycast(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer))
+     void DoragonCheck(Monsters target)
     {
-        RaycastHit2D[] hit;
-        hit = Physics2D.RaycastAll(rayOrigin + transform.position, transform.right, Mathf.Infinity, enemyLayer);
-        for (int j = 0; j < hit.Length; j++)
+        GameObject monsterObj = target.gameObject;
+
+        if (target != null)
         {
-            GameObject monsterObj = hit[j].collider.gameObject;
-            Monsters monster = monsterObj.GetComponent<Monsters>();
+        float damage = atk;
 
-            if (monster != null)
-            {
-                float damage = atk / 2f;
+        if (monsterObj.TryGetComponent<Doragon>(out _) ||
+            monsterObj.TryGetComponent<Doragon_1>(out _))
+        {
+            damage *= 1.5f;
+        }
 
-               if (monsterObj.TryGetComponent<Doragon>(out _) ||
-                    monsterObj.TryGetComponent<Doragon_1>(out _))
-                {
-                    damage *= 1.5f;
-                }
-
-                Attack(monster, damage);
-            }
+        Attack(target, damage);
         }
     }
-}
 
 }
 

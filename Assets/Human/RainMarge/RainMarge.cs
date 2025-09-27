@@ -110,6 +110,12 @@ public class RainMarge : Human
             }
         }
 
+        if(target == null)
+        {
+            AtkTriggerRate = 50;
+            return;
+        }
+
         var c = Instantiate(cloud, transform.position, Quaternion.identity).GetComponent<Cloud>();
         StartCoroutine(c.ArcMove(target.transform));
     }
