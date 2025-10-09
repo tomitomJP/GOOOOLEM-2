@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Human : Monsters
 {
@@ -63,12 +65,24 @@ public class Human : Monsters
 
     public IEnumerator First()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForEndOfFrameUnit();
         float spdDefault = spd;
-        spd = Random.Range(1.3f, 1.8f);
+        spd = 2;
+        aktCTimer = 100;
+        float saveDef = defRate;
+        defRate = 10;
 
-        yield return new WaitForSeconds(1);
+        float saveAtkTriggerRate = AtkTriggerRate;
+        float saveAtkTriggerUpRate = AtkTriggerUpRate;
+        AtkTriggerRate = 0;
+        AtkTriggerUpRate = 0;
+
+        yield return new WaitForSeconds(1.4f);
         spd = spdDefault;
+        aktCTimer = 0;
+        AtkTriggerRate = saveAtkTriggerRate;
+        AtkTriggerUpRate = saveAtkTriggerUpRate;
+        defRate = saveDef;
         FirstSkill();
     }
 
