@@ -66490,6 +66490,7 @@ MonoBehaviour:
   - {fileID: 3829371852777196674, guid: 2b69405597ca24580a0c09c3cec35575, type: 3}
   - {fileID: 5604669495224457799, guid: 2a2b4b2fe67e84ffa928dbef9c5e04b4, type: 3}
   - {fileID: 8809612509992870365, guid: f438f9d680a204aa396f5fd10810f98c, type: 3}
+  - {fileID: 5178038252388078136, guid: 84ae4f93b328b8044bb1e7273b34c025, type: 3}
   humanLevel: 1
   LevelViewText: {fileID: 1954892784}
   waveTimeText: {fileID: 1497534980}

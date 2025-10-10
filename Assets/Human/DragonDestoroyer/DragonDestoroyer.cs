@@ -55,7 +55,7 @@ public class DragonDestoroyer : Human
         if (monsterObj.TryGetComponent<Doragon>(out _) ||
             monsterObj.TryGetComponent<Doragon_1>(out _))
         {
-            damage *= 1.5f;
+            damage *= 2f;
         }
 
         Attack(target, damage);
