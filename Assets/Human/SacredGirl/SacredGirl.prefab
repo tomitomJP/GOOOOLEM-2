@@ -75,7 +75,6 @@ MonoBehaviour:
   AtkTriggerUpRate: 1.1
   isDead: 0
   level: 1
-  growthRate: 0.25
   name: "\u3042\u3042\u3042\u3042"
   job: 
   sex: 1
@@ -89,6 +88,7 @@ MonoBehaviour:
   - {fileID: 1397967730, guid: 42806152dce4946228dc55c817e95e93, type: 3}
   - {fileID: -1044482037, guid: 42806152dce4946228dc55c817e95e93, type: 3}
   holyBeam: {fileID: 2526245617495559755, guid: d709fab7ffe874a5fbdcc2bddc8b8ab5, type: 3}
+  chargePar: {fileID: 3539355952683476758, guid: fe278e5ca39de44ee922f66c8a59859f, type: 3}
   purificationRate: -25
 --- !u!212 &6633268611387802998
 SpriteRenderer:

@@ -8,6 +8,7 @@ public class SacredGirl : Human
     [SerializeField] AudioClip trumpetSE;
     [SerializeField] Sprite[] holySprite;
     [SerializeField] GameObject holyBeam;
+    [SerializeField] GameObject chargePar;
 
     [SerializeField] float purificationRate = -25;
     void Start()
@@ -16,9 +17,13 @@ public class SacredGirl : Human
         HumanSetUp();
 
 
-        if (Random.Range(0, 10) == 0 || level >= 18) StartCoroutine(Purification(true));
     }
 
+    public override void FirstSkill()
+    {
+        if (Random.Range(0, 10) == 0 || level >= 18) StartCoroutine(Purification());
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -39,7 +44,7 @@ public class SacredGirl : Human
 
         if (Random.Range(0, 100) <= purificationRate)
         {
-            StartCoroutine(Purification(false));
+            StartCoroutine(Purification());
             purificationRate = -25;
             yield break;
 
@@ -59,7 +64,7 @@ public class SacredGirl : Human
             yield return Wait(0.2f);
 
             InstantImpact();
-            AudioManager.PlaySEWithPitch(trumpetSE, 1f, 0.3f);
+            AudioManager.PlaySEWithPitch(trumpetSE, 1f, 0.3f + (0.15f * (shootCount - 1)));
             spriteRenderer.sprite = atkSprites[1];
             yield return Wait(0.1f, 2);
 
@@ -89,31 +94,15 @@ public class SacredGirl : Human
         angelImpact.angel = this;
     }
 
-    public IEnumerator Purification(bool firstWait = false)
+    public IEnumerator Purification()
     {
         mode = Mode.atk;
 
         float animDuration = 0.3f;
         float duration = 3;
         int n = 0;
-        while (duration > 0 && firstWait)
-        {
 
-            if (animDuration < 0)
-            {
-                animDuration = 0.6f;
-                n = (n + 1) % (moveSprites.Length - 1);
-            }
-
-            spriteRenderer.sprite = moveSprites[n];
-
-            ShieldingMove();
-
-            yield return null;
-            duration -= Time.deltaTime;
-            animDuration -= Time.deltaTime;
-        }
-
+        Instantiate(chargePar, transform.position, Quaternion.identity, transform);
         for (int i = 0; i < 40; i++)
         {
             if (hp <= 0)

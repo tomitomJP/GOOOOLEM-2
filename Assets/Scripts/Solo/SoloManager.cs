@@ -177,16 +177,16 @@ public class SoloManager : MonoBehaviour
         Shuffle(availableCharacters);
 
         // 1人目は humans[0] 固定
-        InstantiateMember(0);
+        InstantiateMember(0, 0);
 
         // 残り3人はランダム
         for (int i = 0; i < 3; i++)
         {
-            InstantiateMember(-1); // -1はランダム
+            InstantiateMember(-1, i + 1); // -1はランダム
         }
     }
 
-    void InstantiateMember(int fixedIndex)
+    void InstantiateMember(int fixedIndex, int count)
     {
         int charIndex;
         if (fixedIndex >= 0)
@@ -202,7 +202,7 @@ public class SoloManager : MonoBehaviour
         }
 
         Vector3 offset = Vector3.zero;
-        offset.x = Random.Range(0, 1f);
+        offset.x = count + 0.2f;
 
         Human human = Instantiate(humans[charIndex], transform.position + offset, Quaternion.identity).GetComponent<Human>();
 
@@ -308,7 +308,7 @@ public class SoloManager : MonoBehaviour
         return $"#{r:X2}{g:X2}{b:X2}{a:X2}";
     }
 
-    float knockBackPower = 5;
+    float knockBackPower = 5.5f;
     void KnockBack()
     {
         StartCoroutine(KnockBackCol());
