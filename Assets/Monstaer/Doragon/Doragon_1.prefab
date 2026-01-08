@@ -139,7 +139,7 @@ MonoBehaviour:
   atkSprites:
   - {fileID: -417412701, guid: 891ebf263a20c4524990a505709cce2a, type: 3}
   - {fileID: -1890451800, guid: 891ebf263a20c4524990a505709cce2a, type: 3}
-  atk: 50
+  atk: 30
   hp: 180
   spd: 0.6
   spdRate: 1
@@ -154,8 +154,10 @@ MonoBehaviour:
   mode: 1
   MoveAniTime: 0.3
   time: 2
+  AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   firePoint: {fileID: 4678675726402506863}
   fireParticle: {fileID: 6834844784792535100, guid: ea6e723dad3dc4d84b2609d9b5a01f6d, type: 3}
   fireLight: {fileID: 6809778544431496932}

@@ -59,6 +59,8 @@ public class CannonBallStatus : MonoBehaviour
                 {
                     KnockBack(monsters);
                     monsters.Damaged(damage, null);
+                    monsters.ApplyStatus(new Monsters.StatusManager("cannonspd", true, Monsters.StatusManager.StatusType.spdRate, 1f, -1));
+                    monsters.ApplyStatus(new Monsters.StatusManager("annonatkspd", true, Monsters.StatusManager.StatusType.atkSpdRate, 1f, -1f));
                 }
             }
         }
@@ -67,7 +69,7 @@ public class CannonBallStatus : MonoBehaviour
         Destroy(gameObject);
     }
 
-    [SerializeField] float knockBackPower = 2;
+    [SerializeField] float knockBackPower = 7;
     void KnockBack(Monsters hit)
     {
 
@@ -80,11 +82,11 @@ public class CannonBallStatus : MonoBehaviour
         Vector2 dire;
         if (player == 0)
         {
-            dire = new Vector2(1, 0.7f).normalized;
+            dire = new Vector2(0.7f, 3f).normalized;
         }
         else
         {
-            dire = new Vector2(-1, 0.7f).normalized;
+            dire = new Vector2(-0.7f, 3f).normalized;
 
         }
 

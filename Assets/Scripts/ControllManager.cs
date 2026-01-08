@@ -272,7 +272,7 @@ public class ControllManager : MonoBehaviour
         }
     }
 
-    [SerializeField] float cannonCT = 1;
+    [SerializeField] float cannonCT = 1.5f;
     float cannonCTTimer = 0;
 
     void CannonShoot()
@@ -501,17 +501,19 @@ public class ControllManager : MonoBehaviour
             switch (peaceNumber)
             {
                 case 0:
-                    monsters.spdRate *= 1.15f + statusUprate;
+                    monsters.hp *= 1.3f + statusUprate;
                     break;
                 case 1:
                     monsters.atkRate *= 1.3f + statusUprate;
                     break;
                 case 2:
+                    monsters.spdRate *= 1.15f + statusUprate;
+                    break;
+
+                case 3:
                     monsters.atkSpdRate *= 1.25f + statusUprate;
                     break;
-                case 3:
-                    monsters.hp *= 1.3f + statusUprate;
-                    break;
+
             }
         }
 

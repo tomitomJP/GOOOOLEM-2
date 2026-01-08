@@ -51,16 +51,30 @@ public class Doragon_1 : Monsters
         StartCoroutine(SwichFireLight(true, 0.2f));
 
         GetTargets();
-        yield return Wait(0.4f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.4f);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.4f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.4f);
+        yield return Wait(0.2f);
         GetTargets();
-        yield return Wait(0.4f);
-        GetTargets2();
+        AudioManager.PlaySE(doragonBreth, 0.5f);
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
+        GetTargets();
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
+        GetTargets();
+        yield return Wait(0.2f);
+        GetTargets();
+        yield return Wait(0.2f);
         StartCoroutine(SwichFireLight(false, 0.2f));
 
         mode = Mode.move;
@@ -68,7 +82,6 @@ public class Doragon_1 : Monsters
 
     void GetTargets()
     {
-       AudioManager.PlaySE(doragonBreth, 0.5f);
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + rayOrigin, transform.right, enemyDistance * 2f, enemyLayer);
         Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance * 2f), Color.yellow, 0.3f);
 
@@ -77,14 +90,14 @@ public class Doragon_1 : Monsters
             Monsters monsters = hit.collider.gameObject.GetComponent<Monsters>();
             // ここで hit.collider などを使って処理
             Attack(monsters, atk / 10);
-            Attack(monsters, 0, true, GetEffect("DoragonSpd", false, Monsters.StatusManager.StatusType.spdRate, 0.4f, -1f));
-            Attack(monsters, 0, true, GetEffect("DoragonatkSpdRate", false, Monsters.StatusManager.StatusType.atkSpdRate, 0.4f, -1f));
+            Attack(monsters, 0, true, GetEffect("DoragonSpd", false, Monsters.StatusManager.StatusType.spdRate, 0.4f, -0.8f));
+            Attack(monsters, 0, true, GetEffect("DoragonatkSpdRate", false, Monsters.StatusManager.StatusType.atkSpdRate, 0.4f, -0.65f));
         }
     }
 
     void GetTargets2()
     {
-       AudioManager.PlaySE(doragonBreth, 0.5f);
+        AudioManager.PlaySE(doragonBreth, 0.5f);
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + rayOrigin, transform.right, enemyDistance * 2f, enemyLayer);
         Debug.DrawRay(transform.position + rayOrigin, transform.right * (enemyDistance * 2f), Color.yellow, 0.3f);
 

@@ -239,7 +239,7 @@ public class House : Monsters
     }
 
 
-    [SerializeField] float knockBackPower = 10;
+    float knockBackPower = 4;
     void KnockBack()
     {
         Instantiate(knockBackMon, transform.position, Quaternion.identity);

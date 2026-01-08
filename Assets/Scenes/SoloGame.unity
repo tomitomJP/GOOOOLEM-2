@@ -13454,6 +13454,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   hpBar: {fileID: 0}
   hpMax: 150
   boxCollider2D: {fileID: 374988172}
@@ -29911,6 +29912,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   hpBar: {fileID: 1265465752}
   hpBar_Red: {fileID: 1979342698}
   hpBarText: {fileID: 1906601095}
@@ -29938,7 +29940,6 @@ MonoBehaviour:
   viewSpr: {fileID: 0}
   vireTra: {fileID: 0}
   NonDamage: 0
-  knockBackPower: 5
 --- !u!50 &567068188
 Rigidbody2D:
   serializedVersion: 4
@@ -35740,6 +35741,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   hpBar: {fileID: 854564633}
   hpBar_Red: {fileID: 1367664750}
   hpBarText: {fileID: 1078448733}
@@ -35767,7 +35769,6 @@ MonoBehaviour:
   viewSpr: {fileID: 382440477}
   vireTra: {fileID: 382440476}
   NonDamage: 0
-  knockBackPower: 5
 --- !u!50 &726798823
 Rigidbody2D:
   serializedVersion: 4
@@ -53474,6 +53475,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   hpBar: {fileID: 0}
   hpMax: 150
   boxCollider2D: {fileID: 1609641299}
@@ -76653,10 +76655,10 @@ MonoBehaviour:
   fieldWidth: 11
   fieldHeight: 11
   peaces:
-  - {fileID: 8060278351571167893, guid: 4f48c9d5acac144de9b139b427b40733, type: 3}
-  - {fileID: 1972885079989700107, guid: 8ae927155f79a44d7ab1faf6aad2fa52, type: 3}
-  - {fileID: 7188422928445906734, guid: 8becfb56945d14bd3b31080a8c7013f1, type: 3}
   - {fileID: 9123272506885105218, guid: bfb0ee27ea42640ec8f6c8ea24887d66, type: 3}
+  - {fileID: 1972885079989700107, guid: 8ae927155f79a44d7ab1faf6aad2fa52, type: 3}
+  - {fileID: 8060278351571167893, guid: 4f48c9d5acac144de9b139b427b40733, type: 3}
+  - {fileID: 7188422928445906734, guid: 8becfb56945d14bd3b31080a8c7013f1, type: 3}
   - {fileID: 7188422928445906734, guid: b184ad6b287d445acb153cd9cd2245a5, type: 3}
   spacing: 0.5
   peacePearent: {fileID: 7320400638541965982}

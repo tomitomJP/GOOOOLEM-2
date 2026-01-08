@@ -520,7 +520,7 @@ public class Monsters : MonoBehaviour
         }
     }
 
-    public List<StatusManager> sm { get; set; } = new List<StatusManager>();
+    public List<StatusManager> sm = new List<StatusManager>();
 
     public void ApplyStatusTarget(Monsters monsters, StatusManager newStatus)
     {
@@ -557,7 +557,7 @@ public class Monsters : MonoBehaviour
         }
     }
 
-    public void ApplyStatusEffect(StatusManager status)
+    void ApplyStatusEffect(StatusManager status)
     {
         switch (status.type)
         {
@@ -582,7 +582,7 @@ public class Monsters : MonoBehaviour
         }
     }
 
-    public void RemoveStatusEffect(StatusManager status)
+    void RemoveStatusEffect(StatusManager status)
     {
         switch (status.type)
         {

@@ -145,7 +145,7 @@ public class Slime : Monsters
     {
         // newStatus が null じゃないときだけ適用する
         if (newStatus != null)
-            ApplyStatusEffect(newStatus);
+            ApplyStatus(newStatus);
 
         if (damage > 0)
         {
