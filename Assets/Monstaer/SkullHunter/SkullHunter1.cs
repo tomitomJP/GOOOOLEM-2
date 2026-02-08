@@ -57,6 +57,7 @@ public class SkullHunter_1 : Monsters
 
         for (int i = 0; i < shootCount; i++)
         {
+            if (hp <= 0) break;
             spriteRenderer.sprite = atkSprites[6];
             yield return Wait(0.05f, 0);
             Shoot();
