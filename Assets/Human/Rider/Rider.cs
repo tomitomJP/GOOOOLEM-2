@@ -7,6 +7,9 @@ public class Rider : Human
 {
     public Sprite[] driveingSprite;//攻撃用のスプライトを入れる
     [SerializeField] ParticleSystem superBackFire;
+    [SerializeField] AudioClip audioClip1;
+    [SerializeField] AudioClip audioClip2;
+
     void Start()
     {
         superBackFire.Stop();
@@ -44,7 +47,7 @@ public class Rider : Human
         spriteRenderer.sprite = atkSprites[3];
         yield return Wait(0.1f, 0);
 
-        if (Random.Range(0, 1) < 1 || true)
+        if (Random.Range(0, 3) < 1)
         {
             StartCoroutine(SuperAtk());
             yield break;
@@ -64,25 +67,22 @@ public class Rider : Human
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
 
+        AudioManager.PlaySEWithPitch(audioClip2, 1.5f, 0.3f);
+        AudioManager.PlaySEWithPitch(audioClip1, 0.8f, 0.3f);
         yield return transform.DOMoveX(-13, 0.3f).SetEase(Ease.InQuart).WaitForCompletion();
         transform.position = new Vector2(13, transform.position.y);
         SuperAtkDamage();
 
-        yield return transform.DOMoveX(-13, 0.4f).WaitForCompletion();
-        transform.position = new Vector2(13, transform.position.y);
-        SuperAtkDamage();
 
-        yield return transform.DOMoveX(-13, 0.4f).WaitForCompletion();
-        transform.position = new Vector2(13, transform.position.y);
-        SuperAtkDamage();
+        for (int i = 0; i < 4; i++)
+        {
+            AudioManager.PlaySEWithPitch(audioClip2, 1.5f, 0.2f);
+            AudioManager.PlaySEWithPitch(audioClip1, 0.8f, 0.2f);
+            yield return transform.DOMoveX(-13, 0.4f).WaitForCompletion();
+            transform.position = new Vector2(13, transform.position.y);
+            SuperAtkDamage();
+        }
 
-        yield return transform.DOMoveX(-13, 0.4f).WaitForCompletion();
-        transform.position = new Vector2(13, transform.position.y);
-        SuperAtkDamage();
-
-        yield return transform.DOMoveX(-13, 0.4f).WaitForCompletion();
-        transform.position = new Vector2(13, transform.position.y);
-        SuperAtkDamage();
 
         ApplyStatus(GetEffect("finishSuperAtk", true, StatusManager.StatusType.spdRate, 0.5f, 5));
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
@@ -96,11 +96,13 @@ public class Rider : Human
 
     void SuperAtkDamage()
     {
+
+
         foreach (var mon in GameManager.GetMonsters(GameManager.type.mon0))
         {
             if (mon.gameObject.GetComponent<Collider2D>().enabled)
             {
-                Attack(mon, atk / 2, false);
+                Attack(mon, atk / 3, false);
             }
         }
     }
