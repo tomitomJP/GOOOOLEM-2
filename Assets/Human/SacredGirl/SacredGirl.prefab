@@ -74,6 +74,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   level: 1
   name: "\u3042\u3042\u3042\u3042"
   job: 
@@ -174,7 +175,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.5738392}
+  m_Offset: {x: 0, y: 1.6496813}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -185,7 +186,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.8523216}
+  m_Size: {x: 1, y: 5.7006373}
   m_EdgeRadius: 0
 --- !u!50 &2495807391220252110
 Rigidbody2D:

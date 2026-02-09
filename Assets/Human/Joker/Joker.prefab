@@ -76,8 +76,8 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   level: 1
-  growthRate: 0.25
   name: "\u3042\u3042\u3042\u3042"
   job: "\u5947\u8853\u5E2B"
   sex: 2
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03434801, y: 1.621361}
+  m_Offset: {x: 0.03434801, y: 1.6820015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.068696, y: 5.757278}
+  m_Size: {x: 1.068696, y: 5.635997}
   m_EdgeRadius: 0
 --- !u!50 &8974992079483469852
 Rigidbody2D:

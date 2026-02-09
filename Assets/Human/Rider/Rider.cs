@@ -45,13 +45,14 @@ public class Rider : Human
         Attack(target, atk);
 
         spriteRenderer.sprite = atkSprites[3];
-        yield return Wait(0.1f, 0);
-
         if (Random.Range(0, 3) < 1)
         {
             StartCoroutine(SuperAtk());
             yield break;
         }
+        yield return Wait(0.1f, 0);
+
+
 
         spriteRenderer.sprite = atkSprites[4];
         yield return Wait(0.2f, 0);
@@ -76,6 +77,8 @@ public class Rider : Human
 
         for (int i = 0; i < 4; i++)
         {
+            if (hp <= 0) break;
+
             AudioManager.PlaySEWithPitch(audioClip2, 1.5f, 0.2f);
             AudioManager.PlaySEWithPitch(audioClip1, 0.8f, 0.2f);
             yield return transform.DOMoveX(-13, 0.4f).WaitForCompletion();

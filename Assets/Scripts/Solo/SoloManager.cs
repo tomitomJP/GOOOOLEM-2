@@ -124,8 +124,8 @@ public class SoloManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.25f);
 
         int savesMon = GameManager.GetMonsters(GameManager.type.mon0).Count;
-        int up = Mathf.FloorToInt(savesMon / 7);
-        clearStatus.text += $"モンスター生存({savesMon.ToString("N1")}体)" + $" + Lv{up.ToString("N1")}\n";
+        int up = Mathf.FloorToInt((savesMon - 3) / 7);
+        clearStatus.text += $"モンスター生存({(savesMon - 3).ToString("N1")}体)" + $" + Lv{up.ToString("N1")}\n";
         humanLevel += up;
         yield return new WaitForSecondsRealtime(0.25f);
 
@@ -206,6 +206,7 @@ public class SoloManager : MonoBehaviour
 
         Human human = Instantiate(humans[charIndex], transform.position + offset, Quaternion.identity).GetComponent<Human>();
 
+        human.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -count;
         // 名前を取得（性別に応じたリストから被りなしで）
         int sexIndex = (int)human.sex;
         string name = availableNames[sexIndex][0];

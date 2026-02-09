@@ -67,7 +67,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16064262, y: 0.8184815}
+  m_Offset: {x: 0.16064262, y: 0.88054895}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4816801, y: 0.52888703}
@@ -78,7 +78,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0180979, y: 3.7550163}
+  m_Size: {x: 1.0180979, y: 3.6308813}
   m_EdgeRadius: 0
 --- !u!212 &2445733953165381340
 SpriteRenderer:
@@ -168,6 +168,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   level: 1
   name: "\u3042\u3042\u3042\u3042"
   job: 

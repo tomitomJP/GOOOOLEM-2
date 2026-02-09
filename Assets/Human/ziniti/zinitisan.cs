@@ -62,6 +62,7 @@ public class zinitisan : Human
 
         for (int i = 0; i < slamCount; i++)
         {
+            if (hp <= 0) break;
             SpawnAndDropFist(basePos, target);
             yield return new WaitForSeconds(interval);
         }
@@ -92,7 +93,7 @@ public class zinitisan : Human
         );
 
         // -180 degrees rotation
-        GameObject fist = Instantiate(fistPrefab, spawnPos, Quaternion.Euler(0, 0, -180));
+        GameObject fist = Instantiate(fistPrefab, spawnPos, Quaternion.Euler(0, 0, -190));
 
         fist.transform
             .DOMove(landPos, fallTime)

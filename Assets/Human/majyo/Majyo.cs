@@ -25,6 +25,10 @@ public class Majyo : Human
     {
         StartSetup();
         HumanSetUp();
+        hp = 1;
+        maxHp = 1;
+        ApplyStatus(new StatusManager("MAJOATK", true, StatusManager.StatusType.atkRate, Mathf.Infinity, (level - 1) * 0.01f));
+
     }
 
     void Update()
