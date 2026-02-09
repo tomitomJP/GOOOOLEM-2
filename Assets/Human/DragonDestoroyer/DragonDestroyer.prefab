@@ -174,8 +174,8 @@ MonoBehaviour:
   moveSprites:
   - {fileID: -1597457494, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
   - {fileID: 771420085, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
-  - {fileID: 1319428285, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
   - {fileID: -1597457494, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
+  - {fileID: 1319428285, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
   atkSprites:
   - {fileID: 1458104706, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
   - {fileID: -554211523, guid: 5448dfd3b58d3424b83cc9aa29976210, type: 3}
@@ -199,6 +199,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   level: 1
   name: "\u3042\u3042\u3042\u3042"
   job: 

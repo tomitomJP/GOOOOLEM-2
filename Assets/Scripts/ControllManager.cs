@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
+using UnityEngine.Timeline;
 
 
 public class ControllManager : MonoBehaviour
@@ -377,6 +379,9 @@ public class ControllManager : MonoBehaviour
 
     }
 
+    int[] soloGame_Monsters_LevelGageValue = new int[4];
+    int[] soloGame_Monsters_Level = new int[4];
+
     IEnumerator deletePeace(List<GameObject> DeletingPeace)
     {
         pazzleManager.ResetHilightPeace();
@@ -423,6 +428,28 @@ public class ControllManager : MonoBehaviour
             }
         }
 
+        if (pazzleManager.soloMode && soulCount == 0)
+        {
+            Color fillColor;
+            switch (peaceNumber)
+            {
+                case 0:
+                    fillColor = Color.green;
+                    break;
+                case 1:
+                    fillColor = Color.red;
+                    break;
+                case 2:
+                    fillColor = Color.cyan;
+                    break;
+                default:
+                    fillColor = Color.yellow;
+                    break;
+            }
+            pazzleManager.levelGage.gameObject.SetActive(true);
+            pazzleManager.levelGageFull.color = fillColor;
+        }
+
         for (int i = 0; i < DeletingPeace.Count; i++)
         {
             DeletingPeace[i].GetComponent<SpriteRenderer>().enabled = false;
@@ -450,6 +477,19 @@ public class ControllManager : MonoBehaviour
                 gameManager.cannonsChages[playerNumber] += 2.5f;
 
             }
+
+            if (pazzleManager.soloMode && soulCount == 0)
+            {
+                soloGame_Monsters_LevelGageValue[peaceNumber]++;
+                if (soloGame_Monsters_LevelGageValue[peaceNumber] > 9)
+                {
+                    soloGame_Monsters_LevelGageValue[peaceNumber] = 0;
+                    soloGame_Monsters_Level[peaceNumber]++;
+                    StartCoroutine(LevelUpTextAnim(peaceNumber));
+                }
+                pazzleManager.levelGage.value = (float)soloGame_Monsters_LevelGageValue[peaceNumber] / 10f;
+            }
+
 
             int j = i + 1;
             float value = j + (j * j / 15f);
@@ -498,6 +538,16 @@ public class ControllManager : MonoBehaviour
 
             Monsters monsters = MonstatSpawn(goleBodyCount, soulCount);
 
+            if (pazzleManager.soloMode)
+            {
+                monsters.hp += 1.15f * soloGame_Monsters_Level[0] * monsters.hp;
+                monsters.atk += 1.1f * soloGame_Monsters_Level[1] * monsters.atk;
+                monsters.spd += 1.05f * soloGame_Monsters_Level[2] * monsters.spd;
+                monsters.atkSpdRate += 0.02f * soloGame_Monsters_Level[3];
+
+
+            }
+
             switch (peaceNumber)
             {
                 case 0:
@@ -525,6 +575,7 @@ public class ControllManager : MonoBehaviour
         yield return pazzleManager.PeaceSet();
 
         if (newSoul != null) Instantiate(soulSpwanPar, newSoul.transform.position, Quaternion.identity);
+        if (pazzleManager.soloMode) pazzleManager.levelGage.gameObject.SetActive(false);
 
         CanCheckPeace = true;
     }
@@ -631,5 +682,29 @@ public class ControllManager : MonoBehaviour
 
             Debug.DrawLine(pointA, pointB, color, 0f, false);
         }
+    }
+
+    IEnumerator LevelUpTextAnim(int pn)
+    {
+        GameObject obj = Instantiate(pazzleManager.levelUpText, pazzleManager.levelGage.transform.position, Quaternion.identity, pazzleManager.levelGage.transform.parent);
+        Text txt = obj.GetComponent<Text>();
+        txt.color = pazzleManager.levelGageFull.color;
+        switch (pn)
+        {
+            case 0:
+                txt.text = "HP+15%";
+                break;
+            case 1:
+                txt.text = "ATK+10%";
+                break;
+            case 2:
+                txt.text = "SPD+5%";
+                break;
+            case 3:
+                txt.text = "ATKSPD+2%";
+                break;
+        }
+        yield return obj.transform.DOLocalMoveY(20, 1).SetEase(Ease.OutBounce).WaitForCompletion();
+        Destroy(obj);
     }
 }

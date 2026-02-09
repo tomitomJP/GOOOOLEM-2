@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,10 @@ public class PazzleManager : MonoBehaviour
     public Transform MonstarsRule;
     public Vector3[] MonstarsRulePos = new Vector3[2];
     public int soulSpawnRate = 10;
+    public bool soloMode = false;
+    public Slider levelGage;
+    public Image levelGageFull;
+    public GameObject levelUpText;
     void Start()
     {
         //StartCoroutine(PeaceSet());

@@ -101,9 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSprites:
   - {fileID: -458666789, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
+  - {fileID: 1172858804, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
+  - {fileID: -458666789, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
   - {fileID: 1114021487, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
-  - {fileID: 1172858804, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
-  - {fileID: 1172858804, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
   atkSprites:
   - {fileID: 728995007, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
   - {fileID: -1779202709, guid: 74f52a7070f5dc440a77f75278e62f1a, type: 3}
@@ -127,6 +127,7 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   level: 1
   name: "\u3042\u3042\u3042\u3042"
   job: "\u5263\u58EB"

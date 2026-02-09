@@ -181,14 +181,14 @@ MonoBehaviour:
   atk: 80
   hp: 1
   spd: 0.4
-  spdRate: 0.4
+  spdRate: 1
   atkSpdRate: 1
   atkRate: 1
   defRate: 1
   player: 1
-  enemyDistance: 20
-  enemyDistanceInCT: 1
-  atkCT: 1
+  enemyDistance: 6
+  enemyDistanceInCT: 4
+  atkCT: 1.5
   aktCTimer: 0
   mode: 1
   MoveAniTime: 0.3

@@ -9795,7 +9795,7 @@ MonoBehaviour:
   sm: []
   level: 1
   name: "\u3042\u3042\u3042\u3042"
-  job: 
+  job: "\u30E9\u30A4\u30C0\u30FC"
   sex: 0
   driveingSprite:
   - {fileID: -1557383454, guid: 45e491634ddd9467fa0413e35e730489, type: 3}
