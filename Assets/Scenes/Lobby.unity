@@ -11235,7 +11235,7 @@ MonoBehaviour:
       m_Action: Player Join Input
       m_Flags: 0
     m_Flags: 0
-  idleSeconds: 5
+  idleSeconds: 10
   demoSceneName: Demo
 --- !u!4 &682591648
 Transform:
