@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] AudioClip buttonSE;
     [SerializeField] AudioClip titleBgm;
     public InputAction playerJoinInputAction = default;
+
+    [SerializeField] float idleSeconds = 30f;
+    [SerializeField] string demoSceneName = "Demo";
+    float idleTimer = 0f;
+    bool idleTriggered = false;
+
 
     void Awake()
     {
@@ -60,6 +67,28 @@ public class LobbyManager : MonoBehaviour
             //Messager.ViewText("うんこおおおおお", 1);
         }
 
+        if (mode == Mode.title)
+        {
+            if (HasAnyInputThisFrame())
+            {
+                idleTimer = 0f;
+                idleTriggered = false;
+            }
+            else
+            {
+                idleTimer += Time.deltaTime;
+                if (!idleTriggered && idleTimer >= idleSeconds)
+                {
+                    idleTriggered = true;
+                    LoadSceneManager.FadeLoadScene(demoSceneName);
+                }
+            }
+        }
+        else
+        {
+            idleTimer = 0f;
+            idleTriggered = false;
+        }
 
     }
 
@@ -218,4 +247,38 @@ public class LobbyManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         canOnButton = true;
     }
+
+    bool HasAnyInputThisFrame()
+    {
+        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) return true;
+
+        if (Mouse.current != null)
+        {
+            if (Mouse.current.leftButton.wasPressedThisFrame) return true;
+            if (Mouse.current.rightButton.wasPressedThisFrame) return true;
+            if (Mouse.current.middleButton.wasPressedThisFrame) return true;
+            if (Mouse.current.scroll.ReadValue() != Vector2.zero) return true;
+        }
+
+        if (Gamepad.current != null)
+        {
+            var gp = Gamepad.current;
+            if (gp.leftStick.ReadValue() != Vector2.zero) return true;
+            if (gp.rightStick.ReadValue() != Vector2.zero) return true;
+            if (gp.leftTrigger.ReadValue() > 0f) return true;
+            if (gp.rightTrigger.ReadValue() > 0f) return true;
+            if (gp.buttonSouth.wasPressedThisFrame) return true;
+            if (gp.startButton.wasPressedThisFrame) return true;
+            if (gp.dpad.up.wasPressedThisFrame) return true;
+            if (gp.dpad.down.wasPressedThisFrame) return true;
+            if (gp.dpad.left.wasPressedThisFrame) return true;
+            if (gp.dpad.right.wasPressedThisFrame) return true;
+        }
+
+        return false;
+    }
+
+
+
+
 }

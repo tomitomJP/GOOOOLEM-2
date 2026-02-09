@@ -17,6 +17,7 @@ TagManager:
   - Messager
   - DamageTextCanvas
   - GoblinBuild
+  - Audio
   layers:
   - Default
   - TransparentFX

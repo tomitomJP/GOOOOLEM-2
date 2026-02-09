@@ -11235,6 +11235,8 @@ MonoBehaviour:
       m_Action: Player Join Input
       m_Flags: 0
     m_Flags: 0
+  idleSeconds: 5
+  demoSceneName: Demo
 --- !u!4 &682591648
 Transform:
   m_ObjectHideFlags: 0
@@ -32949,6 +32951,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036753364359758919, guid: 6cae823d763b44055ae40db40bd58cfb, type: 3}
       propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036753364359758919, guid: 6cae823d763b44055ae40db40bd58cfb, type: 3}
+      propertyPath: m_TagString
       value: Audio
       objectReference: {fileID: 0}
     m_RemovedComponents: []
