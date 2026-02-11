@@ -540,10 +540,10 @@ public class ControllManager : MonoBehaviour
 
             if (pazzleManager.soloMode)
             {
-                monsters.hp += 1.15f * soloGame_Monsters_Level[0] * monsters.hp;
-                monsters.atk += 1.1f * soloGame_Monsters_Level[1] * monsters.atk;
-                monsters.spd += 1.05f * soloGame_Monsters_Level[2] * monsters.spd;
-                monsters.atkSpdRate += 0.02f * soloGame_Monsters_Level[3];
+                monsters.hp += 0.25f * soloGame_Monsters_Level[0] * monsters.hp;
+                monsters.atk += 0.2f * soloGame_Monsters_Level[1] * monsters.atk;
+                monsters.spd += 0.15f * soloGame_Monsters_Level[2] * monsters.spd;
+                monsters.atkSpdRate += 0.12f * soloGame_Monsters_Level[3];
 
 
             }
@@ -692,16 +692,16 @@ public class ControllManager : MonoBehaviour
         switch (pn)
         {
             case 0:
-                txt.text = "HP+15%";
+                txt.text = "HP+25%";
                 break;
             case 1:
-                txt.text = "ATK+10%";
+                txt.text = "ATK+20%";
                 break;
             case 2:
-                txt.text = "SPD+5%";
+                txt.text = "SPD+15%";
                 break;
             case 3:
-                txt.text = "ATKSPD+2%";
+                txt.text = "ATKSPD+12%";
                 break;
         }
         yield return obj.transform.DOLocalMoveY(20, 1).SetEase(Ease.OutBounce).WaitForCompletion();

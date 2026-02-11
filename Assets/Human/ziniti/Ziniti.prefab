@@ -55,7 +55,7 @@ MonoBehaviour:
   atkSprites:
   - {fileID: 252546722, guid: 1c6746c4c4ae7d9409da536b935384f8, type: 3}
   - {fileID: 252546722, guid: 1c6746c4c4ae7d9409da536b935384f8, type: 3}
-  atk: 5
+  atk: 60
   hp: 40
   spd: 0.8
   spdRate: 1

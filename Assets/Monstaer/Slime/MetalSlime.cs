@@ -9,6 +9,7 @@ public class MetalSlime : Monsters
     void Start()
     {
         StartSetup();
+        hp = 10;
     }
 
     // Update is called once per frame

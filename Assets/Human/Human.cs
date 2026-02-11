@@ -8,7 +8,7 @@ public class Human : Monsters
 {
     [Header("人間の設定")]
     public int level = 1;
-    private float growthRate = 0.5f; // 二次関数の係数
+    private float growthRate = 0.35f; // 二次関数の係数
 
     public string name = "ああああ";
     public string job;
@@ -51,7 +51,7 @@ public class Human : Monsters
             return atk;
         }
 
-        float atkValue = atk * (1.8f + ((level - 2f) / 27f));
+        float atkValue = atk * (2.2f + ((level - 2f) / 27f));
         return Mathf.Floor(atkValue);
     }
 

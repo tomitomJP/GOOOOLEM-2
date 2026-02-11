@@ -113,7 +113,7 @@ public class zinitisan : Human
             Monsters m = hits[i].GetComponent<Monsters>();
             if (m != null)
             {
-                Attack(m, atk * 0.6f, false);
+                Attack(m, atk / 6f, false);
             }
         }
     }

@@ -62,7 +62,7 @@ MonoBehaviour:
   - {fileID: -1648058317, guid: c5d4d0ecea4ec4e8494282476260602e, type: 3}
   - {fileID: -1477129937, guid: c5d4d0ecea4ec4e8494282476260602e, type: 3}
   atk: 30
-  hp: 50
+  hp: 40
   spd: 0.45
   spdRate: 1
   atkSpdRate: 1
@@ -79,8 +79,8 @@ MonoBehaviour:
   AtkTriggerRate: 50
   AtkTriggerUpRate: 1.1
   isDead: 0
+  sm: []
   level: 1
-  growthRate: 0.4
   name: "\u3042\u3042\u3042\u3042"
   job: "\u52C7\u8005"
   sex: 0
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 3.2, y: 3.2}
     newSize: {x: 8, y: 8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
