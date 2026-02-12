@@ -61,6 +61,7 @@ public class Democontroller : MonoBehaviour
             if (gp.dpad.left.wasPressedThisFrame) return true;
             if (gp.dpad.right.wasPressedThisFrame) return true;
         }
+        if (Input.anyKeyDown) return true;
 
         return false;
     }

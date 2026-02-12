@@ -275,6 +275,8 @@ public class LobbyManager : MonoBehaviour
             if (gp.dpad.right.wasPressedThisFrame) return true;
         }
 
+        if (Input.anyKeyDown) return true;
+
         return false;
     }
 
